@@ -1,0 +1,1120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Context-Aware Journey Orchestration · Khanim Azimli</title>
+<meta name="description" content="Case study: how a real-world weather signal became a timely, governed customer journey. Contextual personalization, journey orchestration, customer decisioning, eligibility, frequency and suppression.">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EDF1F4; --paper:#FAFBFC; --ink:#121A22; --ink2:#45515D; --ink3:#7A8591;
+  --line:rgba(18,26,34,.08); --line2:rgba(18,26,34,.16); --line3:rgba(18,26,34,.28);
+  --blue:#1B5BFF; --blue2:rgba(27,91,255,.09); --blue3:rgba(27,91,255,.24);
+  --cyan:#3FC6DE; --green:#0E9F68; --green2:rgba(14,159,104,.12);
+  --sans:'Satoshi',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --wrap:1240px; --gut:40px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+em,i,cite{font-style:normal}
+a{color:inherit}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--gut)}
+.cap{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3)}
+section{position:relative;padding:150px 0}
+.sec-head{display:flex;gap:14px;align-items:center;margin-bottom:40px}
+.sec-head .idx{font-family:var(--mono);font-size:12px;color:var(--blue);letter-spacing:.08em}
+.sec-head .tag{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)}
+.sec-head::after{content:'';flex:1;height:1px;background:var(--line2)}
+h2{font-weight:500;font-size:clamp(34px,4.8vw,66px);line-height:1.03;letter-spacing:-.03em;max-width:16ch}
+h3{font-weight:500;font-size:22px;letter-spacing:-.01em;line-height:1.25}
+.lead{font-size:clamp(17px,1.45vw,20px);color:var(--ink2);max-width:60ch;margin-top:26px}
+.blue{color:var(--blue)}
+.grid-bg{background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px}
+.note{font-family:var(--mono);font-size:11px;color:var(--ink3);margin-top:18px;letter-spacing:.03em}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+@keyframes dash{to{stroke-dashoffset:-24}}
+@keyframes drop{0%{transform:translateY(-14px);opacity:0}20%{opacity:1}100%{transform:translateY(46px);opacity:0}}
+.ico{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex:none;display:block}
+.tick{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;border:1px solid var(--line3);color:transparent;transition:all .45s;flex:none}
+.tick svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.on>.tick,.on .wc-top .tick,.tick.on{background:var(--blue);border-color:var(--blue);color:#fff}
+
+/* top bar + rail */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:50;display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;padding:16px var(--gut);font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);background:linear-gradient(var(--bg) 40%,rgba(237,241,244,0));pointer-events:none}
+.topbar a,.topbar span{pointer-events:auto;text-decoration:none}
+.topbar .brand{color:var(--ink);font-weight:500}
+.topbar .status b{font-weight:500;color:var(--blue);margin-left:8px}
+/* portfolio navigation layer (All work / Next project) */
+.topbar .ka-back{justify-self:start}
+.topbar .brand{justify-self:center;white-space:nowrap}
+.topbar .tr{justify-self:end;display:flex;align-items:center;gap:20px;white-space:nowrap}
+.topbar .tr .sep{width:1px;height:12px;background:var(--line3)}
+.topbar .ka-nav{color:var(--ink2);transition:color .2s;white-space:nowrap}
+.topbar .ka-nav:hover{color:var(--ink)}
+.topbar .ka-nav i{display:inline-block;color:var(--blue);transition:transform .3s}
+.topbar .ka-back:hover i{transform:translateX(-3px)}
+.topbar .ka-next:hover i{transform:translateX(3px)}
+.topbar a:focus-visible,.ka-nextcase:focus-visible{outline:2px solid var(--blue);outline-offset:4px}
+.ka-nextcase{display:block;text-decoration:none;color:var(--ink);border-top:1px solid var(--line2);padding:80px 0 88px;transition:background .4s}
+.ka-nextcase:hover{background:var(--paper)}
+.ka-nextcase .cap{display:flex;gap:14px}
+.ka-nextcase .cap b{font-weight:400;color:var(--blue)}
+.ka-nextcase .nt{display:flex;align-items:baseline;justify-content:space-between;gap:24px;margin-top:22px}
+.ka-nextcase .nt span{font-size:clamp(34px,4.8vw,66px);font-weight:500;letter-spacing:-.03em;line-height:1.03}
+.ka-nextcase .nt i{font-size:clamp(28px,3.6vw,48px);color:var(--blue);transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.ka-nextcase:hover .nt i{transform:translateX(10px)}
+.ka-nextcase small{display:block;margin-top:16px;color:var(--ink3);font-size:15px}
+@media (max-width:760px){.topbar .status,.topbar .tr .sep,.topbar .ka-next .lg{display:none}.topbar{gap:10px}.ka-nextcase{padding:60px 0 64px}}
+.rail{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:40;display:flex;flex-direction:column;gap:12px}
+.rail::before{content:'';position:absolute;left:3px;top:0;bottom:0;width:1px;background:var(--line2)}
+.rail a{position:relative;width:7px;height:7px;border-radius:50%;background:var(--bg);border:1px solid var(--line3);display:block;transition:background .3s,border-color .3s}
+.rail a.on{background:var(--blue);border-color:var(--blue)}
+.rail a.past{background:var(--ink3);border-color:var(--ink3)}
+.rail a span{position:absolute;right:16px;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;color:var(--ink3);opacity:0;transition:opacity .2s;background:var(--bg);padding:2px 6px}
+.rail a:hover span{opacity:1}
+
+/* 01 hero */
+.hero{min-height:100vh;min-height:100svh;padding:0;overflow:hidden;background:radial-gradient(110% 90% at 72% 40%,#F8FAFB 0%,#EBF0F3 58%,#E2E8ED 100%);display:flex;flex-direction:column}
+.hero .latlon{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:96px 96px;-webkit-mask-image:radial-gradient(70% 70% at 70% 45%,#000 20%,transparent 100%);mask-image:radial-gradient(70% 70% at 70% 45%,#000 20%,transparent 100%)}
+#isobars{position:absolute;inset:0;width:100%;height:100%;display:block}
+#isobars path{fill:none;stroke:rgba(27,91,255,.13);stroke-width:1}
+.hero-grid{position:relative;z-index:2;flex:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:40px;align-items:center;padding-top:110px;padding-bottom:30px;width:100%}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:26px;display:flex;gap:12px;align-items:center}
+.eyebrow::before{content:'';width:28px;height:1px;background:var(--blue)}
+h1{font-weight:500;font-size:clamp(42px,5.7vw,86px);line-height:.95;letter-spacing:-.04em}
+.hero .sub{font-size:clamp(18px,1.6vw,23px);color:var(--ink2);max-width:28ch;margin-top:28px;line-height:1.4}
+.hero .who{margin-top:34px;padding-top:16px;border-top:1px solid var(--line2);font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink2);display:flex;flex-wrap:wrap;gap:6px 26px;max-width:520px}
+.hero .who span{color:var(--ink3);text-transform:uppercase;letter-spacing:.12em;margin-right:8px}
+.hv{position:relative;width:100%}
+.hv-stage{position:absolute;left:0;top:0;width:620px;height:500px;transform-origin:0 0}
+.orb{position:absolute;left:0;top:130px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFFFFF 0%,#E3EAF0 55%,#CBD6E0 100%);box-shadow:0 30px 60px -30px rgba(11,26,51,.35),inset 0 0 0 1px rgba(255,255,255,.7);overflow:hidden;transition:background 1.6s}
+.hv.s1 .orb{background:radial-gradient(circle at 35% 30%,#F4F7FA 0%,#C9D5DF 55%,#9FB1C1 100%)}
+.orb .cloud{position:absolute;left:50%;top:40px;width:96px;margin-left:-48px}
+.orb .cloud svg{width:96px;height:60px;fill:rgba(255,255,255,.9);stroke:#6C8193;stroke-width:1.4}
+.orb .rain{position:absolute;left:66px;right:66px;top:96px;height:60px;opacity:0;transition:opacity 1s}
+.hv.s1 .orb .rain{opacity:1}
+.orb .rain i{position:absolute;top:0;width:1.4px;height:12px;background:#4D6A86;border-radius:2px;animation:drop 1.2s linear infinite}
+.orb .deg{position:absolute;left:0;right:0;bottom:46px;text-align:center;font-size:44px;font-weight:500;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.orb .lbl{position:absolute;left:0;right:0;bottom:26px;text-align:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+.hv-cap{position:absolute;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);transition:color .5s;white-space:nowrap}
+.hv-cap.on{color:var(--blue)}
+.hv svg.links{position:absolute;left:0;top:0;width:620px;height:500px;overflow:visible}
+.links path{fill:none;stroke:var(--blue);stroke-width:1.5;stroke-dasharray:240;stroke-dashoffset:240;transition:stroke-dashoffset 1.1s ease}
+.hv.s2 .links .l1,.hv.s3 .links .l2{stroke-dashoffset:0}
+.dnode{position:absolute;left:252px;top:204px;width:72px;height:72px;border-radius:50%;background:var(--paper);border:1px solid var(--line3);display:flex;align-items:center;justify-content:center;transition:all .6s}
+.dnode::before{content:'';position:absolute;inset:-9px;border-radius:50%;border:1px solid var(--line2)}
+.dnode svg{width:26px;height:26px;fill:none;stroke:var(--ink3);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:stroke .5s}
+.hv.s2 .dnode{border-color:var(--blue)}
+.hv.s3 .dnode{background:var(--blue);border-color:var(--blue);box-shadow:0 0 0 10px var(--blue2)}
+.hv.s3 .dnode svg{stroke:#fff}
+.checks{position:absolute;left:196px;top:304px;width:190px;display:flex;flex-direction:column;gap:8px}
+.checks div{display:flex;gap:9px;align-items:center;font-size:13.5px;font-weight:500;color:var(--ink3);opacity:.35;transition:all .5s;white-space:nowrap}
+.checks div.on{opacity:1;color:var(--ink)}
+.checks .tick{width:18px;height:18px}
+.checks .tick svg{width:10px;height:10px}
+.mphone{position:absolute;left:400px;top:30px;width:220px;height:450px;border-radius:38px;background:#0F1720;padding:8px;box-shadow:0 40px 70px -30px rgba(11,26,51,.5)}
+.mscreen{position:relative;width:100%;height:100%;border-radius:31px;overflow:hidden;background:linear-gradient(180deg,#6D8396 0%,#3A5064 60%,#22323F 100%)}
+.mscreen .isl{position:absolute;top:10px;left:50%;width:70px;height:20px;margin-left:-35px;border-radius:14px;background:#0F1720}
+.mscreen .ls{position:absolute;top:44px;left:0;right:0;text-align:center;color:#fff}
+.mscreen .ls .d{font-size:11.5px;font-weight:500;opacity:.85}
+.mscreen .ls .t{font-size:52px;font-weight:500;letter-spacing:-.04em;line-height:1.05}
+.mn{position:absolute;left:8px;right:8px;bottom:96px;background:rgba(245,248,250,.92);border-radius:16px;padding:10px 12px;opacity:0;transform:translateY(16px) scale(.96);transition:all .7s cubic-bezier(.2,.8,.2,1)}
+.hv.s3 .mn{opacity:1;transform:none}
+.mn .h{display:flex;justify-content:space-between;font-size:10px;color:var(--ink3);margin-bottom:2px}
+.mn .h b{display:flex;gap:5px;align-items:center;color:var(--ink2)}
+.mn .h b i{width:12px;height:12px;border-radius:3px;background:var(--blue)}
+.mn .tt{font-size:13px;font-weight:700;line-height:1.25}
+.mn .bd{font-size:11.5px;color:var(--ink2);line-height:1.35;margin-top:2px}
+.mr{position:absolute;left:8px;right:8px;bottom:16px;border-radius:16px;padding:10px 12px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;opacity:0;transform:translateY(10px);transition:all .7s}
+.hv.s4 .mr{opacity:1;transform:none}
+.mr small{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;opacity:.75}
+.mr div{font-size:20px;font-weight:500;letter-spacing:-.02em}
+.hero-steps{position:relative;z-index:2;list-style:none;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line2);margin-bottom:28px}
+.hero-steps li{padding:16px 18px 0 0;position:relative}
+.hero-steps li::before{content:'';position:absolute;left:0;top:-1px;height:2px;width:0;background:var(--blue);transition:width .8s ease}
+.hero-steps li.on::before{width:calc(100% - 18px)}
+.hero-steps .n{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);transition:color .5s}
+.hero-steps .t{font-size:17px;font-weight:500;margin-top:4px;color:var(--ink3);transition:color .5s;line-height:1.3}
+.hero-steps li.on .n{color:var(--blue)}
+.hero-steps li.on .t{color:var(--ink)}
+
+/* 02 problem */
+.fields{display:grid;grid-template-columns:1fr 72px 1fr;align-items:stretch;margin-top:72px}
+.field{position:relative;padding:28px 28px 22px;border-radius:4px}
+.field.internal{background:var(--paper);border:1px solid var(--line3)}
+.field.external{border:1px dashed var(--blue3);background:repeating-radial-gradient(circle at 85% 20%,transparent 0 22px,rgba(27,91,255,.07) 22px 23px),rgba(250,251,252,.45)}
+.f-label{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:18px}
+.f-label b{font-weight:500;color:var(--ink)}
+.external .f-label b{color:var(--blue)}
+.sig{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;padding:15px 0;border-top:1px solid var(--line)}
+.sig .nm{font-size:19px;font-weight:500;letter-spacing:-.01em}
+.sig .k{font-size:14px;color:var(--ink3)}
+.external .sig .k{color:var(--blue)}
+.join{display:flex;align-items:center;justify-content:center;font-size:34px;color:var(--ink3)}
+.converge{display:block;width:100%;height:110px}
+.converge path{fill:none;stroke:var(--line3);stroke-width:1;vector-effect:non-scaling-stroke;stroke-dasharray:600;stroke-dashoffset:600;transition:stroke-dashoffset 1.6s ease}
+.converge path.ext{stroke:var(--blue)}
+.converge.in path{stroke-dashoffset:0}
+.ctx-node{margin:0 auto;max-width:460px;text-align:center;padding:24px 28px;border:1px solid var(--ink);border-radius:4px;background:var(--paper);position:relative}
+.ctx-node::before{content:'';position:absolute;inset:-7px;border:1px solid var(--line2);border-radius:6px}
+.ctx-node h3{font-size:26px}
+.ctx-node p{color:var(--ink3);margin-top:6px;font-size:15px}
+
+/* 03 signal */
+.wcards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:72px}
+.wc{background:var(--paper);border:1px solid var(--line2);border-radius:4px;padding:26px 26px 24px;transition:border-color .5s,box-shadow .5s,opacity .9s,transform .9s}
+.wc.on{border-color:var(--blue);box-shadow:0 0 0 4px var(--blue2)}
+.wc-top{display:flex;justify-content:space-between;align-items:flex-start}
+.wc-top .ico{width:40px;height:40px;color:var(--ink2);transition:color .5s}
+.wc.on .wc-top .ico{color:var(--blue)}
+.wc .tick{width:26px;height:26px}
+.wc h3{font-size:clamp(30px,3vw,42px);letter-spacing:-.03em;margin-top:22px}
+.wc .rule{font-size:17px;color:var(--ink2);margin-top:2px}
+.meter{position:relative;height:40px;margin-top:22px}
+.meter .tr{position:absolute;left:0;right:0;top:15px;height:4px;border-radius:2px;background:var(--line)}
+.meter .zone{position:absolute;top:15px;height:4px;border-radius:2px;background:var(--blue3)}
+.meter .th{position:absolute;top:8px;width:1px;height:18px;background:var(--ink2)}
+.meter .mk{position:absolute;top:10px;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--ink3);transition:left 1.2s cubic-bezier(.3,.7,.2,1),background .5s}
+.wc.on .meter .mk{background:var(--blue);box-shadow:0 0 0 5px var(--blue2)}
+.meter .ends{position:absolute;left:0;right:0;top:26px;display:flex;justify-content:space-between;font-size:11.5px;color:var(--ink3)}
+.wc .today{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:15px;color:var(--ink3);transition:color .5s}
+.wc.on .today{color:var(--ink)}
+.wc .today b{font-weight:500}
+.merge{display:block;width:100%;height:90px}
+.merge path{fill:none;stroke:var(--blue);stroke-width:1.3;vector-effect:non-scaling-stroke;stroke-dasharray:400;stroke-dashoffset:400;transition:stroke-dashoffset 1.2s ease}
+.merge.on path{stroke-dashoffset:0}
+.qual{display:flex;align-items:center;justify-content:center;gap:16px;margin:0 auto;width:max-content;max-width:100%;padding:16px 28px;border-radius:40px;border:1px solid var(--line3);background:var(--paper);transition:all .6s}
+.qual b{font-size:22px;font-weight:500;color:var(--ink3);transition:color .5s}
+.qual.on{background:var(--blue);border-color:var(--blue);box-shadow:0 0 0 8px var(--blue2)}
+.qual.on b,.qual.on .cap{color:#fff}
+.anyone{text-align:center;margin-top:18px;font-size:15px;color:var(--ink3)}
+.anyone b{font-weight:500;color:var(--blue)}
+
+/* 04 decision funnel */
+.funnel{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;margin-top:72px;align-items:center}
+.fsteps{list-style:none;border-top:1px solid var(--line2)}
+.fs{display:grid;grid-template-columns:30px 1fr auto;gap:14px;align-items:center;padding:15px 0;border-bottom:1px solid var(--line2);opacity:.35;transition:opacity .5s}
+.fs.on{opacity:1}
+.fs .tick{width:24px;height:24px}
+.fs .q{font-size:clamp(18px,1.7vw,22px);font-weight:500;letter-spacing:-.01em;line-height:1.25}
+.fs .s{font-size:14px;color:var(--ink3);margin-top:2px}
+.fs .c{font-size:24px;font-weight:500;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--ink3);min-width:2.2ch;text-align:right}
+.fs.cur .c{color:var(--blue)}
+.fs.last.on .q,.fs.last.on .c{color:var(--green)}
+.fs.last.on .tick{background:var(--green);border-color:var(--green)}
+.crowd{background:var(--paper);border:1px solid var(--line2);border-radius:4px;padding:26px}
+.crowd-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px;gap:12px}
+.crowd-h .big{font-size:clamp(44px,5vw,68px);font-weight:500;letter-spacing:-.05em;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}
+.crowd-h .big small{font-size:18px;color:var(--ink3);letter-spacing:0;margin-left:8px}
+.crowd-h .cap{text-align:right;max-width:20ch;line-height:1.5;color:var(--blue)}
+#crowd{width:100%;height:auto;display:block}
+#crowd .p{fill:var(--blue);stroke:transparent;stroke-width:1.2;transition:fill .6s,opacity .6s,stroke .6s}
+#crowd .p.x1{fill:#C9D1D8}
+#crowd .p.x2{fill:transparent;stroke:#9AA5B0}
+#crowd .p.x3{fill:#C9D1D8;opacity:.35}
+#crowd .p.fin{fill:var(--green)}
+.legend2{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:18px;font-size:13px;color:var(--ink2)}
+.legend2 span{display:flex;gap:8px;align-items:center}
+.legend2 i{width:11px;height:11px;border-radius:50%;display:inline-block}
+.legend2 .a{background:var(--green)}.legend2 .b{background:#C9D1D8}.legend2 .c{border:1.2px solid #9AA5B0}.legend2 .d{background:#C9D1D8;opacity:.45}
+.statement{padding:140px 0 0}
+.statement p{font-size:clamp(40px,7vw,108px);font-weight:500;letter-spacing:-.045em;line-height:.98}
+.statement p + p{margin-top:16px;color:var(--blue)}
+.statement .rule{display:flex;align-items:center;gap:16px;margin-bottom:40px}
+.statement .rule::after{content:'';flex:1;height:1px;background:var(--line3)}
+
+/* 05 orchestration */
+.eq{display:grid;grid-template-columns:1fr 26px 1fr 26px 1fr 26px 1fr 26px 1fr 26px 1.1fr;align-items:stretch;margin-top:72px}
+.eqt{background:var(--paper);border:1px solid var(--line2);border-radius:4px;padding:18px 16px 20px;opacity:.2;transform:translateY(10px);transition:all .6s}
+.eqt.on{opacity:1;transform:none}
+.eqt .cap{font-size:10.5px}
+.eqt b{display:block;font-size:clamp(20px,1.9vw,27px);font-weight:500;letter-spacing:-.02em;margin:12px 0 6px;line-height:1.1}
+.eqt p{font-size:13.5px;color:var(--ink2);line-height:1.4}
+.eqt.ctx{border-color:var(--blue3)}
+.eqt.res{background:var(--blue);border-color:var(--blue)}
+.eqt.res .cap,.eqt.res b,.eqt.res p{color:#fff}
+.op{display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--ink3);opacity:.2;transition:opacity .6s}
+.op.on{opacity:1}
+.memory{margin-top:110px}
+.mem-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:end;margin-bottom:30px}
+.mem-head h3{font-size:clamp(26px,2.6vw,36px);letter-spacing:-.025em;line-height:1.1}
+.mem-head p{font-size:16px;color:var(--ink2)}
+.month{position:relative;background:var(--paper);border:1px solid var(--line2);border-radius:4px;padding:26px 26px 26px}
+.mlbl{position:relative;height:22px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3)}
+.mlbl span{position:absolute;top:0}
+.mtrack{position:relative;display:grid;grid-template-columns:repeat(37,1fr);gap:3px;height:44px}
+.mtrack i{background:var(--line);border-radius:2px;position:relative;transition:background .4s}
+.mtrack i.ev{background:var(--line2)}
+.mtrack i.ev.lit.ok{background:var(--blue)}
+.mtrack i.ev.lit.sup{background:var(--ink3)}
+.mtrack i.nov{background:rgba(18,26,34,.05)}
+.mcursor{position:absolute;top:-6px;bottom:-6px;width:2px;margin-left:-1px;background:var(--blue);left:0;opacity:0;box-shadow:0 0 12px var(--blue3);z-index:2}
+.mevents{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px}
+.me{border-top:2px solid var(--line2);padding-top:14px;opacity:.28;transition:all .5s}
+.me.on{opacity:1}
+.me.on.ok{border-color:var(--blue)}
+.me.on.sup{border-color:var(--ink)}
+.me .d{display:flex;gap:10px;align-items:center;font-size:14px;color:var(--ink2)}
+.me .d .ico{width:22px;height:22px}
+.me b{display:block;font-size:20px;font-weight:500;margin-top:8px;letter-spacing:-.01em;line-height:1.25}
+.me.ok b{color:var(--blue)}
+.me p{font-size:14px;color:var(--ink3);margin-top:4px;line-height:1.4}
+
+/* 06 journey */
+.versus{margin-top:64px;border-top:1px solid var(--line2)}
+.vrow{display:grid;grid-template-columns:150px 1fr 260px;gap:28px;align-items:center;padding:30px 0;border-bottom:1px solid var(--line2)}
+.vchain{display:flex;align-items:center}
+.vnode{display:flex;align-items:center;gap:10px;font-size:19px;font-weight:500;white-space:nowrap}
+.vnode .ico{width:30px;height:30px}
+.vlink{flex:1;min-width:20px;height:1px;background:var(--line3);margin:0 14px;position:relative}
+.vrow.ctx .vlink{background:none;border-top:1px dashed var(--blue)}
+.vrow.ctx .vlink::after{content:'';position:absolute;top:-4px;left:0;width:7px;height:7px;border-radius:50%;background:var(--blue);animation:slide 2.4s linear infinite}
+@keyframes slide{from{left:0;opacity:0}15%{opacity:1}85%{opacity:1}to{left:calc(100% - 7px);opacity:0}}
+.vrow.trad .vnode{color:var(--ink3)}
+.vrow.ctx .vnode.ev{color:var(--blue)}
+.vrow p{font-size:15px;color:var(--ink2);line-height:1.45}
+.vrow.ctx p{color:var(--ink)}
+.fc{margin-top:90px}
+.fc-head{display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap;margin-bottom:44px}
+.fc-head h3{font-size:clamp(24px,2.4vw,32px);letter-spacing:-.02em}
+.days{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.day{position:relative;padding:18px 16px 16px;background:var(--paper);border:1px solid var(--line2);border-radius:4px;transition:all .45s}
+.day .dn{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3)}
+.day .wx{display:flex;gap:10px;align-items:center;margin:12px 0 6px}
+.day .wx .ico{width:30px;height:30px;color:var(--ink2)}
+.day .dt{font-size:30px;font-weight:500;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.day .dd{font-size:13.5px;color:var(--ink2)}
+.day .res{margin-top:12px;font-size:14px;font-weight:500;color:var(--ink3);min-height:1.5em}
+.day .rel{position:absolute;top:-30px;left:0;font-family:var(--mono);font-size:12px;font-weight:500;color:var(--blue);opacity:0;transform:translateY(6px);transition:all .5s;white-space:nowrap}
+.day.scan{border-color:var(--ink);box-shadow:0 0 0 3px var(--line)}
+.day.miss{opacity:.6}
+.day.dday{border-color:var(--blue);background:linear-gradient(var(--blue2),var(--blue2)),var(--paper);box-shadow:0 0 0 4px var(--blue2)}
+.day.dday .res,.day.dday .wx .ico{color:var(--blue)}
+.day.mark .rel{opacity:1;transform:none}
+.tl{position:relative;margin-top:100px}
+.tl-line{position:absolute;left:150px;top:10px;bottom:10px;width:1px;background:var(--line2)}
+.tl-line i{position:absolute;left:0;top:0;width:1px;height:0;background:var(--blue)}
+.tl-step{position:relative;display:grid;grid-template-columns:150px 1fr;padding:0 0 70px}
+.tl-step:last-child{padding-bottom:0}
+.tl-day{font-family:var(--mono);font-size:30px;font-weight:500;letter-spacing:-.02em;color:var(--ink3);transition:color .5s;padding-top:4px}
+.tl-day small{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-top:6px;color:var(--ink3);font-weight:400}
+.tl-step.in .tl-day{color:var(--blue)}
+.tl-body{position:relative;padding-left:52px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px 40px}
+.tl-body::before{content:'';position:absolute;left:-6px;top:14px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:1px solid var(--line3);transition:all .5s}
+.tl-step.in .tl-body::before{background:var(--blue);border-color:var(--blue);box-shadow:0 0 0 5px var(--blue2)}
+.msg{grid-column:1/-1;font-size:clamp(28px,3.6vw,48px);font-weight:500;letter-spacing:-.025em;line-height:1.1}
+.tl-body .k{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.tl-body p{font-size:16px;color:var(--ink2);line-height:1.5}
+.tl-body p b{font-weight:500;color:var(--ink)}
+.offer{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.offer span{font-size:13.5px;padding:5px 11px;border:1px solid var(--blue3);border-radius:20px;color:var(--blue)}
+
+/* 07 experience */
+.xp-scroll{position:relative;height:300vh}
+.xp-sticky{position:sticky;top:0;height:100vh;height:100svh;display:flex;align-items:center;overflow:hidden}
+.scene{position:absolute;inset:0;transition:background 1.4s ease;background:linear-gradient(180deg,#E6ECF1 0%,#DCE4EA 100%)}
+.scene.s1{background:linear-gradient(180deg,#D9E1E8 0%,#C9D4DD 100%)}
+.scene.s2{background:linear-gradient(180deg,#CED8E1 0%,#BAC8D4 100%)}
+#xpRain{position:absolute;inset:0;width:100%;height:100%}
+.scene .contour{position:absolute;inset:0;width:100%;height:100%;opacity:.5}
+.xp-grid{position:relative;z-index:2;display:grid;grid-template-columns:1fr auto 1fr;gap:60px;align-items:center;width:100%}
+.xp-when{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.xp-temp{display:flex;align-items:center;gap:14px;margin:12px 0 4px}
+.xp-temp b{font-size:clamp(56px,6vw,84px);font-weight:500;letter-spacing:-.05em;line-height:1}
+.xp-temp .ico{width:52px;height:52px;color:var(--ink2)}
+.xp-wx{font-size:16px;color:var(--ink2)}
+.story{list-style:none;margin-top:28px;border-top:1px solid var(--line3)}
+.story li{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line2);font-size:clamp(17px,1.5vw,20px);font-weight:500;color:var(--ink3);transition:color .5s;line-height:1.3}
+.story li.on{color:var(--ink)}
+.phone{position:relative;width:300px;height:620px;border-radius:48px;background:#0F1720;padding:10px;box-shadow:0 50px 90px -30px rgba(11,26,51,.5),0 0 0 1px rgba(255,255,255,.3) inset}
+.screen{position:relative;width:100%;height:100%;border-radius:39px;overflow:hidden;background:linear-gradient(180deg,#6D8396 0%,#3A5064 60%,#22323F 100%);transition:background 1.4s}
+.phone.s1 .screen{background:linear-gradient(180deg,#5A6F82 0%,#2E4357 60%,#1B2835 100%)}
+.phone.s2 .screen{background:linear-gradient(180deg,#4B6074 0%,#24384A 60%,#141F2A 100%)}
+.screen .isl{position:absolute;top:12px;left:50%;width:92px;height:26px;margin-left:-46px;border-radius:20px;background:#0F1720}
+.screen .ls{position:absolute;top:58px;left:0;right:0;text-align:center;color:#fff}
+.screen .ls .d{font-size:14px;font-weight:500;opacity:.85}
+.screen .ls .t{font-size:72px;font-weight:500;letter-spacing:-.04em;line-height:1.05}
+.screen .ls .w{font-size:13px;opacity:.75;margin-top:2px}
+.notifs{position:absolute;left:10px;right:10px;bottom:24px;display:flex;flex-direction:column-reverse;gap:8px}
+.nt{background:rgba(245,248,250,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:18px;padding:0 13px;color:var(--ink);opacity:0;transform:translateY(18px) scale(.97);transition:all .6s cubic-bezier(.2,.8,.2,1);max-height:0;overflow:hidden;text-align:left}
+.nt.on{opacity:1;transform:none;max-height:150px;padding-top:12px;padding-bottom:12px}
+.nt.old{opacity:.62}
+.nt .h{display:flex;justify-content:space-between;font-size:11px;color:var(--ink3);margin-bottom:3px}
+.nt .h b{font-weight:700;color:var(--ink2);display:flex;gap:6px;align-items:center}
+.nt .h b i{width:14px;height:14px;border-radius:4px;background:var(--blue);display:inline-block}
+.nt .tt{font-size:15px;font-weight:700;line-height:1.25}
+.nt .bd{font-size:13px;color:var(--ink2);line-height:1.35;margin-top:2px}
+.reward{position:absolute;left:10px;right:10px;top:206px;padding:14px 16px;border-radius:18px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.3);color:#fff;opacity:0;transform:translateY(10px);transition:all .7s;text-align:left}
+.reward.on{opacity:1;transform:none}
+.reward small{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;opacity:.75}
+.reward .v{font-size:30px;font-weight:500;letter-spacing:-.03em;margin-top:2px}
+.reward .s{font-size:12.5px;opacity:.85}
+.xp-why .cap{color:var(--blue)}
+.xp-why h3{font-size:clamp(22px,2.1vw,29px);letter-spacing:-.02em;line-height:1.2;margin-top:10px}
+.xp-why p{color:var(--ink2);margin-top:12px;font-size:16px;max-width:34ch}
+.xp-dots{display:flex;gap:6px;margin-top:24px;max-width:200px}
+.xp-dots i{height:2px;flex:1;background:var(--line3);transition:background .4s}
+.xp-dots i.on{background:var(--blue)}
+
+/* 08 role */
+.own{margin-top:64px}
+.own-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+.own-strip div{padding:16px 14px;border:1px solid var(--line2);background:var(--paper);font-size:16px;font-weight:500;line-height:1.25;min-height:86px;border-radius:3px}
+.own-strip div small{display:block;font-family:var(--mono);font-size:10px;font-weight:400;letter-spacing:.1em;color:var(--ink3);margin-bottom:8px;text-transform:uppercase}
+.own-strip .mine{border-color:var(--blue);background:linear-gradient(var(--blue2),var(--blue2)),var(--paper)}
+.own-strip .mine small{color:var(--blue)}
+.brackets{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin-top:10px}
+.br{position:relative;padding-top:16px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink3)}
+.br::before{content:'';position:absolute;left:0;right:0;top:0;height:9px;border:1px solid var(--line3);border-top:0}
+.br.me{grid-column:2/7;color:var(--blue)}
+.br.me::before{border-color:var(--blue)}
+.own-claim{margin-top:64px;font-size:clamp(24px,2.8vw,38px);font-weight:500;letter-spacing:-.02em;line-height:1.2;max-width:28ch}
+.own-claim span{color:var(--ink3)}
+.caps{margin-top:64px;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink)}
+.capb{padding:24px 24px 28px 0;border-bottom:1px solid var(--line2)}
+.capb:not(:nth-child(3n+1)){padding-left:24px;border-left:1px solid var(--line2)}
+.capb .n{font-family:var(--mono);font-size:11px;color:var(--blue);letter-spacing:.1em}
+.capb h3{font-size:20px;margin:10px 0 8px}
+.capb p{font-size:15px;color:var(--ink2);line-height:1.5}
+
+/* 09 maturity */
+.mat{margin-top:72px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:end}
+.lvl{position:relative;padding:26px 24px 28px;border-top:2px solid var(--line3);background:var(--paper);border-radius:0 0 4px 4px}
+.lvl:nth-child(1){min-height:240px}
+.lvl:nth-child(2){min-height:310px}
+.lvl:nth-child(3){min-height:390px;border-top-color:var(--blue);background:linear-gradient(180deg,var(--blue2),rgba(27,91,255,.02)),var(--paper)}
+.lvl .n{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)}
+.lvl:nth-child(3) .n{color:var(--blue)}
+.lvl h3{font-size:clamp(22px,2.2vw,30px);letter-spacing:-.02em;margin:12px 0 16px}
+.lvl q{display:block;font-size:17px;color:var(--ink2);line-height:1.45;quotes:none}
+.lvl .in3{display:flex;gap:6px;flex-wrap:wrap;margin-top:22px}
+.lvl .in3 span{font-size:12.5px;padding:4px 10px;border:1px solid var(--line2);border-radius:20px;color:var(--ink2)}
+.lvl:nth-child(3) .in3 span{border-color:var(--blue3);color:var(--blue)}
+.final{margin-top:100px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:56px;align-items:start;border-top:1px solid var(--ink);padding-top:30px}
+.final p{font-size:clamp(24px,2.6vw,36px);font-weight:500;letter-spacing:-.02em;line-height:1.22}
+.final p span{color:var(--ink3)}
+
+/* 10 unlock */
+.unlock{position:relative;margin-top:72px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr) minmax(0,.7fr);gap:110px;align-items:center}
+#unlockSvg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.conn{fill:none;stroke-width:1.2}
+.conn.b{stroke:var(--blue);stroke-dasharray:5 6;animation:dash 1.2s linear infinite}
+.conn.p{stroke:var(--ink3);stroke-dasharray:2 5}
+.u-sigs{list-style:none;position:relative;z-index:1}
+.u-sigs li{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:12px 16px;margin-bottom:6px;border:1px dashed var(--line3);border-radius:3px;background:rgba(250,251,252,.7)}
+.u-sigs li b{font-weight:500;font-size:16px}
+.u-sigs li small{font-family:var(--mono);font-size:10.5px;color:var(--ink3);letter-spacing:.06em}
+.u-sigs li.impl{border:1px solid var(--blue);background:var(--paper)}
+.u-sigs li.impl b,.u-sigs li.impl small{color:var(--blue)}
+.u-core,.u-out{position:relative;z-index:1}
+.u-core h4,.u-out h4{font-family:var(--mono);font-weight:500;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:14px}
+.core{border:1px solid var(--ink);border-radius:4px;background:var(--paper);padding:8px;position:relative}
+.core::before{content:'';position:absolute;inset:-7px;border:1px solid var(--line2);border-radius:6px}
+.core div{padding:11px 14px;border-bottom:1px solid var(--line);font-size:15px;font-weight:500}
+.core div:last-child{border-bottom:0}
+.chip{background:var(--paper);border:1px solid var(--line2);border-radius:3px;padding:13px 16px;margin-bottom:10px}
+.chip b{font-weight:500;font-size:16px}
+.legend{display:flex;gap:28px;margin-top:36px;font-family:var(--mono);font-size:11px;color:var(--ink3);letter-spacing:.06em;flex-wrap:wrap}
+.legend span{display:flex;gap:10px;align-items:center}
+.legend i{width:28px;height:0;border-top:1.5px solid var(--blue)}
+.legend i.p{border-top:1.5px dashed var(--ink3)}
+.closing{padding:160px 0 110px}
+.closing p{font-size:clamp(40px,6.6vw,104px);font-weight:500;letter-spacing:-.045em;line-height:1}
+.closing p + p{color:var(--blue);margin-top:10px}
+footer{border-top:1px solid var(--line2);padding:36px 0 46px}
+footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;font-family:var(--mono);font-size:11.5px;color:var(--ink3);letter-spacing:.04em;line-height:1.8}
+footer b{color:var(--ink);font-weight:500}
+footer a{color:var(--blue);text-decoration:none}
+
+/* responsive */
+@media (max-width:1100px){
+  .rail{display:none}
+  .eq{grid-template-columns:1fr 1fr 1fr;gap:12px}
+  .eq .op{display:none}
+  .unlock{gap:60px}
+}
+@media (max-width:900px){
+  :root{--gut:22px}
+  section{padding:104px 0}
+  .hero-grid{grid-template-columns:1fr;gap:26px;padding-top:96px}
+  .hero-steps{grid-template-columns:1fr 1fr;row-gap:14px}
+  .fields{grid-template-columns:1fr}
+  .join{height:52px}
+  .wcards{grid-template-columns:1fr}
+  .merge{height:50px}
+  .funnel,.mem-head,.final{grid-template-columns:1fr;gap:28px}
+  .mevents{grid-template-columns:1fr 1fr}
+  .vrow{grid-template-columns:1fr;gap:14px;padding:24px 0}
+  .vchain{flex-wrap:wrap;row-gap:12px}
+  .vnode{font-size:16px}
+  .days{grid-template-columns:repeat(5,minmax(140px,1fr));overflow-x:auto;padding:36px 2px 8px;margin-top:-30px}
+  .tl-line{left:8px}
+  .tl-step{grid-template-columns:1fr;padding-left:36px}
+  .tl-body{padding-left:0;grid-template-columns:1fr}
+  .tl-body::before{left:-34px;top:-30px}
+  .tl-day{font-size:24px;margin-bottom:12px}
+  .tl-day small{display:inline;margin-left:10px}
+  .xp-grid{grid-template-columns:1fr;gap:14px;justify-items:center;text-align:center}
+  .xp-why{display:none}
+  .xp-temp{justify-content:center;margin:4px 0 0}
+  .xp-temp b{font-size:40px}.xp-temp .ico{width:34px;height:34px}
+  .xp-wx{font-size:14px}
+  .story{display:none}
+  .phone{width:250px;height:520px;border-radius:42px}
+  .screen{border-radius:33px}
+  .screen .ls .t{font-size:58px}
+  .reward{top:176px}
+  .own-strip{grid-template-columns:1fr}
+  .own-strip div{min-height:0}
+  .brackets{display:none}
+  .caps{grid-template-columns:1fr}
+  .capb,.capb:not(:nth-child(3n+1)){padding:20px 0;border-left:0}
+  .mat{grid-template-columns:1fr}
+  .lvl:nth-child(n){min-height:0}
+  .unlock{grid-template-columns:1fr;gap:44px}
+  #unlockSvg{display:none}
+  .statement{padding:100px 0 0}
+  .closing{padding:110px 0 80px}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  .eq{grid-template-columns:1fr 1fr}
+  .eqt.res{grid-column:1/-1}
+  .mevents{grid-template-columns:1fr}
+  .crowd{padding:18px}
+  .hero .who{font-size:10.5px}
+  .hero-steps .t{font-size:15px}
+  .topbar .crumb{display:none}
+  .reward{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="ka-nav ka-back" href="index.html#work" data-ka-back><i>←</i> All work</a>
+  <a class="brand" href="index.html">Khanım Azimli</a>
+  <span class="tr"><span class="status">Progress<b id="pathPct">00%</b></span><span class="sep" aria-hidden="true"></span><a class="ka-nav ka-next" href="index.html#/work/who-when-whether"><span class="lg">Next project </span><i>→</i></a></span>
+</header>
+<nav class="rail" id="rail" aria-label="Sections"></nav>
+
+<!-- 01 THE IDEA -->
+<section class="hero" id="s01" data-name="The idea">
+  <div class="latlon"></div>
+  <svg id="isobars" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Case study · Contextual personalization</p>
+      <h1>Context-Aware Journey Orchestration</h1>
+      <p class="sub">Turning real-world signals into timely customer experiences.</p>
+      <div class="who">
+        <div><span>Role</span>Lead CX Specialist, ABB Bank</div>
+        <div><span>Focus</span>Journey &amp; decision design</div>
+      </div>
+    </div>
+
+    <div class="hv" id="hv" role="img" aria-label="The weather turns cold and rainy, a decision checks the customer and the timing, and the customer receives a timely message with a reward.">
+      <div class="hv-stage" id="hvStage">
+        <svg class="links" viewBox="0 0 620 500" aria-hidden="true">
+          <path class="l1" d="M222 240 C236 240, 238 240, 252 240"/>
+          <path class="l2" d="M324 240 C362 240, 366 330, 400 330"/>
+        </svg>
+        <span class="hv-cap" id="cap1" style="left:0;top:100px">01 · Real world</span>
+        <div class="orb">
+          <div class="cloud"><svg viewBox="0 0 96 60"><path d="M24 52a16 16 0 0 1-2-32 22 22 0 0 1 42-4 15 15 0 0 1 8 36z"/></svg></div>
+          <div class="rain" id="orbRain"></div>
+          <div class="deg" id="orbDeg">12°</div>
+          <div class="lbl" id="orbLbl">Mild · dry</div>
+        </div>
+        <span class="hv-cap" id="cap2" style="left:240px;top:168px">03 · Decision</span>
+        <div class="dnode"><svg viewBox="0 0 26 26"><path d="M5 13.5l5 5L21 7"/></svg></div>
+        <div class="checks" id="checks">
+          <div><span class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5l2.5 2.5L10 3"/></svg></span>Weather qualifies</div>
+          <div><span class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5l2.5 2.5L10 3"/></svg></span>Customer is eligible</div>
+          <div><span class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5l2.5 2.5L10 3"/></svg></span>Not contacted this month</div>
+        </div>
+        <span class="hv-cap" id="cap3" style="left:400px;top:0">04 · Experience</span>
+        <div class="mphone">
+          <div class="mscreen">
+            <div class="isl"></div>
+            <div class="ls"><div class="d">Thursday · 4°C, rain</div><div class="t">18:30</div></div>
+            <div class="mn"><div class="h"><b><i></i>ABB Mobile</b><span>now</span></div><div class="tt">Tomorrow calls for something warm 🌧️</div><div class="bd">10% back at selected khinkali restaurants. Up to 20 AZN.</div></div>
+            <div class="mr"><small>Reward · tomorrow</small><div>10% back</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap" style="position:relative;z-index:2">
+    <ol class="hero-steps" id="heroSteps">
+      <li><div class="n">01 Real world</div><div class="t">It turns cold and rainy</div></li>
+      <li><div class="n">02 Context</div><div class="t">The customer's moment changes</div></li>
+      <li><div class="n">03 Decision</div><div class="t">Right customer, right time</div></li>
+      <li><div class="n">04 Experience</div><div class="t">A message that makes sense</div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 02 THE PROBLEM -->
+<section id="s02" data-name="The problem">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="idx">02</span><span class="tag">The problem</span></div>
+    <h2 class="rv">CRM knows the customer. It often ignores the moment.</h2>
+    <p class="lead rv">Most CRM journeys start from what the bank already knows: transactions, balances, products, app activity, past campaigns. That describes the customer well. It says very little about the day they are having. This project added one signal from outside the bank, the weather, and tested whether it could become a real input into customer decisions.</p>
+
+    <div class="fields rv">
+      <div class="field internal">
+        <div class="f-label"><b>What the bank knows</b><span>Inside</span></div>
+        <div class="sig"><span class="nm">Transactions</span><span class="k">what they buy</span></div>
+        <div class="sig"><span class="nm">App behaviour</span><span class="k">how they use the app</span></div>
+        <div class="sig"><span class="nm">Product ownership</span><span class="k">what they hold</span></div>
+        <div class="sig"><span class="nm">Campaign history</span><span class="k">what we already sent</span></div>
+      </div>
+      <div class="join">+</div>
+      <div class="field external">
+        <div class="f-label"><b>What is happening outside</b><span>Context</span></div>
+        <div class="sig"><span class="nm">Weather forecast</span><span class="k">the next 5 days</span></div>
+        <div class="sig"><span class="nm">Temperature</span><span class="k">is it cold?</span></div>
+        <div class="sig"><span class="nm">Wind</span><span class="k">is it windy?</span></div>
+        <div class="sig"><span class="nm">Precipitation</span><span class="k">is it raining?</span></div>
+      </div>
+    </div>
+    <svg class="converge" id="converge" viewBox="0 0 1000 110" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M250 0 C250 64, 500 46, 500 110"/>
+      <path class="ext" d="M750 0 C750 64, 500 46, 500 110"/>
+    </svg>
+    <div class="ctx-node rv">
+      <h3>Contextual decisioning</h3>
+      <p>Who the customer is, plus what is happening around them right now.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 03 THE SIGNAL -->
+<section id="s03" class="grid-bg" data-name="The signal">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="idx">03</span><span class="tag">The signal</span></div>
+    <h2 class="rv">Weather becomes a customer signal.</h2>
+    <p class="lead rv">A five-day forecast is translated into three plain conditions. Each one has a clear threshold, and any one of them is enough for a day to qualify.</p>
+
+    <div class="wcards" id="wcards">
+      <div class="wc" data-mk="80">
+        <div class="wc-top"><span data-ico="temp"></span><span class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5l2.5 2.5L10 3"/></svg></span></div>
+        <h3>Cold</h3><div class="rule">5°C or colder</div>
+        <div class="meter"><div class="tr"></div><div class="zone" style="left:0;width:40%"></div><div class="th" style="left:40%"></div><div class="mk" style="left:80%" data-to="35.6"></div><div class="ends"><span>−5°C</span><span>20°C</span></div></div>
+        <div class="today">Friday forecast: <b>3.9°C</b></div>
+      </div>
+      <div class="wc">
+        <div class="wc-top"><span data-ico="wind"></span><span class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5l2.5 2.5L10 3"/></svg></span></div>
+        <h3>Windy</h3><div class="rule">10 m/s or stronger</div>
+        <div class="meter"><div class="tr"></div><div class="zone" style="left:50%;right:0"></div><div class="th" style="left:50%"></div><div class="mk" style="left:15%" data-to="58"></div><div class="ends"><span>calm</span><span>20 m/s</span></div></div>
+        <div class="today">Friday forecast: <b>11.6 m/s</b></div>
+      </div>
+      <div class="wc">
+        <div class="wc-top"><span data-ico="rain"></span><span class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5l2.5 2.5L10 3"/></svg></span></div>
+        <h3>Rainy</h3><div class="rule">Rain in the forecast</div>
+        <div class="meter"><div class="tr"></div><div class="zone" style="left:50%;right:0"></div><div class="th" style="left:50%"></div><div class="mk" style="left:20%" data-to="80"></div><div class="ends"><span>dry</span><span>rain</span></div></div>
+        <div class="today">Friday forecast: <b>rain</b></div>
+      </div>
+    </div>
+    <svg class="merge" id="merge" viewBox="0 0 1000 90" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M167 0 C167 50, 500 40, 500 90"/><path d="M500 0 V90"/><path d="M833 0 C833 50, 500 40, 500 90"/>
+    </svg>
+    <div class="qual" id="qual"><span class="cap">Friday</span><b>The day qualifies</b></div>
+    <p class="anyone">Cold <b>or</b> windy <b>or</b> rainy. Any one is enough. Forecast values on this page are simulated.</p>
+  </div>
+</section>
+
+<!-- 04 THE DECISION -->
+<section id="s04" data-name="The decision">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="idx">04</span><span class="tag">The decision</span></div>
+    <h2 class="rv">A signal alone is not enough.</h2>
+    <p class="lead rv">Good weather for the offer does not mean every customer should hear about it. Each check removes people for whom a message would be irrelevant, repeated or badly timed. Only those who pass every check get the experience.</p>
+
+    <div class="funnel" id="funnel">
+      <ol class="fsteps" id="fsteps">
+        <li class="fs"><span class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5l2.5 2.5L10 3"/></svg></span><div><div class="q">The weather qualifies</div><div class="s">Every customer in the city could be reached</div></div><span class="c">100</span></li>
+        <li class="fs"><span class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5l2.5 2.5L10 3"/></svg></span><div><div class="q">Who is eligible?</div><div class="s">Right audience, eligible card</div></div><span class="c">68</span></li>
+        <li class="fs"><span class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5l2.5 2.5L10 3"/></svg></span><div><div class="q">Already took part this month?</div><div class="s">Frequency: once a month at most</div></div><span class="c">55</span></li>
+        <li class="fs"><span class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5l2.5 2.5L10 3"/></svg></span><div><div class="q">Already in another message flow?</div><div class="s">Suppression: no double contact</div></div><span class="c">49</span></li>
+        <li class="fs"><span class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5l2.5 2.5L10 3"/></svg></span><div><div class="q">Is the timing right?</div><div class="s">Three days' notice before the cold day</div></div><span class="c">49</span></li>
+        <li class="fs last"><span class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5l2.5 2.5L10 3"/></svg></span><div><div class="q">Relevant experience</div><div class="s">The journey starts for these customers only</div></div><span class="c">49</span></li>
+      </ol>
+      <div class="crowd">
+        <div class="crowd-h"><div class="big" id="crowdN">100<small>customers</small></div><span class="cap" id="crowdL">Weather qualifies</span></div>
+        <svg id="crowd" viewBox="0 0 400 300" aria-label="Illustrative group of 100 customers narrowing to 49 who receive the experience"></svg>
+        <div class="legend2"><span><i class="a"></i>Gets the experience</span><span><i class="b"></i>Not eligible</span><span><i class="c"></i>Already took part</span><span><i class="d"></i>Already in a flow</span></div>
+      </div>
+    </div>
+    <p class="note">Illustrative group of 100. Not campaign data.</p>
+
+    <div class="statement">
+      <div class="rule cap rv">The principle</div>
+      <p class="rv">A trigger is not a message.</p>
+      <p class="rv">It is an input into a decision.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 05 THE ORCHESTRATION -->
+<section id="s05" class="grid-bg" data-name="Orchestration">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="idx">05</span><span class="tag">The orchestration</span></div>
+    <h2 class="rv">Context opens the door. Four rules decide the action.</h2>
+    <p class="lead rv">The weather never sends anything by itself. It is combined with eligibility, timing, frequency and suppression, and only then does the journey act.</p>
+
+    <div class="eq" id="eq">
+      <div class="eqt ctx"><span class="cap">Context</span><b>The weather</b><p>Cold, windy or rainy day ahead</p></div>
+      <div class="op">+</div>
+      <div class="eqt"><span class="cap">Eligibility</span><b>Who</b><p>Right audience, eligible card</p></div>
+      <div class="op">+</div>
+      <div class="eqt"><span class="cap">Timing</span><b>When</b><p>Three days' notice, then the day itself</p></div>
+      <div class="op">+</div>
+      <div class="eqt"><span class="cap">Frequency</span><b>How often</b><p>Once a month at most</p></div>
+      <div class="op">+</div>
+      <div class="eqt"><span class="cap">Suppression</span><b>Not twice</b><p>Never on top of another flow</p></div>
+      <div class="op">=</div>
+      <div class="eqt res"><span class="cap">Action</span><b>The right experience</b><p>Or, just as often, no message at all</p></div>
+    </div>
+
+    <div class="memory" id="memory">
+      <div class="mem-head rv">
+        <h3>The journey remembers.</h3>
+        <p>One customer across two months. It can rain many times in October, but the customer only takes part once. A new month resets the cap.</p>
+      </div>
+      <div class="month" id="month">
+        <div class="mlbl"><span style="left:0">October</span><span style="left:83.9%">November</span></div>
+        <div class="mtrack" id="mtrack"><div class="mcursor" id="mcursor"></div></div>
+        <div class="mevents" id="mevents">
+          <div class="me ok"><div class="d"><span data-ico="rain"></span>9 October · rain</div><b>Takes part</b><p>First qualifying day this month</p></div>
+          <div class="me sup"><div class="d"><span data-ico="temp"></span>16 October · cold</div><b>No message</b><p>Already took part in October</p></div>
+          <div class="me sup"><div class="d"><span data-ico="rain"></span>27 October · rain</div><b>No message</b><p>Monthly cap still applies</p></div>
+          <div class="me ok"><div class="d"><span data-ico="wind"></span>4 November · wind</div><b>Eligible again</b><p>New month, new opportunity</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 THE JOURNEY -->
+<section id="s06" data-name="The journey">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="idx">06</span><span class="tag">The journey</span></div>
+    <h2 class="rv">The experience unfolds at the right moment.</h2>
+    <p class="lead rv">In a scheduled campaign, someone decides Tuesday is campaign day. Here, nobody picks the date. The first qualifying day in the forecast becomes the key day, and the journey is planned backwards from it.</p>
+
+    <div class="versus rv">
+      <div class="vrow trad">
+        <span class="cap">Traditional</span>
+        <div class="vchain">
+          <span class="vnode"><span data-ico="cal"></span>Calendar</span>
+          <span class="vlink"></span><span class="vnode">Campaign</span>
+          <span class="vlink"></span><span class="vnode">Customer</span>
+        </div>
+        <p>The date is a marketing decision.</p>
+      </div>
+      <div class="vrow ctx">
+        <span class="cap blue">Contextual</span>
+        <div class="vchain">
+          <span class="vnode ev"><span data-ico="rain"></span>Weather</span>
+          <span class="vlink"></span><span class="vnode">Decision</span>
+          <span class="vlink"></span><span class="vnode">Journey</span>
+          <span class="vlink"></span><span class="vnode">Customer</span>
+        </div>
+        <p>The date is a consequence of the weather.</p>
+      </div>
+    </div>
+
+    <div class="fc">
+      <div class="fc-head rv"><h3>The forecast picks the day</h3><span class="cap">5-day forecast · simulated</span></div>
+      <div class="days" id="days"></div>
+    </div>
+
+    <div class="tl" id="tl">
+      <div class="tl-line"><i id="tlFill"></i></div>
+      <div class="tl-step">
+        <div class="tl-day">D−3<small>Teaser</small></div>
+        <div class="tl-body">
+          <div class="msg">“Perfect weather for something warm 🥟”</div>
+          <div><div class="k">Why</div><p>Name the weather before the offer. The customer recognises their own day first.</p></div>
+          <div><div class="k">What happens</div><p><b>The customer joins the journey.</b> If the forecast shifts later, they are not dropped halfway through.</p></div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-day">D−1<small>Offer</small></div>
+        <div class="tl-body">
+          <div class="msg">“Tomorrow calls for something warm 🌧️”</div>
+          <div><div class="k">Why</div><p>Reveal the offer the evening before, when tomorrow's plans are being made.</p>
+            <div class="offer"><span>Selected khinkali restaurants</span><span>10% cashback</span><span>Up to 20 AZN</span></div></div>
+          <div><div class="k">What happens</div><p>Push notification plus an in-app banner, for the same customers only.</p></div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-day">D0<small>Reward</small></div>
+        <div class="tl-body">
+          <div class="msg">“This one's on us 💙”</div>
+          <div><div class="k">Why</div><p>The reward lands on the cold day itself, when it means the most.</p></div>
+          <div><div class="k">What happens</div><p>Cashback is active for the day with an eligible card. At day end the journey closes and the result is remembered.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 THE CUSTOMER EXPERIENCE -->
+<section id="s07" style="padding:0" data-name="Experience">
+  <div class="wrap" style="padding-top:150px;padding-bottom:30px">
+    <div class="sec-head rv"><span class="idx">07</span><span class="tag">The customer experience</span></div>
+    <h2 class="rv">The message feels relevant, not random.</h2>
+    <p class="lead rv">All the logic exists for this moment. Three messages over four days, each arriving when the weather has already made it make sense.</p>
+  </div>
+  <div class="xp-scroll" id="xpScroll">
+    <div class="xp-sticky">
+      <div class="scene" id="scene">
+        <svg class="contour" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true" id="xpContour"></svg>
+        <canvas id="xpRain" aria-hidden="true"></canvas>
+      </div>
+      <div class="wrap xp-grid">
+        <div class="xp-info">
+          <div class="xp-when" id="xWhen">Tuesday · 3 days before</div>
+          <div class="xp-temp"><span id="xIco"></span><b id="xTemp">8°</b></div>
+          <div class="xp-wx" id="xWx">Mild today. Cold rain forecast for Friday.</div>
+          <ol class="story" id="story">
+            <li><span class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5l2.5 2.5L10 3"/></svg></span>The weather changed.</li>
+            <li><span class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5l2.5 2.5L10 3"/></svg></span>The system noticed.</li>
+            <li><span class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5l2.5 2.5L10 3"/></svg></span>The journey reacted.</li>
+            <li><span class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5l2.5 2.5L10 3"/></svg></span>The customer got something that made sense.</li>
+          </ol>
+        </div>
+        <div class="phone" id="phone">
+          <div class="screen">
+            <div class="isl"></div>
+            <div class="ls"><div class="d" id="pDate">Tuesday, 6 October</div><div class="t" id="pTime">09:40</div><div class="w" id="pW">8°C · cloudy</div></div>
+            <div class="reward" id="reward"><small>Reward · today</small><div class="v">10% back</div><div class="s">Khinkali restaurants · up to 20 AZN</div></div>
+            <div class="notifs">
+              <div class="nt" id="n1"><div class="h"><b><i></i>ABB Mobile</b><span>Tue 09:40</span></div><div class="tt">Perfect weather for something warm 🥟</div><div class="bd">Cold days are on the way. We have something cosy planned for you.</div></div>
+              <div class="nt" id="n2"><div class="h"><b><i></i>ABB Mobile</b><span>Thu 18:30</span></div><div class="tt">Tomorrow calls for something warm 🌧️</div><div class="bd">Get 10% back at selected khinkali restaurants tomorrow. Up to 20 AZN.</div></div>
+              <div class="nt" id="n3"><div class="h"><b><i></i>ABB Mobile</b><span>Fri 12:10</span></div><div class="tt">This one's on us 💙</div><div class="bd">Pay with your card today and 10% comes back to you.</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="xp-why">
+          <div class="cap" id="yK">D−3 · Teaser</div>
+          <h3 id="yH">The weather is named before the offer.</h3>
+          <p id="yP">No reward yet. The message only says what the customer can already feel. Relevance comes first and earns attention for the offer.</p>
+          <div class="xp-dots"><i class="on"></i><i></i><i></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 MY ROLE -->
+<section id="s08" data-name="My role">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="idx">08</span><span class="tag">My role</span></div>
+    <h2 class="rv">I designed the decision and journey logic behind it.</h2>
+    <p class="lead rv">I owned the customer journey and orchestration layer: who enters, when, how often, and what they experience once the weather qualifies. Engineering built the weather data integration. Delivery was coordinated with product, IT and campaign teams.</p>
+
+    <div class="own rv">
+      <div class="own-strip">
+        <div class="eng"><small>Engineering</small>Weather data feed</div>
+        <div class="mine"><small>My scope</small>Weather rules &amp; thresholds</div>
+        <div class="mine"><small>My scope</small>Eligibility</div>
+        <div class="mine"><small>My scope</small>Frequency &amp; suppression</div>
+        <div class="mine"><small>My scope</small>Journey timing</div>
+        <div class="mine"><small>My scope</small>Customer experience</div>
+      </div>
+      <div class="brackets"><div class="br">Built by engineering</div><div class="br me">Designed by me · journey, decisioning and experience</div></div>
+    </div>
+
+    <p class="own-claim rv">I didn't build the weather feed. <span>I designed what the bank should do when the weather changes.</span></p>
+
+    <div class="caps">
+      <div class="capb rv"><div class="n">01</div><h3>Contextual journey concept</h3><p>Weather framed as a decision input, not a campaign theme.</p></div>
+      <div class="capb rv"><div class="n">02</div><h3>Trigger framework</h3><p>How a five-day forecast qualifies a day and sets the key date.</p></div>
+      <div class="capb rv"><div class="n">03</div><h3>Weather decision rules</h3><p>Clear thresholds for cold, wind and rain. Any one qualifies.</p></div>
+      <div class="capb rv"><div class="n">04</div><h3>Journey architecture</h3><p>Teaser, offer and reward, planned backwards from the qualifying day.</p></div>
+      <div class="capb rv"><div class="n">05</div><h3>Eligibility logic</h3><p>Audience and card conditions that decide who can join.</p></div>
+      <div class="capb rv"><div class="n">06</div><h3>Frequency governance</h3><p>Once a month per customer, with no drop-outs mid-journey.</p></div>
+      <div class="capb rv"><div class="n">07</div><h3>Communication sequencing</h3><p>Three messages, each with a single job.</p></div>
+      <div class="capb rv"><div class="n">08</div><h3>Customer experience design</h3><p>Tone and timing that read as care, not promotion.</p></div>
+      <div class="capb rv"><div class="n">09</div><h3>Cross-functional coordination</h3><p>Requirements, flow documentation and sign-off with partner teams.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 WHY IT MATTERS -->
+<section id="s09" class="grid-bg" data-name="Why it matters">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="idx">09</span><span class="tag">Why it matters</span></div>
+    <h2 class="rv">From campaign scheduling to context-aware engagement.</h2>
+    <div class="mat">
+      <div class="lvl rv"><div class="n">Level 1</div><h3>Campaign</h3><q>“Send this message on this date.”</q><div class="in3"><span>calendar</span></div></div>
+      <div class="lvl rv"><div class="n">Level 2</div><h3>Triggered journey</h3><q>“Send when the customer does something.”</q><div class="in3"><span>customer</span><span>action</span></div></div>
+      <div class="lvl rv"><div class="n">Level 3</div><h3>Context-aware orchestration</h3><q>“Look at the customer, the context and the timing before deciding whether to act.”</q><div class="in3"><span>customer</span><span>context</span><span>timing</span><span>history</span></div></div>
+    </div>
+    <div class="final rv">
+      <div class="cap">Outcome</div>
+      <p>The weather was one use case. <span>The bigger result was showing that outside context can become another input into customer decisions.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- 10 WHAT IT UNLOCKS -->
+<section id="s10" style="padding-bottom:0" data-name="What it unlocks">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="idx">10</span><span class="tag">What this unlocks</span></div>
+    <h2 class="rv">Weather was the first outside signal.</h2>
+    <p class="lead rv">The same decision layer can take others. None of the signals below were built. They show where it could go next, with the same eligibility, frequency and suppression rules applied to each.</p>
+    <div class="unlock rv" id="unlock">
+      <svg id="unlockSvg" aria-hidden="true"></svg>
+      <ul class="u-sigs">
+        <li class="impl"><b>Weather</b><small>implemented</small></li>
+        <li><b>Travel disruption</b><small>potential</small></li>
+        <li><b>Location context</b><small>potential</small></li>
+        <li><b>Seasonality</b><small>potential</small></li>
+        <li><b>Salary-day behaviour</b><small>potential</small></li>
+        <li><b>Merchant context</b><small>potential</small></li>
+        <li><b>Major events</b><small>potential</small></li>
+        <li><b>Time-sensitive service</b><small>potential</small></li>
+      </ul>
+      <div class="u-core"><h4>Decision layer</h4><div class="core" id="ucore"><div>Context rules</div><div>Eligibility</div><div>Frequency</div><div>Suppression</div><div>Customer history</div></div></div>
+      <div class="u-out" id="uout"><h4>Experiences</h4><div class="chip"><b>Contextual journeys</b></div><div class="chip"><b>Service messages</b></div><div class="chip"><b>Next best experience</b></div></div>
+    </div>
+    <div class="legend"><span><i></i>Implemented signal</span><span><i class="p"></i>Potential application, not built</span></div>
+    <div class="closing">
+      <p class="rv">Build the decision layer once.</p>
+      <p class="rv">Feed it better signals over time.</p>
+    </div>
+  </div>
+</section>
+
+<a class="ka-nextcase" href="index.html#/work/who-when-whether">
+  <div class="wrap">
+    <span class="cap"><b>02</b>Next project</span>
+    <div class="nt"><span>Who, When, and Whether</span><i aria-hidden="true">→</i></div>
+    <small>Customer decisioning · Retail banking · 2025–2026</small>
+  </div>
+</a>
+
+<footer>
+  <div class="wrap">
+    <div><b>Khanim Azimli</b> · Lead CX Specialist<br>CRM &amp; Lifecycle Strategy · Journey Orchestration · Customer Decisioning</div>
+    <div>Forecast values and audience counts are simulated for illustration.<br>No performance metrics are shown. <a href="index.html#work" data-ka-back>All work</a></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+'use strict';
+var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var $ = function(s,c){return (c||document).querySelector(s)};
+var $$ = function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
+var clamp = function(v,a,b){return Math.max(a,Math.min(b,v))};
+var NS='http://www.w3.org/2000/svg';
+function svgEl(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e}
+function sleep(ms){return new Promise(function(r){setTimeout(r,ms)})}
+function once(el,cb,th){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){io.disconnect();cb()}})},{threshold:th||.35});io.observe(el)}
+function watch(el,cb){var io=new IntersectionObserver(function(es){es.forEach(function(e){cb(e.isIntersecting)})});io.observe(el)}
+function count(el,from,to,ms,suffix){if(RM||from===to){el.firstChild.nodeValue=to;return}var t0=performance.now();(function f(n){var p=clamp((n-t0)/ms,0,1);el.firstChild.nodeValue=Math.round(from+(to-from)*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(t0)}
+
+/* ---------- icons ---------- */
+var ICONS={
+  temp:'<path d="M14 14.8V5a2 2 0 0 0-4 0v9.8a4 4 0 1 0 4 0z"/><path d="M12 9v7"/>',
+  wind:'<path d="M3 8h10a3 3 0 1 0-3-3"/><path d="M3 12h15a3 3 0 1 1-3 3"/><path d="M3 16h7"/>',
+  rain:'<path d="M7 15a4.5 4.5 0 0 1-.6-8.96A6 6 0 0 1 18 7.5a3.75 3.75 0 0 1 0 7.5z"/><path d="M8 18l-1 3M12 18l-1 3M16 18l-1 3"/>',
+  cloud:'<path d="M7 18a4.5 4.5 0 0 1-.6-8.96A6 6 0 0 1 18 10.5a3.75 3.75 0 0 1 0 7.5z"/>',
+  cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M14 14h3v3h-3z"/>'
+};
+function ico(n){return '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true">'+ICONS[n]+'</svg>'}
+$$('[data-ico]').forEach(function(s){s.outerHTML=ico(s.getAttribute('data-ico'))});
+
+/* ---------- reveal ---------- */
+if(RM)$$('.rv').forEach(function(e){e.classList.add('in')});
+else{var rio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');rio.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'});$$('.rv').forEach(function(e){rio.observe(e)})}
+once($('#converge'),function(){$('#converge').classList.add('in')},.4);
+
+/* ---------- rail + progress ---------- */
+var secs=$$('section[id]'),rail=$('#rail');
+secs.forEach(function(s){var a=document.createElement('a');a.href='#'+s.id;a.innerHTML='<span>'+s.id.slice(1)+' · '+(s.dataset.name||'')+'</span>';rail.appendChild(a)});
+var railLinks=$$('a',rail),pct=$('#pathPct');
+function onRail(){var y=scrollY,h=document.documentElement.scrollHeight-innerHeight;pct.textContent=String(Math.round(clamp(y/h,0,1)*100)).padStart(2,'0')+'%';
+  var mid=y+innerHeight*.45,cur=0;secs.forEach(function(s,i){if(s.offsetTop<=mid)cur=i});
+  railLinks.forEach(function(a,i){a.classList.toggle('on',i===cur);a.classList.toggle('past',i<cur)})}
+
+/* ---------- contour helper ---------- */
+function ringD(c,k,t){var r0=c.sp*k+18,d='',N=84;for(var i=0;i<=N;i++){var a=i/N*Math.PI*2;var r=r0*(1+.11*Math.sin(3*a+k*.35+t)+.05*Math.sin(5*a-k*.5-t*1.3)+.03*Math.sin(2*a+t*.7));d+=(i?'L':'M')+(c.x+r*Math.cos(a)*1.3).toFixed(1)+' '+(c.y+r*Math.sin(a)*.86).toFixed(1)}return d+'Z'}
+(function(){var s=$('#isobars');for(var k=1;k<=9;k++){var p=svgEl('path',{d:ringD({x:1180,y:430,sp:52},k,.6)});p.style.opacity=(1-k/12).toFixed(2);s.appendChild(p)}})();
+
+/* ---------- 01 hero sequence ---------- */
+var hv=$('#hv'),stage=$('#hvStage');
+function fitHero(){var w=hv.clientWidth,s=Math.min(1,w/620);stage.style.transform='scale('+s+')';hv.style.height=(500*s)+'px'}
+fitHero();
+(function(){var r=$('#orbRain');for(var i=0;i<9;i++){var d=document.createElement('i');d.style.left=(i*11+Math.random()*6)+'%';d.style.animationDelay=(Math.random()*1.2).toFixed(2)+'s';r.appendChild(d)}})();
+var hSteps=$$('#heroSteps li'),checks=$$('#checks div'),orbDeg=$('#orbDeg'),orbLbl=$('#orbLbl');
+function heroFinal(){hv.className='hv s1 s2 s3 s4';hSteps.forEach(function(l){l.classList.add('on')});checks.forEach(function(c){c.classList.add('on')});['cap1','cap2','cap3'].forEach(function(i){$('#'+i).classList.add('on')});orbDeg.textContent='4°';orbLbl.textContent='Cold · rain'}
+async function heroPlay(){
+  await sleep(500);hv.classList.add('s1');$('#cap1').classList.add('on');hSteps[0].classList.add('on');
+  var t0=performance.now();(function f(n){var p=clamp((n-t0)/1500,0,1);orbDeg.textContent=Math.round(12-8*p)+'°';if(p<1)requestAnimationFrame(f)})(t0);
+  await sleep(800);orbLbl.textContent='Cold · rain';
+  await sleep(700);hSteps[1].classList.add('on');
+  await sleep(700);hv.classList.add('s2');$('#cap2').classList.add('on');
+  for(var i=0;i<3;i++){await sleep(380);checks[i].classList.add('on');if(i===0)hSteps[2].classList.add('on')}
+  await sleep(500);hv.classList.add('s3');$('#cap3').classList.add('on');hSteps[3].classList.add('on');
+  await sleep(1100);hv.classList.add('s4');
+}
+if(RM)heroFinal();else heroPlay();
+
+/* ---------- 03 signal ---------- */
+var wcs=$$('.wc'),merge=$('#merge'),qual=$('#qual');
+function sigFinal(){wcs.forEach(function(c){c.classList.add('on');var m=$('.mk',c);m.style.left=m.dataset.to+'%'});merge.classList.add('on');qual.classList.add('on')}
+if(RM)sigFinal();
+else once($('#wcards'),async function(){for(var i=0;i<wcs.length;i++){await sleep(i?750:300);var m=$('.mk',wcs[i]);m.style.left=m.dataset.to+'%';await sleep(650);wcs[i].classList.add('on')}await sleep(300);merge.classList.add('on');await sleep(1000);qual.classList.add('on')},.3);
+
+/* ---------- 04 audience filter ---------- */
+var crowd=$('#crowd'),people=[];
+for(var r=0;r<10;r++)for(var c=0;c<10;c++){var x=20+c*40,y=16+r*29;var g=svgEl('g',{'class':'p'});
+  g.appendChild(svgEl('circle',{cx:x,cy:y-4,r:4.6}));
+  g.appendChild(svgEl('path',{d:'M'+(x-8)+' '+(y+11)+' Q'+(x-8)+' '+(y+2)+' '+x+' '+(y+2)+' Q'+(x+8)+' '+(y+2)+' '+(x+8)+' '+(y+11)+' Z'}));
+  crowd.appendChild(g);people.push(g)}
+var order=people.map(function(_,i){return i}),seed=7;function rnd(){seed=(seed*16807)%2147483647;return seed/2147483647}
+for(var i=order.length-1;i>0;i--){var j=Math.floor(rnd()*(i+1));var t=order[i];order[i]=order[j];order[j]=t}
+var CUT=[[0,32,'x1'],[32,45,'x2'],[45,51,'x3']];
+var fs=$$('.fs'),crowdN=$('#crowdN'),crowdL=$('#crowdL');
+var FS=[{n:100,l:'Weather qualifies'},{n:68,l:'Eligible',cut:0},{n:55,l:'Have not taken part this month',cut:1},{n:49,l:'Not in another flow',cut:2},{n:49,l:'Timing is right'},{n:49,l:'Get the experience',fin:true}];
+function applyFS(i,anim){var s=FS[i];fs.forEach(function(e,k){e.classList.toggle('on',k<=i);e.classList.toggle('cur',k===i)});
+  if(s.cut!==undefined){var cc=CUT[s.cut];for(var k=cc[0];k<cc[1];k++)people[order[k]].classList.add(cc[2])}
+  if(s.fin)for(var k2=51;k2<100;k2++)people[order[k2]].classList.add('fin');
+  var prev=i?FS[i-1].n:100;if(anim)count(crowdN,prev,s.n,700);else crowdN.firstChild.nodeValue=s.n;crowdL.textContent=s.l}
+if(RM){for(var q=0;q<FS.length;q++)applyFS(q,false)}
+else{applyFS(0,false);fs[0].classList.remove('on','cur');once($('#funnel'),async function(){for(var i=0;i<FS.length;i++){await sleep(i?1300:300);applyFS(i,true)}},.35)}
+
+/* ---------- 05 orchestration ---------- */
+var eqEls=$$('#eq > *');
+if(RM)eqEls.forEach(function(e){e.classList.add('on')});
+else once($('#eq'),async function(){for(var i=0;i<eqEls.length;i++){eqEls[i].classList.add('on');await sleep(eqEls[i].classList.contains('op')?160:330)}},.4);
+var mtrack=$('#mtrack'),cells=[],EV={8:'ok',15:'sup',26:'sup',34:'ok'},EVI=[8,15,26,34],mev=$$('.me'),mcur=$('#mcursor');
+for(var d=0;d<37;d++){var ce=document.createElement('i');if(d>=31)ce.className='nov';if(EV[d])ce.className+=' ev '+EV[d];if(d===31)ce.style.boxShadow='-2px 0 0 #121A22';mtrack.appendChild(ce);cells.push(ce)}
+function lightEv(k){cells[EVI[k]].classList.add('lit');mev[k].classList.add('on')}
+if(RM){EVI.forEach(function(_,k){lightEv(k)})}
+else once($('#month'),function(){var t0=performance.now(),D=5600,done=0;mcur.style.opacity=1;(function f(n){var p=clamp((n-t0)/D,0,1);mcur.style.left=(p*100)+'%';while(done<4&&p*37>=EVI[done]+.5){lightEv(done);done++}if(p<1)requestAnimationFrame(f);else setTimeout(function(){mcur.style.opacity=0},600)})(t0)},.45);
+
+/* ---------- 06 forecast + timeline ---------- */
+var DAYS=[
+  {n:'Tue 06',t:'8.4°',i:'cloud',dd:'6.1 m/s · dry',rel:'D−3 · teaser',r:'No'},
+  {n:'Wed 07',t:'7.6°',i:'cloud',dd:'8.0 m/s · dry',rel:'',r:'No'},
+  {n:'Thu 08',t:'6.0°',i:'cloud',dd:'9.4 m/s · dry',rel:'D−1 · offer',r:'No'},
+  {n:'Fri 09',t:'3.9°',i:'rain',dd:'11.6 m/s · rain',rel:'D0 · reward',r:'Qualifies · key day',dday:true},
+  {n:'Sat 10',t:'2.8°',i:'rain',dd:'7.0 m/s · rain',rel:'',r:'Qualifies, but Friday is first'}
+];
+var daysEl=$('#days');
+DAYS.forEach(function(d){var el=document.createElement('div');el.className='day';el.innerHTML='<span class="rel">'+d.rel+'</span><div class="dn">'+d.n+' Oct</div><div class="wx">'+ico(d.i)+'<span class="dt">'+d.t+'</span></div><div class="dd">'+d.dd+'</div><div class="res"></div>';daysEl.appendChild(el)});
+var dayEls=$$('.day',daysEl);
+function dayFinal(i){var el=dayEls[i],d=DAYS[i];el.classList.remove('scan');$('.res',el).textContent=d.r;el.classList.add(d.dday?'dday':(i===4?'ign':'miss'))}
+function markRel(){dayEls.forEach(function(e,i){if(DAYS[i].rel)e.classList.add('mark')})}
+if(RM){dayEls.forEach(function(_,i){dayFinal(i)});markRel()}
+else once(daysEl,async function(){for(var i=0;i<dayEls.length;i++){dayEls[i].classList.add('scan');await sleep(550);dayFinal(i)}await sleep(350);markRel()},.5);
+var tl=$('#tl'),tlFill=$('#tlFill'),tlSteps=$$('.tl-step');
+function onTL(){var r=tl.getBoundingClientRect();tlFill.style.height=(clamp((innerHeight*.6-r.top)/r.height,0,1)*100)+'%';tlSteps.forEach(function(s){s.classList.toggle('in',s.getBoundingClientRect().top<innerHeight*.62)})}
+
+/* ---------- 07 experience ---------- */
+function Rain(cv,o){var ctx=cv.getContext('2d'),w=0,h=0,drops=[],I=o.i,T=o.i,raf=0,run=false;
+  function mk(r){return{x:Math.random()*(w+200),y:r?Math.random()*h:-30-Math.random()*h*.3,l:7+Math.random()*15,s:4+Math.random()*6,a:.12+Math.random()*.32,k:Math.random()}}
+  function resize(){var d=Math.min(2,devicePixelRatio||1);w=cv.clientWidth;h=cv.clientHeight;cv.width=w*d;cv.height=h*d;ctx.setTransform(d,0,0,d,0,0);drops=[];for(var n=Math.round(w*h/5000),i=0;i<n;i++)drops.push(mk(true));draw(false)}
+  function draw(mv){ctx.clearRect(0,0,w,h);I+=(T-I)*.04;ctx.lineWidth=1;for(var i=0;i<drops.length;i++){var p=drops[i];if(mv){p.y+=p.s;p.x-=p.s*.22;if(p.y>h+20||p.x<-40){var nn=mk(false);nn.k=p.k;drops[i]=nn;continue}}if(p.k>I)continue;ctx.strokeStyle='rgba(30,60,100,'+p.a+')';ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p.x-p.l*.22,p.y+p.l);ctx.stroke()}}
+  function loop(){if(!run)return;draw(true);raf=requestAnimationFrame(loop)}
+  resize();addEventListener('resize',resize);
+  return{start:function(){if(RM||run)return;run=true;loop()},stop:function(){run=false;cancelAnimationFrame(raf)},set:function(v){T=v;if(RM){I=v;draw(false)}}}}
+(function(){var s=$('#xpContour');for(var k=1;k<=12;k++)s.appendChild(svgEl('path',{d:ringD({x:800,y:520,sp:58},k,1.2),fill:'none',stroke:'rgba(18,26,34,.10)','stroke-width':1}))})();
+var xpRain=Rain($('#xpRain'),{i:.1});
+var XP=[
+  {when:'Tuesday · 3 days before',temp:'8°',i:'cloud',wx:'Mild today. Cold rain forecast for Friday.',date:'Tuesday, 6 October',time:'09:40',w:'8°C · cloudy',rain:.08,st:2,k:'D−3 · Teaser',h:'The weather is named before the offer.',p:'No reward yet. The message only says what the customer can already feel. Relevance comes first and earns attention for the offer.'},
+  {when:'Thursday · the day before',temp:'5°',i:'rain',wx:'Light rain. Friday looks colder still.',date:'Thursday, 8 October',time:'18:30',w:'5°C · light rain',rain:.5,st:3,k:'D−1 · Offer',h:'The offer arrives the evening before.',p:'10% back at selected khinkali restaurants, up to 20 AZN. Timed for the evening, when tomorrow’s plans are being made and the rain is already on the window.'},
+  {when:'Friday · the day itself',temp:'4°',i:'rain',wx:'Cold, windy and raining.',date:'Friday, 9 October',time:'12:10',w:'4°C · rain',rain:.9,st:4,k:'D0 · Reward',h:'The reward lands on the day itself.',p:'At lunchtime on the coldest, wettest day of the week, the bank picks up part of the bill. The weather that started the journey is where it pays off.'}
+];
+var xpScroll=$('#xpScroll'),scene=$('#scene'),phone=$('#phone'),xpStep=-1,storyLis=$$('#story li'),xpDots=$$('.xp-dots i');
+function setXP(i){if(i===xpStep)return;xpStep=i;var d=XP[i];
+  $('#xWhen').textContent=d.when;$('#xTemp').textContent=d.temp;$('#xIco').innerHTML=ico(d.i);$('#xWx').textContent=d.wx;
+  $('#pDate').textContent=d.date;$('#pTime').textContent=d.time;$('#pW').textContent=d.w;
+  $('#yK').textContent=d.k;$('#yH').textContent=d.h;$('#yP').textContent=d.p;
+  ['n1','n2','n3'].forEach(function(id,j){var n=document.getElementById(id);n.classList.toggle('on',j<=i&&!(i===2&&j===0));n.classList.toggle('old',j<i)});
+  $('#reward').classList.toggle('on',i===2);
+  scene.className='scene'+(i?' s'+i:'');phone.className='phone'+(i?' s'+i:'');
+  storyLis.forEach(function(l,j){l.classList.toggle('on',j<d.st)});xpDots.forEach(function(e,j){e.classList.toggle('on',j<=i)});
+  xpRain.set(d.rain)}
+setXP(0);
+if(!RM)watch(xpScroll,function(v){v?xpRain.start():xpRain.stop()});
+function onXP(){var r=xpScroll.getBoundingClientRect(),p=clamp(-r.top/(r.height-innerHeight),0,1);setXP(p<.33?0:p<.66?1:2)}
+
+/* ---------- 10 unlock connectors ---------- */
+function pt(r,side,box){return side==='right'?{x:r.right-box.left,y:r.top+r.height/2-box.top}:{x:r.left-box.left,y:r.top+r.height/2-box.top}}
+function curve(svg,a,b,cls,box){var p1=pt(a.getBoundingClientRect(),'right',box),p2=pt(b.getBoundingClientRect(),'left',box),mx=(p1.x+p2.x)/2;svg.appendChild(svgEl('path',{'class':'conn '+cls,d:'M'+p1.x+' '+p1.y+' C'+mx+' '+p1.y+','+mx+' '+p2.y+','+p2.x+' '+p2.y}))}
+function drawUnlock(){var u=$('#unlock'),svg=$('#unlockSvg');svg.innerHTML='';if(innerWidth<=900)return;var box=u.getBoundingClientRect(),core=$('#ucore');
+  $$('.u-sigs li',u).forEach(function(li){curve(svg,li,core,li.classList.contains('impl')?'b':'p',box)});
+  $$('#uout .chip').forEach(function(c){curve(svg,core,c,'b',box)})}
+
+/* ---------- scroll + resize ---------- */
+var ticking=false;
+function onScroll(){if(ticking)return;ticking=true;requestAnimationFrame(function(){ticking=false;onRail();onTL();onXP()})}
+addEventListener('scroll',onScroll,{passive:true});
+var rz;addEventListener('resize',function(){clearTimeout(rz);rz=setTimeout(function(){fitHero();drawUnlock();onScroll()},120)});
+onScroll();drawUnlock();
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){drawUnlock();fitHero()});
+addEventListener('load',drawUnlock);
+})();
+
+</script>
+<script>
+/* Portfolio navigation layer.
+   "All work" goes back through browser history when the visitor came straight
+   from the portfolio index, so it returns exactly where they left it. In-page
+   section links scroll without adding history entries, so Back always leaves
+   the case rather than stepping through sections. */
+(function(){
+'use strict';
+var RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function ss(k,v){try{if(v===undefined)return sessionStorage.getItem(k);sessionStorage.setItem(k,v)}catch(e){return null}}
+function cameFromIndex(){
+  try{
+    if(!document.referrer||history.length<2)return false;
+    var u=new URL(document.referrer);
+    return u.origin===location.origin&&u.pathname!==location.pathname&&ss('ka-src')==='index';
+  }catch(e){return false}
+}
+Array.prototype.forEach.call(document.querySelectorAll('[data-ka-back]'),function(a){
+  a.addEventListener('click',function(e){
+    if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button)return;
+    if(cameFromIndex()){e.preventDefault();history.back();}
+    else ss('ka-ret','1');
+  });
+});
+document.addEventListener('click',function(e){
+  var a=e.target.closest&&e.target.closest('a[href^="#"]');
+  if(!a||e.defaultPrevented)return;
+  var id=a.getAttribute('href').slice(1),t=id&&document.getElementById(id);
+  if(!t)return;
+  e.preventDefault();
+  t.scrollIntoView({behavior:RM?'auto':'smooth',block:'start'});
+  try{history.replaceState(history.state,'','#'+id)}catch(_){}
+});
+})();
+</script>
+</body>
+</html>
