@@ -564,6 +564,52 @@ body {
 }
 @media (prefers-reduced-motion: reduce) { .oc *, .oc { animation: none !important; transition: none !important; } }
 
+/* ---------- featured case 04: From Signal to Next Best Action (standalone page) ---------- */
+.sw-f .f-vis > svg.nb[data-mode="v"] { display: none; }
+.nb text { font-family: "Satoshi", "Helvetica Neue", Arial, sans-serif; }
+.nb .nm { font-size: 124px; font-weight: 500; letter-spacing: -.05em; fill: #F7F3E9; }
+.nb .nm.g { fill: #D4AF37; }
+.nb .cp { font-size: 19px; font-weight: 700; letter-spacing: .18em; fill: rgba(247,243,233,.55); }
+.nb .sl { font-size: 19px; fill: rgba(247,243,233,.42); }
+.nb .sl.w { fill: #F7F3E9; }
+.nb .dt { fill: #F7F3E9; }
+.nb .dt.w { fill: #D4AF37; }
+.nb .dt.k { fill: #D4AF37; }
+.nb .hl { fill: none; stroke: #D4AF37; stroke-width: 1.6; stroke-opacity: .45; transition: stroke-opacity .5s, r .5s; }
+.nb .ln { fill: none; stroke: #415A77; stroke-width: 1.5; }
+.nb .ln.w { stroke: #D4AF37; stroke-width: 2.4; }
+.nb .vl { fill: none; stroke: #415A77; stroke-width: 1.5; stroke-dasharray: 5 7; }
+.nb .vl.a { stroke: #D4AF37; stroke-width: 2.4; stroke-dasharray: none; }
+.nb .ch rect { fill: none; stroke: rgba(247,243,233,.4); stroke-width: 1.6; }
+.nb .ch text { font-size: 21px; font-weight: 700; letter-spacing: .16em; fill: rgba(247,243,233,.6); }
+.nb .ch.x { opacity: .5; }
+.nb .ch.a rect { fill: #D4AF37; stroke: #D4AF37; }
+.nb .ch.a text { fill: #0D1B2A; }
+.nb .ok { font-size: 18px; font-weight: 700; letter-spacing: .18em; fill: #D4AF37; }
+.nb .os { font-size: 22px; font-weight: 500; fill: #F7F3E9; }
+.nb .os.d { font-size: 19px; font-weight: 400; fill: rgba(247,243,233,.5); }
+.nb[data-mode="v"] .nm { font-size: 112px; }
+.nb[data-mode="v"] .cp { font-size: 25px; }
+.nb[data-mode="v"] .ch text { font-size: 24px; letter-spacing: .12em; }
+.nb[data-mode="v"] .ok { font-size: 24px; } .nb[data-mode="v"] .os { font-size: 30px; }
+.sw-f:hover .nb .hl, .sw-f:focus-visible .nb .hl { stroke-opacity: 1; }
+/* sequence: each stage arrives, the ones that do not qualify step back, one decision leaves */
+.nb:not(.go) .st, .nb:not(.go) .lk, .nb:not(.go) .vd { opacity: 0; }
+.nb.go .st { animation: nbIn .7s cubic-bezier(.22,.61,.15,1) var(--d) both; }
+.nb.go .lk .ln { stroke-dasharray: 1; animation: nbDraw .7s cubic-bezier(.65,0,.15,1) var(--d) both; }
+.nb.go .dt.o { animation: nbDim .6s ease var(--dd) both; }
+.nb.go .vd { animation: nbIn .8s cubic-bezier(.22,.61,.15,1) 2.4s both; }
+@keyframes nbIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes nbDraw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes nbDim { from { opacity: 1; } to { opacity: .2; } }
+.nb.st *, .nb.st { animation: none !important; }
+.nb.st .dt.o { opacity: .2; }
+@media (max-width: 760px) {
+  .sw-f .f-vis > svg.nb[data-mode="h"] { display: none; }
+  .sw-f .f-vis > svg.nb[data-mode="v"] { display: block; }
+}
+@media (prefers-reduced-motion: reduce) { .nb *, .nb { animation: none !important; transition: none !important; } .nb .dt.o { opacity: .2; } }
+
 /* ---------- live cover drawing ---------- */
 .cj text { font-family: "Satoshi", "Helvetica Neue", Arial, sans-serif; }
 .cj .cj-iso path { fill: none; stroke: rgba(27,91,255,.14); stroke-width: 1.2; }
@@ -1543,7 +1589,7 @@ onScroll();
   const TO = s => String(s).replace(/→/g, '<em>→</em>');
 
   /* ---------------- CONTENT ---------------- */
-  const P = [{"id": "context-aware-journey-orchestration", "lead": true, "custom": "cajo", "href": "context-aware-journey-orchestration.html", "title": "Context-Aware Journey Orchestration", "cat": "Journey orchestration", "caps": ["Customer decisioning", "Personalization", "Journey orchestration"], "sector": "Retail banking", "year": "2025–2026", "groups": ["lifecycle"], "desc": "How a real-world weather signal became a timely, governed customer journey.", "kpi": "", "kpiCap": ""}, {"id": "who-when-whether", "custom": "www", "title": "Who, When, and Whether", "cat": "Customer decisioning", "caps": ["Customer decisioning", "Journey orchestration", "Retail banking"], "sector": "Retail banking", "year": "2025–2026", "groups": ["lifecycle"], "desc": "How I designed the decision logic behind personalized journeys in a retail bank's mobile app: who qualifies, when the moment is right, and who should be held back.", "kpi": "28%", "kpiCap": "campaign conversion on the live deposit journey", "hook": "Who qualifies, when the moment is right, and who should be held back.", "titleLines": ["Who, When,", "and Whether"], "focus": ["Customer decisioning", "Journey orchestration"], "lines": ["Who qualifies.", "When the moment is right.", "And when the bank should stay silent."], "where": "Retail banking · Mobile app"}, {"id": "one-customer-seven-journeys", "standalone": true, "href": "one-customer-seven-journeys.html", "custom": "ocsj", "pageBg": "#FAF9F6", "title": "One Customer. Seven Possible Messages. One Decision.", "titleLines": ["One Customer.", "Seven Possible", "Messages.", "One Decision."], "cat": "Customer decisioning", "caps": ["Customer decisioning", "Journey orchestration", "CRM strategy", "Contact rules"], "sector": "Retail banking", "year": "2025–2026", "groups": ["lifecycle"], "desc": "When several journeys compete for the same customer's attention, sending everything is not personalization. This case explores the logic that decides what should happen next — and what should not happen at all.", "hook": "Seven possible messages. One customer. One decision.", "focus": ["Journey prioritization", "Contact governance"], "lines": ["When several journeys compete for one customer's attention, sending everything is not personalization.", "The logic decides what happens next, and what should not happen at all."], "kpi": "7 → 1", "kpiCap": "possible messages, one relevant experience (illustrative)", "where": "Retail banking · Customer decisioning"}];
+  const P = [{"id": "context-aware-journey-orchestration", "lead": true, "custom": "cajo", "href": "context-aware-journey-orchestration.html", "title": "Context-Aware Journey Orchestration", "cat": "Journey orchestration", "caps": ["Customer decisioning", "Personalization", "Journey orchestration"], "sector": "Retail banking", "year": "2025–2026", "groups": ["lifecycle"], "desc": "How a real-world weather signal became a timely, governed customer journey.", "kpi": "", "kpiCap": ""}, {"id": "who-when-whether", "custom": "www", "title": "Who, When, and Whether", "cat": "Customer decisioning", "caps": ["Customer decisioning", "Journey orchestration", "Retail banking"], "sector": "Retail banking", "year": "2025–2026", "groups": ["lifecycle"], "desc": "How I designed the decision logic behind personalized journeys in a retail bank's mobile app: who qualifies, when the moment is right, and who should be held back.", "kpi": "28%", "kpiCap": "campaign conversion on the live deposit journey", "hook": "Who qualifies, when the moment is right, and who should be held back.", "titleLines": ["Who, When,", "and Whether"], "focus": ["Customer decisioning", "Journey orchestration"], "lines": ["Who qualifies.", "When the moment is right.", "And when the bank should stay silent."], "where": "Retail banking · Mobile app"}, {"id": "one-customer-seven-journeys", "standalone": true, "href": "one-customer-seven-journeys.html", "custom": "ocsj", "pageBg": "#FAF9F6", "title": "One Customer. Seven Possible Messages. One Decision.", "titleLines": ["One Customer.", "Seven Possible", "Messages.", "One Decision."], "cat": "Customer decisioning", "caps": ["Customer decisioning", "Journey orchestration", "CRM strategy", "Contact rules"], "sector": "Retail banking", "year": "2025–2026", "groups": ["lifecycle"], "desc": "When several journeys compete for the same customer's attention, sending everything is not personalization. This case explores the logic that decides what should happen next — and what should not happen at all.", "hook": "Seven possible messages. One customer. One decision.", "focus": ["Journey prioritization", "Contact governance"], "lines": ["When several journeys compete for one customer's attention, sending everything is not personalization.", "The logic decides what happens next, and what should not happen at all."], "kpi": "7 → 1", "kpiCap": "possible messages, one relevant experience (illustrative)", "where": "Retail banking · Customer decisioning"}, {"id": "from-signal-to-next-best-action", "standalone": true, "href": "from-signal-to-next-best-action.html", "custom": "nba", "pageBg": "#F5F2EB", "title": "From Signal to Next Best Action", "titleLines": ["From Signal", "to Next", "Best Action"], "cat": "CRM & Lifecycle Strategy", "caps": ["CRM & Lifecycle Strategy", "Customer Decisioning", "Journey Orchestration"], "sector": "Retail banking", "year": "2025–2026", "groups": ["lifecycle"], "desc": "A customer decisioning system that determines whether to contact a customer, what to say and through which channel.", "hook": "Many signals enter. One decision leaves.", "focus": ["CRM & Lifecycle Strategy", "Customer Decisioning", "Journey Orchestration"], "lines": ["A customer decisioning system that determines", "whether to contact a customer, what to say and through which channel."], "kpi": "12 → 1", "kpiCap": "signals resolved into one next best action (illustrative)", "where": "Retail banking · CRM & lifecycle strategy"}];
   const PI = Object.fromEntries(P.map((p, i) => [p.id, i]));
 
   /* Who / When / Whether preview: 100 customers narrow to 8 journeys started (from the case) */
@@ -1932,12 +1978,82 @@ onScroll();
     o.observe(svg);
   });
 
+  /* From Signal to Next Best Action: twelve signals narrow to seven possible actions, three eligible, one decision */
+  const NB_SIG = ['Salary in', 'Flight booked', 'Balance ↑ 3 mo', 'Restaurant ×4', 'App opened ×6', 'Travel content ×4', 'Deposit viewed ×2', 'Card use ↓', 'Day 31', 'Cold day', 'Holiday window', 'Kiosk payment'];
+  const NB_KEEP = [[1, 2, 4, 5, 7, 9, 10], [0, 1, 3], [0]];   /* which items survive into the next stage, in order */
+  const nbaArt = (mode = 'h') => {
+    const H = mode === 'h', f = n => n.toFixed(1), N = [12, 7, 3, 1];
+    const W = H ? 1600 : 900, Ht = H ? 900 : 1150;
+    const CAP = H ? ['SIGNALS', 'POSSIBLE ACTIONS', 'ELIGIBLE', 'ONE DECISION'] : ['SIGNALS', 'ACTIONS', 'ELIGIBLE', 'DECISION'];
+    const S = H ? 46 : 50;
+    /* centre of stage k, and of item j inside it */
+    const at = (k, j) => H ? [[330, 650, 960, 1250][k], 470 + (j - (N[k] - 1) / 2) * S]
+                           : [540 + (j - (N[k] - 1) / 2) * S, [140, 380, 600, 800][k]];
+    /* the winning chain: Flight booked -> Travel -> Travel -> next best action */
+    const win = [1, 0, 0, 0];
+    let out = '';
+    for (let k = 0; k < 4; k++) {
+      const d = (k * .62).toFixed(2), keep = NB_KEEP[k] || [];
+      let g = '';
+      if (H) {
+        const [x] = at(k, 0);
+        g += `<text class="nm${k === 3 ? ' g' : ''}" x="${x}" y="138" text-anchor="middle">${N[k]}</text><text class="cp" x="${x}" y="184" text-anchor="middle">${CAP[k]}</text>`;
+      } else {
+        const [, y] = at(k, 0);
+        g += `<text class="nm${k === 3 ? ' g' : ''}" x="56" y="${y + 34}">${N[k]}</text><text class="cp" x="60" y="${y + 76}">${CAP[k]}</text>`;
+      }
+      for (let j = 0; j < N[k]; j++) {
+        const [x, y] = at(k, j), last = k === 3;
+        const cls = last ? 'dt k' : (k < 3 && !keep.includes(j) ? 'dt o' : 'dt') + (j === win[k] ? ' w' : '');
+        g += last ? `<circle class="hl" cx="${x}" cy="${y}" r="${H ? 34 : 38}"/><circle class="${cls}" cx="${x}" cy="${y}" r="${H ? 14 : 16}"/>`
+                  : `<circle class="${cls}" style="--dd:${(k * .62 + .9).toFixed(2)}s" cx="${x}" cy="${y}" r="${H ? 7 : 9}"/>`;
+        if (H && k === 0) g += `<text class="sl${j === 1 ? ' w' : ''}" x="${x - 26}" y="${f(y + 6)}" text-anchor="end">${NB_SIG[j]}</text>`;
+      }
+      out += `<g class="st" style="--d:${d}s">${g}</g>`;
+      if (k < 3) {
+        let ln = '';
+        keep.forEach((src, dst) => {
+          const [x0, y0] = at(k, src), [x1, y1] = at(k + 1, dst), w = src === win[k] && dst === win[k + 1];
+          const p = H ? `M${x0 + 12} ${f(y0)}C${f((x0 + x1) / 2)} ${f(y0)} ${f((x0 + x1) / 2)} ${f(y1)} ${x1 - (k === 2 ? 20 : 12)} ${f(y1)}`
+                      : `M${f(x0)} ${y0 + 14}C${f(x0)} ${f((y0 + y1) / 2)} ${f(x1)} ${f((y0 + y1) / 2)} ${f(x1)} ${y1 - (k === 2 ? 22 : 14)}`;
+          ln += `<path class="ln${w ? ' w' : ''}" pathLength="1" d="${p}"/>`;
+        });
+        out += `<g class="lk" style="--d:${(k * .62 + .34).toFixed(2)}s">${ln}</g>`;
+      }
+    }
+    /* outcome: act / wait / no action */
+    let vd = '';
+    if (H) {
+      const x = 1250, y = 470, cx = 1312, cw = 236, ch = 54;
+      [['WAIT', 'w', 380], ['ACT', 'a', 470], ['NO ACTION', 'x', 560]].forEach(([t, c, cy]) => {
+        vd += `<path class="vl ${c}" d="M${x + 18} ${y}C${x + 40} ${y} ${x + 36} ${cy} ${cx} ${cy}"/>`
+            + `<g class="ch ${c}"><rect x="${cx}" y="${cy - ch / 2}" width="${cw}" height="${ch}" rx="${ch / 2}"/><text x="${cx + cw / 2}" y="${cy + 8}" text-anchor="middle">${t}</text></g>`;
+      });
+      vd += `<text class="ok" x="${cx}" y="660">NEXT BEST ACTION</text><text class="os" x="${cx}" y="694">Travel card · in-app story</text><text class="os d" x="${cx}" y="724">today · 1 of 3 weekly contacts</text>`;
+    } else {
+      const x = 540, y = 800, cy = 960, cw = 210, ch = 64;
+      [['WAIT', 'w', 300], ['ACT', 'a', 540], ['NO ACTION', 'x', 780]].forEach(([t, c, cx]) => {
+        vd += `<path class="vl ${c}" d="M${x} ${y + 20}C${x} ${y + 80} ${cx} ${cy - 90} ${cx} ${cy - ch / 2}"/>`
+            + `<g class="ch ${c}"><rect x="${cx - cw / 2}" y="${cy - ch / 2}" width="${cw}" height="${ch}" rx="${ch / 2}"/><text x="${cx}" y="${cy + 9}" text-anchor="middle">${t}</text></g>`;
+      });
+      vd += `<text class="ok" x="540" y="1068" text-anchor="middle">NEXT BEST ACTION</text><text class="os" x="540" y="1110" text-anchor="middle">Travel card · in-app story</text>`;
+    }
+    out += `<g class="vd">${vd}</g>`;
+    return `<svg class="nb" data-mode="${mode}" viewBox="0 0 ${W} ${Ht}" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect width="${W}" height="${Ht}" fill="#0D1B2A"/>${out}</svg>`;
+  };
+  /* plays once when the drawing is in view */
+  const liveNb = host => $$('svg.nb', host).forEach(svg => {
+    if (RM) { svg.classList.add('go', 'st'); return; }
+    const o = new IntersectionObserver(es => { if (es[0].isIntersecting) { o.disconnect(); svg.classList.add('go'); } }, { threshold: .35 });
+    o.observe(svg);
+  });
+
   /* ---------------- FEATURED CASES (everything after the lead) ---------------- */
   const LEAD = P.find(p => p.lead);
   const featHTML = p => {
     const i = PI[p.id], n = pad(i + 1);
     const t = (p.titleLines || [p.title]).map(l => `<span class="l"><span>${l}</span></span>`).join('');
-    const vis = p.custom === 'www' ? engineArt('h') + engineArt('v') : p.custom === 'ocsj' ? ocsjArt('h') + ocsjArt('v') : media(p);
+    const vis = p.custom === 'www' ? engineArt('h') + engineArt('v') : p.custom === 'ocsj' ? ocsjArt('h') + ocsjArt('v') : p.custom === 'nba' ? nbaArt('h') + nbaArt('v') : media(p);
     const ext = !!(p.standalone && p.href);
     return `
     <article class="sw-ch" aria-labelledby="swf-${p.id}">
@@ -1945,7 +2061,7 @@ onScroll();
       <a class="sw-f${(p.titleLines || []).length > 2 ? ' f-long' : ''}" href="${ext ? p.href : '#/work/' + p.id}" ${ext ? `data-page="${p.id}"` : `data-open="${p.id}"`}>
         <span class="f-top mc"><span>${(p.focus || p.caps || []).join(' · ')}</span><span>${p.year || ''}</span></span>
         <h3 class="f-t" id="swf-${p.id}">${t}</h3>
-        <span class="f-vis${p.custom === 'www' ? ' eng' : ''}${p.custom === 'ocsj' ? ' ocv' : ''}">${vis}</span>
+        <span class="f-vis${p.custom === 'www' ? ' eng' : ''}${p.custom === 'ocsj' ? ' ocv' : ''}${p.custom === 'nba' ? ' nbv' : ''}">${vis}</span>
         <span class="f-sum">${(p.lines || [p.hook || p.desc]).map(l => `<span>${l}</span>`).join('')}</span>
         ${p.kpi ? `<span class="f-kpi"><b>${TO(String(p.kpi).replace('%', '<em>%</em>'))}</b><small>${p.kpiCap || ''}</small></span>` : ''}
         <span class="f-cta">View case study <i aria-hidden="true">↗</i></span>
@@ -1958,7 +2074,7 @@ onScroll();
 
   const projects = $('#projects');
   projects.innerHTML = P.filter(p => !p.lead).map(featHTML).join('');
-  $$('.sw-ch', projects).forEach(ch => { const a = $('.sw-f', ch); if ($('svg.wv', ch)) liveEngine(ch, a); if ($('svg.oc', ch)) liveOc(ch); });
+  $$('.sw-ch', projects).forEach(ch => { const a = $('.sw-f', ch); if ($('svg.wv', ch)) liveEngine(ch, a); if ($('svg.oc', ch)) liveOc(ch); if ($('svg.nb', ch)) liveNb(ch); });
   $('#swCount').textContent = '(' + pad(P.length) + ')';
   const cover = $('#swCover');
   if (cover && LEAD) {
