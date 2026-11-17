@@ -55,7 +55,7 @@
         <div><dt>My role</dt><dd>Lead CX Specialist, hyper-personalization squad. I own my campaigns on the business side.</dd></div>
         <div><dt>Why it was complex</dt><dd>Five stages with different owners, Risk and Finance approval, three languages, and bank-wide contact rules.</dd></div>
         <div><dt>What I contributed</dt><dd>Segments, triggers, eligibility rules, rewards and message sequences; approvals; hand-off; results review.</dd></div>
-        <div><dt>Delivered</dt><dd><b>Seven campaigns</b> I own are marked published; a weather-triggered journey is in development.</dd></div>
+        <div><dt>Delivered</dt><dd><b>Seven campaigns</b> I own are marked published in the squad tracker; one more awaits approval and a weather-triggered journey is in development.</dd></div>
       </dl>
     </div>
   </section>
@@ -85,7 +85,7 @@
         </table>
 
         <div class="demo th" id="th">
-          <div class="dh"><span class="k">Synthetic demonstration · 10,000 invented customers</span><p>Illustrates the method. Not bank data and not a campaign result.</p></div>
+          <div class="dh"><span class="k">Synthetic demonstration · 10,000 invented customers</span><p>Illustrates the method. Not bank data and not a campaign result. The verdict rules are illustrative.</p></div>
           <div class="ctl" style="margin-top:16px">
             <label for="thR">Monthly spend threshold</label>
             <input type="range" id="thR" min="100" max="800" step="25" value="500">
@@ -94,7 +94,7 @@
           <svg id="thSvg" viewBox="0 0 720 190" role="img" aria-label="Histogram of synthetic monthly card spend with the threshold marked"></svg>
           <div class="res" aria-live="polite">
             <div><b class="num" id="thA" style="color:var(--s-wait)"></b><span>already qualify: rewarded for spending they would do anyway</span></div>
-            <div><b class="num" id="thB" style="color:var(--accent)"></b><span>within reach: spend 60–100% of the threshold today</span></div>
+            <div><b class="num" id="thB" style="color:var(--accent)"></b><span>within reach: spend 60–100% of the threshold today (60% is an illustrative cut-off)</span></div>
             <div><b class="num" id="thC" style="color:var(--mute)"></b><span>out of reach: spend under 60% of it, unlikely to change behaviour</span></div>
           </div>
           <p class="verdict" id="thV"></p>
@@ -166,7 +166,7 @@
       <div class="side"><span class="k">04</span><h2>Campaigns and status</h2></div>
       <div>
         <table class="ev">
-          <thead><tr><th>Campaign</th><th>Mechanic</th><th class="s">Status</th></tr></thead>
+          <thead><tr><th>Campaign type</th><th>Mechanic</th><th class="s">Status</th></tr></thead>
           <tbody>
             <tr><td>Task-and-reward, summer 2026</td><td>Reach a spend threshold in the period, or take up a credit card, and earn event tickets</td><td class="s"><span class="st ship">Live</span></td></tr>
             <tr><td>Premium birthday reward</td><td>Cashback on the customer's birthday</td><td class="s"><span class="st ship">Live</span></td></tr>
@@ -176,11 +176,11 @@
           </tbody>
         </table>
         <div class="lessons l3" style="margin-top:30px">
-          <div><b>Analytical thinking</b><span>Sizing who a rule would reward, who it would move, and who it would miss before setting it.</span></div>
-          <div><b>Business judgment</b><span>Restraint rules and launch sequencing that protect relevance, even when every campaign is approved.</span></div>
-          <div><b>Cross-functional execution</b><span>Taking campaigns through business squads, Risk, Finance and the engagement team to launch.</span></div>
+          <div><b>Sizing a rule before setting it</b><span>Sizing who a rule would reward, who it would move, and who it would miss before setting it.</span></div>
+          <div><b>Holding messages back</b><span>Restraint rules and launch sequencing that protect relevance, even when every campaign is approved.</span></div>
+          <div><b>Idea to launch through five owners</b><span>Taking campaigns through business squads, Risk, Finance and the engagement team to launch.</span></div>
         </div>
-        <p class="cap2" style="margin-top:18px">Campaign results are reported inside the bank and are not published here.</p>
+        <p class="cap2" style="margin-top:18px">Rows group my campaigns by type; the summer task-and-reward row covers several campaigns. Results are reported inside the bank and are not published here.</p>
       </div>
     </div>
   </section>
@@ -236,7 +236,7 @@
     var share = a / (a + bb);
     var v = share > 0.55 ? 'Too low: most rewards would go to customers who already spend this much.' :
             bb < 1800 ? 'Too high: few customers are close enough to try.' :
-            'Workable: a large group is within reach, and most rewards would go to changed behaviour.';
+            'Workable: a large group is within reach, and most rewards would go to customers who must stretch to earn them.';
     document.getElementById('thV').innerHTML = '<b>Reading:</b> ' + v + ' The final choice also depends on the reward cost Finance approves.';
   }
   R.addEventListener('input', draw); addEventListener('resize', draw); draw();
