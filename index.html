@@ -35,15 +35,13 @@
 .hero { min-height: 100svh; display: flex; align-items: center; padding: 120px 0 64px; position: relative; overflow: hidden; }
 .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 70% at 78% 45%, rgba(65, 90, 119, .28), transparent 70%); pointer-events: none; }
 .hero .wrap { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 4vw, 64px); align-items: center; position: relative; }
-.hero .who { display: flex; align-items: center; gap: 14px; margin-bottom: 30px; }
-.hero .who b { font-weight: 700; font-size: 17px; }
-.hero .who span { width: 32px; height: 1.5px; background: var(--gold); }
-.hero h1 { font-size: clamp(38px, 4.1vw, 62px); letter-spacing: -.04em; line-height: 1.03; }
+.hero h1 { font-size: clamp(40px, 4.4vw, 64px); letter-spacing: -.04em; line-height: 1.03; max-width: 15ch; }
+.hero .who2 { margin-top: 30px; padding-left: 16px; border-left: 2px solid var(--gold); }
+.hero .who2 b { display: block; font-weight: 700; font-size: 18px; letter-spacing: -.01em; }
+.hero .who2 span { display: block; margin-top: 2px; font-size: 16px; color: var(--tx-2); }
 .hero h1 .gold { display: inline; }
-.hero .role { margin-top: 30px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
-.hero .role b { font-weight: 500; font-size: 18px; }
-.hero .role .sep { width: 5px; height: 5px; border-radius: 50%; background: var(--steel); }
-.hero .lede { margin-top: 18px; font-size: 19px; max-width: 44ch; }
+.hero .lede { margin-top: 22px; font-size: 19px; max-width: 46ch; }
+.hero .lede.l2 { margin-top: 12px; font-size: 17px; color: var(--tx-3); }
 .hero .acts { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 12px; }
 
 /* visualization */
@@ -84,11 +82,12 @@
 .qx { display: none; }
 @media (max-width: 640px) {
   .hero { min-height: auto; padding: 92px 0 36px; }
-  .hero .who { margin-bottom: 16px; }
-  .hero h1 { font-size: 33px; line-height: 1.06; }
-  .hero .role { margin-top: 18px; }
-  .hero .role .sep, .hero .role .mute { display: none; }
-  .hero .lede { font-size: 17px; margin-top: 10px; }
+  .hero h1 { font-size: 36px; line-height: 1.04; }
+  .hero .who2 { margin-top: 18px; }
+  .hero .who2 b { font-size: 17px; }
+  .hero .who2 span { font-size: 15px; }
+  .hero .lede { font-size: 17px; margin-top: 14px; }
+  .hero .lede.l2 { font-size: 15.5px; margin-top: 8px; }
   .hero .acts { margin-top: 20px; }
   .qx { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 14px; }
   .qx a { display: block; padding: 10px 10px 12px; border-radius: 12px; border: 1px solid var(--ln-d2); text-decoration: none; font-size: 14px; line-height: 1.25; color: var(--tx); min-height: 44px; }
@@ -279,11 +278,11 @@
   <section class="hero dk" aria-labelledby="h1">
     <div class="wrap">
       <div>
-        <div class="who" data-rv><b>Khanım Azimli</b><span aria-hidden="true"></span><span class="lbl" style="width:auto;height:auto;background:none">Baku</span></div>
-        <h1 id="h1" data-rv style="--d:.08s">I turn customer data into business decisions, <span class="gold">and build the systems that make them repeatable.</span></h1>
-        <div class="role" data-rv style="--d:.18s"><b>Lead Customer Experience Specialist</b><i class="sep" aria-hidden="true"></i><span class="mute">Retail banking, hyper-personalization</span></div>
-        <p class="lede" data-rv style="--d:.24s">Economist by training. I decide which customers a campaign is for, when it should reach them and when the bank should stay silent, and I build working prototypes when a process needs one.</p>
-        <div class="acts" data-rv style="--d:.32s"><a class="btn" href="#work">Explore work <span class="ar" aria-hidden="true">→</span></a><a class="btn ghost" href="about/">About me</a></div>
+        <h1 id="h1" data-rv>Most of my work happens before a customer <span class="gold">sees anything.</span></h1>
+        <p class="who2" data-rv style="--d:.1s"><b>Khanım Azimli</b><span>Lead Customer Experience Specialist at ABB</span></p>
+        <p class="lede" data-rv style="--d:.18s">At ABB, I work on customer journeys, personalization and campaign decisions — from deciding who should receive an offer to knowing when it's better not to send one.</p>
+        <p class="lede l2" data-rv style="--d:.24s">My recent work includes ABB Wrapped 2026 and Hyper Intelligence OS, an independent project I started to make campaign planning easier.</p>
+        <div class="acts" data-rv style="--d:.32s"><a class="btn" href="#work">Explore my work <span class="ar" aria-hidden="true">→</span></a></div>
         <nav class="qx" aria-label="Case studies"><a href="abb-wrapped/"><small>01</small>ABB Wrapped 2026</a><a href="customer-journeys/"><small>02</small>Customer Journeys</a><a href="hyper-intelligence-os/"><small>03</small>Hyper Intelligence OS</a></nav>
       </div>
 
@@ -415,14 +414,14 @@
   <section class="sec lt2" aria-labelledby="capT">
     <div class="wrap">
       <div class="sh" style="margin-bottom:0">
-        <div><span class="lbl g" data-rv>What I work on</span><h2 class="h2" id="capT" data-rv style="--d:.06s">From a question to something that works.</h2></div>
-        <p class="lede" data-rv style="--d:.12s">Each depends on the one before: a clear question makes the logic possible, and the logic is what a tool has to carry.</p>
+        <div><span class="lbl g" data-rv>What I work on</span><h2 class="h2" id="capT" data-rv style="--d:.06s">The three kinds of work I do most.</h2></div>
+        <p class="lede" data-rv style="--d:.12s">They usually come in this order: get the question right, write the rules, then build what is needed to run them.</p>
       </div>
       <div class="caps" id="caps">
         <span class="line" aria-hidden="true"></span>
-        <div class="cap"><span class="nd" aria-hidden="true">01</span><h3>Business problems</h3><p>Defining the question, the owner, the constraints and what would count as success.</p><p class="eg">Seen in: <a href="customer-journeys/#analysis">sizing a spend threshold</a></p></div>
-        <div class="cap"><span class="nd" aria-hidden="true">02</span><h3>Decision systems</h3><p>Turning customer signals and evidence into ordered rules: who qualifies, when, and whether to act at all.</p><p class="eg">Seen in: <a href="customer-journeys/">customer journeys</a>, <a href="abb-wrapped/">Wrapped story rules</a></p></div>
-        <div class="cap"><span class="nd" aria-hidden="true">03</span><h3>Digital solutions</h3><p>Building and coordinating practical implementations, with the hand-offs and approvals they need.</p><p class="eg">Seen in: <a href="hyper-intelligence-os/">Hyper Intelligence OS</a></p></div>
+        <div class="cap"><span class="nd" aria-hidden="true">01</span><h3>Business problems</h3><p>Working out what the question really is, who owns it, and what would count as success.</p><p class="eg">Seen in: <a href="customer-journeys/#analysis">sizing a spend threshold</a></p></div>
+        <div class="cap"><span class="nd" aria-hidden="true">02</span><h3>Decision systems</h3><p>Writing the rules that decide who qualifies, when to reach them, and whether to contact them at all.</p><p class="eg">Seen in: <a href="customer-journeys/">customer journeys</a>, <a href="abb-wrapped/">Wrapped story rules</a></p></div>
+        <div class="cap"><span class="nd" aria-hidden="true">03</span><h3>Digital solutions</h3><p>Building, or coordinating, whatever runs those rules, along with the hand-offs and approvals it needs.</p><p class="eg">Seen in: <a href="hyper-intelligence-os/">Hyper Intelligence OS</a></p></div>
       </div>
     </div>
   </section>
@@ -430,7 +429,7 @@
   <!-- D · BACKGROUND -->
   <section class="sec lt" aria-labelledby="bgT" style="border-top:1px solid var(--ln-l)">
     <div class="wrap bg-grid">
-      <div><span class="lbl g" data-rv>Background</span><h2 class="h2" id="bgT" data-rv style="--d:.06s;margin-top:20px">Economist by training. Customer work across four industries.</h2></div>
+      <div><span class="lbl g" data-rv>Background</span><h2 class="h2" id="bgT" data-rv style="--d:.06s;margin-top:20px">I studied economics, then spent ten years close to customers.</h2></div>
       <div>
         <p class="body" data-rv style="font-size:19px">I studied economics, then spent nearly a decade in marketing, communications and customer experience in retail, international education and shopping malls before moving into retail banking in 2025. At ABB I work in the hyper-personalization squad on campaign decisions and customer journeys in the mobile app. Alongside that, I build AI-assisted tools that take repetitive steps out of campaign work.</p>
         <div class="path" data-rv style="--d:.1s" aria-label="Career path"><span>Economics</span><span>Retail marketing</span><span>Education communications</span><span>Shopping-mall marketing</span><span>Banking CX</span><span class="hot">Decision systems and AI prototypes</span></div>
@@ -443,7 +442,7 @@
   <section class="contact dk" id="contact" aria-labelledby="ctT">
     <div class="wrap">
       <span class="lbl g" data-rv>Contact</span>
-      <h2 class="d1" id="ctT" data-rv style="--d:.06s;margin-top:24px;max-width:14ch">Let's talk through the decisions behind the work.</h2>
+      <h2 class="d1" id="ctT" data-rv style="--d:.06s;margin-top:24px;max-width:14ch">Happy to walk you through any of this.</h2>
       <a class="mail" href="mailto:khanimazimli0@gmail.com" data-rv style="--d:.12s">khanimazimli0@gmail.com</a>
       <div class="row" data-rv style="--d:.18s"><a class="btn ghost" href="https://www.linkedin.com/in/khanimazimli" rel="noopener">LinkedIn <span class="ar" aria-hidden="true">↗</span></a><span>Based in Baku, Azerbaijan</span></div>
     </div>
