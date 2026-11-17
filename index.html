@@ -12,12 +12,12 @@
 </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Khanım Azimli · Customer experience, data and products</title>
-<meta name="description" content="Khanım Azimli, Lead Customer Experience Specialist at ABB in Baku. Economics graduate with ten years across retail, education, shopping malls and banking. Selected work: ABB Wrapped, customer journeys, and Customer OS.">
+<title>Khanım Azimli · Lead Customer Experience Specialist, ABB</title>
+<meta name="description" content="Khanım Azimli, Lead Customer Experience Specialist at ABB in Baku. Project Owner of ABB Wrapped, a personalized banking initiative that reached approximately 1.5 million customers, reporting to the Managing Director. Economics graduate with ten years across four industries.">
 <link rel="canonical" href="https://khanimazimli.github.io/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Khanım Azimli · The Decision Studio">
-<meta property="og:description" content="Customer experience and business analysis in retail banking, data-informed digital products, and an independent AI-assisted prototype.">
+<meta property="og:title" content="Khanım Azimli · Lead Customer Experience Specialist, ABB">
+<meta property="og:description" content="Project Owner of ABB Wrapped (two editions, ~1.5M customers reached in 2025), business analysis and delivery in retail banking, and an independently developed, accepted AI-assisted prototype.">
 <meta property="og:url" content="https://khanimazimli.github.io/">
 <meta name="theme-color" content="#0D1B2A">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%230D1B2A'/%3E%3Ccircle cx='16' cy='16' r='12' fill='none' stroke='%23D4AF37' stroke-width='1.6'/%3E%3Ctext x='16' y='20.5' font-family='Arial' font-size='11' font-weight='700' fill='%23D4AF37' text-anchor='middle'%3EKA%3C/text%3E%3C/svg%3E">
@@ -90,6 +90,15 @@
 
 /* ---------- selected work ---------- */
 .work-h { padding: var(--sec) 0 clamp(40px, 5vw, 64px); }
+.ldb { padding: 0 0 clamp(8px, 2vw, 24px); }
+.ldl { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--ln-d2); border-bottom: 1px solid var(--ln-d); }
+.ldl li { padding: 26px 22px 28px 0; min-width: 0; }
+.ldl li + li { padding-left: 22px; border-left: 1px solid var(--ln-d); }
+.ldl b { display: block; font: 500 clamp(24px, 2.3vw, 34px)/1.08 var(--f); letter-spacing: -.03em; color: var(--tx); }
+.ldl li:nth-child(2) b { color: var(--gold); }
+.ldl span { display: block; margin-top: 8px; font-size: 15px; line-height: 1.45; color: var(--tx-2); }
+@media (max-width: 960px) { .ldl { grid-template-columns: 1fr 1fr; } .ldl li:nth-child(3) { padding-left: 0; border-left: 0; } .ldl li:nth-child(n+3) { border-top: 1px solid var(--ln-d); } }
+@media (max-width: 480px) { .ldl { grid-template-columns: 1fr; } .ldl li, .ldl li + li { padding: 20px 0; border-left: 0; } .ldl li + li { border-top: 1px solid var(--ln-d); } }
 .feat { position: relative; overflow: hidden; padding: clamp(72px, 9vw, 136px) 0; }
 .feat .wrap { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
 .feat.rev .wrap { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
@@ -195,8 +204,8 @@
       <div>
         <h1 id="h1" data-rv>Most of my work happens before a customer <span class="gold">sees anything.</span></h1>
         <p class="who2" data-rv style="--d:.1s"><b>Khanım Azimli</b><span>Lead Customer Experience Specialist at ABB</span></p>
-        <p class="lede" data-rv style="--d:.18s">At ABB I work on customer experience for the mobile app: looking into what customers do, deciding what the bank should change, and getting it delivered with the teams involved. When a question needs data, I look at it myself, using basic SQL where needed.</p>
-        <p class="lede l2" data-rv style="--d:.24s">Before banking, I spent nearly a decade in retail, international education and shopping malls. I studied economics, and I built Customer OS, an AI-assisted prototype, as my own initiative.</p>
+        <p class="lede" data-rv style="--d:.18s">I lead customer experience initiatives in ABB's mobile app: analysing customer data and business questions, deciding what the bank should do, and managing delivery across business and technical teams. When I need to look at the data myself, I use basic SQL.</p>
+        <p class="lede l2" data-rv style="--d:.24s">Economics graduate. Ten years across retail, international education, shopping malls and banking.</p>
         <div class="acts" data-rv style="--d:.32s"><a class="btn" href="#work">Explore my work <span class="ar" aria-hidden="true">→</span></a></div>
         <nav class="qx" aria-label="Case studies"><a href="abb-wrapped/"><small>01</small>ABB Wrapped</a><a href="customer-journeys/"><small>02</small>Customer Journeys</a><a href="customer-os/"><small>03</small>Customer OS</a></nav>
       </div>
@@ -213,11 +222,23 @@
     </div>
   </section>
 
+  <!-- A2 · LEADERSHIP -->
+  <section class="ldb dk" aria-label="Responsibilities at a glance">
+    <div class="wrap">
+      <ul class="ldl">
+        <li data-rv><b>Project Owner</b><span>ABB Wrapped, 2025 and 2026 editions</span></li>
+        <li data-rv style="--d:.06s"><b class="num">~1.5M</b><span>customers reached by the 2025 edition</span></li>
+        <li data-rv style="--d:.12s"><b>Managing Director</b><span>direct reporting on the project</span></li>
+        <li data-rv style="--d:.18s"><b>Accepted</b><span>Customer OS, my independent AI-assisted prototype</span></li>
+      </ul>
+    </div>
+  </section>
+
   <!-- B · SELECTED WORK -->
   <div id="work" class="dk work-h">
     <div class="wrap sh" style="margin-bottom:0">
       <div><span class="lbl g" data-rv>Selected work</span><h2 class="d2" data-rv style="--d:.06s">Three projects, three kinds of work.</h2></div>
-      <p class="lede" data-rv style="--d:.12s">A data-informed digital product, the customer analysis and delivery behind my day-to-day work, and a prototype I started on my own.</p>
+      <p class="lede" data-rv style="--d:.12s">A large-scale banking initiative I own, the analysis and delivery behind my day-to-day work, and a product prototype I initiated myself.</p>
     </div>
   </div>
 
@@ -226,11 +247,11 @@
     <div class="wrap">
       <div class="txt">
         <span class="no" aria-hidden="true">01</span>
-        <span class="lbl g" style="display:flex;margin-top:12px">Project Owner · Personalized digital banking</span>
+        <span class="lbl g" style="display:flex;margin-top:12px">Project Owner · Large-scale digital banking</span>
         <h3 id="f1t">ABB Wrapped</h3>
-        <p class="prob">An annual personalized banking experience built around customers' individual banking activity. The 2025 edition reached approximately 1.5 million customers; the next edition is in development.</p>
+        <p class="prob">A personalized banking initiative built around individual customer activity, with two editions under my project ownership. The 2025 edition reached approximately 1.5 million customers.</p>
         <dl>
-          <div><dt>My role</dt><dd>Project Owner for the 2025 and 2026 editions, leading the initiative across teams and reporting directly to the Managing Director.</dd></div>
+          <div><dt>My role</dt><dd>Project Owner for both editions, managing cross-functional work and reporting directly to the Managing Director.</dd></div>
           <div><dt>Status</dt><dd style="display:flex;flex-wrap:wrap;gap:8px"><span class="st done">2025 launched</span><span class="st wait">2026 in development</span></dd></div>
         </dl>
         <a class="link go" href="abb-wrapped/">Read case study <span class="ar" aria-hidden="true">→</span></a>
@@ -247,11 +268,11 @@
     <div class="wrap">
       <div class="txt">
         <span class="no" aria-hidden="true">02</span>
-        <span class="lbl g" style="display:flex;margin-top:12px">Customer analysis, business decisions and delivery</span>
+        <span class="lbl g" style="display:flex;margin-top:12px">Business analysis · Customer experience · Delivery</span>
         <h3 id="f2t">Customer Journeys</h3>
-        <p class="prob">The day-to-day work behind customer initiatives in the app: understanding what customers need, deciding what the bank should do about it, and seeing it through to results.</p>
+        <p class="prob">Business analysis, customer experience and initiative delivery: the day-to-day work behind customer initiatives in the bank's mobile app.</p>
         <dl>
-          <div><dt>My role</dt><dd>I analyse customer information, shape the initiatives I own, coordinate delivery with business and technical colleagues, and review how they perform.</dd></div>
+          <div><dt>My role</dt><dd>I analyse customer data, shape the initiatives I own, take them through delivery with business and technical teams, and review the results.</dd></div>
           <div><dt>Status</dt><dd><span class="st done">Initiatives live</span></dd></div>
         </dl>
         <a class="link go" href="customer-journeys/">Read case study <span class="ar" aria-hidden="true">→</span></a>
@@ -269,7 +290,7 @@
         <span class="no" aria-hidden="true">03</span>
         <span class="lbl g" style="display:flex;margin-top:12px">Independent AI-assisted product initiative</span>
         <h3 id="f3t">Customer OS</h3>
-        <p class="prob">An AI-assisted product I initiated and developed independently, from an initial idea to a working prototype. I presented it for evaluation, and it was accepted.</p>
+        <p class="prob">An AI-assisted product prototype I initiated and developed independently. I presented it for evaluation, and it was accepted.</p>
         <dl>
           <div><dt>My role</dt><dd>Identified the problem, defined the scope, and built and tested the prototype using AI-assisted development.</dd></div>
           <div><dt>Status</dt><dd><span class="st done">Presented and accepted</span></dd></div>
@@ -298,8 +319,8 @@
   <section class="sec lt2" aria-labelledby="capT">
     <div class="wrap">
       <div class="sh" style="margin-bottom:0">
-        <div><span class="lbl g" data-rv>What I work on</span><h2 class="h2" id="capT" data-rv style="--d:.06s">From a business question to something delivered.</h2></div>
-        <p class="lede" data-rv style="--d:.12s">The same sequence runs through most of my work, whatever the industry.</p>
+        <div><span class="lbl g" data-rv>How I work</span><h2 class="h2" id="capT" data-rv style="--d:.06s">From a business question to something delivered.</h2></div>
+        <p class="lede" data-rv style="--d:.12s">Analysis comes first: most decisions in my work start with a closer look at what customers actually do.</p>
       </div>
       <div class="caps c5" id="caps">
         <span class="line" aria-hidden="true"></span>
@@ -427,7 +448,7 @@
 
 /* ---------- 01 / 02 · abstract visuals ---------- */
 KAV.editions(document.querySelector('#edH svg'));
-KAV.loop(document.querySelector('#lpH svg'));
+KAV.loop(document.querySelector('#lpH svg'), ['Analysis', 'Decision', 'Delivery', 'Review']);
 ['edH', 'lpH'].forEach(function (id) { var e = document.getElementById(id); KA.onView(e, function () { e.classList.add('in'); }); });
 
 
