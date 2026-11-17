@@ -12,216 +12,487 @@
 </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hyper Intelligence OS: an AI-assisted campaign workflow · Khanım Azimli</title>
-<meta name="description" content="Case study: Hyper Intelligence OS, a prototype I initiated and built with AI agents to turn a one-sentence campaign idea into a brief, journey document, checked copy and a visual brief, with every decision kept human. Working prototype, not in production.">
+<title>Hyper Intelligence OS · Khanım Azimli</title>
+<meta name="description" content="Case study: Hyper Intelligence OS, an independently initiated AI-assisted campaign intelligence prototype. One sentence in; a brief, journey document, checked copy and visual brief out, with people approving every step. Working prototype, not in production.">
 <link rel="canonical" href="https://khanimazimli.github.io/hyper-intelligence-os/">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hyper Intelligence OS: an AI-assisted campaign workflow">
-<meta property="og:description" content="From an operational problem to a working prototype, built with AI agents. Case study by Khanım Azimli.">
+<meta property="og:title" content="Hyper Intelligence OS · case study">
+<meta property="og:description" content="An independently initiated AI-assisted campaign intelligence prototype. Working prototype, not in production.">
 <meta property="og:url" content="https://khanimazimli.github.io/hyper-intelligence-os/">
-<meta name="theme-color" content="#FFFFFF">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230E1116'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='16' font-weight='700' fill='white' text-anchor='middle'%3EKA%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#0D1B2A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%230D1B2A'/%3E%3Ccircle cx='16' cy='16' r='12' fill='none' stroke='%23D4AF37' stroke-width='1.6'/%3E%3Ctext x='16' y='20.5' font-family='Arial' font-size='11' font-weight='700' fill='%23D4AF37' text-anchor='middle'%3EKA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600&family=Inter:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="../assets/studio.css">
+<style>
+/* identity: a product, framed like a launch */
+.oh { background: radial-gradient(70% 55% at 50% 100%, rgba(65, 90, 119, .45), transparent 70%), var(--navy); padding-bottom: 0; min-height: auto; display: block; }
+.oh .intro { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 4vw, 64px); align-items: end; }
+.oh .intro > * { min-width: 0; }
+.oh h1 { font-size: clamp(46px, 6.6vw, 100px); letter-spacing: -.05em; line-height: .94; }
+.oh .tagl { margin-top: 22px; font-size: clamp(20px, 1.8vw, 26px); line-height: 1.35; letter-spacing: -.015em; color: var(--gold); max-width: 30ch; }
+@media (max-width: 960px) { .oh .intro { grid-template-columns: 1fr; } }
+.show { margin-top: clamp(40px, 6vw, 80px); perspective: 2000px; }
+.show .win { transform: rotateX(14deg) scale(.96); transform-origin: 50% 100%; transition: transform 1.4s var(--e); }
+.show.in .win { transform: none; }
+.show .cap2 { margin: 18px 0 0; font-size: 14.5px; color: var(--tx-3); text-align: center; }
+
+/* product window (shared by hero and demo) */
+.win { background: #0A1522; border: 1px solid var(--ln-d2); border-radius: 18px 18px 0 0; overflow: hidden; box-shadow: 0 -30px 120px -40px rgba(212, 175, 55, .18), 0 40px 100px -30px rgba(0, 0, 0, .7); color: var(--tx); }
+.win.full { border-radius: 18px; }
+.win .bar { display: flex; align-items: center; gap: 8px; padding: 13px 18px; border-bottom: 1px solid var(--ln-d); }
+.win .bar i { width: 11px; height: 11px; border-radius: 50%; background: var(--ln-d2); }
+.win .bar span { margin-left: 10px; font: 500 13px var(--m); color: var(--tx-3); letter-spacing: .04em; }
+.win .bar em { margin-left: auto; font: 500 12px var(--m); color: var(--tx-3); letter-spacing: .06em; text-transform: uppercase; }
+.win .wb { display: grid; grid-template-columns: 220px minmax(0, 1fr) 280px; min-height: 420px; }
+.win .side { border-right: 1px solid var(--ln-d); padding: 20px 14px; }
+.win .side h4, .win .rail h4 { font: 500 12px var(--m); color: var(--tx-3); letter-spacing: .08em; text-transform: uppercase; margin: 0 8px 10px; }
+.win .side li { display: flex; align-items: center; gap: 10px; padding: 11px 10px; border-radius: 10px; font-size: 15.5px; color: var(--tx-3); }
+.win .side li i { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--steel); display: grid; place-items: center; font-size: 11.5px; font-weight: 700; flex: 0 0 auto; transition: all .4s; }
+.win .side li .sd { margin-left: auto; width: 8px; height: 8px; border-radius: 50%; }
+.win .side li.cur { background: rgba(212, 175, 55, .1); color: var(--tx); }
+.win .side li.cur i { border-color: var(--gold); color: var(--gold); }
+.win .side li.ok { color: var(--tx-2); }
+.win .side li.ok i { background: var(--ok); border-color: var(--ok); color: var(--navy); }
+.win .side .plan { margin-top: 16px; padding-top: 12px; border-top: 1px dashed var(--ln-d2); }
+.win .side .plan li { color: var(--tx-3); opacity: .8; }
+.win .side .plan li i { border-style: dashed; }
+.win .main { padding: 24px; min-width: 0; }
+.win .main small, .win .rail small { font: 500 12px var(--m); color: var(--tx-3); letter-spacing: .08em; text-transform: uppercase; }
+.win .idea { margin-top: 10px; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--ln-d2); font-size: 16.5px; }
+.win .chips { margin-top: 16px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.win .chip { padding: 10px 12px; border-radius: 10px; background: rgba(247, 243, 233, .05); font-size: 15px; min-width: 0; }
+.win .chip small { display: block; font-size: 11px; margin-bottom: 3px; }
+.win .chip.miss { outline: 1px dashed var(--wait); outline-offset: -1px; color: var(--wait); background: rgba(242, 166, 90, .06); }
+.win .rail { border-left: 1px solid var(--ln-d); padding: 20px 16px; }
+.win .rail li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--ln-d); font-size: 14.5px; color: var(--tx-2); line-height: 1.4; }
+.win .rail li i { width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; font-size: 11px; font-weight: 700; background: var(--ok); color: var(--navy); }
+.win .rail li i.h { background: transparent; border: 1.5px solid var(--gold); color: var(--gold); }
+.win .rail li i.w { background: var(--wait); }
+.win .acts { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 10px; }
+.win .acts .a1 { padding: 10px 18px; border-radius: 999px; background: var(--gold); color: var(--navy); font-weight: 700; font-size: 15px; border: 0; min-height: 44px; }
+.win .acts .a2 { padding: 10px 18px; border-radius: 999px; background: transparent; border: 1px solid var(--ln-d2); font-size: 15px; min-height: 44px; }
+.win .acts .a2:hover { border-color: var(--hold); }
+@media (max-width: 1080px) { .win .wb { grid-template-columns: 200px minmax(0, 1fr); } .win .rail { display: none; } }
+@media (max-width: 680px) {
+  .win .wb { grid-template-columns: 1fr; min-height: 0; }
+  .win .side { border-right: 0; border-bottom: 1px solid var(--ln-d); padding: 12px; }
+  .win .side ul:first-of-type { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .win .side .plan, .win .side h4 { display: none; }
+  .win .main { padding: 16px; }
+  .win .chips { grid-template-columns: 1fr 1fr; }
+  .show .win { transform: none; }
+}
+
+/* 01 · fragmentation */
+.frag { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; position: relative; }
+.frag .col { padding: 16px 14px 18px; border-radius: 14px; background: #fff; border: 1px solid var(--ln-l); min-width: 0; position: relative; }
+.frag .col.hu { background: transparent; border-style: dashed; border-color: var(--ln-l2); }
+.frag .col small { font: 500 12px var(--m); color: var(--ink-3); letter-spacing: .06em; }
+.frag .col b { display: block; margin-top: 4px; font-size: 16.5px; line-height: 1.25; }
+.frag .fmt { margin-top: 14px; font: 500 11.5px var(--m); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
+.frag .fact { margin-top: 6px; padding: 10px 11px; border-radius: 10px; background: var(--ivory); font-size: 14.5px; line-height: 1.4; border: 1px solid transparent; }
+.frag .fact.bad { border-color: var(--hold-l); background: rgba(154, 52, 34, .06); }
+.frag .fact.bad em { color: var(--hold-l); font-weight: 700; }
+.frag .col::after { content: "→"; position: absolute; right: -11px; top: 22px; width: 14px; text-align: center; color: var(--ink-3); font-size: 14px; z-index: 1; }
+.frag .col:last-child::after { display: none; }
+.js .frag .col { opacity: .25; transform: translateY(10px); transition: opacity .6s var(--e), transform .6s var(--e); }
+.js .frag.in .col { opacity: 1; transform: none; }
+.frag.in .col:nth-child(2) { transition-delay: .18s; } .frag.in .col:nth-child(3) { transition-delay: .36s; } .frag.in .col:nth-child(4) { transition-delay: .54s; } .frag.in .col:nth-child(5) { transition-delay: .72s; } .frag.in .col:nth-child(6) { transition-delay: .9s; }
+.fkey { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 22px; font-size: 15.5px; color: var(--ink-2); }
+@media (max-width: 1080px) { .frag { grid-template-columns: repeat(3, minmax(0, 1fr)); } .frag .col::after { display: none; } }
+@media (max-width: 600px) { .frag { grid-template-columns: 1fr 1fr; } }
+
+/* 02 · approach stepper */
+.appr { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); position: relative; }
+.appr::before { content: ""; position: absolute; left: 0; right: 0; top: 23px; height: 1.5px; background: var(--ln-d2); }
+.appr button { align-self: start; position: relative; text-align: left; background: transparent; border: 0; padding: 0 18px 0 0; color: var(--tx-3); }
+.appr button i { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: var(--navy); border: 1.5px solid var(--steel); font: 500 14px var(--m); color: var(--tx-2); position: relative; z-index: 1; transition: all .35s; }
+.appr button b { display: block; margin-top: 18px; font-size: 19px; font-weight: 500; line-height: 1.25; color: var(--tx-2); letter-spacing: -.01em; transition: color .3s; }
+.appr button:hover b { color: var(--tx); }
+.appr button[aria-selected="true"] i { background: var(--gold); border-color: var(--gold); color: var(--navy); }
+.appr button[aria-selected="true"] b { color: var(--tx); }
+.apd { margin-top: 36px; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(20px, 4vw, 56px); padding: clamp(24px, 3vw, 36px); border-radius: var(--r); background: var(--navy-2); border: 1px solid var(--ln-d); min-height: 190px; }
+.apd > * { min-width: 0; }
+.apd h3 { font-size: clamp(22px, 2.2vw, 30px); }
+.apd p.t { margin-top: 12px; color: var(--tx-2); }
+.apd .ev { padding-left: 18px; border-left: 2px solid var(--gold); }
+.apd .ev p { margin-top: 8px; color: var(--tx); font-size: 16px; }
+@media (max-width: 860px) {
+  .appr { grid-template-columns: 1fr; gap: 14px; }
+  .appr::before { left: 23px; right: auto; top: 0; bottom: 0; width: 1.5px; height: auto; }
+  .appr button { display: grid; grid-template-columns: 48px 1fr; gap: 16px; align-items: center; padding: 0; }
+  .appr button b { margin-top: 0; font-size: 17px; }
+  .apd { grid-template-columns: 1fr; }
+}
+
+/* 03 · demo */
+.demo-in { display: flex; gap: 10px; margin-top: 10px; }
+.demo-in input { flex: 1; min-width: 0; min-height: 48px; padding: 0 14px; border-radius: 12px; border: 1px solid var(--ln-d2); background: rgba(247, 243, 233, .04); color: var(--tx); font-size: 16px; }
+.demo-in input:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
+.demo-in button { min-height: 48px; padding: 0 18px; border-radius: 12px; border: 0; background: var(--gold); color: var(--navy); font-weight: 700; }
+.tryx { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 14.5px; color: var(--tx-3); }
+.tryx button { min-height: 36px; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--ln-d2); background: transparent; color: var(--tx-2); font-size: 14px; }
+.tryx button:hover { border-color: var(--gold); color: var(--tx); }
+.pane { margin-top: 18px; min-height: 230px; }
+.doc { padding: 16px 18px; border-radius: 12px; border: 1px solid var(--ln-d); background: rgba(247, 243, 233, .03); }
+.doc h4 { font-size: 15px; font-weight: 700; letter-spacing: 0; }
+.doc dl { margin: 12px 0 0; display: grid; grid-template-columns: 130px 1fr; gap: 8px 14px; font-size: 15px; }
+.doc dt { color: var(--tx-3); }
+.doc dd { margin: 0; }
+.doc ol { margin-top: 12px; padding-left: 20px; list-style: decimal; font-size: 15px; color: var(--tx-2); }
+.doc ol li { padding: 3px 0; }
+.msg { padding: 16px 18px; border-radius: 16px; background: #F7F3E9; color: var(--navy); font-size: 16px; line-height: 1.45; max-width: 380px; }
+.msg small { display: block; font: 500 11.5px var(--m); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px; }
+.note2 { margin-top: 12px; font-size: 14.5px; color: var(--tx-3); }
+.stline { margin-top: 14px; min-height: 24px; font-size: 15px; color: var(--gold); }
+@media (max-width: 680px) { .cg { grid-template-columns: 1fr !important; } .demo-in { flex-direction: column; } .win .bar em { display: none; } }
+.legend { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 22px; font-size: 15px; color: var(--ink-2); align-items: center; }
+
+/* 04 · governance */
+.gov { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
+.gov > * { min-width: 0; }
+.gsel { display: grid; gap: 8px; }
+.gsel button { text-align: left; padding: 14px 16px; border-radius: 14px; border: 1px solid var(--ln-d); background: transparent; transition: border-color .3s, background .3s; }
+.gsel button b { display: block; font-size: 17px; font-weight: 500; }
+.gsel button span { display: none; margin-top: 6px; font-size: 15px; color: var(--tx-2); line-height: 1.45; }
+.gsel button[aria-pressed="true"] { border-color: var(--gold); background: rgba(212, 175, 55, .07); }
+.gsel button[aria-pressed="true"] span { display: block; }
+.gmap svg { width: 100%; height: auto; }
+.gmap [data-k] { transition: opacity .4s; }
+.gmap.f [data-k] { opacity: .3; }
+.gmap.f-facts [data-k~="facts"], .gmap.f-human [data-k~="human"], .gmap.f-back [data-k~="back"], .gmap.f-trace [data-k~="trace"], .gmap.f-gen [data-k~="gen"] { opacity: 1; }
+.gmap text { font-family: var(--f); }
+@media (max-width: 960px) { .gov { grid-template-columns: 1fr; } }
+
+/* 05 · demonstrated */
+.mat { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 4vw, 64px); }
+.mat > * { min-width: 0; }
+.lim li { padding: 14px 0; border-bottom: 1px solid var(--ln-l); font-size: 16px; color: var(--ink-2); display: grid; grid-template-columns: 22px 1fr; gap: 10px; }
+.lim li::before { content: "–"; color: var(--hold-l); font-weight: 700; }
+.lim { border-top: 1px solid var(--ln-l2); }
+@media (max-width: 900px) { .mat { grid-template-columns: 1fr; } }
+.tchart { margin-top: clamp(48px, 6vw, 80px); padding: clamp(20px, 3vw, 32px); border-radius: var(--r); background: #fff; border: 1px dashed var(--ln-l2); }
+.tchart .hd { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; align-items: flex-start; }
+.bars2 { margin-top: 18px; }
+.bars2 .r { display: grid; grid-template-columns: minmax(0, 180px) minmax(0, 1fr) 54px; gap: 12px; align-items: center; padding: 7px 0; font-size: 15px; }
+.bars2 .t { height: 14px; border-radius: 7px; background: var(--ivory); overflow: hidden; }
+.bars2 .t span { display: block; height: 100%; border-radius: 7px; transition: width .6s var(--e); }
+.bars2 .v { text-align: right; font: 500 14px var(--m); color: var(--ink-2); }
+.bkey { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 12px; font-size: 14px; color: var(--ink-3); }
+.bkey i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; }
+.tout { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: baseline; padding-top: 16px; border-top: 1px solid var(--ln-l); }
+.tout b { font: 500 34px/1 var(--f); letter-spacing: -.03em; }
+@media (max-width: 520px) { .bars2 .r { grid-template-columns: 1fr 48px; } .bars2 .r .t { grid-column: 1 / -1; grid-row: 2; } }
+
+.demo-cap { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 18px; margin: 0 0 14px; font-size: 16px; color: var(--tx-2); }
+.show .legend { color: var(--tx-3); font-size: 14.5px; }
+.mods { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.mod { padding: 22px; border-radius: var(--r); background: var(--navy); color: var(--tx); border: 1px solid var(--navy-3); min-width: 0; }
+.mod .mh { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.mod .mn { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--gold); color: var(--navy); font-weight: 700; }
+.mod h3 { font-size: 22px; letter-spacing: -.02em; }
+.mod .mh .st { margin-left: auto; font-size: 11.5px; padding: 5px 10px; }
+.mod dl { margin: 18px 0 0; }
+.mod dl div { padding: 10px 0; border-top: 1px solid var(--ln-d); }
+.mod dt { font: 500 12px var(--m); letter-spacing: .08em; text-transform: uppercase; color: var(--gold); }
+.mod dd { margin: 4px 0 0; font-size: 15.5px; line-height: 1.45; color: var(--tx-2); }
+.evid .lbl.g, .mod .lbl.g { color: var(--gold); }
+.mod .st.done { color: var(--ok); } .mod .st.pro { color: var(--pro); }
+.planned .st { white-space: normal; }
+.planned { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-top: 20px; }
+@media (max-width: 1080px) { .mods { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 640px) { .mods { grid-template-columns: 1fr; } }
+.evid { margin-top: clamp(40px, 5vw, 64px); padding: clamp(22px, 3vw, 32px); border-radius: var(--r); background: var(--navy); color: var(--tx); }
+.evid ul { margin-top: 18px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.evid li { padding-top: 14px; border-top: 2px solid var(--gold); }
+.evid b { display: block; font-size: 17px; font-weight: 500; line-height: 1.3; }
+.evid span { display: block; margin-top: 6px; font-size: 15px; color: var(--tx-2); line-height: 1.45; }
+@media (max-width: 900px) { .evid ul { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .evid ul { grid-template-columns: 1fr; } }
+.more .tchart { margin-top: 0; }
+</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="nav">
   <div class="wrap">
-    <a class="brand" href="../">Khanım Azimli</a>
+    <a class="brand" href="../" aria-label="Khanım Azimli, home"><i aria-hidden="true">KA</i><span>Khanım Azimli</span></a>
     <nav aria-label="Primary">
       <ul>
-        <li><a class="l" href="../#work" aria-current="page">Work</a></li>
-        <li><a class="l" href="../about/">About</a></li>
-        <li><a class="btn sm" href="../#contact">Contact</a></li>
+        <li><a href="../#work" aria-current="page">Work</a></li>
+        <li><a href="../about/">About</a></li>
+        <li><a class="cta" href="../#contact">Contact</a></li>
       </ul>
     </nav>
   </div>
 </header>
 
 <main id="main">
-
-  <section class="c-hero">
+  <!-- HERO -->
+  <section class="chero oh" aria-labelledby="t">
     <div class="wrap">
-      <div class="crumb"><span class="k">Case 03 · Independent initiative · 2026</span><span class="st test">Working prototype, not in production</span></div>
-      <h1 class="h-1">Hyper Intelligence OS: from an operational problem to a working prototype.</h1>
-      <p class="lede">I saw campaign preparation repeat the same work across six steps and several teams. I turned that into a product concept, and built a working prototype by orchestrating AI agents, with every decision kept human.</p>
-      <dl class="glance" aria-label="Project at a glance">
-        <div><dt>Problem</dt><dd>One campaign takes weeks across six stages owned by different teams, much of it restating the same facts.</dd></div>
+      <div class="crumbs" data-rv><span class="lbl">Case 03 · Independent initiative · 2026</span><span class="st pro">Working prototype, not in production</span></div>
+      <div class="intro">
+        <div>
+          <h1 id="t" data-rv style="--d:.06s">Hyper Intelligence OS</h1>
+          <p class="tagl" data-rv style="--d:.12s">An independently initiated, AI-assisted campaign intelligence prototype.</p>
+        </div>
+        <p class="lede" data-rv style="--d:.18s">One sentence in. A brief, a journey document, checked copy and a visual brief out, each waiting for a person to approve it. I identified the problem, own the product decisions, and built it by directing AI coding agents.</p>
+      </div>
+      <figure class="show" id="explore" style="margin-left:0;margin-right:0;margin-bottom:0" data-rv="fade">
+        <figcaption class="demo-cap"><span class="lbl g">Try the workflow</span><span>Type an offer or pick an example, then approve each step or send it back.</span></figcaption>
+      <div class="win full" id="os">
+        <div class="bar"><i></i><i></i><i></i><span>Hyper OS · guided recreation</span><em>Fictional campaign</em></div>
+        <div class="wb">
+          <div class="side"><h4>Modules</h4>
+            <ul role="tablist" aria-label="Modules" id="osT">
+              <li role="presentation"><button role="tab" data-p="0" aria-selected="true" style="all:unset;display:flex;align-items:center;gap:10px;width:100%;cursor:pointer"><i>1</i>Brief<span class="sd" style="background:var(--ok)" title="Working"></span></button></li>
+              <li role="presentation"><button role="tab" data-p="1" aria-selected="false" style="all:unset;display:flex;align-items:center;gap:10px;width:100%;cursor:pointer"><i>2</i>Journey<span class="sd" style="background:var(--ok)" title="Working"></span></button></li>
+              <li role="presentation"><button role="tab" data-p="2" aria-selected="false" style="all:unset;display:flex;align-items:center;gap:10px;width:100%;cursor:pointer"><i>3</i>Copy<span class="sd" style="background:var(--pro)" title="In testing"></span></button></li>
+              <li role="presentation"><button role="tab" data-p="3" aria-selected="false" style="all:unset;display:flex;align-items:center;gap:10px;width:100%;cursor:pointer"><i>4</i>Visual brief<span class="sd" style="background:var(--ok)" title="Working"></span></button></li>
+            </ul>
+            <ul class="plan" aria-label="Planned architecture"><li><i>5</i>Risk and Finance package</li><li><i>6</i>Platform configuration</li><li><i>7</i>Monitoring</li></ul>
+          </div>
+          <div class="main">
+            <form id="osF"><label for="osI"><small>What campaign do you want to prepare today?</small></label>
+              <div class="demo-in"><input type="text" id="osI" value="5% cashback on pharmacy card payments, up to 15 AZN" autocomplete="off"><button type="submit">Create brief</button></div></form>
+            <div class="tryx">Try: <button type="button" data-x="5% cashback on grocery card payments next week">groceries</button><button type="button" data-x="Double points for online purchases this month">online</button><button type="button" data-x="A gift when you open a deposit">deposit</button><button type="button" data-x="Something nice for customers">vague idea</button></div>
+            <div class="pane" id="osPane" aria-live="polite"></div>
+            <div class="acts"><button class="a1" type="button" id="osOk">Approve</button><button class="a2" type="button" id="osBack">Send back with comment</button></div>
+            <p class="stline" id="osState" role="status"></p>
+          </div>
+          <div class="rail"><h4>Human gate</h4>
+            <ul><li><i class="h">●</i>Each module produces a draft only</li><li><i class="h">●</i>A person approves it or sends it back with a comment</li><li><i class="h">●</i>Paid image generation needs explicit consent</li></ul>
+          </div>
+        </div>
+      </div>
+        <p class="legend"><span class="st done">Working</span><span class="st pro">In testing</span><span class="st plan">Planned</span><span>A recreation of the prototype's flow with a fictional campaign. It runs in your browser with simple rules and calls no AI model; the real prototype's screens contain internal bank material and are not shown.</span></p>
+      </figure>
+    </div>
+  </section>
+
+  <section class="dk" style="padding:clamp(56px,7vw,96px) 0">
+    <div class="wrap">
+      <dl class="facts" style="margin-top:0" data-rv>
+        <div><dt>Problem</dt><dd>By my estimate, one campaign takes weeks across six stages owned by different teams, much of it restating the same facts.</dd></div>
         <div><dt>My role</dt><dd>Initiated it on my own, own the product decisions, designed the workflow and built it with AI coding agents.</dd></div>
         <div><dt>Why it was complex</dt><dd>Facts must stay identical from brief to copy, approvals in a bank must stay human, and image generation costs money.</dd></div>
-        <div><dt>What I built</dt><dd>Four modules that turn one sentence into a brief, a journey document, checked copy and a visual brief.</dd></div>
-        <div><dt>Demonstrated</dt><dd><b>Three modules working, one in testing</b> on test campaigns. Not used on live campaigns.</dd></div>
+        <div><dt>Demonstrated</dt><dd><b>Three modules working</b>, one in testing, on test campaigns. Not used on live campaigns.</dd></div>
       </dl>
     </div>
   </section>
 
-  <nav class="toc" aria-label="Sections">
-    <button class="tb" type="button" aria-expanded="false" aria-controls="toc-list"><span>Sections</span><span class="cur">From problem to product</span><span class="ch" aria-hidden="true"></span></button>
-    <ol id="toc-list">
-      <li><a href="#path">From problem to product</a></li>
-      <li><a href="#product">See the workflow</a></li>
-      <li><a href="#agents">How I used AI agents</a></li>
-      <li><a href="#analysis">Worked analysis</a></li>
-      <li><a href="#maturity">Maturity</a></li>
-    </ol>
-  </nav>
-
-  <section class="chap c2" id="path" style="border-top:0">
-    <div class="wrap chap-grid">
-      <div class="side"><span class="k">01</span><h2>From problem to product</h2></div>
-      <div>
-        <ol class="ladder">
-          <li><span class="k">Problem</span><b>Mapped where campaign preparation time goes</b><p>Six stages owned by different teams, from brief to platform build. By my rough assumptions, the first four take most of the time and repeat the same facts in new formats; the decisions sit in review and approval.</p><span class="evi">stage map with owners and rough duration assumptions; not measured</span></li>
-          <li><span class="k">Requirements</span><b>Wrote three rules before building anything</b><p>The brief step never invents a fact and asks for what is missing. Approvals stay human. Paid image generation needs explicit human consent.</p><span class="evi">each rule is enforced in the prototype: rule-based brief parsing, approval points, a consent step</span></li>
-          <li><span class="k">Structure</span><b>Designed modules with human gates between them</b><p>Brief, journey, copy and visual modules, each producing a draft a person approves or sends back with a comment. A 16-step target design extends this to Risk, Finance and activation.</p><span class="evi">the target architecture in my v15 product deck</span></li>
-          <li><span class="k">Build</span><b>Built it by orchestrating AI agents</b><p>I wrote the campaign skills and prompt specifications the modules run on, and built the software by directing AI coding agents and reviewing their work.</p><span class="evi">the skills in my account since June 2026; the development history</span></li>
-          <li><span class="k">Test and iterate</span><b>Tested in the browser and changed what failed</b><p>Automated browser tests ran throughout development. Copy tone was the weakest output, so tone rules are now being refined with Marketing feedback.</p><span class="evi">version 15 of the product deck, with each module's status labelled</span></li>
-        </ol>
-        <p class="cap2">The evidence items are internal working files. I can walk through them in an interview.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="chap c2" id="product">
-    <div class="wrap chap-grid">
-      <div class="side"><span class="k">02</span><h2>See the workflow</h2></div>
-      <div>
-        <p class="lead2">One sentence in. A brief, a journey, checked copy and a visual brief out, each waiting for a person.</p>
-        <div class="win" id="os">
-          <div class="wt"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="ttl">Hyper OS</span><span class="rec">Recreation · fictional campaign</span></div>
-          <div class="wb">
-            <div class="steps2" role="tablist" aria-label="Workflow steps">
-              <button type="button" role="tab" data-p="0" aria-selected="true"><span class="s"></span>1 Brief</button>
-              <button type="button" role="tab" data-p="1" aria-selected="false"><span class="s"></span>2 Journey</button>
-              <button type="button" role="tab" data-p="2" aria-selected="false"><span class="s t"></span>3 Copy</button>
-              <button type="button" role="tab" data-p="3" aria-selected="false"><span class="s"></span>4 Visual brief</button>
-            </div>
-            <p class="q">What campaign do you want to prepare today?</p>
-            <form class="inp" id="osF" autocomplete="off">
-              <label for="osI" class="k" style="position:absolute;left:-9999px">Campaign idea</label>
-              <input type="text" id="osI" value="5% cashback on pharmacy card payments, up to 15 AZN">
-              <button class="go" type="submit">Create brief</button>
-            </form>
-            <p class="ex">Try: <button type="button" data-x="5% cashback on grocery card payments next week">groceries</button><button type="button" data-x="Double points for online purchases this month">online</button><button type="button" data-x="A gift for customers who open a deposit">deposit</button></p>
-            <div class="pane" id="osPane" role="tabpanel" aria-live="polite"></div>
-            <div class="acts"><button type="button" class="ok" id="osOk">Approve</button><button type="button" id="osBack">Send back with comment</button></div>
-            <p class="state" id="osState"></p>
-          </div>
-        </div>
-        <p class="cap2">A recreation of the prototype's flow for this portfolio, using a fictional campaign. It runs in your browser with simple rules, its outputs are simplified, and it calls no AI model; the real prototype runs locally and its prompts, models and source are not shown. Green: working in the prototype. Blue: in testing.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="chap c2" id="agents">
-    <div class="wrap chap-grid">
-      <div class="side"><span class="k">03</span><h2>How I used AI agents</h2></div>
-      <div>
-        <div class="lane" style="margin-top:0">
-          <div>
-            <h3>Agents that built it</h3>
-            <ol>
-              <li>An AI coding agent wrote the software from my specifications</li>
-              <li>Exploration and general-purpose sub-agents worked in parallel sessions</li>
-              <li>A multi-agent code review checked the codebase</li>
-              <li>Automated browser tests checked each module as it changed</li>
-            </ol>
-          </div>
-          <div>
-            <h3>Agents and rules inside it</h3>
-            <ol>
-              <li>Language-model agents draft the journey, the copy and the art direction</li>
-              <li>A creative-review agent checks visuals against the brief</li>
-              <li>An image model runs only after human consent</li>
-              <li>Brief parsing, financial calculations, documents and package QA are rule-based</li>
-            </ol>
-          </div>
-        </div>
-        <p class="sub">My part was the product: what each agent is allowed to do, where a rule must replace a model, and where a person decides. I build by directing coding agents and testing the result, not by writing production code by hand.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="chap c2" id="analysis">
-    <div class="wrap chap-grid">
-      <div class="side"><span class="k">04</span><h2>Worked analysis: where should AI help?</h2></div>
-      <div>
-        <p class="lead2">Under my working assumptions, most preparation time sits in the four preparation stages, not in Risk and Finance decisions. So those are the stages to assist.</p>
-        <div class="demo" id="an">
-          <div class="dh"><span class="k">Illustrative assumptions, not measured data</span><p>Rough shares based on my own stage assumptions, rounded in 5-point steps so each case adds up to 100%. No stage times have been measured; a pilot would be needed to test them.</p></div>
-          <div class="seg" role="group" aria-label="Choose an assumption">
-            <button type="button" data-s="lo" aria-pressed="false">Low case</button>
-            <button type="button" data-s="mid" aria-pressed="true">Middle case</button>
-            <button type="button" data-s="hi" aria-pressed="false">High case</button>
-          </div>
-          <div id="anBars" style="margin-top:18px"></div>
-          <div class="outcome" style="margin-top:16px" aria-live="polite"><div class="ol"><span class="ov num" id="anV"></span></div><p id="anP"></p></div>
-          <noscript><p class="muted">Under these illustrative assumptions, the four preparation stages hold about 70–85% of preparation time across the three cases. Not measured.</p></noscript>
-        </div>
-        <details class="more">
-          <summary>Options I compared, and how success would be measured</summary>
-          <div class="in prose">
-            <table class="ev" style="margin-top:4px">
-              <thead><tr><th>Option</th><th>Assessment</th></tr></thead>
-              <tbody>
-                <tr><td>Process fixes only</td><td>Cheap, but people still restate the same facts at every step.</td></tr>
-                <tr><td>Automate end to end, approvals included</td><td>Removes the controls the bank is accountable for.</td></tr>
-                <tr><td>A generic AI writing tool</td><td>No link between brief, scenario and copy, so numbers can drift.</td></tr>
-                <tr><td><b>Chosen: assist the four preparation stages</b></td><td>Targets where most time is assumed to go; facts are carried and checked across steps; every decision stays human.</td></tr>
-              </tbody>
-            </table>
-            <p style="margin-top:16px">A pilot would compare elapsed days per stage, review rounds before approval, number mismatches caught, and generation cost per campaign, with no change in the time or depth of Risk and Finance review.</p>
-          </div>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <section class="chap c2" id="maturity">
-    <div class="wrap chap-grid">
-      <div class="side"><span class="k">05</span><h2>Maturity and what it shows</h2></div>
-      <div>
-        <table class="ev">
-          <tbody>
-            <tr><td>Brief, journey document, visual brief</td><td class="s"><span class="st test">Working prototype</span></td></tr>
-            <tr><td>Copy with tone checks</td><td class="s"><span class="st test">In testing</span></td></tr>
-            <tr><td>Risk and Finance review</td><td class="s"><span class="st wait">Human by design</span></td></tr>
-            <tr><td>Platform configuration, monitoring</td><td class="s"><span class="st plan">Proposed</span></td></tr>
-            <tr><td>Use on live campaigns, measured savings</td><td class="s"><span class="st plan">Not yet</span></td></tr>
-          </tbody>
-        </table>
-        <div class="lessons l3" style="margin-top:30px">
-          <div><b>Nobody assigned it</b><span>I identified the problem in my own team's work and acted on it.</span></div>
-          <div><b>A process map turned into software</b><span>Turned a process map into requirements, modules and approval points, then into a working prototype.</span></div>
-          <div><b>Rules, models and people</b><span>Rules where accuracy matters, models where wording matters, people wherever the bank is accountable.</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec tight">
+  <!-- 01 MODULES -->
+  <section class="sec lt2" aria-labelledby="s1">
     <div class="wrap">
-      <div class="next">
-        <a href="../customer-journeys/"><span class="k">Previous · 02</span><b>← Customer Journeys &amp; Hyper-Personalization</b></a>
-        <a href="../about/"><span class="k">Next</span><b>About me →</b></a>
+      <div class="sh">
+        <div><span class="lbl g" data-rv><span class="n">01</span> What the prototype does</span><h2 class="h2" id="s1" data-rv style="--d:.06s">Four modules, each ending in a human decision.</h2></div>
+        <p class="lede" data-rv style="--d:.12s">Each module turns the previous approved output into the next draft. Rules handle facts and numbers; language models handle wording.</p>
+      </div>
+      <div class="mods">
+        <article class="mod" data-rv><div class="mh"><span class="mn">1</span><h3>Brief</h3><span class="st done">Working</span></div>
+          <dl><div><dt>In</dt><dd>One sentence describing the offer</dd></div><div><dt>Out</dt><dd>A brief with six fields: mechanism, rate, category, activity, cap, period</dd></div><div><dt>How</dt><dd>Rule-based parsing</dd></div><div><dt>Control</dt><dd>Never invents a fact; asks for anything missing</dd></div></dl></article>
+        <article class="mod" data-rv style="--d:.06s"><div class="mh"><span class="mn">2</span><h3>Journey</h3><span class="st done">Working</span></div>
+          <dl><div><dt>In</dt><dd>The approved brief</dd></div><div><dt>Out</dt><dd>A journey and scenario document: mechanic, period, audience and message sequence</dd></div><div><dt>How</dt><dd>Language-model draft from my campaign skills</dd></div><div><dt>Control</dt><dd>A person approves or edits it before anything is built</dd></div></dl></article>
+        <article class="mod" data-rv style="--d:.12s"><div class="mh"><span class="mn">3</span><h3>Copy</h3><span class="st pro">In testing</span></div>
+          <dl><div><dt>In</dt><dd>The approved earlier steps</dd></div><div><dt>Out</dt><dd>Push and banner texts</dd></div><div><dt>How</dt><dd>Language-model draft; numbers and length checked by rules</dd></div><div><dt>Control</dt><dd>Tone is still reviewed by a person while tone rules are refined with Marketing</dd></div></dl></article>
+        <article class="mod" data-rv style="--d:.18s"><div class="mh"><span class="mn">4</span><h3>Visual brief</h3><span class="st done">Working</span></div>
+          <dl><div><dt>In</dt><dd>The approved earlier steps</dd></div><div><dt>Out</dt><dd>An art-director brief</dd></div><div><dt>How</dt><dd>Language-model draft; a creative-review agent checks visuals against the brief</dd></div><div><dt>Control</dt><dd>Reuses approved creative first; paid image generation only after a person consents</dd></div></dl></article>
+      </div>
+      <div class="planned" data-rv><span class="lbl">Planned, not built</span><span class="st plan">Risk and Finance package · human by design</span><span class="st plan">Platform configuration · proposed</span><span class="st plan">Monitoring · proposed</span><span class="small">Part of a 16-step target design.</span></div>
+    </div>
+  </section>
+
+  <!-- 02 APPROACH -->
+  <section class="sec dk" aria-labelledby="s2">
+    <div class="wrap">
+      <div class="sh">
+        <div><span class="lbl g" data-rv><span class="n">02</span> How I built it</span><h2 class="h2" id="s2" data-rv style="--d:.06s">From a process map to working software, on my own initiative.</h2></div>
+        <p class="lede" data-rv style="--d:.12s">Select a step to see what I did and the evidence behind it.</p>
+      </div>
+      <div class="appr" role="tablist" aria-label="Product approach steps" id="appr">
+        <button role="tab" id="ap0" aria-selected="true" aria-controls="apd" tabindex="0"><i>01</i><b>Identified the challenge</b></button>
+        <button role="tab" id="ap1" aria-selected="false" aria-controls="apd" tabindex="-1"><i>02</i><b>Structured requirements</b></button>
+        <button role="tab" id="ap2" aria-selected="false" aria-controls="apd" tabindex="-1"><i>03</i><b>Designed the workflow</b></button>
+        <button role="tab" id="ap3" aria-selected="false" aria-controls="apd" tabindex="-1"><i>04</i><b>Built and tested with AI agents</b></button>
+        <button role="tab" id="ap4" aria-selected="false" aria-controls="apd" tabindex="-1"><i>05</i><b>Iterated on function and controls</b></button>
+      </div>
+      <div class="apd" id="apd" role="tabpanel" aria-labelledby="ap0" aria-live="polite">
+        <div><h3 id="apT"></h3><p class="t" id="apX"></p></div>
+        <div class="ev"><span class="lbl g">Evidence</span><p id="apE"></p></div>
       </div>
     </div>
   </section>
+
+  <!-- 03 PROBLEM -->
+  <section class="sec lt" aria-labelledby="s3">
+    <div class="wrap">
+      <div class="sh">
+        <div><span class="lbl g" data-rv><span class="n">03</span> The problem it addresses</span><h2 class="stmt" id="s3" data-rv style="--d:.06s"><span class="m">One offer.</span> Six hand-offs. Six rewrites of the same facts.</h2></div>
+        <p class="lede" data-rv style="--d:.12s">Each stage turns the same offer into a new format for the next team. Every rewrite is a chance for a number to drift, and approvals only see the end result.</p>
+      </div>
+      <div class="frag" id="frag">
+        <div class="col"><small>01</small><b>Brief and idea</b><p class="fmt">Brief</p><p class="fact">5% cashback on pharmacy card payments, up to 15 AZN</p></div>
+        <div class="col"><small>02</small><b>Journey and scenario</b><p class="fmt">Scenario document</p><p class="fact">Reward: 5% · Cap: 15 AZN · Category: pharmacies</p></div>
+        <div class="col"><small>03</small><b>Copy and review</b><p class="fmt">Push, three languages</p><p class="fact">Pay by card at pharmacies and get 5% back, up to 15 AZN.</p></div>
+        <div class="col"><small>04</small><b>Visuals</b><p class="fmt">Banner headline</p><p class="fact bad">5% back at pharmacies, up to <em>20 AZN</em></p></div>
+        <div class="col hu"><small>05</small><b>Risk and Finance</b><p class="fmt">Approval</p><p class="fact">Cost and conditions reviewed by people</p></div>
+        <div class="col"><small>06</small><b>Platform build</b><p class="fmt">Configuration</p><p class="fact">Reward rule and cap entered again</p></div>
+      </div>
+      <p class="note" style="margin-top:22px">Illustrative, with a fictional offer. The red figure shows how a number can drift between hand-offs.</p>
+    </div>
+  </section>
+
+  <!-- 04 GOVERNANCE -->
+  <section class="sec dk" aria-labelledby="s4">
+    <div class="wrap">
+      <div class="sh">
+        <div><span class="lbl g" data-rv><span class="n">04</span> Intelligence and governance</span><h2 class="h2" id="s4" data-rv style="--d:.06s">Rules for facts. Models for wording. People for every decision.</h2></div>
+      </div>
+      <div class="gov">
+        <div class="gsel" role="group" aria-label="Highlight a property of the system" id="gsel">
+          <button type="button" data-g="facts" aria-pressed="true"><b>Structured information</b><span>The brief is parsed by rules into fields. Every later module reads those fields instead of retyping the offer.</span></button>
+          <button type="button" data-g="human" aria-pressed="false"><b>Human approval checkpoints</b><span>A person approves each module's draft before the next module starts. Risk and Finance review stays human by design.</span></button>
+          <button type="button" data-g="back" aria-pressed="false"><b>Review feedback</b><span>Send back returns a draft, with a comment, to the step that produced it.</span></button>
+          <button type="button" data-g="trace" aria-pressed="false"><b>Decision traceability</b><span>Numbers in the copy and briefs are checked against the fields from the original brief. A mismatch is flagged, not published.</span></button>
+          <button type="button" data-g="gen" aria-pressed="false"><b>Controlled content generation</b><span>Language models draft the journey, the copy and the art direction. An image model runs only after a person consents to the cost.</span></button>
+        </div>
+        <div class="gmap f f-facts" id="gmap">
+          <svg viewBox="0 0 760 440" role="img" aria-labelledby="gmT">
+            <title id="gmT">Four modules in a row: brief, journey, copy and visual brief. A fact record from the brief runs beneath all of them. A human approval gate sits after each module. A send-back arrow returns to the previous module. Number checks link the copy back to the fact record. A consent lock sits before image generation.</title>
+            <g data-k="facts trace"><rect x="30" y="300" width="700" height="56" rx="12" fill="#13243A" stroke="#D4AF37" stroke-width="1.4"/><text x="50" y="324" fill="#D4AF37" font-size="13" font-weight="700" letter-spacing="1.2">FACT RECORD FROM THE BRIEF</text><text x="50" y="344" fill="#C3CBD6" font-size="14">mechanism · rate · category · activity · cap · period</text></g>
+            <g data-k="facts"><path d="M95 240 V300 M270 240 V300 M445 240 V300 M620 240 V300" stroke="#D4AF37" stroke-width="1.4" stroke-dasharray="3 4"/></g>
+            <g data-k="facts human back trace gen">
+              <rect x="30" y="150" width="130" height="90" rx="14" fill="#13243A" stroke="rgba(247,243,233,.3)"/><text x="95" y="190" text-anchor="middle" fill="#F7F3E9" font-size="16" font-weight="700">Brief</text><text x="95" y="212" text-anchor="middle" fill="#93A0B2" font-size="13">rules</text>
+              <rect x="205" y="150" width="130" height="90" rx="14" fill="#13243A" stroke="rgba(247,243,233,.3)"/><text x="270" y="190" text-anchor="middle" fill="#F7F3E9" font-size="16" font-weight="700">Journey</text><text x="270" y="212" text-anchor="middle" fill="#93A0B2" font-size="13">model draft</text>
+              <rect x="380" y="150" width="130" height="90" rx="14" fill="#13243A" stroke="rgba(247,243,233,.3)"/><text x="445" y="190" text-anchor="middle" fill="#F7F3E9" font-size="16" font-weight="700">Copy</text><text x="445" y="212" text-anchor="middle" fill="#93A0B2" font-size="13">model draft</text>
+              <rect x="555" y="150" width="130" height="90" rx="14" fill="#13243A" stroke="rgba(247,243,233,.3)"/><text x="620" y="190" text-anchor="middle" fill="#F7F3E9" font-size="16" font-weight="700">Visual brief</text><text x="620" y="212" text-anchor="middle" fill="#93A0B2" font-size="13">model draft</text>
+            </g>
+            <g data-k="human"><g fill="#D4AF37"><path d="M182 182 l12 13 -12 13 -12 -13z"/><path d="M357 182 l12 13 -12 13 -12 -13z"/><path d="M532 182 l12 13 -12 13 -12 -13z"/><path d="M707 182 l12 13 -12 13 -12 -13z"/></g><text x="182" y="140" text-anchor="middle" fill="#D4AF37" font-size="13" font-weight="700">approve</text><text x="707" y="140" text-anchor="middle" fill="#D4AF37" font-size="13">to Risk and Finance, human</text></g>
+            <g data-k="back"><path d="M445 150 C445 92 270 92 270 146" fill="none" stroke="#E58C7A" stroke-width="1.8"/><path d="M263 138 l7 10 7 -10" fill="none" stroke="#E58C7A" stroke-width="1.8"/><text x="357" y="84" text-anchor="middle" fill="#E58C7A" font-size="14">send back with a comment</text></g>
+            <g data-k="trace"><path d="M470 240 V300" stroke="#7ED3A6" stroke-width="2.2"/><circle cx="470" cy="270" r="11" fill="#7ED3A6"/><text x="470" y="275" text-anchor="middle" fill="#0D1B2A" font-size="13" font-weight="700">✓</text><text x="490" y="276" fill="#7ED3A6" font-size="13">numbers match the brief</text></g>
+            <g data-k="gen"><rect x="580" y="30" width="150" height="62" rx="12" fill="none" stroke="#8EB5FF" stroke-dasharray="4 4"/><text x="655" y="56" text-anchor="middle" fill="#8EB5FF" font-size="14" font-weight="700">Image model</text><text x="655" y="76" text-anchor="middle" fill="#93A0B2" font-size="13">paid, optional</text><path d="M620 150 V92" stroke="#8EB5FF" stroke-width="1.6"/><rect x="606" y="108" width="28" height="22" rx="4" fill="#8EB5FF"/><path d="M612 108 v-6 a8 8 0 0 1 16 0 v6" fill="none" stroke="#8EB5FF" stroke-width="2"/><text x="540" y="124" text-anchor="end" fill="#8EB5FF" font-size="13">consent first</text></g>
+          </svg>
+        </div>
+      </div>
+      <p class="note" style="margin-top:28px">Brief parsing, financial calculations, documents and package checks are rule-based.</p>
+    </div>
+  </section>
+
+  <!-- 05 DEMONSTRATED -->
+  <section class="sec lt" aria-labelledby="s5">
+    <div class="wrap">
+      <div class="sh">
+        <div><span class="lbl g" data-rv><span class="n">05</span> What was demonstrated</span><h2 class="h2" id="s5" data-rv style="--d:.06s">A working prototype, tested on test campaigns. Not production software.</h2></div>
+        <p class="lede" data-rv style="--d:.12s">Copy tone was the weakest output in testing, so tone rules are being refined with Marketing feedback.</p>
+      </div>
+      <div class="mat">
+        <ul class="stat" data-rv>
+          <li><div><b>Brief, journey document, visual brief</b><span class="d">Run end to end on test campaigns</span></div><span class="st done">Working prototype</span></li>
+          <li><div><b>Copy with tone checks</b><span class="d">Number and length checks work; tone still reviewed by a person</span></div><span class="st pro">In testing</span></li>
+          <li><div><b>Risk and Finance review</b><span class="d">Kept with people on purpose</span></div><span class="st plan">Human by design</span></li>
+          <li><div><b>Platform configuration and monitoring</b><span class="d">Part of a 16-step target design</span></div><span class="st plan">Proposed</span></li>
+          <li><div><b>Use on live campaigns, measured savings</b><span class="d">No pilot has run</span></div><span class="st plan">Not yet</span></li>
+        </ul>
+        <div data-rv style="--d:.08s"><span class="lbl">Limitations</span>
+          <ul class="lim" style="margin-top:14px">
+            <li>Runs locally. Integration with the bank's marketing platform is proposed, not built.</li>
+            <li>Not used on live campaigns, and no time or cost savings have been measured.</li>
+            <li>Copy tone is not yet reliable enough to skip human review.</li>
+            <li>Built by directing AI coding agents and testing the result, not by writing production code by hand.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="evid" data-rv>
+        <span class="lbl g">Evidence I can walk through in an interview</span>
+        <ul>
+          <li><b>Product deck, version 15</b><span>Status of each module and the 16-step target design</span></li>
+          <li><b>Campaign skills and prompt specifications</b><span>Written by me; in my account since June 2026</span></li>
+          <li><b>Automated browser tests</b><span>Run as each module changed during development</span></li>
+          <li><b>Development history</b><span>The record of building it by directing AI coding agents</span></li>
+        </ul>
+      </div>
+
+      <details class="more" style="margin-top:32px">
+        <summary>Illustrative assumption: where preparation time goes</summary>
+        <div class="in">
+      <div class="tchart" id="an">
+        <div class="hd">
+          <div><span class="lbl">Illustrative assumptions · not measured data</span><h3 class="h3" style="margin-top:10px">A rough split of preparation time</h3><p class="small" style="margin-top:8px;max-width:60ch">My own stage assumptions, rounded in 5-point steps so each case totals 100%. Not measured; a pilot would test them.</p></div>
+          <div class="seg" role="group" aria-label="Choose an assumption"><button type="button" data-s="lo" aria-pressed="false">Low case</button><button type="button" data-s="mid" aria-pressed="true">Middle case</button><button type="button" data-s="hi" aria-pressed="false">High case</button></div>
+        </div>
+        <div class="bars2" id="anBars"></div>
+        <div class="bkey"><span><i style="background:#0D1B2A"></i>assisted by the prototype</span><span><i style="background:#B5651D"></i>stays human</span><span><i style="background:#B9BEC6"></i>later</span></div>
+        <div class="tout"><b id="anV">About 80%</b><span class="small" id="anP">Share of preparation time in the four stages the prototype assists, under these assumptions.</span></div>
+        <noscript><p class="small">Under these illustrative assumptions, the four preparation stages hold about 70–85% of preparation time across the three cases. Not measured.</p></noscript>
+      </div>
+        </div>
+      </details>
+
+      <details class="more">
+        <summary>Options I compared, and how success would be measured</summary>
+        <div class="in">
+          <ul class="stat">
+            <li><div><b>Process fixes only</b><span class="d">Cheap, but people still restate the same facts at every step.</span></div></li>
+            <li><div><b>Automate end to end, approvals included</b><span class="d">Removes the controls the bank is accountable for.</span></div></li>
+            <li><div><b>A generic AI writing tool</b><span class="d">No link between brief, scenario and copy, so numbers can drift.</span></div></li>
+            <li><div><b>Chosen: assist the four preparation stages</b><span class="d">Targets where most time is assumed to go; facts are carried and checked across steps; every decision stays human.</span></div></li>
+          </ul>
+          <p class="body" style="margin-top:16px">A pilot would compare elapsed days per stage, review rounds before approval, number mismatches caught, and generation cost per campaign, with no change in the time or depth of Risk and Finance review.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <nav class="dk" aria-label="Case studies">
+    <div class="wrap nextc">
+      <a href="../customer-journeys/"><span class="lbl">Previous · 02</span><b>← Customer Journeys</b></a>
+      <a href="../about/"><span class="lbl">Next</span><b>About me →</b></a>
+    </div>
+  </nav>
 </main>
 
 <footer class="foot">
   <div class="wrap">
-    <span>© <span id="yr">2026</span> Khanım Azimli · The workflow on this page is a recreation with a fictional campaign.</span>
+    <span>© <span id="yr">2026</span> Khanım Azimli · Interfaces on this page are recreations with a fictional campaign.</span>
     <nav aria-label="Footer"><a href="../">Home</a><a href="../about/">About</a><a href="mailto:khanimazimli0@gmail.com">Email</a></nav>
   </div>
 </footer>
 
-<script src="../assets/site.js" defer></script>
+<script src="../assets/studio.js"></script>
 <script>
+KA.onView(document.getElementById('frag'), function () { document.getElementById('frag').classList.add('in'); });
+
+/* ---------- 02 approach stepper ---------- */
+(function () {
+  var D = [
+    ['Mapped where campaign preparation time goes', 'Six stages owned by different teams, from brief to platform build. By my rough assumptions, the first four take most of the time and repeat the same facts in new formats; the decisions sit in review and approval.', 'A stage map with owners and rough duration assumptions. Not measured.'],
+    ['Wrote three rules before building anything', 'The brief step never invents a fact and asks for what is missing. Approvals stay human. Paid image generation needs explicit human consent.', 'Each rule is enforced in the prototype: rule-based brief parsing, approval points, a consent step.'],
+    ['Designed modules with human gates between them', 'Brief, journey, copy and visual modules, each producing a draft a person approves or sends back with a comment. A 16-step target design extends this to Risk, Finance and activation.', 'The target architecture in version 15 of my product deck.'],
+    ['Built it by orchestrating AI agents', 'I wrote the campaign skills and prompt specifications the modules run on, and built the software by directing AI coding agents, with sub-agents in parallel sessions and a multi-agent code review, then reviewing their work.', 'The skills in my account since June 2026, and the development history.'],
+    ['Tested in the browser and changed what failed', 'Automated browser tests checked each module as it changed. Copy tone was the weakest output, so tone rules are now being refined with Marketing feedback.', 'Version 15 of the product deck, with each module\'s status labelled.']
+  ];
+  var tabs = [].slice.call(document.querySelectorAll('#appr [role=tab]')), pan = document.getElementById('apd');
+  function sel(i, focus) {
+    tabs.forEach(function (t, j) { t.setAttribute('aria-selected', j === i ? 'true' : 'false'); t.tabIndex = j === i ? 0 : -1; });
+    pan.setAttribute('aria-labelledby', 'ap' + i);
+    document.getElementById('apT').textContent = D[i][0]; document.getElementById('apX').textContent = D[i][1]; document.getElementById('apE').textContent = D[i][2];
+    if (focus) tabs[i].focus();
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { sel(i); });
+    t.addEventListener('keydown', function (e) { var k = e.key; if (k === 'ArrowRight' || k === 'ArrowDown') { e.preventDefault(); sel((i + 1) % 5, true); } if (k === 'ArrowLeft' || k === 'ArrowUp') { e.preventDefault(); sel((i + 4) % 5, true); } });
+  });
+  sel(0);
+})();
+
+/* ---------- 03 guided recreation ---------- */
 (function () {
   /* Recreation of the prototype's flow. Simple rules in the browser; no AI calls. */
   var CAT = [['restaurant', 'Restaurants'], ['cafe', 'Cafés'], ['café', 'Cafés'], ['grocer', 'Groceries'], ['supermarket', 'Groceries'], ['fuel', 'Fuel'], ['petrol', 'Fuel'], ['taxi', 'Taxi'], ['pharmac', 'Pharmacies'], ['travel', 'Travel'], ['flight', 'Travel'], ['online', 'Online purchases'], ['e-com', 'Online purchases'], ['deposit', 'Deposits'], ['coffee', 'Coffee']];
@@ -233,7 +504,7 @@
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   var root = document.getElementById('os'); if (!root) return;
   var inp = document.getElementById('osI'), pane = document.getElementById('osPane'), st = document.getElementById('osState');
-  var tabs = root.querySelectorAll('[data-p]'), step = 0, F = {};
+  var tabs = [].slice.call(root.querySelectorAll('[data-p]')), lis = tabs.map(function (b) { return b.parentNode; }), step = 0, done = -1, F = {};
   function parse(raw) {
     var t = raw.toLowerCase();
     var rate = (t.match(/(\d+(?:[.,]\d+)?)\s?%/) || [])[1];
@@ -248,76 +519,79 @@
     if (F.mech) return 'A ' + m + ' offer is waiting for you in the app.';
     return '';
   }
-  function chip(k, v) { return '<div class="chip' + (v ? '' : ' miss') + '"><small>' + k + '</small><span>' + (v ? esc(v) : 'Will ask') + '</span></div>'; }
+  function chip(k, v) { return '<div class="chip' + (v ? '' : ' miss') + '"><small' + (v ? ' class="mute"' : '') + '>' + k + '</small>' + (v ? esc(v) : 'Will ask') + '</div>'; }
+  function check(ok, txt, warn) { return '<li><i class="' + (ok ? '' : warn ? 'w' : 'h') + '">' + (ok ? '✓' : warn ? '!' : '●') + '</i>' + txt + '</li>'; }
   function draw() {
-    tabs.forEach(function (b, i) { b.setAttribute('aria-selected', i === step ? 'true' : 'false'); });
+    tabs.forEach(function (b, i) { b.setAttribute('aria-selected', i === step ? 'true' : 'false'); var li = lis[i]; li.className = i === step ? 'cur' : i <= done ? 'ok' : ''; li.querySelector('i').textContent = i <= done && i !== step ? '✓' : i + 1; });
     var h = '';
     if (step === 0) {
-      h = '<div class="chips">' + chip('Mechanism', F.mech) + chip('Rate', F.rate) + chip('Category', F.cat) + chip('Activity', F.act) + chip('Cap', F.cap) + chip('Period', F.per) + '</div>' +
-          '<p class="note2">Facts taken only from your sentence. Anything missing is asked, never assumed.</p>';
+      h = '<small>Brief · fields taken from your sentence</small><div class="chips">' + chip('Mechanism', F.mech) + chip('Rate', F.rate) + chip('Category', F.cat) + chip('Activity', F.act) + chip('Cap', F.cap) + chip('Period', F.per) + '</div>' +
+          '<p class="note2">Facts are taken only from your sentence. Anything missing is asked, never assumed.</p>';
     } else if (step === 1) {
-      h = '<div class="doc"><h4>Journey and scenario document · draft</h4><div class="row2">' +
-          '<b>Mechanic</b><span>' + esc([F.mech, F.rate, F.cat ? PH[F.cat] : null].filter(Boolean).join(' ') || 'To be confirmed') + (F.cap ? ', capped at ' + esc(F.cap) : '') + '</span>' +
-          '<b>Period</b><span>' + esc(F.per || 'To be confirmed with the requester') + '</span>' +
-          '<b>Audience</b><span>To be confirmed by a person</span></div>' +
+      h = '<div class="doc"><h4>Journey and scenario document · draft</h4><dl>' +
+          '<dt>Mechanic</dt><dd>' + esc([F.mech, F.rate, F.cat ? PH[F.cat] : null].filter(Boolean).join(' ') || 'To be confirmed') + (F.cap ? ', capped at ' + esc(F.cap) : '') + '</dd>' +
+          '<dt>Period</dt><dd>' + esc(F.per || 'To be confirmed with the requester') + '</dd>' +
+          '<dt>Audience</dt><dd>To be confirmed by a person</dd></dl>' +
           '<ol><li>Launch: banner and announcement push</li><li>Midway: reminder to customers who have not taken part</li><li>Last day: final push</li><li>After: results handed to analysis</li></ol></div>' +
           '<p class="note2">A draft structure for the build team. A person approves or edits it before anything is built.</p>';
     } else if (step === 2) {
       var c = copy(), nums = c.match(/\d+(?:[.,]\d+)?/g) || [], ok = nums.every(function (n) { return [F._r, F._c].indexOf(n) > -1; });
-      h = c ? '<div class="split2"><div><div class="msg"><small>Push · announcement</small>' + esc(c) + '</div></div><ul class="checks">' +
-          '<li><i class="' + (ok ? '' : 'w') + '">' + (ok ? '✓' : '!') + '</i>' + (ok ? 'Numbers match the brief' : 'Number mismatch: sent back') + '</li>' +
-          '<li><i class="' + (c.length <= 90 ? '' : 'w') + '">' + (c.length <= 90 ? '✓' : '!') + '</i>Length ' + c.length + ' of 90 characters</li>' +
-          '<li><i class="h">–</i>Tone: a person reviews it</li></ul></div>' +
+      h = c ? '<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start" class="cg"><div class="msg"><small>Push · announcement</small>' + esc(c) + '</div><ul style="font-size:15px">' +
+          check(ok, ok ? 'Numbers match the brief' : 'Number mismatch: sent back', true) + check(c.length <= 90, 'Length ' + c.length + ' of 90 characters', true) + check(false, 'Tone: a person reviews it') + '</ul></div>' +
           '<p class="note2">In testing: tone rules are still being refined with Marketing.</p>'
-        : '<p class="note2">No copy yet: the brief has no mechanism, so it goes back with a question.</p>';
+        : '<p class="note2" style="font-size:16px;color:var(--tx)">No copy yet: the brief has no mechanism, so it goes back to the requester with a question.</p>';
     } else {
-      h = '<div class="doc"><h4>Art-director brief · draft</h4><div class="row2">' +
-          '<b>What is sold</b><span>' + esc([F.mech, F.cat ? PH[F.cat] : null].filter(Boolean).join(' ') || 'To be confirmed') + '</span>' +
-          '<b>Customer benefit</b><span>' + esc(F.rate ? F.rate + ' back on everyday spending' : 'To be confirmed') + '</span>' +
-          '<b>Route</b><span>Reuse an approved creative first. A new image is generated only after a person consents to the cost.</span></div></div>' +
+      h = '<div class="doc"><h4>Art-director brief · draft</h4><dl>' +
+          '<dt>What is sold</dt><dd>' + esc([F.mech, F.cat ? PH[F.cat] : null].filter(Boolean).join(' ') || 'To be confirmed') + '</dd>' +
+          '<dt>Customer benefit</dt><dd>' + esc(F.rate ? F.rate + ' back on everyday spending' : 'To be confirmed') + '</dd>' +
+          '<dt>Route</dt><dd>Reuse an approved creative first. A new image is generated only after a person consents to the cost.</dd></dl></div>' +
           '<p class="note2">In the prototype this brief goes to an image model only after consent. This page generates nothing.</p>';
     }
-    pane.innerHTML = h; st.textContent = '';
+    pane.innerHTML = h;
   }
-  document.getElementById('osF').addEventListener('submit', function (e) { e.preventDefault(); parse(inp.value); step = 0; draw(); });
-  root.querySelectorAll('[data-x]').forEach(function (b) { b.addEventListener('click', function () { inp.value = b.dataset.x; parse(inp.value); step = 0; draw(); }); });
-  tabs.forEach(function (b) { b.addEventListener('click', function () { step = +b.dataset.p; draw(); }); });
+  function reset() { parse(inp.value); step = 0; done = -1; st.textContent = ''; draw(); }
+  document.getElementById('osF').addEventListener('submit', function (e) { e.preventDefault(); reset(); });
+  root.querySelectorAll('[data-x]').forEach(function (b) { b.addEventListener('click', function () { inp.value = b.dataset.x; reset(); }); });
+  tabs.forEach(function (b) { b.addEventListener('click', function () { step = +b.dataset.p; st.textContent = ''; draw(); }); });
   var names = ['Brief', 'Journey document', 'Copy', 'Visual brief'];
   document.getElementById('osOk').addEventListener('click', function () {
+    done = Math.max(done, step);
     if (step < 3) { step++; draw(); st.textContent = names[step - 1] + ' approved. Next: ' + names[step].toLowerCase() + '.'; }
-    else st.textContent = 'Visual brief approved. In the prototype, the package now goes to Risk and Finance review.';
+    else { draw(); st.textContent = 'Visual brief approved. In the prototype, the package now goes to Risk and Finance review, by people.'; }
   });
-  document.getElementById('osBack').addEventListener('click', function () {
-    st.textContent = names[step] + ' sent back with a comment to the step that produced it.';
-  });
+  document.getElementById('osBack').addEventListener('click', function () { st.textContent = names[step] + ' sent back with a comment to the step that produced it.'; });
   parse(inp.value); draw();
 })();
+
+/* ---------- 04 governance map ---------- */
+(function () {
+  var bs = [].slice.call(document.querySelectorAll('#gsel [data-g]')), m = document.getElementById('gmap'); if (!m) return;
+  bs.forEach(function (b) { b.addEventListener('click', function () {
+    bs.forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); });
+    m.className = 'gmap f f-' + b.dataset.g;
+  }); });
+})();
+
+/* ---------- 05 illustrative time split ---------- */
 (function () {
   /* Illustrative stage assumptions, not measurements. Shares use largest-remainder rounding in 5-point steps, so they always total 100%. */
+  var S = [['Brief and idea', 1, 2, 'a'], ['Journey and scenario', 1, 3, 'a'], ['Copy and review', 3, 5, 'a'], ['Visuals', 3, 10, 'a'], ['Risk and Finance', 3, 3, 'h'], ['Platform build', 1, 1, 'l']];
+  var C = { a: '#0D1B2A', h: '#B5651D', l: '#B9BEC6' };
+  function val(x, k) { return k === 'lo' ? x[1] : k === 'hi' ? x[2] : (x[1] + x[2]) / 2; }
   function shares(k) {
     var v = S.map(function (x) { return val(x, k); }), t = v.reduce(function (a, b) { return a + b; }, 0);
     var u = v.map(function (x) { return x / t * 20; }), f = u.map(Math.floor), left = 20 - f.reduce(function (a, b) { return a + b; }, 0);
     u.map(function (x, i) { return [x - f[i], i]; }).sort(function (a, b) { return b[0] - a[0]; }).slice(0, left).forEach(function (r) { f[r[1]]++; });
     return f.map(function (n) { return n * 5; });
   }
-  var S = [['Brief and idea', 1, 2, 'a'], ['Journey and scenario', 1, 3, 'a'], ['Copy and review', 3, 5, 'a'], ['Visuals', 3, 10, 'a'], ['Risk and Finance', 3, 3, 'h'], ['Platform build', 1, 1, 'l']];
-  var C = { a: 'var(--accent)', h: 'var(--s-wait)', l: 'var(--line-2)' }, L = { a: 'assisted', h: 'stays human', l: 'later' };
   var root = document.getElementById('an'); if (!root) return;
-  function val(x, k) { return k === 'lo' ? x[1] : k === 'hi' ? x[2] : (x[1] + x[2]) / 2; }
-  function fmt(n) { return (Math.round(n * 10) / 10).toString(); }
   function draw(k) {
-    var tot = S.reduce(function (t, x) { return t + val(x, k); }, 0);
-    var as = S.filter(function (x) { return x[3] === 'a'; }).reduce(function (t, x) { return t + val(x, k); }, 0);
     var sh = shares(k);
     document.getElementById('anBars').innerHTML = S.map(function (x, i) {
-      var pct = sh[i];
-      return '<div style="display:grid;grid-template-columns:minmax(0,170px) minmax(0,1fr) 92px;gap:12px;align-items:center;padding:7px 0;font-size:14.5px">' +
-        '<span>' + x[0] + '</span><span style="background:#fff;border:1px solid var(--line);border-radius:6px;height:14px;overflow:hidden"><span style="display:block;height:100%;width:' + pct.toFixed(1) + '%;background:' + C[x[3]] + '"></span></span>' +
-        '<span class="num muted" style="text-align:right">' + pct + '%</span></div>';
-    }).join('') + '<div style="display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:10px;font-size:13px;color:var(--mute)">' +
-      ['a', 'h', 'l'].map(function (c) { return '<span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:' + C[c] + ';margin-right:6px;vertical-align:-1px"></span>' + L[c] + '</span>'; }).join('') + '</div>';
-    var r = sh.reduce(function (t, p, i) { return S[i][3] === 'a' ? t + p : t; }, 0) / 100; document.getElementById('anV').textContent = 'About ' + Math.round(r * 100) + '%';
-    document.getElementById('anP').textContent = 'Illustrative share of preparation time in the four stages the prototype assists. An assumption to test in a pilot, not a measured result.';
+      return '<div class="r"><span>' + x[0] + '</span><span class="t"><span style="width:' + sh[i] + '%;background:' + C[x[3]] + '"></span></span><span class="v">' + sh[i] + '%</span></div>';
+    }).join('');
+    var r = sh.reduce(function (t, p, i) { return S[i][3] === 'a' ? t + p : t; }, 0);
+    document.getElementById('anV').textContent = 'About ' + r + '%';
   }
   var btns = root.querySelectorAll('[data-s]');
   btns.forEach(function (b) { b.addEventListener('click', function () { btns.forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); }); draw(b.dataset.s); }); });

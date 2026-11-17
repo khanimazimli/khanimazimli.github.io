@@ -12,228 +12,435 @@
 </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ABB Wrapped 2026: personalized digital banking at scale · Khanım Azimli</title>
+<title>ABB Wrapped 2026 · Khanım Azimli</title>
 <meta name="description" content="Case study: ABB Wrapped 2026, the year-in-review in a bank's mobile app, redesigned around reusable story templates with runtime personalization, mass and premium versions, and a tracked path to production. Not yet launched.">
 <link rel="canonical" href="https://khanimazimli.github.io/abb-wrapped/">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ABB Wrapped 2026: personalized digital banking at scale">
-<meta property="og:description" content="A personalized year-in-review in a bank's mobile app, redesigned for 2026 around reusable story templates. Not yet launched. Case study by Khanım Azimli.">
+<meta property="og:title" content="ABB Wrapped 2026 · case study">
+<meta property="og:description" content="A personalized year-in-review in a bank's mobile app, redesigned for 2026 around reusable story templates. Not yet launched.">
 <meta property="og:url" content="https://khanimazimli.github.io/abb-wrapped/">
-<meta name="theme-color" content="#FFFFFF">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230E1116'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='16' font-weight='700' fill='white' text-anchor='middle'%3EKA%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#0D1B2A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%230D1B2A'/%3E%3Ccircle cx='16' cy='16' r='12' fill='none' stroke='%23D4AF37' stroke-width='1.6'/%3E%3Ctext x='16' y='20.5' font-family='Arial' font-size='11' font-weight='700' fill='%23D4AF37' text-anchor='middle'%3EKA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600&family=Inter:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="../assets/studio.css">
+<style>
+/* identity: warm story colours over deep navy */
+.wh { background: radial-gradient(55% 70% at 75% 50%, rgba(15, 94, 99, .35), transparent 70%), radial-gradient(40% 50% at 95% 90%, rgba(74, 37, 69, .45), transparent 70%), var(--navy); }
+.wh .wrap { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(24px, 4vw, 64px); align-items: center; }
+.wh h1 { font-size: clamp(46px, 5.6vw, 84px); letter-spacing: -.045em; line-height: .95; }
+.wh .sub { margin-top: 24px; }
+.wh .mine { margin-top: 26px; padding-left: 18px; border-left: 2px solid var(--gold); color: var(--tx); font-size: 17px; line-height: 1.55; max-width: 44ch; }
+.wh .mine span { display: block; color: var(--tx-3); font-size: 15px; margin-top: 6px; }
+.stage { position: relative; height: clamp(440px, 50vw, 640px); perspective: 1600px; overflow: visible; clip-path: inset(-20% -40% -10% 0); }
+.stage .rig { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform .8s var(--e); }
+.stage .phone { position: absolute; left: 54%; top: 48%; width: clamp(150px, 14.5vw, 210px); transition: transform 1.2s var(--e), opacity 1.2s var(--e); }
+.stage .phone.p0 { width: clamp(200px, 19vw, 276px); transform: translate(-50%, -50%) translateZ(80px); z-index: 5; box-shadow: 0 60px 120px -40px rgba(0, 0, 0, .9), 0 0 0 1px rgba(212, 175, 55, .6); }
+.stage .phone.p1 { transform: translate(-50%, -50%) translate(-74%, -6%) translateZ(-40px) rotateY(16deg); z-index: 4; }
+.stage .phone.p2 { transform: translate(-50%, -50%) translate(74%, 4%) translateZ(-40px) rotateY(-16deg); z-index: 4; }
+.stage .phone.p3 { transform: translate(-50%, -50%) translate(-122%, 8%) translateZ(-160px) rotateY(24deg); z-index: 3; opacity: .82; }
+.stage .phone.p4 { transform: translate(-50%, -50%) translate(122%, -8%) translateZ(-160px) rotateY(-24deg); z-index: 3; opacity: .82; }
+.js .stage:not(.in) .phone { transform: translate(-50%, -40%) scale(.92); opacity: 0; }
+.stage .cap { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); font-size: 14px; color: var(--tx-3); white-space: nowrap; }
+@media (max-width: 1080px) { .wh .wrap { grid-template-columns: 1fr; } .stage { height: 560px; } }
+@media (max-width: 640px) {
+  .stage { height: 460px; margin-top: 8px; }
+  .stage .phone { width: 150px; }
+  .stage .phone.p0 { width: 196px; }
+  .stage .phone.p1 { transform: translate(-50%, -50%) translate(-58%, -4%) translateZ(-40px) rotateY(14deg); }
+  .stage .phone.p2 { transform: translate(-50%, -50%) translate(58%, 4%) translateZ(-40px) rotateY(-14deg); }
+  .stage .phone.p3, .stage .phone.p4 { display: none; }
+  .stage .cap { white-space: normal; text-align: center; width: 100%; }
+}
+
+/* 01 · data to story */
+.xf { display: grid; gap: 0; border-top: 1px solid var(--ln-l2); }
+.xf .hd, .xf .row { display: grid; grid-template-columns: minmax(0, 1fr) 44px minmax(0, 1.2fr) 44px minmax(0, 1fr); align-items: center; }
+.xf .hd { padding: 16px 0; }
+.xf .hd span { font: 500 12.5px/1.3 var(--m); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+.xf .row { padding: 14px 0; border-top: 1px solid var(--ln-l); }
+.xf .a { display: inline-flex; flex-direction: column; padding: 12px 16px; border-radius: 12px; background: #fff; border: 1px solid var(--ln-l); font-size: 15.5px; line-height: 1.35; }
+.xf .a small { font: 500 12px/1.3 var(--m); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 4px; }
+.xf .r { font-size: 15.5px; line-height: 1.45; color: var(--ink-2); padding: 0 6px; }
+.xf .r b { color: var(--ink); font-weight: 700; }
+.xf .o { padding: 12px 16px; border-radius: 12px; background: var(--ink); color: var(--ivory); font-size: 16px; line-height: 1.35; }
+.xf .o small { display: block; font: 500 12px/1.3 var(--m); letter-spacing: .06em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+.xf .o.none { background: transparent; color: var(--ink-3); border: 1px dashed var(--ln-l2); }
+.xf .ar { height: 1.5px; background: var(--ln-l2); position: relative; margin: 0 6px; }
+.xf .ar::after { content: ""; position: absolute; right: -1px; top: -4px; border: 5px solid transparent; border-left-color: var(--ln-l2); border-right: 0; }
+.js .xf .row { opacity: .28; transition: opacity .6s var(--e); }
+.js .xf.in .row { opacity: 1; }
+.xf.in .row:nth-child(3) { transition-delay: .25s; } .xf.in .row:nth-child(4) { transition-delay: .5s; } .xf.in .row:nth-child(5) { transition-delay: .75s; } .xf.in .row:nth-child(6) { transition-delay: 1s; }
+@media (max-width: 820px) {
+  .xf .hd { display: none; }
+  .xf .row { grid-template-columns: 1fr; gap: 8px; padding: 18px 0; }
+  .xf .ar { width: 1.5px; height: 14px; margin: 0 0 0 20px; }
+  .xf .ar::after { right: -4px; top: auto; bottom: -1px; border: 5px solid transparent; border-top-color: var(--ln-l2); border-bottom: 0; }
+  .xf .a { display: flex; }
+}
+
+/* 02 · experience */
+.exp { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 4fr) minmax(0, 4fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
+.exp > * { min-width: 0; }
+.prof { display: grid; gap: 10px; }
+.prof button { text-align: left; display: grid; grid-template-columns: 40px 1fr; gap: 14px; align-items: center; padding: 14px 16px; border-radius: 14px; border: 1px solid var(--ln-d); background: transparent; transition: border-color .3s, background .3s; }
+.prof button:hover { border-color: var(--ln-d2); }
+.prof button[aria-pressed="true"] { border-color: var(--gold); background: rgba(212, 175, 55, .08); }
+.prof button i { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 15px; color: var(--navy); }
+.prof button b { display: block; font-weight: 700; font-size: 16.5px; }
+.prof button span { display: block; font-size: 14.5px; color: var(--tx-3); margin-top: 2px; line-height: 1.35; }
+.view { position: relative; max-width: 330px; width: 100%; margin: 0 auto; }
+.view .phone { width: 100%; }
+.view .phone > * { transition: opacity .3s var(--e), transform .3s var(--e); }
+.view .phone.fade > * { opacity: 0; transform: translateY(8px); }
+.view .tap { position: absolute; top: 0; bottom: 0; width: 40%; background: transparent; border: 0; z-index: 3; }
+.view .tap.l { left: 0; } .view .tap.r { right: 0; }
+.ctl { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 16px; }
+.ctl button { width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--ln-d2); background: transparent; font-size: 18px; }
+.ctl button:hover { border-color: var(--gold); }
+.ctl span { font: 500 14px var(--m); color: var(--tx-3); min-width: 60px; text-align: center; }
+.why { border-top: 1px solid var(--ln-d); padding-top: 20px; }
+.why .rule { margin-top: 12px; font-size: clamp(20px, 1.8vw, 24px); line-height: 1.35; letter-spacing: -.015em; }
+.seq { margin-top: 26px; display: grid; gap: 4px; }
+.seq button { text-align: left; display: flex; gap: 12px; align-items: center; min-height: 44px; padding: 8px 10px; border-radius: 10px; border: 0; background: transparent; color: var(--tx-3); font-size: 15.5px; }
+.seq button i { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--ln-d2); display: grid; place-items: center; font: 500 12px var(--m); }
+.seq button[aria-current="true"] { color: var(--tx); background: rgba(247, 243, 233, .05); }
+.seq button[aria-current="true"] i { border-color: var(--gold); background: var(--gold); color: var(--navy); }
+@media (max-width: 1080px) { .exp { grid-template-columns: 1fr 1fr; } .why { grid-column: 1 / -1; } }
+@media (max-width: 700px) {
+  .exp { grid-template-columns: 1fr; }
+  .prof { grid-template-columns: 1fr 1fr; }
+  .prof button { grid-template-columns: 1fr; gap: 8px; padding: 12px; }
+  .prof button i { width: 32px; height: 32px; font-size: 13px; }
+  .prof button span { display: none; }
+  .view { max-width: 260px; }
+}
+
+/* 03 · production journey */
+.lanes { --cols: 6; display: grid; grid-template-columns: 170px repeat(var(--cols), minmax(0, 1fr)); border-top: 1px solid var(--ln-l2); }
+.lanes > div { padding: 14px 12px; border-bottom: 1px solid var(--ln-l); font-size: 14.5px; line-height: 1.4; min-width: 0; }
+.lanes .stg { padding-top: 18px; }
+.lanes .stg b { display: block; font-size: 16px; line-height: 1.25; }
+.lanes .stg small { display: block; font: 500 12px var(--m); color: var(--ink-3); letter-spacing: .06em; margin-bottom: 6px; }
+.lanes .who { font: 500 12.5px/1.35 var(--m); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); display: flex; align-items: center; gap: 8px; padding-left: 0; }
+.lanes .who.me { color: var(--gold-ink); }
+.lanes .c { position: relative; }
+.lanes .c.on { color: var(--ink); }
+.lanes .c.on::before { content: ""; display: block; height: 6px; border-radius: 3px; margin-bottom: 10px; background: var(--ink); transform-origin: 0 50%; }
+.lanes .c.me::before { background: var(--gold); }
+.lanes .c.pend::before { background: transparent; border: 1.5px dashed var(--wait-l); height: 6px; }
+.lanes .c.ny::before { background: transparent; border: 1.5px dashed var(--plan-l); }
+.js .lanes .c.on::before { transform: scaleX(0); transition: transform .9s var(--e); }
+.lanes.in .c.on::before { transform: scaleX(1); }
+.lanes .s1::before { transition-delay: .1s !important; } .lanes .s2::before { transition-delay: .25s !important; } .lanes .s3::before { transition-delay: .4s !important; } .lanes .s4::before { transition-delay: .55s !important; } .lanes .s5::before { transition-delay: .7s !important; } .lanes .s6::before { transition-delay: .85s !important; }
+.lanes .c .st { margin-top: 8px; font-size: 11.5px; padding: 4px 9px; }
+.lkey { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 22px; font-size: 15px; color: var(--ink-2); }
+.lkey span { display: inline-flex; align-items: center; gap: 10px; }
+.lkey i { width: 28px; height: 6px; border-radius: 3px; background: var(--gold); }
+.lkey i.k2 { background: var(--ink); } .lkey i.k3 { background: transparent; border: 1.5px dashed var(--wait-l); }
+.plist { display: none; }
+@media (max-width: 980px) {
+  .lanes { display: none; }
+  .plist { display: grid; gap: 0; border-top: 1px solid var(--ln-l2); }
+  .plist li { padding: 18px 0; border-bottom: 1px solid var(--ln-l); display: grid; grid-template-columns: 40px 1fr; gap: 12px; }
+  .plist li > i { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; font: 500 12.5px var(--m); background: var(--gold); color: var(--navy); }
+  .plist b { display: block; font-size: 17px; }
+  .plist p { margin-top: 6px; font-size: 15.5px; color: var(--ink-2); }
+  .plist p.o { color: var(--ink-3); }
+  .plist p em { font-weight: 700; color: var(--ink); }
+}
+
+/* 04 · decisions */
+.decs { border-top: 1px solid var(--ln-d); }
+.decs article { display: grid; grid-template-columns: 90px minmax(0, 4fr) minmax(0, 8fr); gap: clamp(16px, 3vw, 40px); padding: clamp(32px, 4vw, 52px) 0; border-bottom: 1px solid var(--ln-d); }
+.decs .n { font: 500 15px var(--m); color: var(--gold); padding-top: 8px; }
+.decs h3 { font-size: clamp(24px, 2.4vw, 34px); letter-spacing: -.03em; }
+.decs dl { margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.decs dt { font: 500 12.5px/1.3 var(--m); letter-spacing: .08em; text-transform: uppercase; color: var(--tx-3); margin-bottom: 8px; }
+.decs dd { margin: 0; font-size: 16px; line-height: 1.55; color: var(--tx-2); }
+.decs dd.ch { color: var(--tx); }
+@media (max-width: 900px) { .decs article { grid-template-columns: 1fr; } .decs dl { grid-template-columns: 1fr; gap: 16px; } .decs .n { padding: 0; } }
+
+/* 05 · status */
+.del { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(20px, 4vw, 48px); }
+.del h3 { font-size: 22px; margin-bottom: 18px; display: flex; align-items: center; gap: 12px; }
+.del ul { border-top: 1px solid var(--ln-l2); }
+.del li { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--ln-l); font-size: 16.5px; }
+.del li i { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 700; }
+.del .dn i { background: var(--ok-l); color: #fff; }
+.del .pn i { border: 1.5px dashed var(--wait-l); color: var(--wait-l); }
+.del li span { display: block; font-size: 14.5px; color: var(--ink-3); margin-top: 2px; }
+@media (max-width: 760px) { .del { grid-template-columns: 1fr; } }
+.y25 { margin-top: clamp(48px, 6vw, 80px); display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: clamp(20px, 4vw, 56px); padding: 28px; border-radius: var(--r); background: rgba(13, 27, 42, .04); border: 1px solid var(--ln-l); }
+@media (max-width: 760px) { .y25 { grid-template-columns: 1fr; } }
+</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="nav">
   <div class="wrap">
-    <a class="brand" href="../">Khanım Azimli</a>
+    <a class="brand" href="../" aria-label="Khanım Azimli, home"><i aria-hidden="true">KA</i><span>Khanım Azimli</span></a>
     <nav aria-label="Primary">
       <ul>
-        <li><a class="l" href="../#work" aria-current="page">Work</a></li>
-        <li><a class="l" href="../about/">About</a></li>
-        <li><a class="btn sm" href="../#contact">Contact</a></li>
+        <li><a href="../#work" aria-current="page">Work</a></li>
+        <li><a href="../about/">About</a></li>
+        <li><a class="cta" href="../#contact">Contact</a></li>
       </ul>
     </nav>
   </div>
 </header>
 
 <main id="main">
-
-  <section class="c-hero">
+  <!-- HERO -->
+  <section class="chero wh" aria-labelledby="t">
     <div class="wrap">
-      <div class="crumb"><span class="k">Case 01 · Retail banking · Mobile app</span><span class="st wait">2026 edition not yet launched</span></div>
-      <h1 class="h-1">ABB Wrapped 2026: a personal year-in-review, designed to scale across the customer base.</h1>
-      <p class="lede">I led the 2026 edition of the bank's year-in-review and redesigned it around reusable story templates that are filled with each customer's values when the story is shown. Backend integration and launch sit with the bank's product and backend teams.</p>
-      <dl class="glance" aria-label="Project at a glance">
+      <div>
+        <div class="crumbs" data-rv><span class="lbl">Case 01 · Retail banking · Mobile app</span><span class="st wait">2026 edition not yet launched</span></div>
+        <h1 id="t" data-rv style="--d:.06s">ABB Wrapped 2026</h1>
+        <p class="lede sub" data-rv style="--d:.12s">A personal year-in-review in the bank's mobile app, redesigned for 2026 around reusable story templates that fill with each customer's values when the story is shown.</p>
+        <p class="mine" data-rv style="--d:.18s">I led the 2026 edition: creative direction, personalization logic, content and production preparation.<span>Backend integration, approval and launch are owned by the bank's product and backend teams.</span></p>
+      </div>
+      <div class="stage" id="stage" data-rv="fade" aria-hidden="true">
+        <div class="rig" id="rig"></div>
+        <p class="cap">Illustrative recreation · fictional customers and values · not ABB's designs</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="dk" style="padding-bottom:clamp(56px,7vw,96px)">
+    <div class="wrap">
+      <dl class="facts" style="margin-top:0" data-rv>
         <div><dt>Problem</dt><dd>Turn a year of each customer's payments into a story that is accurate, appropriate and repeatable every December.</dd></div>
-        <div><dt>My role</dt><dd>Led creative direction, personalization logic, content and production preparation.</dd></div>
         <div><dt>Why it was complex</dt><dd>Dozens of story types, many countries, two audiences, and hand-offs across Marketing, Design, product and backend teams.</dd></div>
         <div><dt>What I contributed</dt><dd>Story concepts, the template and fallback design, the story set, production tracking and my own pre-handover checks.</dd></div>
-        <div><dt>Delivered</dt><dd><b>The 2026 story set</b> prepared and checked for hand-off; product approval, integration and launch are pending. Separately, the 2025 edition, which I contributed to, shipped in December 2025.</dd></div>
+        <div><dt>Delivered</dt><dd><b>The 2026 story set</b>, prepared and checked for hand-off. Product approval, integration and launch are pending.</dd></div>
       </dl>
     </div>
   </section>
 
-  <nav class="toc" aria-label="Sections">
-    <button class="tb" type="button" aria-expanded="false" aria-controls="toc-list"><span>Sections</span><span class="cur">Scale</span><span class="ch" aria-hidden="true"></span></button>
-    <ol id="toc-list">
-      <li><a href="#scale">Scale</a></li>
-      <li><a href="#stories">Story previews</a></li>
-      <li><a href="#workflow">Production workflow</a></li>
-      <li><a href="#decisions">Key decisions</a></li>
-      <li><a href="#status">Status</a></li>
-    </ol>
-  </nav>
-
-  <section class="chap c2" id="scale" style="border-top:0">
-    <div class="wrap chap-grid">
-      <div class="side"><span class="k">01</span><h2>The scale</h2></div>
-      <div>
-        <p class="lead2">Customers' years differ, so the edition is a system of story types, not one story.</p>
-        <ul class="prose" style="margin-top:22px;padding-left:20px;list-style:disc"><li>Dozens of story types across country and travel, spending categories, product firsts, cashback and rewards, and year-summary stories.</li><li>One master template behind every country story, with a fallback for countries outside the designed set.</li><li>Separate versions for mass-market and premium customers.</li><li>Story files tracked and checked before hand-off.</li></ul>
-        
-      </div>
-    </div>
-  </section>
-
-  <section class="chap c2" id="stories">
-    <div class="wrap chap-grid">
-      <div class="side"><span class="k">02</span><h2>How a story is personalized</h2></div>
-      <div>
-        <p class="lead2">Choose a customer to see which stories they receive and the rule behind each one.</p>
-        <div class="demo" id="wr" style="margin-top:20px">
-          <div class="dh"><span class="k">Illustrative recreation · fictional data</span><p>Not ABB's designs. People, amounts and wording are invented; the rules follow the real story families.</p></div>
-          <div class="seg" role="group" aria-label="Choose a customer">
-            <button type="button" data-c="0" aria-pressed="true">Frequent traveller</button>
-            <button type="button" data-c="1" aria-pressed="false">Rare destination</button>
-            <button type="button" data-c="2" aria-pressed="false">Premium customer</button>
-            <button type="button" data-c="3" aria-pressed="false">Returning customer</button>
-          </div>
-          <div class="gal" id="wrGal" tabindex="0" role="region" aria-label="Story previews for the selected customer" aria-live="polite"></div>
-          <p class="galhint">Scroll sideways for more stories →</p>
-          <noscript><p class="muted">The preview needs JavaScript. In short: each customer receives a sequence of story types; a country outside the designed set uses a generic template; premium customers get premium versions; returning customers get their own path.</p></noscript>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="chap c2" id="workflow">
-    <div class="wrap chap-grid">
-      <div class="side"><span class="k">03</span><h2>Production workflow</h2></div>
-      <div>
-        <p class="lead2">From concept to hand-off, with each step owned and tracked.</p>
-        <ol class="pipe">
-          <li class="me"><b>Concept and creative direction</b><span class="o">Story concepts and idea screens, from July 2026</span><span class="st ship">Done</span></li>
-          <li class="me"><b>Templates and rules</b><span class="o">Runtime values, fallbacks, audience versions</span><span class="st ship">Done</span></li>
-          <li class="me"><b>Story content</b><span class="o">Developed with AI assistance; every story reviewed by me</span><span class="st ship">Done</span></li>
-          <li class="me"><b>Tracking and pre-handover checks</b><span class="o">Story files tracked and checked before hand-off</span><span class="st ship">Done</span></li>
-          <li><b>Product approval and backend integration</b><span class="o">Product owner, backend team</span><span class="st wait">Pending</span></li>
-          <li><b>Bank QA and launch</b><span class="o">Bank teams</span><span class="st plan">Not yet</span></li>
-        </ol>
-        <p class="legend-me"><i></i>Steps I led</p>
-        <p class="cap2" style="margin-top:16px">My pre-handover check covers phone layout, motion, dynamic values, console errors, assets, logo placement and performance on a slow Android device. It is my own check before hand-off, not the bank's QA sign-off.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="chap c2" id="decisions">
-    <div class="wrap chap-grid">
-      <div class="side"><span class="k">04</span><h2>Key decisions and constraints</h2></div>
-      <div>
-        <table class="ev dec">
-          <thead><tr><th>Decision</th><th>Why</th></tr></thead>
-          <tbody>
-            <tr><td>Templates instead of designed screens</td><td>One master template is designed to serve all country stories and category names of different lengths, so the next edition reuses the system instead of repeating production.</td></tr>
-            <tr><td>Fallbacks for story families</td><td>A country outside the designed set gets a generic version with its name filled in, to avoid broken or empty screens.</td></tr>
-            <tr><td>Separate paths for edge segments</td><td>Customers who left or joined late have no full year to tell, so they get their own sequence instead of a thin summary.</td></tr>
-            <tr><td>Premium versions for selected stories only</td><td>A distinct premium experience where the audience differs most, without doubling the size of the set.</td></tr>
-            <tr><td>Test on a slow Android phone before hand-off</td><td>Animation problems are invisible on a laptop. Finding them before hand-off is the cheapest point to fix them.</td></tr>
-          </tbody>
-        </table>
-        <details class="more">
-          <summary>My contribution to the shipped 2025 edition (separate from 2026)</summary>
-          <div class="in prose">
-            <p>The 2025 edition shipped in December 2025 with more than a dozen story families and over a hundred content variants, covering spending categories, countries, cashback, product firsts, loyalty, and separate paths for churned and new customers.</p>
-            <p>Tasks assigned to me on the 2025 sprint board: the main story text, the closing message and the messages for churned and new customers; with colleagues, reviewing the category messages and tracking the country and travel visuals. Visual production was done by Design and an agency; Marketing approved the texts.</p>
-          </div>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <section class="chap c2" id="status">
-    <div class="wrap chap-grid">
-      <div class="side"><span class="k">05</span><h2>Status and what it shows</h2></div>
-      <div>
-        <table class="ev">
-          <tbody>
-            <tr><td>2026 story set and my pre-handover checks</td><td class="s"><span class="st ship">Done</span></td></tr>
-            <tr><td>2026 product approval, backend integration, bank QA</td><td class="s"><span class="st wait">Pending</span></td></tr>
-            <tr><td>2026 launch</td><td class="s"><span class="st plan">Not yet</span></td></tr>
-            <tr><td>2025 edition</td><td class="s"><span class="st ship">Shipped Dec 2025</span></td></tr>
-          </tbody>
-        </table>
-        <div class="lessons l3" style="margin-top:30px">
-          <div><b>From one story to a system</b><span>Broke “a personal story for each customer” into story families, rules, fallbacks and audiences.</span></div>
-          <div><b>Concept to hand-off</b><span>Led the edition from concept to a checked, hand-off-ready story set, working across four functions.</span></div>
-          <div><b>Choices per story</b><span>Decided where to personalize, where to fall back and where a premium version is worth its cost.</span></div>
-        </div>
-        <p class="cap2" style="margin-top:18px">Engagement results for 2025 were tracked inside the bank and are not published here. There are no results for 2026 yet.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec tight">
+  <!-- 01 CHALLENGE -->
+  <section class="sec lt" aria-labelledby="s1">
     <div class="wrap">
-      <div class="next">
-        <a href="../"><span class="k">Back to</span><b>All work</b></a>
-        <a href="../customer-journeys/"><span class="k">Next case · 02</span><b>Customer Journeys &amp; Hyper-Personalization →</b></a>
+      <div class="sh">
+        <div><span class="lbl g" data-rv><span class="n">01</span> The challenge</span><h2 class="stmt" id="s1" data-rv style="--d:.06s"><span class="m">A year of payments is data.</span> A story is a decision about what matters.</h2></div>
+        <p class="lede" data-rv style="--d:.12s">Customers' years differ, so the edition cannot be one story. It is a set of story types, each with a rule that decides who sees it and what it says.</p>
+      </div>
+      <div class="xf" id="xf">
+        <div class="hd"><span>Customer data (fictional)</span><span></span><span>Rule</span><span></span><span>What the story says</span></div>
+        <div class="row"><span class="a"><small>Top spending category</small>Cafés · 184 payments</span><i class="ar" aria-hidden="true"></i><p class="r"><b>Category story.</b> One variant per category, chosen by top spend.</p><i class="ar" aria-hidden="true"></i><p class="o"><small>Top category</small>Your payments were led by Cafés</p></div>
+        <div class="row"><span class="a"><small>Country abroad</small>Iceland · 410 AZN</span><i class="ar" aria-hidden="true"></i><p class="r"><b>Country story.</b> A designed story where one exists; otherwise a generic template filled with the country's name.</p><i class="ar" aria-hidden="true"></i><p class="o"><small>Fallback</small>Abroad, you spent most in Iceland</p></div>
+        <div class="row"><span class="a"><small>Product firsts</small>First deposit opened</span><i class="ar" aria-hidden="true"></i><p class="r"><b>Product first.</b> Shown only to customers who had one this year.</p><i class="ar" aria-hidden="true"></i><p class="o"><small>A first</small>This year you opened your first deposit</p></div>
+        <div class="row"><span class="a"><small>Audience</small>Premium customer</span><i class="ar" aria-hidden="true"></i><p class="r"><b>Audience version.</b> Selected stories have a premium version.</p><i class="ar" aria-hidden="true"></i><p class="o"><small>Premium</small>A premium edition of your year</p></div>
+        <div class="row"><span class="a"><small>Activity</small>Away for most of the year</span><i class="ar" aria-hidden="true"></i><p class="r"><b>Separate path.</b> No full year to tell, so a returning-customer sequence replaces the summary.</p><i class="ar" aria-hidden="true"></i><p class="o"><small>Welcome back</small>Here is what changed while you were away</p></div>
+      </div>
+      <p class="note" style="margin-top:24px">Fictional customer values. The rules follow the real story families; real thresholds and story content are not shown because the edition is unreleased.</p>
+    </div>
+  </section>
+
+  <!-- 02 EXPERIENCE -->
+  <section class="sec dk" id="experience" aria-labelledby="s2">
+    <div class="wrap">
+      <div class="sh">
+        <div><span class="lbl g" data-rv><span class="n">02</span> The experience</span><h2 class="h2" id="s2" data-rv style="--d:.06s">Choose a customer. See the stories they get, and why.</h2></div>
+        <p class="lede" data-rv style="--d:.12s">Tap the story or use the arrows to move through the sequence. Each story shows the rule that selected it.</p>
+      </div>
+      <div class="exp" id="exp">
+        <div>
+          <p class="lbl" style="margin-bottom:14px" id="profL">Fictional customer</p>
+          <div class="prof" role="group" aria-labelledby="profL">
+            <button type="button" data-c="0" aria-pressed="true"><i style="background:#7FC4C8">FT</i><span><b>Frequent traveller</b><span>Pays abroad several times a year</span></span></button>
+            <button type="button" data-c="1" aria-pressed="false"><i style="background:#DCE6FA">RD</i><span><b>Rare destination</b><span>Travelled somewhere outside the designed set</span></span></button>
+            <button type="button" data-c="2" aria-pressed="false"><i style="background:#C9D9B5">PC</i><span><b>Premium customer</b><span>In the premium audience</span></span></button>
+            <button type="button" data-c="3" aria-pressed="false"><i style="background:#E3B8D4">RC</i><span><b>Returning customer</b><span>Came back after a long break</span></span></button>
+          </div>
+        </div>
+        <div>
+          <div class="view">
+            <div class="phone" id="ph" role="img" aria-live="polite" aria-label=""></div>
+            <button class="tap l" type="button" id="tl" aria-label="Previous story"></button>
+            <button class="tap r" type="button" id="tr" aria-label="Next story"></button>
+          </div>
+          <div class="ctl"><button type="button" id="bp" aria-label="Previous story">←</button><span id="pos" aria-hidden="true">1 / 5</span><button type="button" id="bn" aria-label="Next story">→</button></div>
+        </div>
+        <div class="why">
+          <span class="lbl g">Rule behind this story</span>
+          <p class="rule" id="rule" aria-live="polite"></p>
+          <div class="seq" id="seq" role="group" aria-label="Stories in this sequence"></div>
+        </div>
+      </div>
+      <p class="note" style="margin-top:36px">Illustrative recreation. Not ABB's designs: people, amounts and wording are invented, and no real customer information is used.</p>
+    </div>
+  </section>
+
+  <!-- 03 PRODUCTION -->
+  <section class="sec lt2" aria-labelledby="s3">
+    <div class="wrap">
+      <div class="sh">
+        <div><span class="lbl g" data-rv><span class="n">03</span> From concept to production</span><h2 class="h2" id="s3" data-rv style="--d:.06s">What I led, and where other teams take over.</h2></div>
+        <p class="lede" data-rv style="--d:.12s">The story set is mine to prepare and check. Putting it into the app, approving it and launching it belong to other teams.</p>
+      </div>
+      <div class="lanes" id="lanes" role="table" aria-label="Production journey by stage and owner">
+        <div role="row" style="display:contents">
+          <div role="columnheader" class="stg"></div>
+          <div role="columnheader" class="stg"><small>01</small><b>Concept</b></div>
+          <div role="columnheader" class="stg"><small>02</small><b>Content architecture</b></div>
+          <div role="columnheader" class="stg"><small>03</small><b>Personalization</b></div>
+          <div role="columnheader" class="stg"><small>04</small><b>Story implementation</b></div>
+          <div role="columnheader" class="stg"><small>05</small><b>Quality review</b></div>
+          <div role="columnheader" class="stg"><small>06</small><b>Handover</b></div>
+        </div>
+        <div role="row" style="display:contents">
+          <div role="rowheader" class="who me">Led by me</div>
+          <div role="cell" class="c on me s1">Story concepts and idea screens, from July 2026</div>
+          <div role="cell" class="c on me s2">Story families, edge-segment paths, mass and premium versions</div>
+          <div role="cell" class="c on me s3">Templates, runtime values and fallbacks</div>
+          <div role="cell" class="c on me s4">Story files, developed with AI assistance; every story reviewed by me</div>
+          <div role="cell" class="c on me s5">My pre-handover checks on a phone and a slow Android device</div>
+          <div role="cell" class="c on me s6">Every file tracked; a hand-off-ready set</div>
+        </div>
+        <div role="row" style="display:contents">
+          <div role="rowheader" class="who">Product owner</div>
+          <div role="cell" class="c"></div><div role="cell" class="c"></div><div role="cell" class="c"></div><div role="cell" class="c"></div><div role="cell" class="c"></div>
+          <div role="cell" class="c on pend s6">Approval of the edition<br><span class="st wait">Pending</span></div>
+        </div>
+        <div role="row" style="display:contents">
+          <div role="rowheader" class="who">Backend and app teams</div>
+          <div role="cell" class="c"></div><div role="cell" class="c"></div>
+          <div role="cell" class="c"></div>
+          <div role="cell" class="c on pend s4">Backend integration into the app<br><span class="st wait">Pending</span></div>
+          <div role="cell" class="c"></div><div role="cell" class="c"></div>
+        </div>
+        <div role="row" style="display:contents">
+          <div role="rowheader" class="who">Bank QA and launch</div>
+          <div role="cell" class="c"></div><div role="cell" class="c"></div><div role="cell" class="c"></div><div role="cell" class="c"></div>
+          <div role="cell" class="c on ny s5">Bank QA sign-off<br><span class="st plan">Not yet</span></div>
+          <div role="cell" class="c on ny s6">Launch<br><span class="st plan">Not yet</span></div>
+        </div>
+      </div>
+      <ol class="plist">
+        <li><i>01</i><div><b>Concept</b><p><em>Me:</em> story concepts and idea screens, from July 2026.</p></div></li>
+        <li><i>02</i><div><b>Content architecture</b><p><em>Me:</em> story families, edge-segment paths, mass and premium versions.</p></div></li>
+        <li><i>03</i><div><b>Personalization</b><p><em>Me:</em> templates, runtime values and fallbacks.</p></div></li>
+        <li><i>04</i><div><b>Story implementation</b><p><em>Me:</em> story files, developed with AI assistance; every story reviewed by me.</p><p class="o">Backend and app teams: integration into the app. Pending.</p></div></li>
+        <li><i>05</i><div><b>Quality review</b><p><em>Me:</em> my pre-handover checks on a phone and a slow Android device.</p><p class="o">Bank QA sign-off. Not yet.</p></div></li>
+        <li><i>06</i><div><b>Handover</b><p><em>Me:</em> every file tracked; a hand-off-ready set.</p><p class="o">Product owner approval: pending. Launch: not yet.</p></div></li>
+      </ol>
+      <div class="lkey" aria-hidden="true"><span><i></i>Led by me, done</span><span><i class="k3"></i>Other teams, pending or not yet</span></div>
+      <p class="note" style="margin-top:28px">My pre-handover check covers phone layout, motion, dynamic values, console errors, assets, logo placement and performance on a slow Android device. It is my own check before hand-off, not the bank's QA sign-off.</p>
+    </div>
+  </section>
+
+  <!-- 04 DECISIONS -->
+  <section class="sec dk" aria-labelledby="s4">
+    <div class="wrap">
+      <div class="sh">
+        <div><span class="lbl g" data-rv><span class="n">04</span> Key decisions</span><h2 class="h2" id="s4" data-rv style="--d:.06s">Three choices that shaped the edition.</h2></div>
+        <p class="lede" data-rv style="--d:.12s">Each traded extra design effort now for an edition that holds up across customer types and can be reused.</p>
+      </div>
+      <div class="decs">
+        <article data-rv><span class="n">D1</span><h3>Templates instead of designed screens</h3>
+          <dl><div><dt>Considered</dt><dd>Designing each story screen individually, as a one-off edition.</dd></div><div><dt>Chose</dt><dd>One master template per story family, filled with each customer's values when the story is shown.</dd></div><div><dt>What it changes</dt><dd class="ch">One template is designed to serve all country stories and category names of different lengths, so a future edition can reuse the system rather than repeat production.</dd></div></dl></article>
+        <article data-rv><span class="n">D2</span><h3>Fallbacks instead of gaps</h3>
+          <dl><div><dt>Considered</dt><dd>Designing country stories only for the destinations in the designed set.</dd></div><div><dt>Chose</dt><dd>A generic version, filled with the country's name, for any country outside that set.</dd></div><div><dt>What it changes</dt><dd class="ch">A customer who travelled somewhere unusual still gets a complete story, not a broken or empty screen.</dd></div></dl></article>
+        <article data-rv><span class="n">D3</span><h3>Premium versions only where the audience differs</h3>
+          <dl><div><dt>Considered</dt><dd>A full premium copy of the whole story set.</dd></div><div><dt>Chose</dt><dd>Premium versions of selected stories only, such as the opening, the top category and the closing.</dd></div><div><dt>What it changes</dt><dd class="ch">A distinct premium experience without doubling the size of the set to produce and check.</dd></div></dl></article>
       </div>
     </div>
   </section>
+
+  <!-- 05 STATUS -->
+  <section class="sec lt" aria-labelledby="s5">
+    <div class="wrap">
+      <div class="sh">
+        <div><span class="lbl g" data-rv><span class="n">05</span> Delivery status</span><h2 class="h2" id="s5" data-rv style="--d:.06s">Ready for hand-off. Not launched.</h2></div>
+        <p class="lede" data-rv style="--d:.12s">The 2026 edition has not been released to customers. There are no 2026 results.</p>
+      </div>
+      <div class="del">
+        <div data-rv><h3><span class="st done">Done</span> My work</h3>
+          <ul class="dn"><li><i aria-hidden="true">✓</i><div>Concepts and creative direction<span>From July 2026</span></div></li><li><i aria-hidden="true">✓</i><div>Templates, rules and fallbacks<span>Runtime values, audience versions</span></div></li><li><i aria-hidden="true">✓</i><div>The 2026 story set<span>Developed with AI assistance, reviewed by me</span></div></li><li><i aria-hidden="true">✓</i><div>Tracking and pre-handover checks<span>Every file tracked and checked</span></div></li></ul></div>
+        <div data-rv style="--d:.1s"><h3><span class="st wait">Pending</span> Other teams</h3>
+          <ul class="pn"><li><i aria-hidden="true">…</i><div>Product owner approval<span>Pending</span></div></li><li><i aria-hidden="true">…</i><div>Backend integration<span>Pending</span></div></li><li><i aria-hidden="true">…</i><div>Bank QA sign-off<span>Not yet</span></div></li><li><i aria-hidden="true">…</i><div>Launch to customers<span>Not yet</span></div></li></ul></div>
+      </div>
+      <div class="y25" data-rv>
+        <div><span class="lbl">Secondary · separate from 2026</span><h3 class="h3" style="margin-top:12px">The 2025 edition</h3><p style="margin-top:12px"><span class="st done">Shipped Dec 2025</span></p></div>
+        <div class="body"><p>The 2025 edition shipped with more than a dozen story families and over a hundred content variants. I contributed to it.</p><p style="margin-top:12px">Tasks assigned to me on the 2025 sprint board: the main story text, the closing message and the messages for churned and new customers; with colleagues, reviewing the category messages and tracking the country and travel visuals. Visual production was done by Design and an agency; Marketing approved the texts. Engagement results were tracked inside the bank and are not published here.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <nav class="dk" aria-label="Case studies">
+    <div class="wrap nextc">
+      <a href="../"><span class="lbl">Back to</span><b>All work</b></a>
+      <a href="../customer-journeys/"><span class="lbl">Next case · 02</span><b>Customer Journeys →</b></a>
+    </div>
+  </nav>
 </main>
 
 <footer class="foot">
   <div class="wrap">
-    <span>© <span id="yr">2026</span> Khanım Azimli · Story previews are illustrative recreations with fictional data.</span>
+    <span>© <span id="yr">2026</span> Khanım Azimli · Story visuals are illustrative recreations with fictional data.</span>
     <nav aria-label="Footer"><a href="../">Home</a><a href="../about/">About</a><a href="mailto:khanimazimli0@gmail.com">Email</a></nav>
   </div>
 </footer>
 
-<script src="../assets/site.js" defer></script>
+<script src="../assets/studio.js"></script>
+<script src="../assets/stories.js"></script>
 <script>
 (function () {
-  /* unit chart squares */
-
-  /* Illustrative story sequences. Fictional customers and values; not ABB designs. */
-  var T = {
-    navy: ['#14213D', '#fff'], sand: ['#EFE6D8', '#1F1A14'], teal: ['#0F5E63', '#fff'], plum: ['#4A2545', '#fff'],
-    ink: ['#0E1116', '#fff'], green: ['#16352B', '#F1E9D2'], sky: ['#DCE6FA', '#0F1830']
-  };
-  var C = [
-    [ ['navy', 'Intro', 'Your 2026, in stories', '', 'Built from your own payments', 'Same opening for all customers'],
-      ['sand', 'Top category', 'Your payments were led by', 'Cafés', '184 payments · 2,140 AZN', 'Category story: one variant per category, chosen by top spend'],
-      ['teal', 'Top country abroad', 'Abroad, you spent most in', 'Georgia', '1,280 AZN this year', 'Country story: Georgia has its own designed story'],
-      ['ink', 'A first', 'This year you opened your', 'First deposit', 'One of this year’s milestones', 'Product first: shown only to customers who had one'],
-      ['navy', 'Closing', 'Thank you for this year', '', 'See you in 2027', 'Shared closing story'] ],
-    [ ['navy', 'Intro', 'Your 2026, in stories', '', 'Built from your own payments', 'Same opening for all customers'],
-      ['sand', 'Top category', 'Your payments were led by', 'Groceries', '96 payments · 1,310 AZN', 'Category story'],
-      ['sky', 'Top country abroad', 'Abroad, you spent most in', 'Iceland', '410 AZN this year', 'Fallback: no designed story for Iceland, so the generic country template is filled with its name'],
-      ['navy', 'Closing', 'Thank you for this year', '', 'See you in 2027', 'Shared closing story'] ],
-    [ ['green', 'Intro · premium', 'Your 2026, in stories', '', 'A premium edition of your year', 'Premium version of the opening'],
-      ['green', 'Top category · premium', 'Your payments were led by', 'Travel', '42 payments · 6,900 AZN', 'Premium version of the category story'],
-      ['teal', 'Top country abroad', 'Abroad, you spent most in', 'Italy', '3,450 AZN this year', 'Country story (same for all audiences)'],
-      ['green', 'Closing · premium', 'Thank you for this year', '', 'See you in 2027', 'Premium closing'] ],
-    [ ['plum', 'Welcome back', 'We meet again', '', 'Here is what changed while you were away', 'Returning-customer path replaces the year summary'],
-      ['plum', 'While you were away', 'New partners joined', '', 'A short look at the year', 'Part of the separate returning-customer sequence'],
-      ['plum', 'An invitation', 'Your next story starts here', '', 'One clear next step', 'Path-specific closing'] ]
-  ];
-  var root = document.getElementById('wr'); if (!root) return;
-  var gal = document.getElementById('wrGal'), btns = root.querySelectorAll('[data-c]');
+  if (!window.KAStory) return;
+  var C = KAStory.sets;
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
-  function draw(ci) {
-    var s = C[ci];
-    gal.innerHTML = s.map(function (x, i) {
-      var t = T[x[0]];
-      return '<figure><div class="story" style="--sc-bg:' + t[0] + ';--sc-fg:' + t[1] + '" role="img" aria-label="' + esc(x[1] + ': ' + x[2] + ' ' + x[3] + '. ' + x[4]) + '">' +
-        '<div class="bars">' + s.map(function (_, j) { return '<i class="' + (j <= i ? 'on' : '') + '"></i>'; }).join('') + '</div><span class="mk"></span>' +
-        '<span class="sk">' + esc(x[1]) + '</span><span class="sh">' + esc(x[2]) + '</span>' +
-        (x[3] ? '<span class="sv">' + esc(x[3]) + '</span>' : '<span class="sv" style="font-size:0"></span>') +
-        '<span class="sn">' + esc(x[4]) + '</span><span class="sb">Share</span></div>' +
-        '<figcaption><b>' + (i + 1) + ' · ' + esc(x[1]) + '</b>' + esc(x[5]) + '</figcaption></figure>';
+
+  /* hero stage */
+  var rig = document.getElementById('rig');
+  if (rig) {
+    var H = [[C[0][2], 'p0', 2, 5], [C[0][1], 'p1', 1, 5], [C[0][3], 'p2', 3, 5], [C[3][0], 'p3', 0, 3], [C[2][0], 'p4', 0, 4]];
+    rig.innerHTML = H.map(function (h, i) {
+      return '<div class="phone ' + h[1] + '" style="' + KAStory.style(h[0]) + ';transition-delay:' + (i * .08) + 's">' + KAStory.inner(h[0], h[2], h[3]) + '</div>';
     }).join('');
-    gal.scrollLeft = 0;
+    var stg = document.getElementById('stage');
+    if (!KA.reduced && matchMedia('(hover: hover) and (min-width: 1081px)').matches) {
+      stg.addEventListener('pointermove', function (e) {
+        var r = stg.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+        rig.style.transform = 'rotateY(' + (x * 8).toFixed(2) + 'deg) rotateX(' + (-y * 6).toFixed(2) + 'deg)';
+      });
+      stg.addEventListener('pointerleave', function () { rig.style.transform = ''; });
+    }
   }
-  btns.forEach(function (b) { b.addEventListener('click', function () {
-    btns.forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); }); draw(+b.dataset.c);
-  }); });
-  draw(0);
+
+  /* experience */
+  var exp = document.getElementById('exp'); if (!exp) return;
+  var ph = document.getElementById('ph'), rule = document.getElementById('rule'), seq = document.getElementById('seq'), pos = document.getElementById('pos');
+  var pbtn = [].slice.call(exp.querySelectorAll('[data-c]')), ci = 0, si = 0;
+  function show(anim) {
+    var s = C[ci], x = s[si];
+    function paint() {
+      ph.setAttribute('style', KAStory.style(x));
+      ph.innerHTML = KAStory.inner(x, si, s.length);
+      ph.setAttribute('aria-label', 'Story ' + (si + 1) + ' of ' + s.length + '. ' + KAStory.label(x));
+      ph.classList.remove('fade');
+    }
+    if (anim && !KA.reduced) { ph.classList.add('fade'); setTimeout(paint, 200); } else paint();
+    rule.textContent = x.r;
+    pos.textContent = (si + 1) + ' / ' + s.length;
+    seq.innerHTML = s.map(function (y, j) { return '<button type="button" data-s="' + j + '"' + (j === si ? ' aria-current="true"' : '') + '><i>' + (j + 1) + '</i>' + esc(y.k) + '</button>'; }).join('');
+  }
+  function go(d) { var n = C[ci].length; si = (si + d + n) % n; show(true); }
+  pbtn.forEach(function (b) { b.addEventListener('click', function () { ci = +b.dataset.c; si = 0; pbtn.forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); }); show(true); }); });
+  seq.addEventListener('click', function (e) { var b = e.target.closest('[data-s]'); if (b) { si = +b.dataset.s; show(true); } });
+  document.getElementById('bn').addEventListener('click', function () { go(1); });
+  document.getElementById('bp').addEventListener('click', function () { go(-1); });
+  document.getElementById('tr').addEventListener('click', function () { go(1); });
+  document.getElementById('tl').addEventListener('click', function () { go(-1); });
+  exp.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') { go(1); } else if (e.key === 'ArrowLeft') { go(-1); } });
+  show(false);
 })();
+KA.onView(document.getElementById('xf'), function () { document.getElementById('xf').classList.add('in'); });
+KA.onView(document.getElementById('lanes'), function () { document.getElementById('lanes').classList.add('in'); });
 </script>
 </body>
 </html>
