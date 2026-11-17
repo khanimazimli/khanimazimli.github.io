@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDHZ7BPM4B"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ZDHZ7BPM4B');
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hyper Intelligence OS: an AI-assisted campaign workflow · Khanım Azimli</title>
+<meta name="description" content="Case study: a prototype I initiated to join six disconnected campaign-preparation steps into one AI-assisted system, with people keeping every decision. What works today, what is in testing, and what is still a target design.">
+<link rel="canonical" href="https://khanimazimli.github.io/hyper-intelligence-os/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hyper Intelligence OS: an AI-assisted campaign workflow">
+<meta property="og:description" content="AI agents prepare. People decide. A working prototype for campaign preparation. Case study by Khanım Azimli.">
+<meta property="og:url" content="https://khanimazimli.github.io/hyper-intelligence-os/">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230E1116'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='16' font-weight='700' fill='white' text-anchor='middle'%3EKA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="../">Khanım Azimli</a>
+    <nav aria-label="Primary">
+      <ul>
+        <li><a class="l" href="../#work" aria-current="page">Work</a></li>
+        <li><a class="l" href="../about/">About</a></li>
+        <li class="hide-s"><a class="l" href="../Khanim_Azimli_CV.pdf">Resume</a></li>
+        <li><a class="btn sm" href="../#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="c-hero">
+    <div class="wrap">
+      <div class="crumb"><span class="k">Case 03 · Independent initiative · 2026</span><span class="st test">Working prototype</span><span class="st plan">Not in production</span></div>
+      <h1 class="h-1">Hyper Intelligence OS: AI agents prepare, people decide.</h1>
+      <p class="lede">Preparing one personalized campaign takes six separate steps, several teams and weeks of manual hand-offs. I started a prototype that joins those steps into one system, without taking any decision away from the people accountable for it.</p>
+      <dl class="facts">
+        <div><dt>My role</dt><dd>Initiated it, own the product decisions, designed the workflow, built it with an AI coding assistant</dd></div>
+        <div><dt>Started</dt><dd>2026, on my own initiative, alongside my squad role</dd></div>
+        <div><dt>Built with</dt><dd>Claude Code for development; language and image-generation models at runtime; rule-based checks</dd></div>
+        <div><dt>Maturity</dt><dd>Three modules working, one in testing, the rest a target design</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <nav class="toc" aria-label="Sections">
+    <ol>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#problem">Problem</a></li>
+      <li><a href="#analysis">Worked analysis</a></li>
+      <li><a href="#initiative">My initiative</a></li>
+      <li><a href="#system">The system</a></li>
+      <li><a href="#try">Try the first step</a></li>
+      <li><a href="#process">How I built it</a></li>
+      <li><a href="#value">Practical value</a></li>
+      <li><a href="#maturity">Current maturity</a></li>
+      <li><a href="#lessons">Lessons</a></li>
+    </ol>
+  </nav>
+
+  <section class="chap" id="overview" style="border-top:0">
+    <div class="wrap chap-grid">
+      <div class="side"><span class="k">01</span><h2>Executive overview</h2></div>
+      <div class="prose">
+        <p class="q">One sentence in. A structured brief, a journey document, channel copy and visual drafts out, each waiting for a human decision.</p>
+        <p style="margin-top:22px">Hyper Intelligence OS is a prototype for preparing personalized banking campaigns. A campaign idea written in one sentence becomes a structured brief, a customer-journey and scenario document, channel copy checked against the brief, and visual drafts generated from a creative brief. Specialized AI steps do the preparation; people approve or send the work back at every stage.</p>
+        <p>It is not a production system. It runs as a working prototype outside the bank's live infrastructure, and it has not been used on a live campaign.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="chap" id="problem">
+    <div class="wrap chap-grid">
+      <div class="side"><span class="k">02</span><h2>The problem</h2></div>
+      <div>
+        <div class="prose">
+          <p class="q">Six steps, many teams, manual coordination.</p>
+          <p style="margin-top:22px">From my own squad's work, a single campaign passes through six stages owned by different teams. Added up end to end, the typical durations come to about 12–24 working days. That is a simplified sum: some work runs in parallel, and it is not a measured average.</p>
+        </div>
+        <div class="flow6" role="list">
+          <div role="listitem"><b>Brief and idea</b><span class="d">Marketing, CX · 1–2 days</span><span class="st ship">Working</span></div>
+          <div role="listitem"><b>Journey and scenario</b><span class="d">CX, engagement team · 1–3 days</span><span class="st ship">Working</span></div>
+          <div role="listitem"><b>Copy and review</b><span class="d">Copywriters, Marketing · 3–5 days</span><span class="st test">Testing</span></div>
+          <div role="listitem"><b>Visuals</b><span class="d">Design · 3–10 days</span><span class="st ship">Working</span></div>
+          <div role="listitem"><b>Risk and Finance</b><span class="d">3 working days</span><span class="st wait">Human decision</span></div>
+          <div role="listitem"><b>Platform build</b><span class="d">Engagement team · 1 day</span><span class="st plan">Future</span></div>
+        </div>
+        <p class="muted" style="font-size:13.5px;margin-top:12px">Labels show what the prototype covers today for each stage.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="chap" id="analysis">
+    <div class="wrap chap-grid">
+      <div class="side"><span class="k">03</span><h2>Worked analysis: where should AI help, and where must it not?</h2></div>
+      <div>
+        <div class="prose">
+          <table class="ev" style="margin-top:0">
+            <tbody>
+              <tr><td>Business question</td><td>Where does the time to prepare one campaign go, and which steps can be accelerated without weakening control in a regulated bank?</td></tr>
+              <tr><td>Hypothesis</td><td>Most of the elapsed time sits in steps that restate the same facts in a new format (idea, brief, scenario, copy, visual brief), not in the decisions themselves. Those steps can be assisted; the decisions cannot.</td></tr>
+              <tr><td>Evidence used</td><td>Stage-by-stage duration estimates and owning teams from my squad's campaign process, and the approval points each campaign must pass. These are working estimates, not measured averages.</td></tr>
+              <tr><td>Approach</td><td>Score each stage on two axes, its share of elapsed time and the risk of automating it, then build where time is high and decision risk is manageable.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="demo" id="an">
+          <div class="dh"><span class="k">Share of estimated elapsed time per stage</span><p>From stage estimates in my squad's process (12–24 working days end to end). Arithmetic on estimates, not a measurement.</p></div>
+          <div class="seg" role="group" aria-label="Choose an estimate">
+            <button type="button" data-s="lo" aria-pressed="false">Low estimate</button>
+            <button type="button" data-s="mid" aria-pressed="true">Midpoint</button>
+            <button type="button" data-s="hi" aria-pressed="false">High estimate</button>
+          </div>
+          <div id="anBars" style="margin-top:22px"></div>
+          <div class="outcome" style="margin-top:18px" aria-live="polite"><div class="ol"><span class="ov num" id="anV"></span></div><p id="anP"></p></div>
+          <noscript><p class="muted" style="margin-top:12px">At the midpoint, the four preparation stages account for about 14 of 18 estimated days (78%); across the low and high estimates the share ranges from 67% to 83%.</p></noscript>
+        </div>
+
+        <div class="prose" style="margin-top:30px">
+          <table class="ev">
+            <thead><tr><th>Stage</th><th>Nature of the work</th><th>Risk if automated</th><th class="s">Decision</th></tr></thead>
+            <tbody>
+              <tr><td>Brief</td><td>Restating an idea as mechanism, rate, category, period</td><td>Low, if extraction is rule-based and gaps are asked</td><td class="s"><span class="st test">Assist first</span></td></tr>
+              <tr><td>Journey and scenario</td><td>Formatting a design into the document a build team needs</td><td>Medium: a person must still approve the design</td><td class="s"><span class="st test">Assist</span></td></tr>
+              <tr><td>Copy</td><td>Drafting per channel, then review loops</td><td>Medium: wrong numbers or tone</td><td class="s"><span class="st test">Assist with checks</span></td></tr>
+              <tr><td>Visuals</td><td>Briefing, producing and revising</td><td>Medium: brand fit and cost</td><td class="s"><span class="st test">Assist with consent</span></td></tr>
+              <tr><td>Risk and Finance</td><td>Judgement and accountability</td><td>High: this is the control itself</td><td class="s"><span class="st wait">Keep human</span></td></tr>
+              <tr><td>Platform build</td><td>Configuring a production system</td><td>High: production access</td><td class="s"><span class="st plan">Later</span></td></tr>
+            </tbody>
+          </table>
+
+          <p style="margin-top:28px"><strong>Options compared.</strong></p>
+          <table class="ev">
+            <thead><tr><th>Option</th><th>For</th><th>Against</th></tr></thead>
+            <tbody>
+              <tr><td>Process fixes only: templates and deadlines</td><td>Cheap, no new tools</td><td>Still asks people to restate the same facts five times</td></tr>
+              <tr><td>Automate end to end, approvals included</td><td>Fastest on paper</td><td>Removes the controls the bank is accountable for</td></tr>
+              <tr><td>A generic AI writing tool</td><td>Available today</td><td>No link between brief, scenario and copy, so numbers can drift between steps</td></tr>
+              <tr><td><b>Chosen: assist the four preparation stages, keep every decision human</b></td><td>Targets most of the elapsed time; facts are carried and checked across steps</td><td>Needs building and testing; no production integration yet</td></tr>
+            </tbody>
+          </table>
+
+          <p style="margin-top:28px"><strong>Decision and rationale.</strong> Build the four preparation modules in order of dependency (brief first, because every later step reuses its facts), keep Risk and Finance review human by design, and leave platform configuration for a later integration. At the midpoint estimate, that targets roughly three quarters of the elapsed time without touching a single approval.</p>
+
+          <p style="margin-top:22px"><strong>How the outcome will be measured.</strong> There is no outcome yet: the prototype has not run on a live campaign. A pilot would compare, campaign by campaign:</p>
+          <ul>
+            <li>elapsed working days per stage, against the current estimates;</li>
+            <li>review rounds per copy and visual before approval;</li>
+            <li>number mismatches between brief and copy caught before review;</li>
+            <li>generation cost per campaign, against the cost of the creative it replaces;</li>
+            <li>and, as a guardrail, no change in the time or depth of Risk and Finance review.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chap" id="initiative">
+    <div class="wrap chap-grid">
+      <div class="side"><span class="k">04</span><h2>My initiative</h2></div>
+      <div class="prose">
+        <p>I started this on my own initiative, because the same preparation work repeated on every campaign: restating the brief, rewriting the scenario in another format, adapting copy for each channel, briefing visuals from scratch. Most of it was translation between formats, not judgement.</p>
+        <p>My aim was narrow: <strong>remove the translation work, keep the judgement.</strong> That set three design rules from the start:</p>
+        <table class="ev" style="margin-bottom:26px">
+          <thead><tr><th>Area</th><th>My contribution</th></tr></thead>
+          <tbody>
+            <tr><td>Initiative</td><td>Started it on my own, outside any assigned project, to address a problem I saw in my squad's daily work.</td></tr>
+            <tr><td>Product ownership</td><td>Decided the scope, the order of modules, and which steps stay human by design.</td></tr>
+            <tr><td>Workflow design</td><td>Designed the target flow: which AI step prepares what, and where a person approves or sends work back.</td></tr>
+            <tr><td>Hands-on build</td><td>Wrote the campaign skills and prompt specifications the modules run on, and built the prototype with an AI coding assistant, testing it in the browser as I went.</td></tr>
+          </tbody>
+        </table>
+        <p class="muted" style="font-size:15px;margin-bottom:22px">Not claimed: use on live campaigns, a formal demo to management, or measured savings. None of these has happened yet.</p>
+        <ul>
+          <li><strong>The brief step does not invent facts.</strong> It extracts only what the person wrote; anything missing is asked, not assumed.</li>
+          <li><strong>People keep every decision.</strong> Risk and Finance review stays human. Every draft can be approved or sent back with a comment.</li>
+          <li><strong>Cost is controlled.</strong> Paid image generation runs only after an explicit human consent; reusing an approved creative is the default.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="chap" id="system">
+    <div class="wrap chap-grid">
+      <div class="side"><span class="k">05</span><h2>The system</h2></div>
+      <div>
+        <div class="cards" style="margin-top:0">
+          <div class="card"><span class="k">Campaign Intelligence</span><h3>Idea to structured brief</h3><p>Turns a one-sentence idea into mechanism, rate, category, activity and period. Rule-based: it does not fill gaps, and missing facts become questions.</p><span class="st ship">Working</span></div>
+          <div class="card"><span class="k">Journey</span><h3>Journey and scenario document</h3><p>Drafts the customer journey and the scenario document a build team needs, from the approved brief.</p><span class="st ship">Working</span></div>
+          <div class="card"><span class="k">Copy &amp; tone of voice</span><h3>Channel copy with a validator</h3><p>Writes push and banner text from the approved scenario, then checks numbers against the brief, message length and tone. Tone rules are still being refined with Marketing.</p><span class="st test">Testing</span></div>
+          <div class="card"><span class="k">Visual Lab</span><h3>Creative brief to visual drafts</h3><p>Builds a ten-question art-director brief, chooses between reusing an approved creative and generating a new one, and lays out text in a studio view for review.</p><span class="st ship">Working</span></div>
+        </div>
+
+        <div class="lane" aria-label="Target design: who prepares and who decides">
+          <div>
+            <h3>AI steps prepare</h3>
+            <ol><li>Turn the brief into audience criteria</li><li>Propose scenario and channels</li><li>Fill Risk and Finance templates</li><li>Write copy for every channel</li><li>Draft visuals</li><li>Check the whole package</li><li>Draft the platform configuration</li><li>Summarise results and learnings</li></ol>
+          </div>
+          <div>
+            <h3>People decide</h3>
+            <ol><li>Approve the brief</li><li>Decide whether the campaign goes ahead</li><li>Check the documents</li><li>Risk approval</li><li>Finance approval</li><li>Final decision on copy and visuals</li><li>Activation</li></ol>
+          </div>
+        </div>
+        <p class="muted" style="font-size:13.5px;margin-top:12px"><span class="st plan">Target design</span>&nbsp; The full design has 16 steps. Every rejection goes back with a comment to the step that produced the work. Only the four modules above are built today.</p>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="chap" id="try">
+    <div class="wrap chap-grid">
+      <div class="side"><span class="k">06</span><h2>Try the first step</h2></div>
+      <div>
+        <div class="prose"><p>Write a campaign idea in one sentence. This page re-creates the principle of the first module in a few lines of code: extract only the facts that are there, flag what is missing, then check a draft message against those facts. It is a simplified re-implementation for this portfolio, not the product, and it calls no AI service.</p></div>
+        <div class="demo" id="bp">
+          <div class="dh"><span class="k">Illustrative re-implementation · runs in your browser</span><p>Synthetic example. No bank data, no API calls.</p></div>
+          <form class="field" id="bpF" autocomplete="off">
+            <label for="bpI" class="k" style="position:absolute;left:-9999px">Campaign idea</label>
+            <input type="text" id="bpI" value="5% cashback on pharmacy card payments, up to 15 AZN">
+            <button class="btn" type="submit">Extract facts <span class="ar" aria-hidden="true">→</span></button>
+          </form>
+          <div class="seg" role="group" aria-label="Examples">
+            <button type="button" data-x="5% cashback on grocery card payments next week" aria-pressed="false">Grocery example</button>
+            <button type="button" data-x="Double points for online purchases this month" aria-pressed="false">Online example</button>
+            <button type="button" data-x="A gift for customers who open a deposit" aria-pressed="false">Deposit example</button>
+          </div>
+          <div class="split" style="margin-top:22px">
+            <div>
+              <span class="k">Facts extracted · nothing invented</span>
+              <dl class="kv" id="bpKV"></dl>
+            </div>
+            <div>
+              <span class="k">Draft push, checked against the facts</span>
+              <div class="outcome" style="margin-top:18px"><p id="bpMsg" style="margin:0;color:var(--ink);font-size:16px"></p></div>
+              <ol class="trace" id="bpChk" style="margin-top:14px"></ol>
+            </div>
+          </div>
+          <noscript><p class="muted">This step needs JavaScript. In the product, missing facts such as the campaign period are asked for rather than assumed.</p></noscript>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chap" id="process">
+    <div class="wrap chap-grid">
+      <div class="side"><span class="k">07</span><h2>How I built it</h2></div>
+      <div class="prose">
+        <ol class="steps">
+          <li><div><b>Mapped the real workflow</b><span>Listed every stage of campaign preparation from my own squad's work: who does it, how long it takes, and what is judgement versus reformatting.</span></div></li>
+          <li><div><b>Drew the line between AI and people</b><span>Decided which steps AI may prepare and which stay human by design: approvals, Risk and Finance, final creative choice, activation.</span></div></li>
+          <li><div><b>Built module by module</b><span>Started with the brief, because every later step depends on it, then the journey document, copy and visuals.</span></div></li>
+          <li><div><b>Kept deterministic where possible</b><span>Brief parsing, financial calculations, document generation and package QA are rule-based. Language models are used where writing and creative judgement help.</span></div></li>
+          <li><div><b>Tested in a browser, repeatedly</b><span>Each module was tested with automated browser runs throughout development. These are development tests, not live usage.</span></div></li>
+          <li><div><b>Iterated on feedback</b><span>Copy tone was the weakest part: early drafts did not always match the bank's voice. Tone rules are now being refined with Marketing, and a human reviewer can steer each variant.</span></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="chap" id="value">
+    <div class="wrap chap-grid">
+      <div class="side"><span class="k">08</span><h2>Practical value</h2></div>
+      <div class="prose">
+        <p>The potential benefits are operational. None of them has been measured in production yet:</p>
+        <ul>
+          <li><strong>Shorter preparation.</strong> The four built modules (three working, one in testing) cover the stages that take most of the 12–24 days today: brief, journey, copy and visuals.</li>
+          <li><strong>Fewer reformatting errors.</strong> Numbers in the copy are checked against the brief automatically, so a 10% offer cannot become 15% in a push.</li>
+          <li><strong>A visible decision trail.</strong> Each approval or rejection is recorded with a comment, which makes governance easier to audit.</li>
+          <li><strong>Lower creative cost.</strong> Reusing approved creatives is the default route; paid generation is a deliberate, approved choice.</li>
+        </ul>
+        <div class="note"><b>What I do not claim.</b> No time saved, cost saved or campaign performance is claimed here, because the system has not run on live campaigns.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chap" id="maturity">
+    <div class="wrap chap-grid">
+      <div class="side"><span class="k">09</span><h2>Current maturity</h2></div>
+      <div class="prose">
+        <table class="ev">
+          <thead><tr><th>Part</th><th>State today</th><th class="s">Status</th></tr></thead>
+          <tbody>
+            <tr><td>Brief, journey document, visual lab</td><td>Working end to end on test campaigns.</td><td class="s"><span class="st test">Working prototype</span></td></tr>
+            <tr><td>Copy and tone of voice</td><td>Working, but some outputs do not yet match the bank's tone; English and Russian versions in progress.</td><td class="s"><span class="st test">Testing</span></td></tr>
+            <tr><td>Risk and Finance review</td><td>Stays a human decision by design.</td><td class="s"><span class="st wait">Human decision</span></td></tr>
+            <tr><td>Platform configuration, monitoring</td><td>Part of the target design; not built.</td><td class="s"><span class="st plan">Future</span></td></tr>
+            <tr><td>Use on live campaigns</td><td>Not yet. It runs outside the bank's production systems.</td><td class="s"><span class="st plan">Not in production</span></td></tr>
+          </tbody>
+        </table>
+        <div class="note"><b>Known gaps.</b> A code review raised findings that are not all resolved yet; some project tooling is not fully installed; image editing still requires a new generation. I would not put it in front of customers before those are closed and the bank's own security and architecture review has run.</div>
+        <p style="margin-top:22px" class="muted">Internal architecture, endpoints and source code are deliberately not shown.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="chap" id="lessons">
+    <div class="wrap chap-grid">
+      <div class="side"><span class="k">10</span><h2>Lessons and transferable capabilities</h2></div>
+      <div>
+        <div class="lessons">
+          <div><b>Automate translation, not judgement.</b><span>The useful question was not “what can AI do?” but “which steps are reformatting work, and which are decisions?”</span></div>
+          <div><b>Deterministic checks around the facts.</b><span>Rule-based parsing and checks handle numbers and conditions; language models handle wording. That split is what makes the output checkable.</span></div>
+          <div><b>Approval points made it easier to explain.</b><span>Approval points, comments and cost consent made the prototype easier to explain to a regulated organisation, not harder.</span></div>
+          <div><b>Say exactly how mature it is.</b><span>Separating working, testing and planned parts is what lets a prototype be taken seriously.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec tight">
+    <div class="wrap">
+      <div class="next">
+        <a href="../customer-journeys/"><span class="k">Previous · 02</span><b>← Customer Journeys &amp; Hyper-Personalization</b></a>
+        <a href="../about/"><span class="k">Next</span><b>About me →</b></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> Khanım Azimli · Examples are synthetic.</span>
+    <nav aria-label="Footer"><a href="../">Home</a><a href="../about/">About</a><a href="mailto:khanimazimli0@gmail.com">Email</a></nav>
+  </div>
+</footer>
+
+<script src="../assets/site.js" defer></script>
+<script>
+(function () {
+  /* Simplified, rule-based re-implementation of the brief step for this portfolio. No AI, no network calls. */
+  var root = document.getElementById('bp'); if (!root) return;
+  var CAT = [['restaurant', 'Restaurants'], ['cafe', 'Cafés'], ['café', 'Cafés'], ['grocer', 'Groceries'], ['supermarket', 'Groceries'], ['fuel', 'Fuel'], ['petrol', 'Fuel'], ['taxi', 'Taxi'], ['pharmac', 'Pharmacies'], ['travel', 'Travel'], ['flight', 'Travel'], ['online', 'Online purchases'], ['e-com', 'Online purchases'], ['deposit', 'Deposits'], ['coffee', 'Coffee']];
+  var MECH = [['cashback', 'Cashback'], ['cash back', 'Cashback'], ['discount', 'Discount'], ['points', 'Loyalty points'], ['gift', 'Gift'], ['ticket', 'Tickets']];
+  var ACT = [['card payment', 'Card payment'], ['pay by card', 'Card payment'], ['online purchase', 'Online purchase'], ['open a deposit', 'Opening a deposit'], ['transfer', 'Transfer']];
+  var PER = [['next week', 'Next week'], ['this week', 'This week'], ['this month', 'This month'], ['next month', 'Next month'], ['weekend', 'This weekend'], ['today', 'Today']];
+  function find(t, L) { for (var i = 0; i < L.length; i++) if (t.indexOf(L[i][0]) > -1) return L[i][1]; return null; }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function run(raw) {
+    var t = raw.toLowerCase();
+    var rate = (t.match(/(\d+(?:[.,]\d+)?)\s?%/) || [])[1];
+    var dbl = /double/.test(t) ? '2×' : null;
+    var cap = (t.match(/up to\s+(\d+(?:[.,]\d+)?)\s?(azn|₼)/) || [])[1];
+    var F = [
+      ['Mechanism', find(t, MECH)],
+      ['Rate', rate ? rate + '%' : dbl],
+      ['Category', find(t, CAT)],
+      ['Activity', find(t, ACT) || (/card/.test(t) ? 'Card payment' : null)],
+      ['Cap', cap ? cap + ' AZN' : null],
+      ['Period', find(t, PER)]
+    ];
+    document.getElementById('bpKV').innerHTML = F.map(function (f) {
+      return '<dt>' + f[0] + '</dt><dd' + (f[1] ? '' : ' class="miss"') + '>' + (f[1] ? esc(f[1]) : 'Not stated · will be asked') + '</dd>';
+    }).join('');
+    var m = F[0][1], r = F[1][1], c = F[2][1], a = F[3][1], cp = F[4][1];
+    var PH = { 'Restaurants': 'at restaurants', 'Cafés': 'at cafés', 'Groceries': 'for groceries', 'Fuel': 'for fuel', 'Taxi': 'on taxi rides', 'Pharmacies': 'at pharmacies', 'Travel': 'on travel', 'Online purchases': 'on online purchases', 'Deposits': 'when you open a deposit', 'Coffee': 'on coffee' };
+    var where = c ? PH[c] : '', what = m ? m.toLowerCase() : '';
+    var msg;
+    if (m && c && a === 'Card payment') msg = 'Pay by card ' + where + ' and get ' + (r ? r + ' ' + what : 'a ' + what) + (cp ? ', up to ' + cp : '') + '.';
+    else if (m && c) msg = (r ? 'Get ' + r + ' ' + what + ' ' : 'Receive a ' + what + ' ') + where + (cp ? ', up to ' + cp : '') + '.';
+    else if (m) msg = 'A ' + what + ' offer is waiting for you in the app.';
+    else msg = 'No draft yet: the mechanism is missing, so the brief goes back with a question.';
+    document.getElementById('bpMsg').textContent = msg;
+    var nums = (msg.match(/\d+(?:[.,]\d+)?/g) || []);
+    var allowed = [rate, cap].filter(Boolean);
+    var numsOk = nums.every(function (n) { return allowed.indexOf(n) > -1; });
+    var missing = F.filter(function (f) { return !f[1]; }).map(function (f) { return f[0].toLowerCase(); });
+    var C = [
+      [numsOk ? 'ok' : 'fb', numsOk ? '<b>Numbers match the brief</b>' + (nums.length ? ' · ' + nums.map(esc).join(', ') : ' · none used') : '<b>Number mismatch</b> · sent back'],
+      [msg.length <= 90 ? 'ok' : 'fb', '<b>Length</b> · ' + msg.length + ' of 90 characters'],
+      ['hd', '<b>Tone</b> · a person reviews it before it moves on'],
+      [missing.length ? 'fb' : 'ok', missing.length ? '<b>Open questions</b> · ' + missing.join(', ') : '<b>Brief complete</b> · ready for approval']
+    ];
+    document.getElementById('bpChk').innerHTML = C.map(function (x) {
+      return '<li><span class="ic ' + x[0] + '" aria-hidden="true">' + (x[0] === 'ok' ? '✓' : x[0] === 'fb' ? '!' : '–') + '</span><span>' + x[1] + '</span></li>';
+    }).join('');
+  }
+  var inp = document.getElementById('bpI');
+  document.getElementById('bpF').addEventListener('submit', function (e) { e.preventDefault(); run(inp.value); });
+  root.querySelectorAll('[data-x]').forEach(function (b) { b.addEventListener('click', function () { inp.value = b.dataset.x; run(inp.value); }); });
+  run(inp.value);
+})();
+</script>
+<script>
+(function () {
+  /* Stage estimates from the squad's process, in working days. Arithmetic only. */
+  var S = [
+    ['Brief and idea', 1, 2, 'a'], ['Journey and scenario', 1, 3, 'a'], ['Copy and review', 3, 5, 'a'],
+    ['Visuals', 3, 10, 'a'], ['Risk and Finance', 3, 3, 'h'], ['Platform build', 1, 1, 'l']
+  ];
+  var C = { a: 'var(--accent)', h: 'var(--s-wait)', l: 'var(--line-2)' };
+  var L = { a: 'assisted', h: 'stays human', l: 'later' };
+  var root = document.getElementById('an'); if (!root) return;
+  function val(x, k) { return k === 'lo' ? x[1] : k === 'hi' ? x[2] : (x[1] + x[2]) / 2; }
+  function fmt(n) { return (Math.round(n * 10) / 10).toString(); }
+  function draw(k) {
+    var tot = S.reduce(function (t, x) { return t + val(x, k); }, 0);
+    var as = S.filter(function (x) { return x[3] === 'a'; }).reduce(function (t, x) { return t + val(x, k); }, 0);
+    document.getElementById('anBars').innerHTML = S.map(function (x) {
+      var v = val(x, k), pct = v / tot * 100;
+      return '<div style="display:grid;grid-template-columns:minmax(0,170px) minmax(0,1fr) 92px;gap:12px;align-items:center;padding:7px 0;font-size:14.5px">' +
+        '<span>' + x[0] + '</span>' +
+        '<span style="background:#fff;border:1px solid var(--line);border-radius:6px;height:14px;overflow:hidden"><span style="display:block;height:100%;width:' + pct.toFixed(1) + '%;background:' + C[x[3]] + '"></span></span>' +
+        '<span class="num muted" style="text-align:right">' + fmt(v) + ' d · ' + Math.round(pct) + '%</span></div>';
+    }).join('') +
+      '<div style="display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:10px;font-size:13px;color:var(--mute)">' +
+      ['a', 'h', 'l'].map(function (c) { return '<span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:' + C[c] + ';margin-right:6px;vertical-align:-1px"></span>' + L[c] + '</span>'; }).join('') + '</div>';
+    document.getElementById('anV').textContent = Math.round(as / tot * 100) + '% of estimated time';
+    document.getElementById('anP').textContent = fmt(as) + ' of ' + fmt(tot) + ' estimated working days sit in the four stages the prototype assists. Risk and Finance review stays human; platform build comes later.';
+  }
+  var btns = root.querySelectorAll('[data-s]');
+  btns.forEach(function (b) { b.addEventListener('click', function () {
+    btns.forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); }); draw(b.dataset.s);
+  }); });
+  draw('mid');
+})();
+</script>
+</body>
+</html>

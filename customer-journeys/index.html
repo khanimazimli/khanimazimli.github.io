@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDHZ7BPM4B"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ZDHZ7BPM4B');
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Customer Journeys &amp; Hyper-Personalization: designing better business decisions · Khanım Azimli</title>
+<meta name="description" content="Case study: moving a retail bank from sending campaigns to deciding who should hear what, when, and when to stay silent. Eligibility, triggers, contact rules and a five-stage process that includes Risk and Finance approval.">
+<link rel="canonical" href="https://khanimazimli.github.io/customer-journeys/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Customer Journeys &amp; Hyper-Personalization: designing better business decisions">
+<meta property="og:description" content="From sending campaigns to making customer decisions, inside a regulated bank. Case study by Khanım Azimli.">
+<meta property="og:url" content="https://khanimazimli.github.io/customer-journeys/">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230E1116'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='16' font-weight='700' fill='white' text-anchor='middle'%3EKA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="../">Khanım Azimli</a>
+    <nav aria-label="Primary">
+      <ul>
+        <li><a class="l" href="../#work" aria-current="page">Work</a></li>
+        <li><a class="l" href="../about/">About</a></li>
+        <li class="hide-s"><a class="l" href="../Khanim_Azimli_CV.pdf">Resume</a></li>
+        <li><a class="btn sm" href="../#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="c-hero">
+    <div class="wrap">
+      <div class="crumb"><span class="k">Case 02 · Retail banking · Mobile app</span><span class="st ship">Campaigns live</span><span class="st test">Weather journey in development</span></div>
+      <h1 class="h-1">From sending campaigns to deciding who should hear what.</h1>
+      <p class="lede">A bank can message any customer at any time. The harder, more valuable question is whether it should: who qualifies, when the moment is right, and when the better decision is to stay silent.</p>
+      <dl class="facts">
+        <div><dt>My role</dt><dd>Lead CX Specialist, hyper-personalization squad (since April 2026); before that CX Expert, CRM and retention</dd></div>
+        <div><dt>Worked with</dt><dd>Business squads, Marketing, the customer engagement team, Risk, Finance, Data Science</dd></div>
+        <div><dt>Channels</dt><dd>Push notifications, in-app stories and banners in the mobile app</dd></div>
+        <div><dt>Period</dt><dd>2025–2026</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <nav class="toc" aria-label="Sections">
+    <ol>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#problem">Problem</a></li>
+      <li><a href="#constraints">Constraints</a></li>
+      <li><a href="#role">My role</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#decision">Decision walkthrough</a></li>
+      <li><a href="#weather">Weather journey</a></li>
+      <li><a href="#status">Status</a></li>
+      <li><a href="#lessons">Lessons</a></li>
+    </ol>
+  </nav>
+
+  <section class="chap" id="overview" style="border-top:0">
+    <div class="wrap chap-grid">
+      <div class="side"><span class="k">01</span><h2>Executive overview</h2></div>
+      <div class="prose">
+        <p class="q">Central question: how do we move from sending campaigns to making smarter customer decisions?</p>
+        <p style="margin-top:22px">The bank's hyper-personalization squad turns behavioural and transactional data into personalized offers and journeys in the mobile app. I work on the customer side of that system: understanding what customers are doing, defining which of them a campaign is for, designing the sequence of messages, and taking each campaign through a five-stage process, including Risk and Finance approval, to launch.</p>
+        <p>This case shows how I structure those decisions, where my part ends and other teams' begin, and the real status of the campaigns I owned. It includes one supporting example, a weather-triggered journey, which is still in development.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="chap" id="problem">
+    <div class="wrap chap-grid">
+      <div class="side"><span class="k">02</span><h2>Business problem</h2></div>
+      <div class="prose">
+        <p class="q">Many teams want the same customer's attention. Sending everything is not personalization.</p>
+        <p style="margin-top:22px">Deposits, cards, investments, loyalty and partner offers each have their own targets. Left alone, every team reaches for the same active customers through the same channels. The result is noise: more messages, less relevance, and offers that arrive when they no longer fit.</p>
+        <p>The business needed three things from a personalization squad:</p>
+        <ul>
+          <li><strong>Relevance</strong>: offers tied to something the customer has actually done or is about to do.</li>
+          <li><strong>Restraint</strong>: rules that keep the wrong customers out and stop the same segment receiving conflicting messages.</li>
+          <li><strong>Accountability</strong>: a governed flow where every campaign is approved, built and measured the same way.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="chap" id="constraints">
+    <div class="wrap chap-grid">
+      <div class="side"><span class="k">03</span><h2>Context and constraints</h2></div>
+      <div class="prose">
+        <p>Every campaign moves through five governed stages, each with one owning team:</p>
+        <table class="ev">
+          <thead><tr><th>Stage</th><th>Owner</th><th>What happens</th></tr></thead>
+          <tbody>
+            <tr><td>1 · Idea</td><td>Hyper-personalization squad</td><td>Customer research, behavioural data, segment formulation, a clear unmet need</td></tr>
+            <tr><td>2 · Scenario</td><td>Business squads</td><td>Business scenario and marketing texts; approvals from the hyper-personalization squad, Risk and Finance</td></tr>
+            <tr><td>3 · Build</td><td>Customer engagement team</td><td>Scenario written and configured in the real-time marketing platform</td></tr>
+            <tr><td>4 · Launch</td><td>Squad with the engagement team</td><td>Go-live, sequencing against other campaigns</td></tr>
+            <tr><td>5 · Results</td><td>Squad with data analysts</td><td>Results analysis and improvements</td></tr>
+          </tbody>
+        </table>
+        <ul style="margin-top:22px">
+          <li><strong>Several approval points</strong> for each campaign, including Risk and Finance, with every customer-facing text prepared in Azerbaijani, English and Russian before build starts.</li>
+          <li><strong>A scoring engine owned by Data Science</strong>, which already applies bank-wide filters such as do-not-contact lists, recently contacted customers and control groups.</li>
+          <li><strong>Platform change.</strong> In May 2026 a content-system migration blocked several launches, so plans had to be resequenced.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="chap" id="role">
+    <div class="wrap chap-grid">
+      <div class="side"><span class="k">04</span><h2>My responsibility</h2></div>
+      <div class="prose">
+        <table class="ev">
+          <thead><tr><th>Stage</th><th>My part</th></tr></thead>
+          <tbody>
+            <tr><td>Idea</td><td>Customer research and behavioural analysis; defining the segment, the trigger and the reward; mapping the journey.</td></tr>
+            <tr><td>Scenario</td><td>Writing the business logic and the push, story and banner texts for my campaigns; coordinating approvals across the chain.</td></tr>
+            <tr><td>Build</td><td>Handing over to the engagement team and answering logic questions during build. I do not configure the platform.</td></tr>
+            <tr><td>Results</td><td>Reviewing results and proposing changes to segments, timing and offers.</td></tr>
+            <tr><td>Operating model</td><td>Designed and built the presentation that mapped this five-stage process, team by team, for the squads' Demo Day in June 2026.</td></tr>
+          </tbody>
+        </table>
+        <div class="note"><b>Not mine:</b> the scoring models and bank-wide filters (Data Science), platform configuration (the customer engagement team), business scenarios for other squads' campaigns, and final Risk and Finance approval.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chap" id="approach">
+    <div class="wrap chap-grid">
+      <div class="side"><span class="k">05</span><h2>How I approach a campaign decision</h2></div>
+      <div class="prose">
+        <ol class="steps">
+          <li><div><b>Name the business problem</b><span>Start from what the bank needs to change, such as product take-up, spending on the bank's cards or engagement with the app, not from the channel.</span></div></li>
+          <li><div><b>Understand the behaviour</b><span>Find the customers whose actions already point at the need, and the moment it shows: a salary arriving, a spending pattern, an upcoming event.</span></div></li>
+          <li><div><b>Define the decision criteria</b><span>Write eligibility as rules a platform can execute: a spend threshold within a period, a product just taken, a time window, a premium segment's birthday.</span></div></li>
+          <li><div><b>Structure the journey</b><span>Decide the order, timing and channel of each message, and what ends the journey for a customer.</span></div></li>
+          <li><div><b>Coordinate requirements</b><span>Agree rules, wording and reward costs with Marketing, Risk and Finance before anything is built.</span></div></li>
+          <li><div><b>Test the scenarios</b><span>Walk edge cases with the engagement team: customers who qualify twice, who are already in another campaign, or whose data is incomplete.</span></div></li>
+          <li><div><b>Improve the experience</b><span>Review results and customer feedback, then tighten or loosen the rules.</span></div></li>
+        </ol>
+        <p style="margin-top:22px">One rule from my own process notes captures the restraint side: <strong>never send mixed communications to the same segment at the same time.</strong> If two squads target the same customers in the same week, the later campaign moves, even when both are approved.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="chap" id="decision">
+    <div class="wrap chap-grid">
+      <div class="side"><span class="k">06</span><h2>Decision walkthrough</h2></div>
+      <div>
+        <div class="prose"><p>Change the facts about one synthetic customer and see how the checks resolve. Each check is labelled with the team that owns it, because in a real bank no single person owns the whole chain.</p></div>
+        <div class="demo" id="dw">
+          <div class="dh"><span class="k">Illustrative walkthrough · synthetic customer</span><p>A simplified model of the order of checks, not the bank's production rules.</p></div>
+          <div class="split" style="margin-top:8px">
+            <fieldset class="chk" style="border:0">
+              <legend class="k" style="margin-bottom:6px">Facts about the customer</legend>
+              <label><input type="checkbox" data-f="dnc"><span><b>On a do-not-contact list</b><small>Bank-wide filter</small></span></label>
+              <label><input type="checkbox" data-f="recent"><span><b>Contacted by another campaign recently</b><small>Bank-wide filter</small></span></label>
+              <label><input type="checkbox" data-f="elig" checked><span><b>Met this month's spend threshold</b><small>Campaign eligibility</small></span></label>
+              <label><input type="checkbox" data-f="done"><span><b>Already took part in this campaign</b><small>Participation limit</small></span></label>
+              <label><input type="checkbox" data-f="moment" checked><span><b>The trigger moment has happened</b><small>For example, salary arrived</small></span></label>
+              <label><input type="checkbox" data-f="clash"><span><b>Another squad messages this segment today</b><small>Launch sequencing</small></span></label>
+              <label><input type="checkbox" data-f="ctrl"><span><b>Assigned to the control group</b><small>Measurement design</small></span></label>
+            </fieldset>
+            <div>
+              <div class="outcome" aria-live="polite"><div class="ol"><span class="ov" id="dwV"></span></div><p id="dwP"></p></div>
+              <ol class="trace" id="dwT" style="margin-top:18px"></ol>
+            </div>
+          </div>
+          <noscript><p class="muted">This walkthrough needs JavaScript. The order of checks is: bank-wide filters, eligibility, participation limit, trigger moment, launch sequencing, control group, then send.</p></noscript>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chap" id="weather">
+    <div class="wrap chap-grid">
+      <div class="side"><span class="k">07</span><h2>Supporting example: a weather-triggered journey</h2></div>
+      <div class="prose">
+        <p class="q">What if the right moment is not in the customer's data at all, but outside, in the weather?</p>
+        <p style="margin-top:22px">Most triggers come from a customer's own transactions. I designed a campaign scenario that uses a weather forecast instead: the forecast selects the day the offer runs, messages are sequenced ahead of that day, and participation is capped so the same customer is not rewarded repeatedly. The theme is a seasonal dining offer for cold weather.</p>
+        <p>It shows the approach well because most of the design effort went into the rules: what counts as qualifying weather, how far ahead to message, what happens if the forecast changes, and how to stop it from becoming a weekly promotion.</p>
+        <table class="ev">
+          <thead><tr><th>Item</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Scenario design, owner: me</td><td><span class="st ship">Done</span></td></tr>
+            <tr><td>Weather data connection and platform build, owner: engagement team</td><td><span class="st test">In development</span></td></tr>
+            <tr><td>Risk and Finance approval, live launch</td><td><span class="st wait">Not confirmed</span></td></tr>
+            <tr><td>Results</td><td><span class="st plan">None yet</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="chap" id="status">
+    <div class="wrap chap-grid">
+      <div class="side"><span class="k">08</span><h2>Verified outcomes and status</h2></div>
+      <div class="prose">
+        <p>From the squad's campaign tracker, campaigns where I am the owner. Seven are marked published in the tracker.</p>
+        <table class="ev">
+          <thead><tr><th>Campaign type</th><th>What it does</th><th class="s">Status</th></tr></thead>
+          <tbody>
+            <tr><td>Task-and-reward campaigns, summer 2026</td><td>Customers who reach a spend threshold within the period, or take up a credit card, earn event tickets.</td><td class="s"><span class="st ship">Live</span></td></tr>
+            <tr><td>Birthday reward for a premium segment</td><td>Cashback reward on the customer's birthday.</td><td class="s"><span class="st ship">Live</span></td></tr>
+            <tr><td>In-app customer feedback survey</td><td>Satisfaction survey delivered inside the app.</td><td class="s"><span class="st ship">Live</span></td></tr>
+            <tr><td>Evening online-purchase offer</td><td>Cashback on online purchases within a late-evening time window.</td><td class="s"><span class="st wait">Awaiting approval</span></td></tr>
+            <tr><td>Weather-triggered journey</td><td>See above.</td><td class="s"><span class="st test">In development</span></td></tr>
+          </tbody>
+        </table>
+        <div class="note"><b>About results.</b> Campaign performance is reported inside the bank. I do not publish those figures: they are confidential, and I have only published what I can tie to a primary record. Happy to discuss how results were measured in conversation.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chap" id="lessons">
+    <div class="wrap chap-grid">
+      <div class="side"><span class="k">09</span><h2>Lessons and transferable capabilities</h2></div>
+      <div>
+        <div class="lessons">
+          <div><b>Ideas become useful as executable rules.</b><span>A campaign idea becomes useful when it can be stated as criteria a platform executes and a risk team can approve.</span></div>
+          <div><b>Holding customers back protects relevance.</b><span>Rules that hold customers back, such as participation limits and launch sequencing, protect the relevance of every other message.</span></div>
+          <div><b>Know where your ownership ends.</b><span>In a regulated bank, good work depends on clean hand-offs to Data Science, the engagement team, Risk and Finance.</span></div>
+          <div><b>Design measurement in.</b><span>Control groups and clear success criteria have to be part of the scenario, not added after launch.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec tight">
+    <div class="wrap">
+      <div class="next">
+        <a href="../abb-wrapped/"><span class="k">Previous · 01</span><b>← ABB Wrapped 2026</b></a>
+        <a href="../hyper-intelligence-os/"><span class="k">Next case · 03</span><b>Hyper Intelligence OS →</b></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> Khanım Azimli · Selected details are simplified to protect confidential information.</span>
+    <nav aria-label="Footer"><a href="../">Home</a><a href="../about/">About</a><a href="mailto:khanimazimli0@gmail.com">Email</a></nav>
+  </div>
+</footer>
+
+<script src="../assets/site.js" defer></script>
+<script>
+(function () {
+  /* Illustrative order of checks. Synthetic customer; not production rules. */
+  var root = document.getElementById('dw'); if (!root) return;
+  var G = [
+    { f: 'dnc', bad: true, name: 'Bank-wide filters', owner: 'Data Science engine', fail: ['stop', 'Not contacted', 'The customer is on a do-not-contact list. The campaign never sees them.'] },
+    { f: 'recent', bad: true, name: 'Recent contact', owner: 'Data Science engine', fail: ['hold', 'Held back', 'Another campaign reached this customer recently. They rest before the next message.'] },
+    { f: 'elig', bad: false, name: 'Eligibility', owner: 'Campaign rules', fail: ['stop', 'Not eligible', 'The customer has not met this month\'s spend threshold.'] },
+    { f: 'done', bad: true, name: 'Participation limit', owner: 'Campaign rules', fail: ['stop', 'Not contacted', 'The customer has already taken part. The reward is not repeated.'] },
+    { f: 'moment', bad: false, name: 'Trigger moment', owner: 'Campaign rules', fail: ['hold', 'Waiting', 'Eligible, but the moment has not happened yet. The journey waits for the trigger.'] },
+    { f: 'clash', bad: true, name: 'Launch sequencing', owner: 'Squad governance', fail: ['hold', 'Rescheduled', 'Another squad is messaging this segment today. This campaign moves so the customer does not receive mixed messages.'] },
+    { f: 'ctrl', bad: true, name: 'Control group', owner: 'Measurement design', fail: ['hold', 'Held out', 'Part of the control group. No message, so the campaign\'s real effect can be measured.'] }
+  ];
+  function v(f) { var i = root.querySelector('[data-f="' + f + '"]'); return i && i.checked; }
+  function draw() {
+    var out = null, rows = [];
+    G.forEach(function (g) {
+      if (out) { rows.push('<li><span class="ic no" aria-hidden="true">·</span><span><b>' + g.name + '</b> · not reached · <span class="muted">' + g.owner + '</span></span></li>'); return; }
+      var failed = g.bad ? v(g.f) : !v(g.f);
+      if (failed) { out = g.fail; rows.push('<li><span class="ic ' + (g.fail[0] === 'stop' ? 'hd' : 'fb') + '" aria-hidden="true">!</span><span><b>' + g.name + '</b> · decides the outcome · <span class="muted">' + g.owner + '</span></span></li>'); }
+      else rows.push('<li><span class="ic ok" aria-hidden="true">✓</span><span><b>' + g.name + '</b> · passed · <span class="muted">' + g.owner + '</span></span></li>');
+    });
+    if (!out) out = ['send', 'Send', 'All checks passed. The customer receives the first message of the journey, in the channel set for this step.'];
+    var V = document.getElementById('dwV');
+    V.textContent = out[1]; V.className = 'ov ' + out[0];
+    document.getElementById('dwP').textContent = out[2];
+    document.getElementById('dwT').innerHTML = rows.join('');
+  }
+  root.querySelectorAll('input[data-f]').forEach(function (i) { i.addEventListener('change', draw); });
+  draw();
+})();
+</script>
+</body>
+</html>
