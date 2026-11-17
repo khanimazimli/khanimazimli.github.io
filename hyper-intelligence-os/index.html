@@ -75,7 +75,7 @@
       <div class="side"><span class="k">01</span><h2>From problem to product</h2></div>
       <div>
         <ol class="ladder">
-          <li><span class="k">Problem</span><b>Mapped where campaign preparation time goes</b><p>Six stages owned by different teams, from brief to platform build. The first four hold most of the estimated time and repeat the same facts in new formats; the decisions sit in review and approval.</p><span class="evi">stage map with owners and estimated durations from my squad's process</span></li>
+          <li><span class="k">Problem</span><b>Mapped where campaign preparation time goes</b><p>Six stages owned by different teams, from brief to platform build. By my rough assumptions, the first four take most of the time and repeat the same facts in new formats; the decisions sit in review and approval.</p><span class="evi">stage map with owners and rough duration assumptions; not measured</span></li>
           <li><span class="k">Requirements</span><b>Wrote three rules before building anything</b><p>The brief step never invents a fact and asks for what is missing. Approvals stay human. Paid image generation needs explicit human consent.</p><span class="evi">each rule is enforced in the prototype: rule-based brief parsing, approval points, a consent step</span></li>
           <li><span class="k">Structure</span><b>Designed modules with human gates between them</b><p>Brief, journey, copy and visual modules, each producing a draft a person approves or sends back with a comment. A 16-step target design extends this to Risk, Finance and activation.</p><span class="evi">the target architecture in my v15 product deck</span></li>
           <li><span class="k">Build</span><b>Built it by orchestrating AI agents</b><p>I wrote the campaign skills and prompt specifications the modules run on, and built the software by directing AI coding agents and reviewing their work.</p><span class="evi">the skills in my account since June 2026; the development history</span></li>
@@ -150,17 +150,17 @@
     <div class="wrap chap-grid">
       <div class="side"><span class="k">04</span><h2>Worked analysis: where should AI help?</h2></div>
       <div>
-        <p class="lead2">Most of the estimated time sits in the four preparation stages, not in Risk and Finance decisions. So those are the stages to assist.</p>
+        <p class="lead2">Under my working assumptions, most preparation time sits in the four preparation stages, not in Risk and Finance decisions. So those are the stages to assist.</p>
         <div class="demo" id="an">
-          <div class="dh"><span class="k">Share of estimated time per stage</span><p>Relative shares from my own stage estimates. Arithmetic on estimates, not a measurement.</p></div>
-          <div class="seg" role="group" aria-label="Choose an estimate">
-            <button type="button" data-s="lo" aria-pressed="false">Low</button>
-            <button type="button" data-s="mid" aria-pressed="true">Midpoint</button>
-            <button type="button" data-s="hi" aria-pressed="false">High</button>
+          <div class="dh"><span class="k">Illustrative assumptions, not measured data</span><p>Rough shares based on my own stage assumptions, rounded to the nearest 5%. No stage times have been measured; a pilot would be needed to test them.</p></div>
+          <div class="seg" role="group" aria-label="Choose an assumption">
+            <button type="button" data-s="lo" aria-pressed="false">Low case</button>
+            <button type="button" data-s="mid" aria-pressed="true">Middle case</button>
+            <button type="button" data-s="hi" aria-pressed="false">High case</button>
           </div>
           <div id="anBars" style="margin-top:18px"></div>
           <div class="outcome" style="margin-top:16px" aria-live="polite"><div class="ol"><span class="ov num" id="anV"></span></div><p id="anP"></p></div>
-          <noscript><p class="muted">The four preparation stages hold about three quarters of the estimated time (67–83% across low and high estimates).</p></noscript>
+          <noscript><p class="muted">Under these illustrative assumptions, the four preparation stages hold roughly two thirds to four fifths of preparation time. Not measured.</p></noscript>
         </div>
         <details class="more">
           <summary>Options I compared, and how success would be measured</summary>
@@ -171,7 +171,7 @@
                 <tr><td>Process fixes only</td><td>Cheap, but people still restate the same facts at every step.</td></tr>
                 <tr><td>Automate end to end, approvals included</td><td>Removes the controls the bank is accountable for.</td></tr>
                 <tr><td>A generic AI writing tool</td><td>No link between brief, scenario and copy, so numbers can drift.</td></tr>
-                <tr><td><b>Chosen: assist the four preparation stages</b></td><td>Targets most of the time; facts are carried and checked across steps; every decision stays human.</td></tr>
+                <tr><td><b>Chosen: assist the four preparation stages</b></td><td>Targets where most time is assumed to go; facts are carried and checked across steps; every decision stays human.</td></tr>
               </tbody>
             </table>
             <p style="margin-top:16px">A pilot would compare elapsed days per stage, review rounds before approval, number mismatches caught, and generation cost per campaign, with no change in the time or depth of Risk and Finance review.</p>
@@ -293,7 +293,7 @@
   parse(inp.value); draw();
 })();
 (function () {
-  /* Relative stage estimates. Only percentages are shown. */
+  /* Illustrative stage assumptions, not measurements. Shares are rounded to 5%. */
   var S = [['Brief and idea', 1, 2, 'a'], ['Journey and scenario', 1, 3, 'a'], ['Copy and review', 3, 5, 'a'], ['Visuals', 3, 10, 'a'], ['Risk and Finance', 3, 3, 'h'], ['Platform build', 1, 1, 'l']];
   var C = { a: 'var(--accent)', h: 'var(--s-wait)', l: 'var(--line-2)' }, L = { a: 'assisted', h: 'stays human', l: 'later' };
   var root = document.getElementById('an'); if (!root) return;
@@ -306,11 +306,11 @@
       var v = val(x, k), pct = v / tot * 100;
       return '<div style="display:grid;grid-template-columns:minmax(0,170px) minmax(0,1fr) 92px;gap:12px;align-items:center;padding:7px 0;font-size:14.5px">' +
         '<span>' + x[0] + '</span><span style="background:#fff;border:1px solid var(--line);border-radius:6px;height:14px;overflow:hidden"><span style="display:block;height:100%;width:' + pct.toFixed(1) + '%;background:' + C[x[3]] + '"></span></span>' +
-        '<span class="num muted" style="text-align:right">' + Math.round(pct) + '%</span></div>';
+        '<span class="num muted" style="text-align:right">≈' + Math.round(pct / 5) * 5 + '%</span></div>';
     }).join('') + '<div style="display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:10px;font-size:13px;color:var(--mute)">' +
       ['a', 'h', 'l'].map(function (c) { return '<span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:' + C[c] + ';margin-right:6px;vertical-align:-1px"></span>' + L[c] + '</span>'; }).join('') + '</div>';
-    document.getElementById('anV').textContent = Math.round(as / tot * 100) + '% of estimated time';
-    document.getElementById('anP').textContent = 'Share of estimated preparation time in the four stages the prototype assists.';
+    var r = as / tot; document.getElementById('anV').textContent = r >= 0.79 ? 'Roughly four fifths' : r >= 0.72 ? 'Roughly three quarters' : 'Roughly two thirds';
+    document.getElementById('anP').textContent = 'Illustrative share of preparation time in the four stages the prototype assists. An assumption to test in a pilot, not a measured result.';
   }
   var btns = root.querySelectorAll('[data-s]');
   btns.forEach(function (b) { b.addEventListener('click', function () { btns.forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); }); draw(b.dataset.s); }); });
