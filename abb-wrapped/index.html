@@ -12,12 +12,12 @@
 </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ABB Wrapped 2026 · Khanım Azimli</title>
-<meta name="description" content="Case study: ABB Wrapped 2026, a personal year-in-review in a bank's mobile app. I led the 2026 edition's creative direction, content and personalization. Not yet launched.">
+<title>ABB Wrapped · Khanım Azimli</title>
+<meta name="description" content="Case study: ABB Wrapped, a personalized year-in-review in ABB's mobile app based on customers' own banking activity. First edition launched in 2025; expanded 2026 edition in development.">
 <link rel="canonical" href="https://khanimazimli.github.io/abb-wrapped/">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ABB Wrapped 2026 · case study">
-<meta property="og:description" content="A personal year-in-review in a bank's mobile app. 2026 edition in preparation, not yet launched.">
+<meta property="og:title" content="ABB Wrapped · case study">
+<meta property="og:description" content="A data-informed, personalized digital banking experience. 2025 launched; 2026 in development.">
 <meta property="og:url" content="https://khanimazimli.github.io/abb-wrapped/">
 <meta name="theme-color" content="#0D1B2A">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%230D1B2A'/%3E%3Ccircle cx='16' cy='16' r='12' fill='none' stroke='%23D4AF37' stroke-width='1.6'/%3E%3Ctext x='16' y='20.5' font-family='Arial' font-size='11' font-weight='700' fill='%23D4AF37' text-anchor='middle'%3EKA%3C/text%3E%3C/svg%3E">
@@ -28,56 +28,48 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap">
 <link rel="stylesheet" href="../assets/studio.css">
 <style>
-/* identity: warm story colours over deep navy */
-.wh { background: radial-gradient(55% 70% at 75% 50%, rgba(15, 94, 99, .35), transparent 70%), radial-gradient(40% 50% at 95% 90%, rgba(74, 37, 69, .45), transparent 70%), var(--navy); }
+.wh { background: radial-gradient(55% 70% at 78% 45%, rgba(65, 90, 119, .32), transparent 70%), var(--navy); }
 .wh .wrap { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(24px, 4vw, 64px); align-items: center; }
-.wh h1 { font-size: clamp(46px, 5.6vw, 84px); letter-spacing: -.045em; line-height: .95; }
+.wh .wrap > * { min-width: 0; }
+.wh h1 { font-size: clamp(50px, 6.4vw, 96px); letter-spacing: -.045em; line-height: .95; }
 .wh .sub { margin-top: 24px; }
-.wh .mine { margin-top: 26px; padding-left: 18px; border-left: 2px solid var(--gold); color: var(--tx); font-size: 17px; line-height: 1.55; max-width: 44ch; }
-.wh .mine span { display: block; color: var(--tx-3); font-size: 15px; margin-top: 6px; }
-.stage { position: relative; height: clamp(440px, 50vw, 640px); perspective: 1600px; overflow: visible; clip-path: inset(-20% -40% -10% 0); }
-.stage .rig { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform .8s var(--e); }
-.stage .phone { position: absolute; left: 54%; top: 48%; width: clamp(150px, 14.5vw, 210px); transition: transform 1.2s var(--e), opacity 1.2s var(--e); }
-.stage .phone.p0 { width: clamp(200px, 19vw, 276px); transform: translate(-50%, -50%) translateZ(80px); z-index: 5; box-shadow: 0 60px 120px -40px rgba(0, 0, 0, .9), 0 0 0 1px rgba(212, 175, 55, .6); }
-.stage .phone.p1 { transform: translate(-50%, -50%) translate(-74%, -6%) translateZ(-40px) rotateY(16deg); z-index: 4; }
-.stage .phone.p2 { transform: translate(-50%, -50%) translate(74%, 4%) translateZ(-40px) rotateY(-16deg); z-index: 4; }
-.stage .phone.p3 { transform: translate(-50%, -50%) translate(-122%, 8%) translateZ(-160px) rotateY(24deg); z-index: 3; opacity: .82; }
-.stage .phone.p4 { transform: translate(-50%, -50%) translate(122%, -8%) translateZ(-160px) rotateY(-24deg); z-index: 3; opacity: .82; }
-.js .stage:not(.in) .phone { transform: translate(-50%, -40%) scale(.92); opacity: 0; }
-.stage .cap { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); font-size: 14px; color: var(--tx-3); white-space: nowrap; }
-@media (max-width: 1080px) { .wh .wrap { grid-template-columns: 1fr; } .stage { height: 560px; } }
-@media (max-width: 640px) {
-  .stage { height: 460px; margin-top: 8px; }
-  .stage .phone { width: 150px; }
-  .stage .phone.p0 { width: 196px; }
-  .stage .phone.p1 { transform: translate(-50%, -50%) translate(-58%, -4%) translateZ(-40px) rotateY(14deg); }
-  .stage .phone.p2 { transform: translate(-50%, -50%) translate(58%, 4%) translateZ(-40px) rotateY(-14deg); }
-  .stage .phone.p3, .stage .phone.p4 { display: none; }
-  .stage .cap { white-space: normal; text-align: center; width: 100%; }
-}
-
-
-/* 01 · challenge */
+.wh .mine { margin-top: 26px; padding-left: 18px; border-left: 2px solid var(--gold); color: var(--tx); font-size: 17px; line-height: 1.55; max-width: 46ch; }
+.wh .edv figcaption { margin-top: 8px; text-align: center; font-size: 14px; color: var(--tx-3); }
+@media (max-width: 1080px) { .wh .wrap { grid-template-columns: 1fr; } }
 .tri { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 3vw, 40px); border-top: 1px solid var(--ln-l2); }
-.tri div { padding-top: 22px; }
+.tri > div { padding-top: 22px; }
 .tri b { display: block; font-size: 22px; font-weight: 500; letter-spacing: -.02em; }
 .tri p { margin-top: 10px; color: var(--ink-2); font-size: 16.5px; }
 .tri i { display: block; width: 36px; height: 3px; background: var(--gold-ink); margin-bottom: 18px; }
 @media (max-width: 760px) { .tri { grid-template-columns: 1fr; } }
-
-/* 03 · role */
-.role2 { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 5vw, 72px); }
-.role2 > * { min-width: 0; }
-.role2 h3 { font-size: 22px; margin-bottom: 14px; }
-.role2 ul { border-top: 1px solid var(--ln-l2); }
-.role2 li { padding: 15px 0; border-bottom: 1px solid var(--ln-l); font-size: 17px; display: grid; grid-template-columns: 22px 1fr; gap: 10px; }
-.role2 li::before { content: ""; width: 9px; height: 9px; border-radius: 50%; margin-top: 9px; background: var(--gold-ink); }
-.role2 .oth li { color: var(--ink-2); grid-template-columns: 22px 1fr auto; align-items: center; }
-.role2 .oth li::before { margin-top: 0; }
-.role2 .oth li::before { background: transparent; box-shadow: inset 0 0 0 1.5px var(--ink-3); margin-top: 0; }
-@media (max-width: 860px) { .role2 { grid-template-columns: 1fr; } }
-.y25 { margin-top: clamp(48px, 6vw, 80px); display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: clamp(20px, 4vw, 56px); padding: 28px; border-radius: var(--r); background: rgba(13, 27, 42, .04); border: 1px solid var(--ln-l); }
-@media (max-width: 760px) { .y25 { grid-template-columns: 1fr; } }
+.tl2 { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(20px, 4vw, 56px); }
+.tl2::before { content: ""; position: absolute; left: 0; right: 0; top: 52px; height: 1.5px; background: var(--ln-d2); }
+.tl2 .pr { position: absolute; left: 0; top: 51px; height: 3px; width: 100%; background: var(--gold); transform-origin: 0 50%; transform: scaleX(0); transition: transform 2s var(--e2) .2s; }
+.tl2.in .pr { transform: scaleX(1); }
+.tl2 article { position: relative; }
+.tl2 .yr { font: 500 clamp(64px, 7vw, 104px)/1 var(--f); letter-spacing: -.05em; color: var(--tx); background: var(--navy); padding-right: 18px; display: inline-block; position: relative; z-index: 1; }
+.tl2 article + article .yr { color: var(--gold); }
+.tl2 .st { margin-top: 18px; }
+.tl2 h3 { margin-top: 18px; font-size: clamp(22px, 2vw, 28px); }
+.tl2 p { margin-top: 10px; color: var(--tx-2); font-size: 16.5px; max-width: 46ch; }
+.tl2 .mypart { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--ln-d); }
+.tl2 .mypart span { display: block; font: 500 12.5px var(--m); letter-spacing: .08em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+.tl2 .mypart p { margin-top: 0; color: var(--tx); }
+@media (max-width: 760px) { .tl2 { grid-template-columns: 1fr; } .tl2::before, .tl2 .pr { display: none; } }
+.resp { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 5vw, 72px); }
+.resp > * { min-width: 0; }
+.resp ul { border-top: 1px solid var(--ln-l2); }
+.resp li { padding: 15px 0; border-bottom: 1px solid var(--ln-l); font-size: 17px; display: grid; grid-template-columns: 22px 1fr; gap: 10px; }
+.resp li::before { content: ""; width: 9px; height: 9px; border-radius: 50%; margin-top: 9px; background: var(--gold-ink); }
+.resp aside { padding: 22px; border-radius: var(--r); background: rgba(13, 27, 42, .04); border: 1px solid var(--ln-l); align-self: start; }
+.resp aside p { margin-top: 10px; color: var(--ink-2); font-size: 16px; }
+@media (max-width: 860px) { .resp { grid-template-columns: 1fr; } }
+.req { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(14px, 2.4vw, 32px); }
+.req div { padding-top: 20px; border-top: 1px solid var(--ln-d2); }
+.req b { display: block; font-size: 19px; font-weight: 500; letter-spacing: -.01em; }
+.req p { margin-top: 8px; color: var(--tx-2); font-size: 15.5px; }
+@media (max-width: 960px) { .req { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .req { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -100,25 +92,22 @@
   <section class="chero wh" aria-labelledby="t">
     <div class="wrap">
       <div>
-        <div class="crumbs" data-rv><span class="lbl">Case 01 · Retail banking · Mobile app</span><span class="st wait">2026 edition not yet launched</span></div>
-        <h1 id="t" data-rv style="--d:.06s">ABB Wrapped 2026</h1>
-        <p class="lede sub" data-rv style="--d:.12s">A personal year-in-review in the bank's mobile app: a short set of stories about each customer's year with the bank.</p>
-        <p class="mine" data-rv style="--d:.18s">I led the 2026 edition: creative direction, content and personalization, working with colleagues across marketing, design and product.</p>
+        <div class="crumbs" data-rv><span class="lbl">Case 01 · Retail banking · Mobile app</span><span class="st done">2025 launched</span><span class="st wait">2026 in development</span></div>
+        <h1 id="t" data-rv style="--d:.06s">ABB Wrapped</h1>
+        <p class="lede sub" data-rv style="--d:.12s">A personalized year-in-review in ABB's mobile app. Customers see a summary of their year with the bank, based on their own banking activity.</p>
+        <p class="mine" data-rv style="--d:.18s">I contributed customer-facing content to the first edition in 2025. For the expanded 2026 edition, I lead the creative, content and personalization direction and coordinate the teams preparing it.</p>
       </div>
-      <div class="stage" id="stage" data-rv="fade" aria-hidden="true">
-        <div class="rig" id="rig"></div>
-        <p class="cap">Illustrative, with fictional data · not ABB's designs</p>
-      </div>
+      <figure class="edv" id="edW" data-rv="fade" style="margin:0"><svg aria-hidden="true"></svg><figcaption>Abstract illustration: each point stands for a different customer's year.</figcaption></figure>
     </div>
   </section>
 
   <section class="dk" style="padding-bottom:clamp(56px,7vw,96px)">
     <div class="wrap">
       <dl class="facts" style="margin-top:0" data-rv>
-        <div><dt>What it is</dt><dd>An annual, personalized story experience inside a retail bank's app.</dd></div>
-        <div><dt>My role</dt><dd>Led the 2026 edition, from the first concepts onward.</dd></div>
-        <div><dt>Worked with</dt><dd>Marketing, design and product teams.</dd></div>
-        <div><dt>Status</dt><dd><b>In preparation, not yet launched.</b> The 2025 edition, which I contributed to, shipped.</dd></div>
+        <div><dt>What it is</dt><dd>An annual, personalized digital experience inside a retail bank's app.</dd></div>
+        <div><dt>My role</dt><dd>Content contributor in 2025; creative, content and personalization lead for 2026.</dd></div>
+        <div><dt>Worked with</dt><dd>Marketing, design, product, data and engineering colleagues.</dd></div>
+        <div><dt>Status</dt><dd><b>2025 edition launched.</b> The 2026 edition is in development and not yet released.</dd></div>
       </dl>
     </div>
   </section>
@@ -126,13 +115,27 @@
   <section class="sec lt" aria-labelledby="s1">
     <div class="wrap">
       <div class="sh">
-        <div><span class="lbl g" data-rv><span class="n">01</span> The challenge</span><h2 class="stmt" id="s1" data-rv style="--d:.06s"><span class="m">A year of banking,</span> told as a story people want to share.</h2></div>
-        <p class="lede" data-rv style="--d:.12s">Customers' years differ. The edition has to feel personal to each of them, and it has to be right.</p>
+        <div><span class="lbl g" data-rv><span class="n">01</span> Why customer data matters</span><h2 class="stmt" id="s1" data-rv style="--d:.06s"><span class="m">Personal</span> only works if it is right.</h2></div>
+        <p class="lede" data-rv style="--d:.12s">ABB Wrapped draws on customers' own banking activity, so what a customer sees depends on their year with the bank. That makes it a data product as much as a creative one.</p>
       </div>
       <div class="tri">
-        <div data-rv><i></i><b>Personal</b><p>Stories built around each customer's own year, so it reads like theirs rather than a campaign.</p></div>
-        <div data-rv style="--d:.08s"><i></i><b>Accurate</b><p>It has to be right, down to the last detail.</p></div>
-        <div data-rv style="--d:.16s"><i></i><b>Coordinated</b><p>It comes together across several teams, on a fixed date.</p></div>
+        <div data-rv><i></i><b>Relevant</b><p>The experience should reflect the customer's activity, not a generic message.</p></div>
+        <div data-rv style="--d:.08s"><i></i><b>Accurate</b><p>Details drawn from customer data need to be correct before they reach customers.</p></div>
+        <div data-rv style="--d:.16s"><i></i><b>Considered</b><p>Personal data needs care: deciding what is worth showing, and how, is part of the work.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec dk" aria-labelledby="s2">
+    <div class="wrap">
+      <div class="sh">
+        <div><span class="lbl g" data-rv><span class="n">02</span> From 2025 to 2026</span><h2 class="h2" id="s2" data-rv style="--d:.06s">One initiative, two editions.</h2></div>
+        <p class="lede" data-rv style="--d:.12s">The second edition builds on what the first one taught the team.</p>
+      </div>
+      <div class="tl2" id="tl2">
+        <span class="pr" aria-hidden="true"></span>
+        <article data-rv><span class="yr">2025</span><br><span class="st done">Launched Dec 2025</span><h3>First edition</h3><p>The bank's first personalized year-in-review, released to customers in the app.</p><div class="mypart"><span>My part</span><p>Customer-facing story content, written and reviewed with colleagues.</p></div></article>
+        <article data-rv style="--d:.12s"><span class="yr">2026</span><br><span class="st wait">In development</span><h3>Expanded edition</h3><p>A larger edition, building on the first. Not yet released.</p><div class="mypart"><span>My part</span><p>Creative, content and personalization direction, and coordinating the teams preparing the edition.</p></div></article>
       </div>
     </div>
   </section>
@@ -140,23 +143,37 @@
   <section class="sec lt2" aria-labelledby="s3">
     <div class="wrap">
       <div class="sh">
-        <div><span class="lbl g" data-rv><span class="n">02</span> My role</span><h2 class="h2" id="s3" data-rv style="--d:.06s">What I led.</h2></div>
-        <p class="lede" data-rv style="--d:.12s">I led the edition's creative and content work and brought the teams involved together around it.</p>
+        <div><span class="lbl g" data-rv><span class="n">03</span> My responsibilities in 2026</span><h2 class="h2" id="s3" data-rv style="--d:.06s">Direction, content and coordination.</h2></div>
+        <p class="lede" data-rv style="--d:.12s">I am responsible for what the edition says and how it feels to customers, and for keeping the teams involved working towards the same edition.</p>
       </div>
-      <div class="role2">
-        <div data-rv><ul>
-          <li>Creative direction and story concepts</li>
-          <li>Content and personalization</li>
-          <li>Coordination with marketing, design and product teams</li></ul></div>
-      </div>
-      <div class="y25" data-rv>
-        <div><span class="lbl">Earlier edition</span><h3 class="h3" style="margin-top:12px">ABB Wrapped 2025</h3><p style="margin-top:12px"><span class="st done">Shipped Dec 2025</span></p></div>
-        <div class="body"><p>I contributed to the 2025 edition, mainly on its story texts.</p></div>
+      <div class="resp">
+        <ul data-rv>
+          <li>Creative direction for the edition</li>
+          <li>Developing the content customers will see</li>
+          <li>Personalization direction: which parts of a customer's activity the experience should focus on</li>
+          <li>Coordinating marketing, design, product, data and engineering colleagues</li>
+          <li>Supporting the preparation of the edition for release</li>
+        </ul>
+        <aside data-rv style="--d:.08s"><span class="lbl">Other teams</span><p>The data infrastructure, app engineering and the release decision sit with the bank's data, engineering and product teams.</p></aside>
       </div>
     </div>
   </section>
 
-  <nav class="dk" aria-label="Case studies">
+  <section class="sec dk" aria-labelledby="s4">
+    <div class="wrap">
+      <div class="sh">
+        <div><span class="lbl g" data-rv><span class="n">04</span> What the work involves</span><h2 class="h2" id="s4" data-rv style="--d:.06s">A digital product built for a broad and varied customer base.</h2></div>
+      </div>
+      <div class="req">
+        <div data-rv><b>Working from customer data</b><p>Turning banking activity into something a customer recognises as their own.</p></div>
+        <div data-rv style="--d:.06s"><b>Product decisions with several teams</b><p>Agreeing scope and priorities with colleagues who own different parts.</p></div>
+        <div data-rv style="--d:.12s"><b>Quality under a deadline</b><p>Balancing creative ambition with accuracy and a fixed release date.</p></div>
+        <div data-rv style="--d:.18s"><b>Learning between editions</b><p>Carrying what the first edition taught us into the second.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <nav class="dk" aria-label="Case studies" style="border-top:1px solid var(--ln-d)">
     <div class="wrap nextc">
       <a href="../"><span class="lbl">Back to</span><b>All work</b></a>
       <a href="../customer-journeys/"><span class="lbl">Next case · 02</span><b>Customer Journeys →</b></a>
@@ -166,28 +183,17 @@
 
 <footer class="foot">
       <div class="wrap">
-        <span>© <span id="yr">2026</span> Khanım Azimli · Story visuals are illustrative, with fictional data.</span>
-        <nav aria-label="Footer"><a href="../">Home</a><a href="../abb-wrapped/">ABB Wrapped 2026</a><a href="../customer-journeys/">Customer Journeys</a><a href="../customer-os/">Customer OS</a><a href="../about/">About</a></nav>
+        <span>© <span id="yr">2026</span> Khanım Azimli · Visuals are abstract illustrations.</span>
+        <nav aria-label="Footer"><a href="../">Home</a><a href="../abb-wrapped/">ABB Wrapped</a><a href="../customer-journeys/">Customer Journeys</a><a href="../customer-os/">Customer OS</a><a href="../about/">About</a></nav>
       </div>
     </footer>
 
 <script src="../assets/studio.js"></script>
-<script src="../assets/stories.js"></script>
+<script src="../assets/visuals.js"></script>
 <script>
-(function () {
-  if (!window.KAStory) return;
-  var L = KAStory.list;
-  var rig = document.getElementById('rig');
-  if (rig) {
-    var H = [[L[2], 'p0', 2, 5], [L[1], 'p1', 1, 5], [L[3], 'p2', 3, 5], [L[0], 'p3', 0, 5], [L[4], 'p4', 4, 5]];
-    rig.innerHTML = H.map(function (h, i) { return '<div class="phone ' + h[1] + '" style="' + KAStory.style(h[0]) + ';transition-delay:' + (i * .08) + 's">' + KAStory.inner(h[0], h[2], h[3]) + '</div>'; }).join('');
-    var stg = document.getElementById('stage');
-    if (!KA.reduced && matchMedia('(hover: hover) and (min-width: 1081px)').matches) {
-      stg.addEventListener('pointermove', function (e) { var r = stg.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; rig.style.transform = 'rotateY(' + (x * 8).toFixed(2) + 'deg) rotateX(' + (-y * 6).toFixed(2) + 'deg)'; });
-      stg.addEventListener('pointerleave', function () { rig.style.transform = ''; });
-    }
-  }
-})();
+KAV.editions(document.querySelector('#edW svg'));
+KA.onView(document.getElementById('edW'), function () { document.getElementById('edW').classList.add('in'); }, '0px');
+KA.onView(document.getElementById('tl2'), function () { document.getElementById('tl2').classList.add('in'); });
 </script>
 </body>
 </html>
