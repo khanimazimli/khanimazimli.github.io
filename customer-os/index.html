@@ -13,11 +13,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Customer OS · Khanım Azimli</title>
-<meta name="description" content="Customer OS: an independent AI-assisted product exploration by Khanım Azimli. A working prototype exploring how AI can support customer-focused work. Not a production product.">
+<meta name="description" content="Customer OS: an independent product initiative by Khanım Azimli. A working AI-assisted prototype built to explore a recurring problem in customer-related work. Not deployed.">
 <link rel="canonical" href="https://khanimazimli.github.io/customer-os/">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Customer OS · independent product exploration">
-<meta property="og:description" content="An independent project exploring how AI can support customer-focused work. Working prototype, not a production product.">
+<meta property="og:title" content="Customer OS · independent product initiative">
+<meta property="og:description" content="An AI-assisted prototype I initiated, scoped, built and tested independently. Working prototype, not deployed.">
 <meta property="og:url" content="https://khanimazimli.github.io/customer-os/">
 <meta name="theme-color" content="#0D1B2A">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%230D1B2A'/%3E%3Ccircle cx='16' cy='16' r='12' fill='none' stroke='%23D4AF37' stroke-width='1.6'/%3E%3Ctext x='16' y='20.5' font-family='Arial' font-size='11' font-weight='700' fill='%23D4AF37' text-anchor='middle'%3EKA%3C/text%3E%3C/svg%3E">
@@ -70,6 +70,14 @@
 .statusb { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 5vw, 72px); align-items: start; }
 .statusb > * { min-width: 0; }
 @media (max-width: 860px) { .statusb { grid-template-columns: 1fr; } }
+
+.bn { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.bn > div { padding: clamp(22px, 3vw, 30px); border-radius: var(--r); border: 1px solid var(--ln-d); background: var(--navy-2); }
+.bn > div.no { background: transparent; border-style: dashed; }
+.bn h3 { margin-top: 14px; font-size: 22px; letter-spacing: -.02em; }
+.bn ul { margin-top: 12px; }
+.bn li { padding: 9px 0; border-top: 1px solid var(--ln-d); color: var(--tx-2); font-size: 16px; }
+@media (max-width: 760px) { .bn { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -91,15 +99,15 @@
 <main id="main">
   <section class="chero oh" aria-labelledby="t">
     <div class="wrap">
-      <div class="crumbs" data-rv><span class="lbl">Case 03 · Independent project · 2026</span><span class="st pro">Working prototype, not a production product</span></div>
+      <div class="crumbs" data-rv><span class="lbl">Case 03 · Independent initiative · 2026</span><span class="st pro">Working prototype, not deployed</span></div>
       <div class="intro">
         <div>
           <h1 id="t" data-rv style="--d:.06s">Customer OS</h1>
-          <p class="tagl" data-rv style="--d:.12s">Independent AI-assisted product exploration</p>
+          <p class="tagl" data-rv style="--d:.12s">Independent product initiative</p>
         </div>
         <div data-rv style="--d:.18s">
-          <p class="lede">An independent project exploring how AI can support customer-focused work and make complex processes easier to manage.</p>
-          <p class="lede">I developed the concept and built a working prototype, drawing on my experience in customer engagement and an interest in practical uses of AI.</p>
+          <p class="lede">An AI-assisted prototype I initiated and built on my own, to explore a practical answer to a recurring problem I saw in customer-related work.</p>
+          <p class="lede">It runs and has been tested. It has not been deployed or used on live work.</p>
         </div>
       </div>
       <figure class="showc" id="showc" data-rv="fade">
@@ -120,59 +128,55 @@
     </div>
   </section>
 
+  <section class="dk" style="padding:clamp(56px,7vw,96px) 0">
+    <div class="wrap">
+      <dl class="facts" style="margin-top:0" data-rv>
+        <div><dt>The problem</dt><dd>Time spent preparing and re-preparing similar information for different people.</dd></div>
+        <div><dt>My role</dt><dd>Identified the problem, defined the scope, built and tested the prototype.</dd></div>
+        <div><dt>How</dt><dd>AI-assisted development, alongside my full-time role.</dd></div>
+        <div><dt>Status</dt><dd><b>Working prototype.</b> Not deployed; no adoption or savings claimed.</dd></div>
+      </dl>
+    </div>
+  </section>
+
   <section class="sec lt" aria-labelledby="s1">
     <div class="wrap">
       <div class="sh" style="margin-bottom:0">
-        <div><span class="lbl g" data-rv><span class="n">01</span> The idea</span><h2 class="stmt" id="s1" data-rv style="--d:.06s"><span class="m">Good customer work</span> gets slowed down by repetition.</h2></div>
-        <p class="lede" data-rv style="--d:.12s">I wanted to find out whether AI could make everyday customer-focused work simpler, so I started building something to test the idea.</p>
+        <div><span class="lbl g" data-rv><span class="n">01</span> The problem</span><h2 class="stmt" id="s1" data-rv style="--d:.06s"><span class="m">The same work,</span> prepared again and again.</h2></div>
+        <div data-rv style="--d:.12s">
+          <p class="lede">In customer-related work, a noticeable share of time goes into preparing similar information in different forms for different colleagues.</p>
+          <p class="body" style="margin-top:16px">I wanted to know whether a focused tool could take some of that work off people's hands, and whether someone in a business role could build a working version of it with today's AI-assisted development tools.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="sec dk" aria-labelledby="s2">
+  <section class="sec lt2" aria-labelledby="s2">
     <div class="wrap">
       <div class="sh">
-        <div><span class="lbl g" data-rv><span class="n">02</span> My role</span><h2 class="h2" id="s2" data-rv style="--d:.06s">Nobody asked for it. I started it, shaped it and built it.</h2></div>
-        <p class="lede" data-rv style="--d:.12s">Customer OS is my own initiative, built outside my assigned work.</p>
-      </div>
-      <div class="trio">
-        <article data-rv><i>01</i><b>Spotted the problem</b><p>Noticed it in my own day-to-day work and decided it was worth solving.</p></article>
-        <article data-rv style="--d:.08s"><i>02</i><b>Shaped the product</b><p>Decided what it should do and what it should not.</p></article>
-        <article data-rv style="--d:.16s"><i>03</i><b>Built a working prototype</b><p>Built it with AI-assisted development, testing it as I went and changing what didn't work.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec lt2" aria-labelledby="s3">
-    <div class="wrap">
-      <div class="sh">
-        <div><span class="lbl g" data-rv><span class="n">03</span> Product exploration</span><h2 class="h2" id="s3" data-rv style="--d:.06s">From a pattern I noticed to something people can try.</h2></div>
-        <p class="lede" data-rv style="--d:.12s">The way I approached it, more than what is inside it.</p>
+        <div><span class="lbl g" data-rv><span class="n">02</span> Approach</span><h2 class="h2" id="s2" data-rv style="--d:.06s">From problem to working prototype.</h2></div>
+        <p class="lede" data-rv style="--d:.12s">I treated it as a small product project: a defined problem, a limited scope, a working build, and testing before any claims.</p>
       </div>
       <ol class="phase" id="phase">
         <span class="pr" aria-hidden="true"></span>
-        <li><svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="30" fill="none" stroke="#0D1B2A" stroke-width="1.5"/><circle cx="40" cy="40" r="6" fill="#7A5A0C"/></svg><b>Observe</b><p>A recurring problem in customer-focused work.</p></li>
-        <li><svg viewBox="0 0 80 80" aria-hidden="true"><rect x="12" y="12" width="56" height="56" rx="10" fill="none" stroke="#0D1B2A" stroke-width="1.5"/><path d="M24 40h32M24 30h20M24 50h26" stroke="#7A5A0C" stroke-width="2" stroke-linecap="round"/></svg><b>Define</b><p>What it should be for.</p></li>
-        <li><svg viewBox="0 0 80 80" aria-hidden="true"><rect x="10" y="18" width="60" height="44" rx="8" fill="none" stroke="#0D1B2A" stroke-width="1.5"/><rect x="18" y="28" width="18" height="24" rx="4" fill="#7A5A0C"/><path d="M44 32h18M44 42h12" stroke="#0D1B2A" stroke-width="2" stroke-linecap="round"/></svg><b>Prototype</b><p>A working version, built with AI-assisted development.</p></li>
-        <li><svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="28" fill="none" stroke="#0D1B2A" stroke-width="1.5"/><path d="M28 41l8 8 16-18" fill="none" stroke="#7A5A0C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><b>Test</b><p>Tried on test scenarios, not live work.</p></li>
-        <li><svg viewBox="0 0 80 80" aria-hidden="true"><path d="M62 40a22 22 0 1 1-6.4-15.6" fill="none" stroke="#0D1B2A" stroke-width="1.5"/><path d="M58 16v10H48" fill="none" stroke="#7A5A0C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><b>Refine</b><p>Kept what worked and reworked what didn't.</p></li>
+        <li><svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="30" fill="none" stroke="#0D1B2A" stroke-width="1.5"/><circle cx="40" cy="40" r="6" fill="#7A5A0C"/></svg><b>Identify</b><p>Noticed the same preparation work recurring across tasks.</p></li>
+        <li><svg viewBox="0 0 80 80" aria-hidden="true"><rect x="12" y="12" width="56" height="56" rx="10" fill="none" stroke="#0D1B2A" stroke-width="1.5"/><path d="M24 40h32M24 30h20M24 50h26" stroke="#7A5A0C" stroke-width="2" stroke-linecap="round"/></svg><b>Scope</b><p>Chose which part of the problem to address first and what a useful result would look like.</p></li>
+        <li><svg viewBox="0 0 80 80" aria-hidden="true"><rect x="10" y="18" width="60" height="44" rx="8" fill="none" stroke="#0D1B2A" stroke-width="1.5"/><rect x="18" y="28" width="18" height="24" rx="4" fill="#7A5A0C"/><path d="M44 32h18M44 42h12" stroke="#0D1B2A" stroke-width="2" stroke-linecap="round"/></svg><b>Build</b><p>Built a working prototype with AI-assisted development.</p></li>
+        <li><svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="28" fill="none" stroke="#0D1B2A" stroke-width="1.5"/><path d="M28 41l8 8 16-18" fill="none" stroke="#7A5A0C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><b>Test</b><p>Tried it on test scenarios and noted where it fell short.</p></li>
+        <li><svg viewBox="0 0 80 80" aria-hidden="true"><path d="M62 40a22 22 0 1 1-6.4-15.6" fill="none" stroke="#0D1B2A" stroke-width="1.5"/><path d="M58 16v10H48" fill="none" stroke="#7A5A0C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><b>Iterate</b><p>Reworked the weakest parts and tested again.</p></li>
       </ol>
     </div>
   </section>
 
-  <section class="sec dk" aria-labelledby="s4">
-    <div class="wrap statusb">
-      <div>
-        <span class="lbl g" data-rv><span class="n">04</span> Status</span>
-        <h2 class="h2" id="s4" data-rv style="--d:.06s;margin-top:18px">A working prototype. Not a production product.</h2>
-        <p class="lede" data-rv style="--d:.12s;margin-top:20px">It runs and I have tested it on test scenarios. It is not used on live work, and I don't claim any measured savings.</p>
+  <section class="sec dk" aria-labelledby="s3">
+    <div class="wrap">
+      <div class="sh">
+        <div><span class="lbl g" data-rv><span class="n">03</span> Status</span><h2 class="h2" id="s3" data-rv style="--d:.06s">What exists, and what does not.</h2></div>
+        <p class="lede" data-rv style="--d:.12s">I am happy to walk through the prototype in an interview.</p>
       </div>
-      <div data-rv style="--d:.18s">
-        <ul class="stat">
-          <li><div><b>Working prototype</b><span class="d">Built and tested by me</span></div><span class="st pro">Prototype</span></li>
-          <li><div><b>Production use</b><span class="d">Not deployed or used on live work</span></div><span class="st plan">Not yet</span></li>
-        </ul>
-        <p class="body" style="margin-top:22px">What it shows: I notice a problem, define it, and build something people can try. I'm happy to walk through the prototype in an interview.</p>
+      <div class="bn">
+        <div data-rv><span class="st pro">Built</span><h3>A working prototype</h3><ul><li>Runs end to end on test scenarios</li><li>Tested and revised over several iterations</li><li>Built independently, outside my assigned work</li></ul></div>
+        <div class="no" data-rv style="--d:.08s"><span class="st plan">Not yet</span><h3>Production use</h3><ul><li>Not deployed or used on live work</li><li>No adoption, efficiency or financial results claimed</li></ul></div>
       </div>
     </div>
   </section>
@@ -180,7 +184,7 @@
   <nav class="dk" aria-label="Case studies" style="border-top:1px solid var(--ln-d)">
     <div class="wrap nextc">
       <a href="../customer-journeys/"><span class="lbl">Previous · 02</span><b>← Customer Journeys</b></a>
-      <a href="../about/"><span class="lbl">Next</span><b>About me →</b></a>
+      <a href="../about/"><span class="lbl">Next</span><b>Experience and education →</b></a>
     </div>
   </nav>
 </main>
@@ -188,7 +192,7 @@
 <footer class="foot">
       <div class="wrap">
         <span>© <span id="yr">2026</span> Khanım Azimli · Interface visuals are conceptual illustrations.</span>
-        <nav aria-label="Footer"><a href="../">Home</a><a href="../abb-wrapped/">ABB Wrapped 2026</a><a href="../customer-journeys/">Customer Journeys</a><a href="../customer-os/">Customer OS</a><a href="../about/">About</a></nav>
+        <nav aria-label="Footer"><a href="../">Home</a><a href="../abb-wrapped/">ABB Wrapped</a><a href="../customer-journeys/">Customer Journeys</a><a href="../customer-os/">Customer OS</a><a href="../about/">About</a></nav>
       </div>
     </footer>
 

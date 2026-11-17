@@ -13,11 +13,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Customer Journeys · Khanım Azimli</title>
-<meta name="description" content="Case study: customer experience and personalization in a retail bank. Deciding who hears from the bank, when, and when it should stay silent, with customer data and basic SQL behind the decisions.">
+<meta name="description" content="Case study: customer analysis, business decisions and delivery in retail banking. Analysing customer information, using basic SQL where needed, shaping customer initiatives and coordinating their delivery.">
 <link rel="canonical" href="https://khanimazimli.github.io/customer-journeys/">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Who, When, Whether · Customer Journeys case study">
-<meta property="og:description" content="Customer experience and personalization: who hears from the bank, when, and when it should stay silent.">
+<meta property="og:title" content="Customer Journeys · case study">
+<meta property="og:description" content="Customer analysis, business decisions and delivery in a retail bank's mobile app.">
 <meta property="og:url" content="https://khanimazimli.github.io/customer-journeys/">
 <meta name="theme-color" content="#0D1B2A">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%230D1B2A'/%3E%3Ccircle cx='16' cy='16' r='12' fill='none' stroke='%23D4AF37' stroke-width='1.6'/%3E%3Ctext x='16' y='20.5' font-family='Arial' font-size='11' font-weight='700' fill='%23D4AF37' text-anchor='middle'%3EKA%3C/text%3E%3C/svg%3E">
@@ -28,40 +28,20 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap">
 <link rel="stylesheet" href="../assets/studio.css">
 <style>
-/* identity: decision gates, gold for the active decision */
-.cjh { background: radial-gradient(60% 60% at 60% 60%, rgba(65, 90, 119, .26), transparent 70%), var(--navy); min-height: auto; padding-bottom: 56px; }
-.cjh h1 { font-size: clamp(46px, 7vw, 108px); letter-spacing: -.05em; line-height: .92; }
-.cjh h1 span { display: block; }
-.cjh h1 .g { color: var(--gold); }
-.cjh .top { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 4vw, 64px); align-items: end; }
-.cjh .top > * { min-width: 0; }
-@media (max-width: 960px) { .cjh .top { grid-template-columns: 1fr; } }
-.sys { margin-top: clamp(32px, 4vw, 56px); }
-.sys svg { width: 100%; height: auto; overflow: visible; }
-.sys .ln { stroke: var(--ln-d2); stroke-width: 1.5; fill: none; }
-.sys .gt rect.b { fill: var(--navy-2); stroke: var(--ln-d2); stroke-width: 1.4; transition: stroke .3s, fill .3s; }
-.sys .gt.on rect.b { stroke: var(--gold); fill: #1E2B3C; }
-.sys .gt text { fill: var(--tx); font: 700 17px var(--f); letter-spacing: .06em; }
-.sys .gt .q { fill: var(--tx-3); font: 400 14.5px var(--f); letter-spacing: 0; }
-.sys .tray text { fill: var(--tx-3); font: 400 14px var(--f); }
-.sys .end text { font: 700 17px var(--f); letter-spacing: .06em; }
-.sys .cnt { font: 500 15px var(--m); fill: var(--tx-2); }
-.sys-foot { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-top: 12px; flex-wrap: wrap; }
-
-/* 01 · broadcast vs decided */
-.bvd { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(20px, 4vw, 56px); }
-.bvd .pn { padding: clamp(20px, 3vw, 32px); border-radius: var(--r); background: #fff; border: 1px solid var(--ln-l); }
-.bvd h3 { font-size: 22px; }
-.bvd .grid { margin-top: 20px; display: grid; grid-template-columns: repeat(10, 1fr); gap: 8px; }
-.bvd .cu { aspect-ratio: 1; border-radius: 50%; background: rgba(13, 27, 42, .1); position: relative; display: flex; align-items: flex-end; justify-content: center; gap: 2px; padding-bottom: 22%; }
-.bvd .cu i { width: 12%; border-radius: 1px; background: var(--ink); height: 0; transition: height .5s var(--e); }
-.bvd.in .cu i { height: 46%; }
-.bvd .cu.h { background: transparent; box-shadow: inset 0 0 0 1.5px rgba(13, 27, 42, .22); }
-.bvd .cu.g i { background: var(--gold-ink); }
-.bvd p.c { margin-top: 18px; font-size: 16px; color: var(--ink-2); }
-@media (max-width: 760px) { .bvd { grid-template-columns: 1fr; } }
-
-
+.cjh { background: radial-gradient(60% 60% at 75% 50%, rgba(65, 90, 119, .3), transparent 70%), var(--navy); }
+.cjh .wrap { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(24px, 4vw, 64px); align-items: center; }
+.cjh .wrap > * { min-width: 0; }
+.cjh h1 { font-size: clamp(48px, 6vw, 92px); letter-spacing: -.045em; line-height: .95; }
+.cjh .tagl { margin-top: 18px; font-size: clamp(19px, 1.7vw, 24px); color: var(--gold); }
+.cjh .lede { margin-top: 20px; }
+.cjh .lpv { width: 100%; max-width: 480px; margin: 0 auto; }
+@media (max-width: 1000px) { .cjh .wrap { grid-template-columns: 1fr; } .cjh .lpv { max-width: 380px; } }
+.ctr { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.ctr article { padding: clamp(22px, 3vw, 32px); border-radius: var(--r); background: #fff; border: 1px solid var(--ln-l); }
+.ctr .k { font: 500 13px var(--m); letter-spacing: .08em; color: var(--gold-ink); }
+.ctr h3 { margin-top: 14px; font-size: 22px; letter-spacing: -.02em; }
+.ctr p { margin-top: 10px; color: var(--ink-2); font-size: 16.5px; }
+@media (max-width: 900px) { .ctr { grid-template-columns: 1fr; } }
 /* 02 · data */
 .dat { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: clamp(28px, 5vw, 80px); align-items: center; }
 .dat > * { min-width: 0; }
@@ -80,17 +60,14 @@
 .steps3 p { margin-top: 4px; color: var(--tx-2); font-size: 16px; }
 @media (max-width: 900px) { .dat { grid-template-columns: 1fr; } }
 
-/* 03 · role */
-.own2 { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 5vw, 72px); }
-.own2 > * { min-width: 0; }
-.own2 h3 { font-size: 22px; margin-bottom: 14px; }
-.own2 ul { border-top: 1px solid var(--ln-l2); }
-.own2 li { padding: 15px 0; border-bottom: 1px solid var(--ln-l); font-size: 17px; display: grid; grid-template-columns: 22px 1fr; gap: 10px; }
-.own2 li::before { content: ""; width: 9px; height: 9px; border-radius: 50%; margin-top: 9px; background: var(--gold-ink); }
-.own2 .oth li { color: var(--ink-2); }
-.own2 .oth li::before { background: transparent; box-shadow: inset 0 0 0 1.5px var(--ink-3); }
-@media (max-width: 860px) { .own2 { grid-template-columns: 1fr; } }
-.learn { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 3vw, 40px); }
+
+.team { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: clamp(24px, 5vw, 72px); align-items: start; }
+.team > * { min-width: 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.chips span { padding: 9px 14px; border-radius: 999px; border: 1px solid var(--ln-l2); font-size: 15px; color: var(--ink-2); }
+.chips span.me { background: var(--ink); color: var(--ivory); border-color: var(--ink); }
+@media (max-width: 860px) { .team { grid-template-columns: 1fr; } }
+.learn { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 3vw, 40px); margin-top: clamp(36px, 5vw, 56px); }
 .learn > div { padding-top: 22px; border-top: 1px solid var(--ln-d2); }
 .learn b { display: block; font-size: 20px; font-weight: 500; letter-spacing: -.015em; }
 .learn p { margin-top: 8px; color: var(--tx-2); font-size: 16px; }
@@ -116,56 +93,63 @@
 <main id="main">
   <section class="chero cjh" aria-labelledby="t">
     <div class="wrap">
-      <div class="crumbs" data-rv><span class="lbl">Case 02 · Retail banking · Mobile app</span><span class="st done">Campaigns live</span></div>
-      <div class="top">
-        <h1 id="t" data-rv style="--d:.06s"><span>Who.</span><span>When.</span><span class="g">Whether.</span></h1>
-        <div data-rv style="--d:.14s">
-          <p class="lede">Customer Journeys. My day-to-day work is deciding who a campaign is for, when it should reach them, and when the bank should not send anything at all.</p>
-        </div>
+      <div>
+        <div class="crumbs" data-rv><span class="lbl">Case 02 · Retail banking · Mobile app</span><span class="st done">Initiatives live</span></div>
+        <h1 id="t" data-rv style="--d:.06s">Customer Journeys</h1>
+        <p class="tagl" data-rv style="--d:.1s">Customer analysis, business decisions and delivery</p>
+        <p class="lede" data-rv style="--d:.16s">My day-to-day work at ABB: understanding what customers do and need, deciding what the bank should offer them and when, and seeing those initiatives through to results with the teams involved.</p>
       </div>
-      <figure class="sys" id="sys" style="margin-top:clamp(32px,4vw,56px);margin-bottom:0" data-rv="fade">
-        <div id="sysv"></div>
-        <figcaption class="sr">Abstract animation. Fictional customers move through three questions, who, when and whether; some receive a message and others are left alone.</figcaption>
-        <div class="sys-foot"><span class="small">Abstract illustration with fictional customers.</span><button class="btn ghost" type="button" id="sysR" style="min-height:40px;padding:6px 16px;font-size:14.5px">↻ Replay</button></div>
-      </figure>
+      <div class="lpv" id="lpC" data-rv="fade"><svg aria-hidden="true"></svg></div>
     </div>
   </section>
 
   <section class="dk" style="padding-bottom:clamp(56px,7vw,96px)">
     <div class="wrap">
       <dl class="facts" style="margin-top:0" data-rv>
-        <div><dt>The problem</dt><dd>Many teams want the same customers' attention. Sending everything is noise, not personalization.</dd></div>
-        <div><dt>My role</dt><dd>Lead Customer Experience Specialist. I own my campaigns on the business side.</dd></div>
-        <div><dt>Worked with</dt><dd>Colleagues across marketing, data, risk and finance.</dd></div>
-        <div><dt>Status</dt><dd><b>Live campaigns</b> that I own.</dd></div>
+        <div><dt>Context</dt><dd>Customer experience and personalization in a retail bank's mobile app.</dd></div>
+        <div><dt>My role</dt><dd>Lead Customer Experience Specialist. I own the business side of my initiatives.</dd></div>
+        <div><dt>Worked with</dt><dd>Marketing, data science, risk, finance and engineering colleagues.</dd></div>
+        <div><dt>Status</dt><dd><b>Live initiatives</b> that I own, with results reviewed inside the bank.</dd></div>
       </dl>
     </div>
   </section>
 
   <section class="sec lt" aria-labelledby="s1">
     <div class="wrap">
-      <div class="sh">
-        <div><span class="lbl g" data-rv><span class="n">01</span> The business problem</span><h2 class="stmt" id="s1" data-rv style="--d:.06s"><span class="m">More messages</span> do not mean better personalization.</h2></div>
-        <p class="lede" data-rv style="--d:.12s">Every campaign can be approved on its own and still add up to noise for the customer. The decision that matters is made for each customer, not for each campaign.</p>
+      <div class="sh" style="margin-bottom:0">
+        <div><span class="lbl g" data-rv><span class="n">01</span> Business context</span><h2 class="stmt" id="s1" data-rv style="--d:.06s"><span class="m">Reach is easy.</span> Relevance takes work.</h2></div>
+        <div data-rv style="--d:.12s">
+          <p class="lede">A bank's app can reach a large customer base, and many teams want that attention. The useful question is narrower: what does a particular group of customers actually need, and is it worth the bank's investment to offer it?</p>
+          <p class="body" style="margin-top:16px">Answering that well means understanding customers through their behaviour, being clear about the business goal, and checking afterwards whether the initiative did what it was meant to.</p>
+        </div>
       </div>
-      <div class="bvd" id="bvd" aria-hidden="true">
-        <div class="pn"><span class="lbl">Broadcast</span><h3 style="margin-top:10px">Every campaign goes to everyone</h3><div class="grid" id="bv1"></div><p class="c">Each customer receives several messages, whether or not they fit.</p></div>
-        <div class="pn"><span class="lbl g">Decided</span><h3 style="margin-top:10px">Each customer gets what fits, or nothing</h3><div class="grid" id="bv2"></div><p class="c">Some receive one relevant message. Others are deliberately left alone.</p></div>
-      </div>
-      <p class="note" style="margin-top:22px">Conceptual illustration with fictional customers.</p>
     </div>
   </section>
 
-  <section class="sec dk" id="data" aria-labelledby="s2">
+  <section class="sec lt2" aria-labelledby="s2">
+    <div class="wrap">
+      <div class="sh">
+        <div><span class="lbl g" data-rv><span class="n">02</span> My contribution</span><h2 class="h2" id="s2" data-rv style="--d:.06s">Three parts of the same job.</h2></div>
+        <p class="lede" data-rv style="--d:.12s">For the initiatives I own, I am responsible for the business side from the first question to the review of results.</p>
+      </div>
+      <div class="ctr">
+        <article data-rv><span class="k">A</span><h3>Customer and data analysis</h3><p>I work with customer information, look at behavioural patterns and investigate business questions. When I need to, I use basic SQL to retrieve and examine the relevant data myself.</p></article>
+        <article data-rv style="--d:.08s"><span class="k">B</span><h3>Business decisions</h3><p>I connect what the analysis shows with customer experience and campaign initiatives: who they are for, what they should achieve, and whether they are worth doing.</p></article>
+        <article data-rv style="--d:.16s"><span class="k">C</span><h3>Project delivery</h3><p>I work with business and technical colleagues to get initiatives built and launched, and I review how they perform so the next one is better informed.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec dk" id="data" aria-labelledby="s3">
     <div class="wrap dat">
       <div>
-        <span class="lbl g" data-rv><span class="n">02</span> How I use data</span>
-        <h2 class="h2" id="s2" data-rv style="--d:.06s;margin-top:18px">Some questions need more than a meeting or a campaign brief.</h2>
-        <p class="lede" data-rv style="--d:.12s;margin-top:20px">I look at customer data to check an assumption or explain a pattern before a decision is made. When I need to examine the information more closely, I use basic SQL to pull and review it myself.</p>
+        <span class="lbl g" data-rv><span class="n">03</span> Data and analysis</span>
+        <h2 class="h2" id="s3" data-rv style="--d:.06s;margin-top:18px">Some questions need more than a meeting or a brief.</h2>
+        <p class="lede" data-rv style="--d:.12s;margin-top:20px">Before a decision is made, I check the assumption behind it against customer data. When I need to look more closely, I use basic SQL to pull and review the information myself, then bring the finding back to the team.</p>
         <ol class="steps3" data-rv>
           <li><i>01</i><div><b>Ask</b><p>Turn a business question into something the data can answer.</p></div></li>
-          <li><i>02</i><div><b>Look</b><p>Pull and check the relevant information, with basic SQL where needed.</p></div></li>
-          <li><i>03</i><div><b>Decide</b><p>Bring what I found back to the team, with what it means for the campaign.</p></div></li>
+          <li><i>02</i><div><b>Look</b><p>Retrieve and check the relevant information, with basic SQL where needed.</p></div></li>
+          <li><i>03</i><div><b>Decide</b><p>Explain what the data shows and what it means for the initiative.</p></div></li>
         </ol>
       </div>
       <div class="plot" id="plot">
@@ -175,32 +159,36 @@
     </div>
   </section>
 
-  <section class="sec lt" aria-labelledby="s3">
-    <div class="wrap">
-      <div class="sh">
-        <div><span class="lbl g" data-rv><span class="n">03</span> My responsibility</span><h2 class="h2" id="s3" data-rv style="--d:.06s">The business side of my campaigns.</h2></div>
-        <p class="lede" data-rv style="--d:.12s">For the campaigns I own, I am responsible for understanding the customer, shaping the personalization, and reviewing the results with the team.</p>
+  <section class="sec lt" aria-labelledby="s4">
+    <div class="wrap team">
+      <div>
+        <span class="lbl g" data-rv><span class="n">04</span> Working across teams</span>
+        <h2 class="h2" id="s4" data-rv style="--d:.06s;margin-top:18px">The business side, in a team of specialists.</h2>
+      </div>
+      <div data-rv style="--d:.1s">
+        <p class="lede">In a regulated bank, an initiative needs several specialists. My part is the business side: framing the need, agreeing what the initiative should achieve, and keeping it moving to launch. The models, the build and the risk and finance decisions belong to the colleagues who own them.</p>
+        <div class="chips" aria-label="Colleagues I work with"><span class="me">Business owner: me</span><span>Marketing</span><span>Data science</span><span>Risk</span><span>Finance</span><span>Engineering</span></div>
       </div>
     </div>
   </section>
 
-  <section class="sec dk" aria-labelledby="s4">
+  <section class="sec dk" aria-labelledby="s5">
     <div class="wrap">
-      <div class="sh">
-        <div><span class="lbl g" data-rv><span class="n">04</span> Learning</span><h2 class="h2" id="s4" data-rv style="--d:.06s">What the work has taught me.</h2></div>
-        <p class="lede" data-rv style="--d:.12s">Results are reported inside the bank and are not published here.</p>
+      <div class="sh" style="margin-bottom:0">
+        <div><span class="lbl g" data-rv><span class="n">05</span> Delivery and outcomes</span><h2 class="h2" id="s5" data-rv style="--d:.06s">Live, reviewed, and improved.</h2></div>
+        <p class="lede" data-rv style="--d:.12s">Initiatives I own are live in the app. I review their results with the team and carry what we learn into the next one. Performance figures are internal and are not published here.</p>
       </div>
       <div class="learn">
-        <div data-rv><b>Relevance beats reach</b><p>A smaller audience that fits the offer does more than a large one that doesn't.</p></div>
-        <div data-rv style="--d:.08s"><b>Holding back is a decision</b><p>Not sending a message is often the right call, even when every campaign is approved.</p></div>
-        <div data-rv style="--d:.16s"><b>Clarity travels</b><p>Work is ready when everyone involved can act on it.</p></div>
+        <div data-rv><b>Start from the customer question</b><p>Decide what the customer needs before deciding which channel or format to use.</p></div>
+        <div data-rv style="--d:.08s"><b>Check before deciding</b><p>A quick look at the data often changes the question, and saves effort later.</p></div>
+        <div data-rv style="--d:.16s"><b>A good plan can be delivered</b><p>The best initiative is one the team can build, launch and measure.</p></div>
       </div>
     </div>
   </section>
 
   <nav class="dk" aria-label="Case studies" style="border-top:1px solid var(--ln-d)">
     <div class="wrap nextc">
-      <a href="../abb-wrapped/"><span class="lbl">Previous · 01</span><b>← ABB Wrapped 2026</b></a>
+      <a href="../abb-wrapped/"><span class="lbl">Previous · 01</span><b>← ABB Wrapped</b></a>
       <a href="../customer-os/"><span class="lbl">Next case · 03</span><b>Customer OS →</b></a>
     </div>
   </nav>
@@ -208,111 +196,16 @@
 
 <footer class="foot">
       <div class="wrap">
-        <span>© <span id="yr">2026</span> Khanım Azimli · Illustrations use fictional data.</span>
-        <nav aria-label="Footer"><a href="../">Home</a><a href="../abb-wrapped/">ABB Wrapped 2026</a><a href="../customer-journeys/">Customer Journeys</a><a href="../customer-os/">Customer OS</a><a href="../about/">About</a></nav>
+        <span>© <span id="yr">2026</span> Khanım Azimli · Visuals are abstract illustrations.</span>
+        <nav aria-label="Footer"><a href="../">Home</a><a href="../abb-wrapped/">ABB Wrapped</a><a href="../customer-journeys/">Customer Journeys</a><a href="../customer-os/">Customer OS</a><a href="../about/">About</a></nav>
       </div>
     </footer>
 
 <script src="../assets/studio.js"></script>
+<script src="../assets/visuals.js"></script>
 <script>
-/* ---------- hero: the decision system ---------- */
-(function () {
-  var host = document.getElementById('sysv'), fig = document.getElementById('sys'); if (!host) return;
-  /* 24 fictional customers: the gate where each is held back (1 who, 2 when, 3 whether) or 0 = sent */
-  var F = [0, 1, 2, 0, 1, 3, 0, 2, 1, 0, 3, 1, 0, 2, 1, 0, 3, 2, 1, 0, 3, 2, 1, 0];
-  var NAMES = ['Who', 'When', 'Whether'], REASON = ['', '', ''];
-  var G, vert, dots = [], raf = 0, t0 = 0, END, visible = true;
-  function geo() {
-    vert = host.clientWidth < 700;
-    if (!vert) return { W: 1200, H: 430, start: [30, 170], gates: [[330, 170], [600, 170], [870, 170]], send: [1130, 170], tray: function (g, k) { return [G.gates[g][0] - 60 + (k % 6) * 24, 340 + Math.floor(k / 6) * 24]; }, sendAt: function (k) { return [1080 - (k % 3) * 22, 112 + Math.floor(k / 3) * 22]; } };
-    return { W: 360, H: 820, start: [130, 20], gates: [[130, 170], [130, 360], [130, 550]], send: [130, 770], tray: function (g, k) { return [262 + (k % 3) * 22, G.gates[g][1] - 18 + Math.floor(k / 3) * 22]; }, sendAt: function (k) { return [70 + (k % 6) * 24, 720 - Math.floor(k / 6) * 22]; } };
-  }
-  function build() {
-    G = geo();
-    var s = '<svg viewBox="0 0 ' + G.W + ' ' + G.H + '" aria-hidden="true">';
-    if (!vert) {
-      s += '<path class="ln" d="M' + G.start[0] + ' 170 H' + (G.send[0] - 30) + '"/>';
-      G.gates.forEach(function (g, i) {
-        s += '<path class="ln" d="M' + g[0] + ' 225 V310" stroke-dasharray="3 5"/>';
-        s += '<g class="gt" id="gt' + i + '" transform="translate(' + (g[0] - 70) + ' ' + (g[1] - 55) + ')"><rect class="b" width="140" height="110" rx="14"/><text x="70" y="50" text-anchor="middle">' + NAMES[i].toUpperCase() + '</text><text class="q" x="70" y="76" text-anchor="middle">' + ['relevant?', 'right moment?', 'contact at all?'][i] + '</text></g>';
-      });
-      s += '<g class="end"><circle cx="' + G.send[0] + '" cy="170" r="14" fill="#D4AF37"/><text x="' + (G.send[0] + 26) + '" y="176" fill="#F7F3E9">SEND</text><text class="cnt" id="cS" x="' + (G.send[0] + 26) + '" y="200">0</text>';
-      s += '<text x="' + (G.send[0] - 60) + '" y="410" fill="#E58C7A">HOLD BACK</text><text class="cnt" id="cH" x="' + (G.send[0] + 54) + '" y="410">0</text></g>';
-    } else {
-      s += '<path class="ln" d="M130 ' + G.start[1] + ' V' + (G.send[1] - 30) + '"/>';
-      G.gates.forEach(function (g, i) {
-        s += '<path class="ln" d="M205 ' + g[1] + ' H255" stroke-dasharray="3 5"/>';
-        s += '<g class="gt" id="gt' + i + '" transform="translate(' + (g[0] - 75) + ' ' + (g[1] - 45) + ')"><rect class="b" width="150" height="90" rx="14"/><text x="75" y="40" text-anchor="middle">' + NAMES[i].toUpperCase() + '</text><text class="q" x="75" y="64" text-anchor="middle">' + ['relevant?', 'right moment?', 'contact at all?'][i] + '</text></g>';
-      });
-      s += '<text x="262" y="' + (G.gates[0][1] - 40) + '" fill="#E58C7A" style="font:700 14px Satoshi,Arial;letter-spacing:.06em">HOLD</text>';
-      s += '<g class="end"><circle cx="130" cy="' + G.send[1] + '" r="14" fill="#D4AF37"/><text x="156" y="' + (G.send[1] + 6) + '" fill="#F7F3E9">SEND</text><text class="cnt" id="cS" x="226" y="' + (G.send[1] + 6) + '">0</text>';
-      s += '<text x="262" y="' + (G.gates[2][1] + 90) + '" fill="#E58C7A" style="font:700 14px Satoshi,Arial;letter-spacing:.06em">HELD</text><text class="cnt" id="cH" x="312" y="' + (G.gates[2][1] + 90) + '">0</text></g>';
-    }
-    s += '<g id="dg"></g></svg>';
-    host.innerHTML = s;
-    var dg = host.querySelector('#dg'), cnt = [0, 0, 0, 0];
-    dots = F.map(function (f, i) {
-      var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      c.setAttribute('r', vert ? 6 : 7); c.setAttribute('fill', '#C3CBD6'); c.setAttribute('cx', G.start[0]); c.setAttribute('cy', G.start[1]); c.style.opacity = 0;
-      dg.appendChild(c);
-      var k = cnt[f]++;
-      return { el: c, f: f, end: f ? G.tray(f - 1, k) : G.sendAt(k), t: i * 260 };
-    });
-    END = (F.length - 1) * 260 + 2200;
-  }
-  function lerp(a, b, k) { return a + (b - a) * k; }
-  function ease(k) { return k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2; }
-  function pos(d, u) {
-    /* u in 0..1 across the dot's own journey */
-    var stopAt = d.f ? G.gates[d.f - 1] : G.send, a = G.start, mid = stopAt;
-    if (u < .72) { var k = ease(u / .72); return [lerp(a[0], mid[0], k), lerp(a[1], mid[1], k), 0]; }
-    var k2 = ease((u - .72) / .28); return [lerp(mid[0], d.end[0], k2), lerp(mid[1], d.end[1], k2), 1];
-  }
-  function render(t) {
-    var s = 0, h = 0, active = [-1, -1, -1];
-    dots.forEach(function (d) {
-      var u = (t - d.t) / 1900;
-      if (u <= 0) { d.el.style.opacity = 0; return; }
-      u = Math.min(1, u);
-      var p = pos(d, u);
-      d.el.setAttribute('cx', p[0].toFixed(1)); d.el.setAttribute('cy', p[1].toFixed(1)); d.el.style.opacity = 1;
-      /* which gate is the dot passing */
-      G.gates.forEach(function (g, gi) { var dd = vert ? Math.abs(p[1] - g[1]) : Math.abs(p[0] - g[0]); if (dd < 40 && !p[2]) active[gi] = 1; });
-      if (p[2]) { d.el.setAttribute('fill', d.f ? '#E58C7A' : '#D4AF37'); if (u >= 1) { d.f ? h++ : s++; } }
-      else d.el.setAttribute('fill', '#C3CBD6');
-    });
-    G.gates.forEach(function (g, gi) { var e = host.querySelector('#gt' + gi); if (e) e.classList.toggle('on', active[gi] === 1); });
-    host.querySelector('#cS').textContent = s; host.querySelector('#cH').textContent = h;
-  }
-  function loop(now) {
-    if (!t0) t0 = now;
-    var t = now - t0; render(Math.min(t, END));
-    if (t < END && visible) raf = requestAnimationFrame(loop); else raf = 0;
-  }
-  function start() { cancelAnimationFrame(raf); t0 = 0; if (KA.reduced) { render(END); return; } raf = requestAnimationFrame(loop); }
-  build();
-  KA.onView(fig, start, '0px');
-  KA.watch(fig, function (v) { visible = v; if (v && t0 && !raf) { t0 = 0; raf = requestAnimationFrame(loop); } });
-  document.getElementById('sysR').addEventListener('click', start);
-  render(0);
-  var lastV = vert, rt; addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(function () { var v = host.clientWidth < 700; if (v !== lastV) { lastV = v; build(); render(END); } }, 150); });
-})();
-
-/* ---------- 01: broadcast vs decided ---------- */
-(function () {
-  var a = document.getElementById('bv1'), b = document.getElementById('bv2'); if (!a) return;
-  function h(n) { var x = Math.sin(n * 12.9898) * 43758.5453; return x - Math.floor(x); }
-  var A = '', B = '';
-  for (var i = 0; i < 40; i++) {
-    var m = 2 + Math.floor(h(i + 1) * 3), d = h(i + 9);
-    A += '<span class="cu">' + new Array(m + 1).join('<i></i>') + '</span>';
-    B += d < .45 ? '<span class="cu g"><i></i></span>' : '<span class="cu h"></span>';
-  }
-  a.innerHTML = A; b.innerHTML = B;
-  KA.onView(document.getElementById('bvd'), function () { document.getElementById('bvd').classList.add('in'); });
-})();
-
-
+KAV.loop(document.querySelector('#lpC svg'));
+KA.onView(document.getElementById('lpC'), function () { document.getElementById('lpC').classList.add('in'); }, '0px');
 /* ---------- 02: abstract pattern ---------- */
 (function () {
   var box = document.getElementById('plot'), svg = document.getElementById('plotS'); if (!svg) return;

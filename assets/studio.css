@@ -196,32 +196,6 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .more[open] summary::after { transform: rotate(45deg); }
 .more .in { padding: 4px 0 28px; }
 
-/* ---------- story phone (9:16) · illustrative recreations ---------- */
-.phone { position: relative; aspect-ratio: 9 / 16; border-radius: 26px; overflow: hidden; color: var(--sfg, #fff); container-type: inline-size;
-  background:
-    radial-gradient(120% 70% at 100% 0%, color-mix(in srgb, var(--sac, #E9CB6B) 22%, transparent), transparent 60%),
-    radial-gradient(90% 60% at 0% 100%, color-mix(in srgb, var(--sfg, #fff) 10%, transparent), transparent 70%),
-    var(--sbg, #14213D);
-  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .1), inset 0 1px 0 rgba(255, 255, 255, .12); }
-.phone::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(currentColor .6px, transparent .7px); background-size: 9px 9px; opacity: .07; pointer-events: none; }
-.phone .bars { position: absolute; top: 3.6%; left: 6%; right: 6%; display: flex; gap: 3px; z-index: 2; }
-.phone .bars i { flex: 1; height: 2.5px; border-radius: 2px; background: currentColor; opacity: .28; }
-.phone .bars i.on { opacity: .95; }
-.phone .top { position: absolute; top: 6.8%; left: 6%; right: 6%; display: flex; align-items: center; gap: 3.5cqw; z-index: 2; font-size: max(8px, 4.6cqw); }
-.phone .top .av { width: 9cqw; height: 9cqw; border-radius: 50%; display: grid; place-items: center; background: var(--sac); color: var(--sbg); font-weight: 700; font-size: max(7px, 4.4cqw); }
-.phone .top .tt { font-weight: 700; opacity: .9; }
-.phone .top .x { margin-left: auto; font-size: max(10px, 7cqw); opacity: .7; line-height: 1; }
-.phone .ps { position: absolute; inset: 0; padding: 27% 8% 8%; display: flex; flex-direction: column; }
-.phone .pk { font: 500 max(8px, 4.8cqw)/1.2 var(--m); letter-spacing: .1em; text-transform: uppercase; color: var(--sac); }
-.phone .ph { margin-top: 4%; font-size: max(11px, 8.6cqw); font-weight: 500; line-height: 1.12; letter-spacing: -.02em; }
-.phone .pviz { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 0; padding: 4% 0; }
-.phone .pviz svg { width: 100%; max-height: 100%; overflow: visible; }
-.phone .pv { font-size: max(18px, 15.5cqw); font-weight: 700; line-height: .95; letter-spacing: -.04em; }
-.phone .pn { margin-top: 3%; font-size: max(8.5px, 5.2cqw); opacity: .82; line-height: 1.35; }
-.phone .pb { margin-top: 6%; align-self: stretch; text-align: center; padding: 4% 0; border-radius: 999px; background: color-mix(in srgb, var(--sfg, #fff) 16%, transparent); font-size: max(8.5px, 5.2cqw); font-weight: 700; }
-.phone .orb { position: absolute; right: -22%; top: 14%; width: 64%; aspect-ratio: 1; border-radius: 50%; border: 1px solid var(--sac); opacity: .22; }
-.phone .orb2 { display: none; }
-
 /* ---------- status list ---------- */
 .stat { display: grid; gap: 0; border-top: 1px solid var(--ln-d); }
 .stat li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--ln-d); }
@@ -291,3 +265,29 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .absw.in .net .g { transition: stroke-dashoffset 1.8s var(--e2) .9s; stroke-dashoffset: 0; }
 .absw-cap { margin-top: 14px; font-size: 14.5px; color: var(--tx-3); }
 @media (max-width: 640px) { .absw .ab { grid-template-columns: 1fr; } .absw .as { display: none; } .absw .cards { grid-template-columns: 1fr 1fr; } .absw .cards .c:nth-child(3) { display: none; } }
+
+/* ---------- abstract visuals (assets/visuals.js) ---------- */
+.edv svg, .lpv svg { width: 100%; height: auto; display: block; overflow: visible; }
+.ed-y { font: 500 76px var(--f); letter-spacing: -.04em; fill: none; stroke: var(--steel); stroke-width: 1.2; }
+.ed-y2 { stroke: var(--gold); }
+.ed-ring { fill: none; stroke: rgba(212, 175, 55, .45); stroke-width: 1.2; stroke-dasharray: 4 6; }
+.ed-arc { fill: none; stroke: var(--gold); stroke-width: 1.6; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.ed-p { fill: rgba(195, 203, 214, .55); transition: opacity .9s var(--e), transform .9s var(--e); transition-delay: var(--d, 0s); transform-box: fill-box; transform-origin: center; }
+.ed-p.g { fill: var(--gold); }
+.js .edv:not(.in) .ed-p { opacity: 0; transform: scale(.2); }
+.edv.in .ed-arc { transition: stroke-dashoffset 1.6s var(--e2) .9s; stroke-dashoffset: 0; }
+.lp-ring { fill: none; stroke: currentColor; stroke-opacity: .18; stroke-width: 1.5; }
+.lp-arc { fill: none; stroke: var(--gold); stroke-width: 2; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.lpv.in .lp-arc { transition: stroke-dashoffset 2.4s var(--e2) .2s; stroke-dashoffset: 0; }
+.lp-p { fill: currentColor; opacity: .22; }
+.lp-n circle { fill: var(--lp-bg, var(--navy-2)); stroke: currentColor; stroke-opacity: .5; stroke-width: 1.4; transition: stroke .5s, fill .5s; transition-delay: var(--d); }
+.lp-n text { font: 700 16px var(--f); fill: currentColor; letter-spacing: .01em; }
+.lpv.in .lp-n circle { stroke: var(--gold); stroke-opacity: 1; }
+.lp-run { fill: var(--gold); offset-distance: 0%; opacity: 0; }
+.lpv.in .lp-run { animation: lprun 2.4s var(--e2) .2s forwards; }
+@keyframes lprun { 0% { offset-distance: 0%; opacity: 1; } 92% { opacity: 1; } 100% { offset-distance: 100%; opacity: 0; } }
+.lt .lpv, .lt2 .lpv { --lp-bg: var(--paper); color: var(--ink); }
+.lt .lp-arc, .lt2 .lp-arc, .lt .lp-run, .lt2 .lp-run { stroke: var(--gold-ink); }
+.lt .lp-run, .lt2 .lp-run { fill: var(--gold-ink); }
+.lt .lpv.in .lp-n circle, .lt2 .lpv.in .lp-n circle { stroke: var(--gold-ink); }
+.dk .lpv { color: var(--tx); }
