@@ -103,6 +103,8 @@
 .role ul.rs li { position: relative; padding: 5px 0 5px 18px; font-size: 16px; color: var(--ink-2); line-height: 1.5; }
 .role ul.rs li::before { content: ""; position: absolute; left: 0; top: 14px; width: 7px; height: 7px; border-radius: 50%; background: var(--gold-ink); }
 .edu.e2 div b { font-size: 23px; }
+.edu.e2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 860px) { .edu.e2 { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -149,7 +151,6 @@
       <div class="edu e2">
         <div data-rv><small>2012–2016</small><b>BSc in Economics</b><span>The Academy of Public Administration under the President of the Republic of Azerbaijan</span></div>
         <div data-rv style="--d:.08s"><small>2018–2020</small><b>MA in Education Management</b><span>ADA University, Baku</span></div>
-        <div data-rv style="--d:.16s"><small>2022</small><b>Forward Program certificate</b><span>McKinsey &amp; Company's online programme for early-career professionals</span></div>
       </div>
       <p class="lang" data-rv><span><b>Azerbaijani</b> native</span><span><b>English</b> fluent</span><span><b>Turkish</b> fluent</span><span><b>Russian</b> limited</span></p>
     </div>
@@ -171,11 +172,11 @@
         </div>
         <div class="org" data-rv>
           <div><p class="on2">PASHA Malls</p><p class="sec2">Shopping malls · Baku</p><span class="ind">Customer and digital experience</span></div>
-          <div><div class="role"><span class="dt">Jul 2024 – Mar 2025</span><div><h3>Marketing Specialist</h3><ul class="rs"><li>Customer research to find where visitors' experience fell short</li><li>Improved the website so visitors could find information faster</li><li>Worked on customer experience changes that improved customer satisfaction scores</li></ul></div></div></div>
+          <div><div class="role"><span class="dt">Jul 2024 – Mar 2025</span><div><h3>Marketing Specialist</h3><ul class="rs"><li>Customer research on the visitor experience</li><li>Website improvements to make information easier to find</li><li>Customer experience initiatives for the malls</li></ul></div></div></div>
         </div>
         <div class="org" data-rv>
           <div><p class="on2">The International School of Azerbaijan</p><p class="sec2">International education · Baku</p><span class="ind">Service and process improvement</span></div>
-          <div><div class="role"><span class="dt">Oct 2019 – Jun 2024</span><div><h3>Communications-External Relations/Publishing Officer</h3><ul class="rs"><li>Redesigned the admissions journey and the website structure around how families apply</li><li>Simplified the process to reduce repetitive enquiries and make applications easier to complete</li><li>Worked with admissions, academic and leadership colleagues; ran communications and digital channels</li></ul></div></div></div>
+          <div><div class="role"><span class="dt">Oct 2019 – Jun 2024</span><div><h3>Communications-External Relations/Publishing Officer</h3><ul class="rs"><li>Worked on the admissions journey and the website structure, around how families apply</li><li>Admissions-related process improvements</li><li>Worked with admissions, academic and leadership colleagues; ran communications and digital channels</li></ul></div></div></div>
         </div>
         <div class="org" data-rv>
           <div><p class="on2">European Azerbaijan School</p><p class="sec2">International education · Baku</p></div>
@@ -191,7 +192,7 @@
       </div>
       <div class="proj" data-rv>
         <div><span class="lbl">Independent project · not employment</span><p class="on2" style="margin-top:10px;font-size:22px;font-weight:500;letter-spacing:-.02em">Customer OS</p><p class="small" style="margin-top:6px">AI-assisted prototype · 2026</p></div>
-        <div><p class="body">A working prototype I initiated, scoped, built and tested independently. Not deployed. <a href="../customer-os/" style="color:inherit;text-underline-offset:4px">Read more</a></p></div>
+        <div><p class="body">I independently initiated and developed Customer OS, from an initial idea to a working prototype. I presented it for evaluation and it was accepted. Not deployed in production. <a href="../customer-os/" style="color:inherit;text-underline-offset:4px">Read more</a></p></div>
       </div>
       <div class="proj" data-rv style="margin-top:12px">
         <div><span class="lbl">Independent project · not employment</span><p class="on2" style="margin-top:10px;font-size:22px;font-weight:500;letter-spacing:-.02em">CosmoPAY</p><p class="small" style="margin-top:6px">Fintech · 2023–2024</p></div>
@@ -223,7 +224,7 @@
       <div class="rel">
         <article data-rv><small>Retail</small><p>Analysed marketing performance and customer behaviour to show which campaigns were working.</p><a href="#cT">Bravo</a></article>
         <article data-rv style="--d:.06s"><small>Education</small><p>Redesigned an admissions process around how families actually apply, with several departments involved.</p><a href="#cT">The International School of Azerbaijan</a></article>
-        <article data-rv style="--d:.12s"><small>Shopping malls</small><p>Used customer research to find where the experience fell short, then improved it.</p><a href="#cT">PASHA Malls</a></article>
+        <article data-rv style="--d:.12s"><small>Shopping malls</small><p>Used customer research to inform improvements to the visitor experience and the website.</p><a href="#cT">PASHA Malls</a></article>
         <article data-rv><small>Banking analysis</small><p>Check assumptions against customer data before decisions, using basic SQL where needed.</p><a href="../customer-journeys/">Customer Journeys</a></article>
         <article data-rv style="--d:.06s"><small>Banking delivery</small><p>Coordinate a data-informed digital product across marketing, design, product, data and engineering.</p><a href="../abb-wrapped/">ABB Wrapped</a></article>
         <article data-rv style="--d:.12s"><small>Own initiative</small><p>Turned a problem nobody had asked me to solve into a working prototype.</p><a href="../customer-os/">Customer OS</a></article>
