@@ -81,12 +81,32 @@
   .hero { padding-top: 112px; }
   .viz { max-width: 760px; }
 }
+.qx { display: none; }
 @media (max-width: 640px) {
-  .viz { aspect-ratio: auto; }
-  .viz canvas { position: relative; height: 300px; }
+  .hero { min-height: auto; padding: 92px 0 36px; }
+  .hero .who { margin-bottom: 16px; }
+  .hero h1 { font-size: 33px; line-height: 1.06; }
+  .hero .role { margin-top: 18px; }
+  .hero .role .sep, .hero .role .mute { display: none; }
+  .hero .lede { font-size: 17px; margin-top: 10px; }
+  .hero .acts { margin-top: 20px; }
+  .qx { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 14px; }
+  .qx a { display: block; padding: 10px 10px 12px; border-radius: 12px; border: 1px solid var(--ln-d2); text-decoration: none; font-size: 14px; line-height: 1.25; color: var(--tx); min-height: 44px; }
+  .qx a small { display: block; font: 500 11.5px var(--m); color: var(--gold); letter-spacing: .06em; margin-bottom: 4px; }
+  .viz { aspect-ratio: auto; margin-top: 4px; }
+  .viz canvas { position: relative; height: 190px; }
   .viz .ph, .viz .ph.hot { display: none; }
-  .viz .stage { position: relative; margin-bottom: 10px; flex-wrap: wrap; }
-  .dec, .act { position: relative; width: 100%; right: auto; top: auto; bottom: auto; margin-top: 12px; }
+  .viz .stage { position: relative; margin-bottom: 4px; flex-wrap: wrap; font-size: 11.5px; gap: 6px; }
+  .dec, .act { position: relative; width: 100%; right: auto; top: auto; bottom: auto; margin-top: 8px; }
+  .dec { padding: 14px; }
+  .dec h3 { font-size: 15px; margin-bottom: 4px; }
+  .dec .grpn { margin: 0 0 8px; }
+  .dec ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .dec li { grid-template-columns: 1fr; gap: 6px; padding: 8px 0 0; font-size: 13.5px; }
+  .act { padding: 12px 14px; }
+  .act b { font-size: 16px; margin-top: 4px; }
+  .act span { font-size: 13.5px; margin-top: 4px; }
+  .viz-foot { margin-top: 8px; }
 }
 
 /* ---------- selected work ---------- */
@@ -230,6 +250,12 @@
 .contact .mail { display: inline-block; margin-top: 36px; font-size: clamp(28px, 5.2vw, 76px); font-weight: 500; letter-spacing: -.04em; line-height: 1.05; text-decoration: none; overflow-wrap: anywhere; background: linear-gradient(var(--gold), var(--gold)) 0 100% / 0 2px no-repeat; transition: background-size .6s var(--e), color .3s; }
 .contact .mail:hover { background-size: 100% 2px; color: var(--gold); }
 .contact .row { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: center; color: var(--tx-3); }
+@media (max-width: 640px) {
+  .work-h { padding: 52px 0 0; }
+  .work-h .lede { font-size: 17px; }
+  .feat { padding: 56px 0 64px; }
+  .feat .no { font-size: 56px; }
+}
 </style>
 </head>
 <body>
@@ -258,6 +284,7 @@
         <div class="role" data-rv style="--d:.18s"><b>Lead Customer Experience Specialist</b><i class="sep" aria-hidden="true"></i><span class="mute">Retail banking, hyper-personalization</span></div>
         <p class="lede" data-rv style="--d:.24s">Economist by training. I decide which customers a campaign is for, when it should reach them and when the bank should stay silent, and I build working prototypes when a process needs one.</p>
         <div class="acts" data-rv style="--d:.32s"><a class="btn" href="#work">Explore work <span class="ar" aria-hidden="true">→</span></a><a class="btn ghost" href="about/">About me</a></div>
+        <nav class="qx" aria-label="Case studies"><a href="abb-wrapped/"><small>01</small>ABB Wrapped 2026</a><a href="customer-journeys/"><small>02</small>Customer Journeys</a><a href="hyper-intelligence-os/"><small>03</small>Hyper Intelligence OS</a></nav>
       </div>
 
       <div data-rv="fade" style="--d:.2s">
@@ -287,7 +314,7 @@
   <!-- B · SELECTED WORK -->
   <div id="work" class="dk work-h">
     <div class="wrap sh" style="margin-bottom:0">
-      <div><span class="lbl g" data-rv>Selected work</span><h2 class="d2" data-rv style="--d:.06s">Three projects. Three kinds of problem.</h2></div>
+      <div><span class="lbl g" data-rv>Selected work</span><h2 class="d2" data-rv style="--d:.06s">Three projects, three kinds of problem.</h2></div>
       <p class="lede" data-rv style="--d:.12s">A personalized product, a decision system inside a regulated bank, and a working prototype I started on my own. Each case states what I did and how far the work got.</p>
     </div>
   </div>
@@ -379,7 +406,7 @@
             </div>
           </div>
         </div>
-        <p class="tag" style="position:static;margin-top:14px">Recreation of the prototype's interface for this portfolio. Fictional campaign.</p>
+        <p class="tag" style="position:static;margin-top:14px">Recreation of the prototype's interface, with a fictional campaign.</p>
       </div>
     </div>
   </article>
@@ -389,7 +416,7 @@
     <div class="wrap">
       <div class="sh" style="margin-bottom:0">
         <div><span class="lbl g" data-rv>What I work on</span><h2 class="h2" id="capT" data-rv style="--d:.06s">From a question to something that works.</h2></div>
-        <p class="lede" data-rv style="--d:.12s">The three are one chain. A clear question makes the logic possible, and the logic is what a tool or a product has to carry.</p>
+        <p class="lede" data-rv style="--d:.12s">Each depends on the one before: a clear question makes the logic possible, and the logic is what a tool has to carry.</p>
       </div>
       <div class="caps" id="caps">
         <span class="line" aria-hidden="true"></span>
@@ -431,6 +458,7 @@
 </footer>
 
 <script src="assets/studio.js"></script>
+<script src="assets/stories.js"></script>
 <script>
 /* ---------- hero: signals → decision → action ---------- */
 (function () {
@@ -441,7 +469,7 @@
   var lis = [].slice.call(dec.querySelectorAll('li')), stg = [].slice.call(fig.querySelectorAll('.stage [data-s]'));
   var W, H, P = [], mobile, t0 = 0, raf = 0, visible = true, done = false;
   /* cluster centres as fractions of the canvas; group 0 is the one evaluated */
-  var CD = [[.44, .30], [.16, .30], [.16, .74], [.44, .76]], CM = [[.5, .52], [.18, .22], [.82, .22], [.82, .82]];
+  var CD = [[.44, .30], [.16, .30], [.16, .74], [.44, .76]], CM = [[.5, .5], [.15, .3], [.85, .3], [.85, .78]];
   function rnd(s) { var x = Math.sin(s * 9301 + 49297) * 233280; return x - Math.floor(x); }
   function size() {
     var r = cv.getBoundingClientRect(), dpr = Math.min(2, devicePixelRatio || 1);
@@ -519,19 +547,9 @@
 
 /* ---------- 01 · fan of illustrative stories ---------- */
 (function () {
-  var S = [
-    ['#4A2545', '#fff', 'Welcome back', 'We meet again', '', 'Here is what changed while you were away'],
-    ['#EFE6D8', '#1F1A14', 'Top category', 'Your payments were led by', 'Cafés', '184 payments · 2,140 AZN'],
-    ['#0F5E63', '#fff', 'Top country abroad', 'Abroad, you spent most in', 'Georgia', '1,280 AZN this year'],
-    ['#14213D', '#fff', 'A first', 'This year you opened your', 'First deposit', 'One of this year’s milestones'],
-    ['#16352B', '#F1E9D2', 'Intro · premium', 'Your 2026, in stories', '', 'A premium edition of your year']
-  ];
-  var f = document.getElementById('fan'); if (!f) return;
-  f.innerHTML = S.map(function (s, i) {
-    return '<div class="phone" style="--sbg:' + s[0] + ';--sfg:' + s[1] + '"><span class="orb"></span><span class="orb2"></span><div class="bars">' +
-      '<i class="on"></i><i class="on"></i><i' + (i > 1 ? ' class="on"' : '') + '></i><i></i><i></i></div><div class="ps"><span class="pk">' + s[2] + '</span><span class="ph">' + s[3] + '</span>' +
-      (s[4] ? '<span class="pv">' + s[4] + '</span>' : '<span class="pv" style="font-size:0"></span>') + '<span class="pn">' + s[5] + '</span><span class="pb">Share</span></div></div>';
-  }).join('');
+  var f = document.getElementById('fan'); if (!f || !window.KAStory) return;
+  var S = KAStory.sets, P = [[S[3][0], 0, 3], [S[0][1], 1, 5], [S[0][2], 2, 5], [S[0][3], 3, 5], [S[2][0], 0, 4]];
+  f.innerHTML = P.map(function (p) { return '<div class="phone" style="' + KAStory.style(p[0]) + '">' + KAStory.inner(p[0], p[1], p[2]) + '</div>'; }).join('');
 })();
 
 /* ---------- 02 · signal dots ---------- */

@@ -109,7 +109,7 @@
 /* 02 · approach stepper */
 .appr { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); position: relative; }
 .appr::before { content: ""; position: absolute; left: 0; right: 0; top: 23px; height: 1.5px; background: var(--ln-d2); }
-.appr button { position: relative; text-align: left; background: transparent; border: 0; padding: 0 18px 0 0; color: var(--tx-3); }
+.appr button { align-self: start; position: relative; text-align: left; background: transparent; border: 0; padding: 0 18px 0 0; color: var(--tx-3); }
 .appr button i { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: var(--navy); border: 1.5px solid var(--steel); font: 500 14px var(--m); color: var(--tx-2); position: relative; z-index: 1; transition: all .35s; }
 .appr button b { display: block; margin-top: 18px; font-size: 19px; font-weight: 500; line-height: 1.25; color: var(--tx-2); letter-spacing: -.01em; transition: color .3s; }
 .appr button:hover b { color: var(--tx); }
@@ -149,7 +149,7 @@
 .msg small { display: block; font: 500 11.5px var(--m); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px; }
 .note2 { margin-top: 12px; font-size: 14.5px; color: var(--tx-3); }
 .stline { margin-top: 14px; min-height: 24px; font-size: 15px; color: var(--gold); }
-@media (max-width: 680px) { .cg { grid-template-columns: 1fr !important; } }
+@media (max-width: 680px) { .cg { grid-template-columns: 1fr !important; } .demo-in { flex-direction: column; } .win .bar em { display: none; } }
 .legend { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 22px; font-size: 15px; color: var(--ink-2); align-items: center; }
 
 /* 04 · governance */
@@ -187,6 +187,33 @@
 .tout { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: baseline; padding-top: 16px; border-top: 1px solid var(--ln-l); }
 .tout b { font: 500 34px/1 var(--f); letter-spacing: -.03em; }
 @media (max-width: 520px) { .bars2 .r { grid-template-columns: 1fr 48px; } .bars2 .r .t { grid-column: 1 / -1; grid-row: 2; } }
+
+.demo-cap { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 18px; margin: 0 0 14px; font-size: 16px; color: var(--tx-2); }
+.show .legend { color: var(--tx-3); font-size: 14.5px; }
+.mods { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.mod { padding: 22px; border-radius: var(--r); background: var(--navy); color: var(--tx); border: 1px solid var(--navy-3); min-width: 0; }
+.mod .mh { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.mod .mn { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--gold); color: var(--navy); font-weight: 700; }
+.mod h3 { font-size: 22px; letter-spacing: -.02em; }
+.mod .mh .st { margin-left: auto; font-size: 11.5px; padding: 5px 10px; }
+.mod dl { margin: 18px 0 0; }
+.mod dl div { padding: 10px 0; border-top: 1px solid var(--ln-d); }
+.mod dt { font: 500 12px var(--m); letter-spacing: .08em; text-transform: uppercase; color: var(--gold); }
+.mod dd { margin: 4px 0 0; font-size: 15.5px; line-height: 1.45; color: var(--tx-2); }
+.evid .lbl.g, .mod .lbl.g { color: var(--gold); }
+.mod .st.done { color: var(--ok); } .mod .st.pro { color: var(--pro); }
+.planned .st { white-space: normal; }
+.planned { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-top: 20px; }
+@media (max-width: 1080px) { .mods { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 640px) { .mods { grid-template-columns: 1fr; } }
+.evid { margin-top: clamp(40px, 5vw, 64px); padding: clamp(22px, 3vw, 32px); border-radius: var(--r); background: var(--navy); color: var(--tx); }
+.evid ul { margin-top: 18px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.evid li { padding-top: 14px; border-top: 2px solid var(--gold); }
+.evid b { display: block; font-size: 17px; font-weight: 500; line-height: 1.3; }
+.evid span { display: block; margin-top: 6px; font-size: 15px; color: var(--tx-2); line-height: 1.45; }
+@media (max-width: 900px) { .evid ul { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .evid ul { grid-template-columns: 1fr; } }
+.more .tchart { margin-top: 0; }
 </style>
 </head>
 <body>
@@ -217,93 +244,8 @@
         </div>
         <p class="lede" data-rv style="--d:.18s">One sentence in. A brief, a journey document, checked copy and a visual brief out, each waiting for a person to approve it. I identified the problem, own the product decisions, and built it by directing AI coding agents.</p>
       </div>
-      <figure class="show" id="show" style="margin-left:0;margin-right:0;margin-bottom:0" data-rv="fade">
-        <div class="win" aria-hidden="true">
-          <div class="bar"><i></i><i></i><i></i><span>Hyper OS · campaign workspace</span><em>Recreation</em></div>
-          <div class="wb">
-            <div class="side"><h4>Modules</h4>
-              <ul id="hS"><li class="ok"><i>✓</i>Brief<span class="sd" style="background:var(--ok)"></span></li><li class="cur"><i>2</i>Journey<span class="sd" style="background:var(--ok)"></span></li><li><i>3</i>Copy<span class="sd" style="background:var(--pro)"></span></li><li><i>4</i>Visual brief<span class="sd" style="background:var(--ok)"></span></li></ul>
-              <ul class="plan"><li><i>5</i>Risk and Finance</li><li><i>6</i>Platform build</li></ul>
-            </div>
-            <div class="main">
-              <small>Campaign idea</small>
-              <div class="idea">5% cashback on pharmacy card payments, up to 15 AZN</div>
-              <div class="chips">
-                <div class="chip"><small class="mute">Mechanism</small>Cashback</div><div class="chip"><small class="mute">Rate</small>5%</div><div class="chip"><small class="mute">Category</small>Pharmacies</div>
-                <div class="chip"><small class="mute">Activity</small>Card payment</div><div class="chip"><small class="mute">Cap</small>15 AZN</div><div class="chip miss"><small>Period</small>Will ask</div>
-              </div>
-              <div class="doc" style="margin-top:16px"><h4>Journey document · draft</h4><ol><li>Launch: banner and announcement push</li><li>Midway: reminder to customers who have not taken part</li><li>Last day: final push</li></ol></div>
-            </div>
-            <div class="rail"><h4>Checks</h4>
-              <ul><li><i>✓</i>Facts taken only from the brief</li><li><i class="w">?</i>Period missing: asked, not assumed</li><li><i>✓</i>Numbers match the brief</li><li><i class="h">●</i>Waiting for a person to approve</li></ul>
-            </div>
-          </div>
-        </div>
-        <figcaption class="cap2">Recreation of the prototype's interface, with a fictional campaign. The real screens contain internal bank material, so they are not shown.</figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <section class="dk" style="padding:clamp(56px,7vw,96px) 0">
-    <div class="wrap">
-      <dl class="facts" style="margin-top:0" data-rv>
-        <div><dt>Problem</dt><dd>One campaign takes weeks across six stages owned by different teams, much of it restating the same facts.</dd></div>
-        <div><dt>My role</dt><dd>Initiated it on my own, own the product decisions, designed the workflow and built it with AI coding agents.</dd></div>
-        <div><dt>Why it was complex</dt><dd>Facts must stay identical from brief to copy, approvals in a bank must stay human, and image generation costs money.</dd></div>
-        <div><dt>Demonstrated</dt><dd><b>Three modules working</b>, one in testing, on test campaigns. Not used on live campaigns.</dd></div>
-      </dl>
-    </div>
-  </section>
-
-  <!-- 01 PROBLEM -->
-  <section class="sec lt" aria-labelledby="s1">
-    <div class="wrap">
-      <div class="sh">
-        <div><span class="lbl g" data-rv><span class="n">01</span> The operational problem</span><h2 class="stmt" id="s1" data-rv style="--d:.06s"><span class="m">One offer.</span> Six hand-offs. Six rewrites of the same facts.</h2></div>
-        <p class="lede" data-rv style="--d:.12s">Each stage turns the same offer into a new format for the next team. Every rewrite is a chance for a number to drift, and approvals only see the end result.</p>
-      </div>
-      <div class="frag" id="frag">
-        <div class="col"><small>01</small><b>Brief and idea</b><p class="fmt">Brief</p><p class="fact">5% cashback on pharmacy card payments, up to 15 AZN</p></div>
-        <div class="col"><small>02</small><b>Journey and scenario</b><p class="fmt">Scenario document</p><p class="fact">Reward: 5% · Cap: 15 AZN · Category: pharmacies</p></div>
-        <div class="col"><small>03</small><b>Copy and review</b><p class="fmt">Push, three languages</p><p class="fact">Pay by card at pharmacies and get 5% back, up to 15 AZN.</p></div>
-        <div class="col"><small>04</small><b>Visuals</b><p class="fmt">Banner headline</p><p class="fact bad">5% back at pharmacies, up to <em>20 AZN</em></p></div>
-        <div class="col hu"><small>05</small><b>Risk and Finance</b><p class="fmt">Approval</p><p class="fact">Cost and conditions reviewed by people</p></div>
-        <div class="col"><small>06</small><b>Platform build</b><p class="fmt">Configuration</p><p class="fact">Reward rule and cap entered again</p></div>
-      </div>
-      <div class="fkey"><span>Illustrative, with a fictional offer. The red figure shows how a number can drift between hand-offs.</span></div>
-      <p class="note" style="margin-top:14px">No time savings are claimed. Stage durations were never measured; see the illustrative analysis in section 05.</p>
-    </div>
-  </section>
-
-  <!-- 02 APPROACH -->
-  <section class="sec dk" aria-labelledby="s2">
-    <div class="wrap">
-      <div class="sh">
-        <div><span class="lbl g" data-rv><span class="n">02</span> My product approach</span><h2 class="h2" id="s2" data-rv style="--d:.06s">From a process map to working software, with no one assigning it.</h2></div>
-        <p class="lede" data-rv style="--d:.12s">Select a step to see what I did and the evidence behind it.</p>
-      </div>
-      <div class="appr" role="tablist" aria-label="Product approach steps" id="appr">
-        <button role="tab" id="ap0" aria-selected="true" aria-controls="apd" tabindex="0"><i>01</i><b>Identified the challenge</b></button>
-        <button role="tab" id="ap1" aria-selected="false" aria-controls="apd" tabindex="-1"><i>02</i><b>Structured requirements</b></button>
-        <button role="tab" id="ap2" aria-selected="false" aria-controls="apd" tabindex="-1"><i>03</i><b>Designed the workflow</b></button>
-        <button role="tab" id="ap3" aria-selected="false" aria-controls="apd" tabindex="-1"><i>04</i><b>Built and tested with AI agents</b></button>
-        <button role="tab" id="ap4" aria-selected="false" aria-controls="apd" tabindex="-1"><i>05</i><b>Iterated on function and controls</b></button>
-      </div>
-      <div class="apd" id="apd" role="tabpanel" aria-labelledby="ap0" aria-live="polite">
-        <div><h3 id="apT"></h3><p class="t" id="apX"></p></div>
-        <div class="ev"><span class="lbl g">Evidence</span><p id="apE"></p></div>
-      </div>
-      <p class="note" style="margin-top:22px">The evidence items are internal working files. I can walk through them in an interview.</p>
-    </div>
-  </section>
-
-  <!-- 03 EXPLORE -->
-  <section class="sec lt2" id="explore" aria-labelledby="s3">
-    <div class="wrap">
-      <div class="sh">
-        <div><span class="lbl g" data-rv><span class="n">03</span> Explore the system</span><h2 class="h2" id="s3" data-rv style="--d:.06s">Run a fictional campaign through the four working modules.</h2></div>
-        <p class="lede" data-rv style="--d:.12s">Type an offer or pick an example, then approve each step or send it back. Nothing is generated by AI here.</p>
-      </div>
+      <figure class="show" id="explore" style="margin-left:0;margin-right:0;margin-bottom:0" data-rv="fade">
+        <figcaption class="demo-cap"><span class="lbl g">Try the workflow</span><span>Type an offer or pick an example, then approve each step or send it back.</span></figcaption>
       <div class="win full" id="os">
         <div class="bar"><i></i><i></i><i></i><span>Hyper OS · guided recreation</span><em>Fictional campaign</em></div>
         <div class="wb">
@@ -329,7 +271,80 @@
           </div>
         </div>
       </div>
-      <div class="legend"><span class="st done">Working prototype</span><span class="st pro">In testing</span><span class="st plan">Planned architecture</span><span class="small">The recreation runs in your browser with simple rules and calls no AI model. The real prototype runs locally; its prompts, models and source are not shown.</span></div>
+        <p class="legend"><span class="st done">Working</span><span class="st pro">In testing</span><span class="st plan">Planned</span><span>A recreation of the prototype's flow with a fictional campaign. It runs in your browser with simple rules and calls no AI model; the real prototype's screens contain internal bank material and are not shown.</span></p>
+      </figure>
+    </div>
+  </section>
+
+  <section class="dk" style="padding:clamp(56px,7vw,96px) 0">
+    <div class="wrap">
+      <dl class="facts" style="margin-top:0" data-rv>
+        <div><dt>Problem</dt><dd>By my estimate, one campaign takes weeks across six stages owned by different teams, much of it restating the same facts.</dd></div>
+        <div><dt>My role</dt><dd>Initiated it on my own, own the product decisions, designed the workflow and built it with AI coding agents.</dd></div>
+        <div><dt>Why it was complex</dt><dd>Facts must stay identical from brief to copy, approvals in a bank must stay human, and image generation costs money.</dd></div>
+        <div><dt>Demonstrated</dt><dd><b>Three modules working</b>, one in testing, on test campaigns. Not used on live campaigns.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- 01 MODULES -->
+  <section class="sec lt2" aria-labelledby="s1">
+    <div class="wrap">
+      <div class="sh">
+        <div><span class="lbl g" data-rv><span class="n">01</span> What the prototype does</span><h2 class="h2" id="s1" data-rv style="--d:.06s">Four modules, each ending in a human decision.</h2></div>
+        <p class="lede" data-rv style="--d:.12s">Each module turns the previous approved output into the next draft. Rules handle facts and numbers; language models handle wording.</p>
+      </div>
+      <div class="mods">
+        <article class="mod" data-rv><div class="mh"><span class="mn">1</span><h3>Brief</h3><span class="st done">Working</span></div>
+          <dl><div><dt>In</dt><dd>One sentence describing the offer</dd></div><div><dt>Out</dt><dd>A brief with six fields: mechanism, rate, category, activity, cap, period</dd></div><div><dt>How</dt><dd>Rule-based parsing</dd></div><div><dt>Control</dt><dd>Never invents a fact; asks for anything missing</dd></div></dl></article>
+        <article class="mod" data-rv style="--d:.06s"><div class="mh"><span class="mn">2</span><h3>Journey</h3><span class="st done">Working</span></div>
+          <dl><div><dt>In</dt><dd>The approved brief</dd></div><div><dt>Out</dt><dd>A journey and scenario document: mechanic, period, audience and message sequence</dd></div><div><dt>How</dt><dd>Language-model draft from my campaign skills</dd></div><div><dt>Control</dt><dd>A person approves or edits it before anything is built</dd></div></dl></article>
+        <article class="mod" data-rv style="--d:.12s"><div class="mh"><span class="mn">3</span><h3>Copy</h3><span class="st pro">In testing</span></div>
+          <dl><div><dt>In</dt><dd>The approved earlier steps</dd></div><div><dt>Out</dt><dd>Push and banner texts</dd></div><div><dt>How</dt><dd>Language-model draft; numbers and length checked by rules</dd></div><div><dt>Control</dt><dd>Tone is still reviewed by a person while tone rules are refined with Marketing</dd></div></dl></article>
+        <article class="mod" data-rv style="--d:.18s"><div class="mh"><span class="mn">4</span><h3>Visual brief</h3><span class="st done">Working</span></div>
+          <dl><div><dt>In</dt><dd>The approved earlier steps</dd></div><div><dt>Out</dt><dd>An art-director brief</dd></div><div><dt>How</dt><dd>Language-model draft; a creative-review agent checks visuals against the brief</dd></div><div><dt>Control</dt><dd>Reuses approved creative first; paid image generation only after a person consents</dd></div></dl></article>
+      </div>
+      <div class="planned" data-rv><span class="lbl">Planned, not built</span><span class="st plan">Risk and Finance package · human by design</span><span class="st plan">Platform configuration · proposed</span><span class="st plan">Monitoring · proposed</span><span class="small">Part of a 16-step target design.</span></div>
+    </div>
+  </section>
+
+  <!-- 02 APPROACH -->
+  <section class="sec dk" aria-labelledby="s2">
+    <div class="wrap">
+      <div class="sh">
+        <div><span class="lbl g" data-rv><span class="n">02</span> How I built it</span><h2 class="h2" id="s2" data-rv style="--d:.06s">From a process map to working software, on my own initiative.</h2></div>
+        <p class="lede" data-rv style="--d:.12s">Select a step to see what I did and the evidence behind it.</p>
+      </div>
+      <div class="appr" role="tablist" aria-label="Product approach steps" id="appr">
+        <button role="tab" id="ap0" aria-selected="true" aria-controls="apd" tabindex="0"><i>01</i><b>Identified the challenge</b></button>
+        <button role="tab" id="ap1" aria-selected="false" aria-controls="apd" tabindex="-1"><i>02</i><b>Structured requirements</b></button>
+        <button role="tab" id="ap2" aria-selected="false" aria-controls="apd" tabindex="-1"><i>03</i><b>Designed the workflow</b></button>
+        <button role="tab" id="ap3" aria-selected="false" aria-controls="apd" tabindex="-1"><i>04</i><b>Built and tested with AI agents</b></button>
+        <button role="tab" id="ap4" aria-selected="false" aria-controls="apd" tabindex="-1"><i>05</i><b>Iterated on function and controls</b></button>
+      </div>
+      <div class="apd" id="apd" role="tabpanel" aria-labelledby="ap0" aria-live="polite">
+        <div><h3 id="apT"></h3><p class="t" id="apX"></p></div>
+        <div class="ev"><span class="lbl g">Evidence</span><p id="apE"></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 PROBLEM -->
+  <section class="sec lt" aria-labelledby="s3">
+    <div class="wrap">
+      <div class="sh">
+        <div><span class="lbl g" data-rv><span class="n">03</span> The problem it addresses</span><h2 class="stmt" id="s3" data-rv style="--d:.06s"><span class="m">One offer.</span> Six hand-offs. Six rewrites of the same facts.</h2></div>
+        <p class="lede" data-rv style="--d:.12s">Each stage turns the same offer into a new format for the next team. Every rewrite is a chance for a number to drift, and approvals only see the end result.</p>
+      </div>
+      <div class="frag" id="frag">
+        <div class="col"><small>01</small><b>Brief and idea</b><p class="fmt">Brief</p><p class="fact">5% cashback on pharmacy card payments, up to 15 AZN</p></div>
+        <div class="col"><small>02</small><b>Journey and scenario</b><p class="fmt">Scenario document</p><p class="fact">Reward: 5% · Cap: 15 AZN · Category: pharmacies</p></div>
+        <div class="col"><small>03</small><b>Copy and review</b><p class="fmt">Push, three languages</p><p class="fact">Pay by card at pharmacies and get 5% back, up to 15 AZN.</p></div>
+        <div class="col"><small>04</small><b>Visuals</b><p class="fmt">Banner headline</p><p class="fact bad">5% back at pharmacies, up to <em>20 AZN</em></p></div>
+        <div class="col hu"><small>05</small><b>Risk and Finance</b><p class="fmt">Approval</p><p class="fact">Cost and conditions reviewed by people</p></div>
+        <div class="col"><small>06</small><b>Platform build</b><p class="fmt">Configuration</p><p class="fact">Reward rule and cap entered again</p></div>
+      </div>
+      <p class="note" style="margin-top:22px">Illustrative, with a fictional offer. The red figure shows how a number can drift between hand-offs.</p>
     </div>
   </section>
 
@@ -337,7 +352,7 @@
   <section class="sec dk" aria-labelledby="s4">
     <div class="wrap">
       <div class="sh">
-        <div><span class="lbl g" data-rv><span class="n">04</span> Intelligence and governance</span><h2 class="h2" id="s4" data-rv style="--d:.06s">Rules where accuracy matters. Models where wording matters. People wherever the bank is accountable.</h2></div>
+        <div><span class="lbl g" data-rv><span class="n">04</span> Intelligence and governance</span><h2 class="h2" id="s4" data-rv style="--d:.06s">Rules for facts. Models for wording. People for every decision.</h2></div>
       </div>
       <div class="gov">
         <div class="gsel" role="group" aria-label="Highlight a property of the system" id="gsel">
@@ -365,7 +380,7 @@
           </svg>
         </div>
       </div>
-      <p class="note" style="margin-top:28px">How the prototype is designed. Brief parsing, financial calculations, documents and package checks are rule-based; language models draft the journey, the copy and the art direction; a creative-review agent checks visuals against the brief.</p>
+      <p class="note" style="margin-top:28px">Brief parsing, financial calculations, documents and package checks are rule-based.</p>
     </div>
   </section>
 
@@ -374,7 +389,7 @@
     <div class="wrap">
       <div class="sh">
         <div><span class="lbl g" data-rv><span class="n">05</span> What was demonstrated</span><h2 class="h2" id="s5" data-rv style="--d:.06s">A working prototype, tested on test campaigns. Not production software.</h2></div>
-        <p class="lede" data-rv style="--d:.12s">Automated browser tests ran throughout development. Copy tone was the weakest output, so tone rules are being refined with Marketing feedback.</p>
+        <p class="lede" data-rv style="--d:.12s">Copy tone was the weakest output in testing, so tone rules are being refined with Marketing feedback.</p>
       </div>
       <div class="mat">
         <ul class="stat" data-rv>
@@ -394,18 +409,33 @@
         </div>
       </div>
 
-      <div class="tchart" id="an" data-rv>
+      <div class="evid" data-rv>
+        <span class="lbl g">Evidence I can walk through in an interview</span>
+        <ul>
+          <li><b>Product deck, version 15</b><span>Status of each module and the 16-step target design</span></li>
+          <li><b>Campaign skills and prompt specifications</b><span>Written by me; in my account since June 2026</span></li>
+          <li><b>Automated browser tests</b><span>Run as each module changed during development</span></li>
+          <li><b>Development history</b><span>The record of building it by directing AI coding agents</span></li>
+        </ul>
+      </div>
+
+      <details class="more" style="margin-top:32px">
+        <summary>Illustrative assumption: where preparation time goes</summary>
+        <div class="in">
+      <div class="tchart" id="an">
         <div class="hd">
-          <div><span class="lbl">Illustrative assumptions · not measured data</span><h3 class="h3" style="margin-top:10px">Where should AI help? A rough split of preparation time.</h3><p class="small" style="margin-top:8px;max-width:60ch">Shares from my own stage assumptions, rounded in 5-point steps so each case adds up to 100%. No stage times have been measured; a pilot would be needed to test them.</p></div>
+          <div><span class="lbl">Illustrative assumptions · not measured data</span><h3 class="h3" style="margin-top:10px">A rough split of preparation time</h3><p class="small" style="margin-top:8px;max-width:60ch">My own stage assumptions, rounded in 5-point steps so each case totals 100%. Not measured; a pilot would test them.</p></div>
           <div class="seg" role="group" aria-label="Choose an assumption"><button type="button" data-s="lo" aria-pressed="false">Low case</button><button type="button" data-s="mid" aria-pressed="true">Middle case</button><button type="button" data-s="hi" aria-pressed="false">High case</button></div>
         </div>
         <div class="bars2" id="anBars"></div>
         <div class="bkey"><span><i style="background:#0D1B2A"></i>assisted by the prototype</span><span><i style="background:#B5651D"></i>stays human</span><span><i style="background:#B9BEC6"></i>later</span></div>
-        <div class="tout"><b id="anV">About 80%</b><span class="small" id="anP">Illustrative share of preparation time in the four stages the prototype assists. An assumption to test in a pilot, not a measured result.</span></div>
+        <div class="tout"><b id="anV">About 80%</b><span class="small" id="anP">Share of preparation time in the four stages the prototype assists, under these assumptions.</span></div>
         <noscript><p class="small">Under these illustrative assumptions, the four preparation stages hold about 70–85% of preparation time across the three cases. Not measured.</p></noscript>
       </div>
+        </div>
+      </details>
 
-      <details class="more" style="margin-top:32px">
+      <details class="more">
         <summary>Options I compared, and how success would be measured</summary>
         <div class="in">
           <ul class="stat">

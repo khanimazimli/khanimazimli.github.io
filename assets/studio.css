@@ -196,19 +196,31 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .more[open] summary::after { transform: rotate(45deg); }
 .more .in { padding: 4px 0 28px; }
 
-/* ---------- story phone (9:16) ---------- */
-.phone { position: relative; aspect-ratio: 9 / 16; border-radius: 26px; overflow: hidden; background: var(--sbg, #14213D); color: var(--sfg, #fff); box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .08); container-type: inline-size; }
-.phone .bars { position: absolute; top: 4.5%; left: 6%; right: 6%; display: flex; gap: 4px; }
-.phone .bars i { flex: 1; height: 3px; border-radius: 2px; background: currentColor; opacity: .3; }
+/* ---------- story phone (9:16) · illustrative recreations ---------- */
+.phone { position: relative; aspect-ratio: 9 / 16; border-radius: 26px; overflow: hidden; color: var(--sfg, #fff); container-type: inline-size;
+  background:
+    radial-gradient(120% 70% at 100% 0%, color-mix(in srgb, var(--sac, #E9CB6B) 22%, transparent), transparent 60%),
+    radial-gradient(90% 60% at 0% 100%, color-mix(in srgb, var(--sfg, #fff) 10%, transparent), transparent 70%),
+    var(--sbg, #14213D);
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .1), inset 0 1px 0 rgba(255, 255, 255, .12); }
+.phone::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(currentColor .6px, transparent .7px); background-size: 9px 9px; opacity: .07; pointer-events: none; }
+.phone .bars { position: absolute; top: 3.6%; left: 6%; right: 6%; display: flex; gap: 3px; z-index: 2; }
+.phone .bars i { flex: 1; height: 2.5px; border-radius: 2px; background: currentColor; opacity: .28; }
 .phone .bars i.on { opacity: .95; }
-.phone .ps { position: absolute; inset: 0; padding: 18% 9% 9%; display: flex; flex-direction: column; }
-.phone .pk { font: 500 max(9px, 5.6cqw)/1.2 var(--m); letter-spacing: .08em; text-transform: uppercase; opacity: .78; }
-.phone .ph { margin-top: 6%; font-size: max(11px, 9.2cqw); font-weight: 500; line-height: 1.12; letter-spacing: -.02em; }
-.phone .pv { margin-top: auto; font-size: max(20px, 19cqw); font-weight: 700; line-height: .95; letter-spacing: -.04em; }
-.phone .pn { margin-top: 5%; font-size: max(9px, 5.8cqw); opacity: .84; line-height: 1.35; }
-.phone .pb { margin-top: 8%; align-self: stretch; text-align: center; padding: 4.5% 0; border-radius: 999px; background: rgba(255, 255, 255, .16); font-size: max(9px, 5.6cqw); font-weight: 700; }
-.phone .orb { position: absolute; right: -18%; top: 22%; width: 70%; aspect-ratio: 1; border-radius: 50%; border: 1px solid currentColor; opacity: .18; }
-.phone .orb2 { position: absolute; left: -30%; bottom: 18%; width: 80%; aspect-ratio: 1; border-radius: 50%; background: currentColor; opacity: .05; }
+.phone .top { position: absolute; top: 6.8%; left: 6%; right: 6%; display: flex; align-items: center; gap: 3.5cqw; z-index: 2; font-size: max(8px, 4.6cqw); }
+.phone .top .av { width: 9cqw; height: 9cqw; border-radius: 50%; display: grid; place-items: center; background: var(--sac); color: var(--sbg); font-weight: 700; font-size: max(7px, 4.4cqw); }
+.phone .top .tt { font-weight: 700; opacity: .9; }
+.phone .top .x { margin-left: auto; font-size: max(10px, 7cqw); opacity: .7; line-height: 1; }
+.phone .ps { position: absolute; inset: 0; padding: 27% 8% 8%; display: flex; flex-direction: column; }
+.phone .pk { font: 500 max(8px, 4.8cqw)/1.2 var(--m); letter-spacing: .1em; text-transform: uppercase; color: var(--sac); }
+.phone .ph { margin-top: 4%; font-size: max(11px, 8.6cqw); font-weight: 500; line-height: 1.12; letter-spacing: -.02em; }
+.phone .pviz { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 0; padding: 4% 0; }
+.phone .pviz svg { width: 100%; max-height: 100%; overflow: visible; }
+.phone .pv { font-size: max(18px, 15.5cqw); font-weight: 700; line-height: .95; letter-spacing: -.04em; }
+.phone .pn { margin-top: 3%; font-size: max(8.5px, 5.2cqw); opacity: .82; line-height: 1.35; }
+.phone .pb { margin-top: 6%; align-self: stretch; text-align: center; padding: 4% 0; border-radius: 999px; background: color-mix(in srgb, var(--sfg, #fff) 16%, transparent); font-size: max(8.5px, 5.2cqw); font-weight: 700; }
+.phone .orb { position: absolute; right: -22%; top: 14%; width: 64%; aspect-ratio: 1; border-radius: 50%; border: 1px solid var(--sac); opacity: .22; }
+.phone .orb2 { display: none; }
 
 /* ---------- status list ---------- */
 .stat { display: grid; gap: 0; border-top: 1px solid var(--ln-d); }

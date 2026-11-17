@@ -94,8 +94,8 @@
 .prof button span { display: block; font-size: 14.5px; color: var(--tx-3); margin-top: 2px; line-height: 1.35; }
 .view { position: relative; max-width: 330px; width: 100%; margin: 0 auto; }
 .view .phone { width: 100%; }
-.view .ps { transition: opacity .45s var(--e), transform .45s var(--e); }
-.view .ps.out { opacity: 0; transform: translateY(10px); }
+.view .phone > * { transition: opacity .3s var(--e), transform .3s var(--e); }
+.view .phone.fade > * { opacity: 0; transform: translateY(8px); }
 .view .tap { position: absolute; top: 0; bottom: 0; width: 40%; background: transparent; border: 0; z-index: 3; }
 .view .tap.l { left: 0; } .view .tap.r { right: 0; }
 .ctl { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 16px; }
@@ -202,7 +202,7 @@
         <div class="crumbs" data-rv><span class="lbl">Case 01 · Retail banking · Mobile app</span><span class="st wait">2026 edition not yet launched</span></div>
         <h1 id="t" data-rv style="--d:.06s">ABB Wrapped 2026</h1>
         <p class="lede sub" data-rv style="--d:.12s">A personal year-in-review in the bank's mobile app, redesigned for 2026 around reusable story templates that fill with each customer's values when the story is shown.</p>
-        <p class="mine" data-rv style="--d:.18s">I led the 2026 edition: creative direction, personalization logic, content and production preparation.<span>Backend integration, approval and launch sit with the bank's product and backend teams.</span></p>
+        <p class="mine" data-rv style="--d:.18s">I led the 2026 edition: creative direction, personalization logic, content and production preparation.<span>Backend integration, approval and launch are owned by the bank's product and backend teams.</span></p>
       </div>
       <div class="stage" id="stage" data-rv="fade" aria-hidden="true">
         <div class="rig" id="rig"></div>
@@ -260,7 +260,7 @@
         </div>
         <div>
           <div class="view">
-            <div class="phone" id="ph" role="img" aria-live="polite" aria-label=""><span class="orb"></span><span class="orb2"></span><div class="bars" id="phB"></div><div class="ps" id="phS"></div></div>
+            <div class="phone" id="ph" role="img" aria-live="polite" aria-label=""></div>
             <button class="tap l" type="button" id="tl" aria-label="Previous story"></button>
             <button class="tap r" type="button" id="tr" aria-label="Next story"></button>
           </div>
@@ -339,11 +339,11 @@
     <div class="wrap">
       <div class="sh">
         <div><span class="lbl g" data-rv><span class="n">04</span> Key decisions</span><h2 class="h2" id="s4" data-rv style="--d:.06s">Three choices that shaped the edition.</h2></div>
-        <p class="lede" data-rv style="--d:.12s">Each one traded a little effort now for an edition that holds up across customers, and can be reused next year.</p>
+        <p class="lede" data-rv style="--d:.12s">Each traded extra design effort now for an edition that holds up across customer types and can be reused.</p>
       </div>
       <div class="decs">
         <article data-rv><span class="n">D1</span><h3>Templates instead of designed screens</h3>
-          <dl><div><dt>Considered</dt><dd>Designing each story screen individually, as a one-off edition.</dd></div><div><dt>Chose</dt><dd>One master template per story family, filled with each customer's values when the story is shown.</dd></div><div><dt>What it changes</dt><dd class="ch">One template is designed to serve every country story and category names of any length, so the next edition reuses the system instead of repeating production.</dd></div></dl></article>
+          <dl><div><dt>Considered</dt><dd>Designing each story screen individually, as a one-off edition.</dd></div><div><dt>Chose</dt><dd>One master template per story family, filled with each customer's values when the story is shown.</dd></div><div><dt>What it changes</dt><dd class="ch">One template is designed to serve all country stories and category names of different lengths, so a future edition can reuse the system rather than repeat production.</dd></div></dl></article>
         <article data-rv><span class="n">D2</span><h3>Fallbacks instead of gaps</h3>
           <dl><div><dt>Considered</dt><dd>Designing country stories only for the destinations in the designed set.</dd></div><div><dt>Chose</dt><dd>A generic version, filled with the country's name, for any country outside that set.</dd></div><div><dt>What it changes</dt><dd class="ch">A customer who travelled somewhere unusual still gets a complete story, not a broken or empty screen.</dd></div></dl></article>
         <article data-rv><span class="n">D3</span><h3>Premium versions only where the audience differs</h3>
@@ -388,42 +388,19 @@
 </footer>
 
 <script src="../assets/studio.js"></script>
+<script src="../assets/stories.js"></script>
 <script>
 (function () {
-  /* Illustrative story sequences. Fictional customers and values; not ABB designs. */
-  var T = { navy: ['#14213D', '#fff'], sand: ['#EFE6D8', '#1F1A14'], teal: ['#0F5E63', '#fff'], plum: ['#4A2545', '#fff'], ink: ['#0E1116', '#fff'], green: ['#16352B', '#F1E9D2'], sky: ['#DCE6FA', '#0F1830'] };
-  var C = [
-    [ ['navy', 'Intro', 'Your 2026, in stories', '', 'Built from your own payments', 'Same opening for all customers.'],
-      ['sand', 'Top category', 'Your payments were led by', 'Cafés', '184 payments · 2,140 AZN', 'Category story: one variant per category, chosen by top spend.'],
-      ['teal', 'Top country abroad', 'Abroad, you spent most in', 'Georgia', '1,280 AZN this year', 'Country story: Georgia has its own designed story.'],
-      ['ink', 'A first', 'This year you opened your', 'First deposit', 'One of this year’s milestones', 'Product first: shown only to customers who had one this year.'],
-      ['navy', 'Closing', 'Thank you for this year', '', 'See you in 2027', 'Shared closing story.'] ],
-    [ ['navy', 'Intro', 'Your 2026, in stories', '', 'Built from your own payments', 'Same opening for all customers.'],
-      ['sand', 'Top category', 'Your payments were led by', 'Groceries', '96 payments · 1,310 AZN', 'Category story: chosen by top spend.'],
-      ['sky', 'Top country abroad', 'Abroad, you spent most in', 'Iceland', '410 AZN this year', 'Fallback: no designed story for Iceland, so the generic country template is filled with its name.'],
-      ['navy', 'Closing', 'Thank you for this year', '', 'See you in 2027', 'Shared closing story.'] ],
-    [ ['green', 'Intro · premium', 'Your 2026, in stories', '', 'A premium edition of your year', 'Premium version of the opening.'],
-      ['green', 'Top category · premium', 'Your payments were led by', 'Travel', '42 payments · 6,900 AZN', 'Premium version of the category story.'],
-      ['teal', 'Top country abroad', 'Abroad, you spent most in', 'Italy', '3,450 AZN this year', 'Country story: the same for every audience.'],
-      ['green', 'Closing · premium', 'Thank you for this year', '', 'See you in 2027', 'Premium closing.'] ],
-    [ ['plum', 'Welcome back', 'We meet again', '', 'Here is what changed while you were away', 'Returning-customer path: replaces the year summary.'],
-      ['plum', 'While you were away', 'New partners joined', '', 'A short look at the year', 'Part of the separate returning-customer sequence.'],
-      ['plum', 'An invitation', 'Your next story starts here', '', 'One clear next step', 'Path-specific closing.'] ]
-  ];
+  if (!window.KAStory) return;
+  var C = KAStory.sets;
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
-  function inner(x) {
-    return '<span class="pk">' + esc(x[1]) + '</span><span class="ph">' + esc(x[2]) + '</span>' +
-      (x[3] ? '<span class="pv">' + esc(x[3]) + '</span>' : '<span class="pv" style="font-size:0"></span>') +
-      '<span class="pn">' + esc(x[4]) + '</span><span class="pb">Share</span>';
-  }
 
   /* hero stage */
   var rig = document.getElementById('rig');
   if (rig) {
-    var H = [[C[0][2], 'p0'], [C[0][1], 'p1'], [C[0][3], 'p2'], [C[3][0], 'p3'], [C[2][0], 'p4']];
+    var H = [[C[0][2], 'p0', 2, 5], [C[0][1], 'p1', 1, 5], [C[0][3], 'p2', 3, 5], [C[3][0], 'p3', 0, 3], [C[2][0], 'p4', 0, 4]];
     rig.innerHTML = H.map(function (h, i) {
-      var t = T[h[0][0]];
-      return '<div class="phone ' + h[1] + '" style="--sbg:' + t[0] + ';--sfg:' + t[1] + ';transition-delay:' + (i * .08) + 's"><span class="orb"></span><span class="orb2"></span><div class="bars"><i class="on"></i><i class="on"></i><i' + (i === 0 ? ' class="on"' : '') + '></i><i></i><i></i></div><div class="ps">' + inner(h[0]) + '</div></div>';
+      return '<div class="phone ' + h[1] + '" style="' + KAStory.style(h[0]) + ';transition-delay:' + (i * .08) + 's">' + KAStory.inner(h[0], h[2], h[3]) + '</div>';
     }).join('');
     var stg = document.getElementById('stage');
     if (!KA.reduced && matchMedia('(hover: hover) and (min-width: 1081px)').matches) {
@@ -437,20 +414,20 @@
 
   /* experience */
   var exp = document.getElementById('exp'); if (!exp) return;
-  var ph = document.getElementById('ph'), ps = document.getElementById('phS'), pb = document.getElementById('phB'), rule = document.getElementById('rule'), seq = document.getElementById('seq'), pos = document.getElementById('pos');
+  var ph = document.getElementById('ph'), rule = document.getElementById('rule'), seq = document.getElementById('seq'), pos = document.getElementById('pos');
   var pbtn = [].slice.call(exp.querySelectorAll('[data-c]')), ci = 0, si = 0;
   function show(anim) {
-    var s = C[ci], x = s[si], t = T[x[0]];
+    var s = C[ci], x = s[si];
     function paint() {
-      ph.style.setProperty('--sbg', t[0]); ph.style.setProperty('--sfg', t[1]);
-      pb.innerHTML = s.map(function (_, j) { return '<i class="' + (j <= si ? 'on' : '') + '"></i>'; }).join('');
-      ps.innerHTML = inner(x); ps.classList.remove('out');
-      ph.setAttribute('aria-label', 'Story ' + (si + 1) + ' of ' + s.length + '. ' + x[1] + ': ' + x[2] + ' ' + x[3] + '. ' + x[4] + '.');
+      ph.setAttribute('style', KAStory.style(x));
+      ph.innerHTML = KAStory.inner(x, si, s.length);
+      ph.setAttribute('aria-label', 'Story ' + (si + 1) + ' of ' + s.length + '. ' + KAStory.label(x));
+      ph.classList.remove('fade');
     }
-    if (anim && !KA.reduced) { ps.classList.add('out'); setTimeout(paint, 220); } else paint();
-    rule.textContent = x[5];
+    if (anim && !KA.reduced) { ph.classList.add('fade'); setTimeout(paint, 200); } else paint();
+    rule.textContent = x.r;
     pos.textContent = (si + 1) + ' / ' + s.length;
-    seq.innerHTML = s.map(function (y, j) { return '<button type="button" data-s="' + j + '"' + (j === si ? ' aria-current="true"' : '') + '><i>' + (j + 1) + '</i>' + esc(y[1]) + '</button>'; }).join('');
+    seq.innerHTML = s.map(function (y, j) { return '<button type="button" data-s="' + j + '"' + (j === si ? ' aria-current="true"' : '') + '><i>' + (j + 1) + '</i>' + esc(y.k) + '</button>'; }).join('');
   }
   function go(d) { var n = C[ci].length; si = (si + d + n) % n; show(true); }
   pbtn.forEach(function (b) { b.addEventListener('click', function () { ci = +b.dataset.c; si = 0; pbtn.forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); }); show(true); }); });
