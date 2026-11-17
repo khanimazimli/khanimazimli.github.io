@@ -70,7 +70,7 @@
   function inner(s, i, n) {
     return '<span class="orb" aria-hidden="true"></span>' +
       '<div class="bars" aria-hidden="true">' + Array.apply(null, Array(n || 5)).map(function (_, j) { return '<i class="' + (j <= (i || 0) ? 'on' : '') + '"></i>'; }).join('') + '</div>' +
-      '<div class="top" aria-hidden="true"><span class="av">' + (s.prem ? '★' : 'Y') + '</span><span class="tt">Your year' + (s.prem ? ' · Premium' : '') + '</span><span class="x">×</span></div>' +
+      '<div class="top" aria-hidden="true"><span class="av">Y</span><span class="tt">Your year</span><span class="x">×</span></div>' +
       '<div class="ps"><span class="pk">' + esc(s.k) + '</span><span class="ph">' + esc(s.h) + '</span>' +
       '<div class="pviz">' + (V[s.kind] ? V[s.kind](s) : '') + '</div>' +
       (s.v ? '<span class="pv">' + esc(s.v) + '</span>' : '') +
@@ -82,12 +82,10 @@
 
   /* fictional story moments for illustration only */
   window.KAStory.list = [
-    { t: 'navy', kind: 'intro', k: 'Opening', h: 'Your 2026, in stories', n: 'A look back at your year', c: 'The opening: a year of activity, told as a short story.' },
-    { t: 'sand', kind: 'category', k: 'Top category', h: 'Your payments were led by', v: 'Cafés', n: '184 payments this year', rows: [['Cafés', 2140], ['Groceries', 1310], ['Transport', 640]], c: 'Where the year went: everyday spending, made personal.' },
-    { t: 'teal', kind: 'country', k: 'Travel', h: 'Abroad, you spent most in', v: 'Georgia', n: 'Across 3 trips', c: 'Travel moments, drawn from the customer’s own year.' },
-    { t: 'ink', kind: 'first', k: 'A first', h: 'This year you opened your', v: 'First deposit', n: 'One of this year’s milestones', c: 'Milestones worth celebrating.' },
-    { t: 'navy', kind: 'months', k: 'Closing', h: 'Thank you for this year', n: 'See you in 2027', c: 'The closing: a warm end, and a reason to come back.' },
-    { t: 'plum', kind: 'away', k: 'Welcome back', h: 'We meet again', n: 'Here is what changed', c: '' },
-    { t: 'green', prem: true, kind: 'intro', k: 'Premium', h: 'Your 2026, in stories', n: 'A premium edition of your year', c: '' }
+    { t: 'navy', kind: 'intro', k: 'Opening', h: 'Your 2026, in stories', n: 'A look back at your year' },
+    { t: 'sand', kind: 'category', k: 'Top category', h: 'Your payments were led by', v: 'Cafés', n: '184 payments this year', rows: [['Cafés', 2140], ['Groceries', 1310], ['Transport', 640]] },
+    { t: 'teal', kind: 'country', k: 'Travel', h: 'Abroad, you spent most in', v: 'Georgia', n: 'Across 3 trips' },
+    { t: 'ink', kind: 'first', k: 'A first', h: 'This year you opened your', v: 'First deposit', n: 'One of this year’s milestones' },
+    { t: 'navy', kind: 'months', k: 'Closing', h: 'Thank you for this year', n: 'See you in 2027' }
   ];
 })();
