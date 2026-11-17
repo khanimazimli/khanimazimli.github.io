@@ -38,5 +38,19 @@
     Object.keys(map).forEach(function (id) { so.observe(d.getElementById(id)); });
   }
 
+  /* small screens: the section list folds into a "Sections" menu */
+  var toc = d.querySelector('.toc'), tb = toc && toc.querySelector('.tb');
+  if (tb) {
+    var cur = tb.querySelector('.cur');
+    tb.addEventListener('click', function () {
+      var open = toc.classList.toggle('open'); tb.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    toc.querySelectorAll('ol a').forEach(function (a) { a.addEventListener('click', function () {
+      toc.classList.remove('open'); tb.setAttribute('aria-expanded', 'false');
+    }); });
+    var mo = new MutationObserver(function () { var on = toc.querySelector('ol a.on'); if (cur && on) cur.textContent = on.textContent; });
+    toc.querySelectorAll('ol a').forEach(function (a) { mo.observe(a, { attributes: true, attributeFilter: ['class'] }); });
+  }
+
   var y = d.getElementById('yr'); if (y) y.textContent = new Date().getFullYear();
 })();
