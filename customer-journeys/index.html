@@ -12,12 +12,12 @@
 </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Customer Journeys &amp; Hyper-Personalization · Khanım Azimli</title>
-<meta name="description" content="Case study: deciding who a bank campaign is for, when it should reach them, and whether the bank should contact them at all. Interactive decision lab and a worked spend-threshold analysis with synthetic data.">
+<title>Customer Journeys · Khanım Azimli</title>
+<meta name="description" content="Case study: customer experience and personalization in a retail bank. Deciding who hears from the bank, when, and when it should stay silent, with customer data and basic SQL behind the decisions.">
 <link rel="canonical" href="https://khanimazimli.github.io/customer-journeys/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Who, When, Whether · Customer Journeys case study">
-<meta property="og:description" content="Personalization as decision-making: who qualifies, when the moment is right, and whether to contact at all.">
+<meta property="og:description" content="Customer experience and personalization: who hears from the bank, when, and when it should stay silent.">
 <meta property="og:url" content="https://khanimazimli.github.io/customer-journeys/">
 <meta name="theme-color" content="#0D1B2A">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%230D1B2A'/%3E%3Ccircle cx='16' cy='16' r='12' fill='none' stroke='%23D4AF37' stroke-width='1.6'/%3E%3Ctext x='16' y='20.5' font-family='Arial' font-size='11' font-weight='700' fill='%23D4AF37' text-anchor='middle'%3EKA%3C/text%3E%3C/svg%3E">
@@ -61,129 +61,72 @@
 .bvd p.c { margin-top: 18px; font-size: 16px; color: var(--ink-2); }
 @media (max-width: 760px) { .bvd { grid-template-columns: 1fr; } }
 
-/* 02 · decision lab */
-.lab { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: clamp(24px, 4vw, 48px); align-items: start; }
-.lab > * { min-width: 0; }
-.ctrls { position: sticky; top: 96px; display: grid; gap: 14px; }
-.ctrl { padding: 20px; border-radius: 16px; border: 1px solid var(--ln-d); background: var(--navy-2); }
-.ctrl .q { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
-.ctrl .q b { font: 500 13px var(--m); letter-spacing: .08em; color: var(--gold); }
-.ctrl .q span { font-size: 15px; color: var(--tx-3); }
-.ctrl label, .ctrl .lab2 { display: block; margin-top: 10px; font-size: 17px; font-weight: 500; }
-.ctrl output { font: 500 18px var(--m); color: var(--tx); }
-.ctrl input[type=range] { width: 100%; margin-top: 14px; accent-color: var(--gold); height: 28px; }
-.ctrl .seg { margin-top: 12px; }
-.ctrl .seg button { font-size: 14.5px; padding: 8px 14px; min-height: 40px; }
-.ctrl.fixed { background: transparent; border-style: dashed; }
-.ctrl.fixed p { margin-top: 8px; font-size: 15px; color: var(--tx-2); }
-.sumbar { display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: center; padding: 18px 22px; border-radius: 16px; background: var(--navy-2); border: 1px solid var(--ln-d); margin-bottom: 16px; }
-.sumbar b { font: 500 clamp(28px, 3vw, 38px)/1 var(--f); letter-spacing: -.03em; }
-.sumbar .s b { color: var(--gold); }
-.sumbar .h b { color: var(--hold); }
-.sumbar small { display: block; font: 500 12.5px var(--m); letter-spacing: .08em; text-transform: uppercase; color: var(--tx-3); margin-top: 6px; }
-.sumbar .gb { margin-left: auto; font-size: 15px; color: var(--tx-3); }
-.cus { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-.cu2 { padding: 18px; border-radius: 16px; border: 1px solid var(--ln-d); background: rgba(19, 36, 58, .6); transition: border-color .35s, background .35s; }
-.cu2.send { border-color: rgba(212, 175, 55, .7); background: rgba(212, 175, 55, .07); }
-.cu2 .hd { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
-.cu2 .hd b { font-size: 17px; }
-.cu2 .v { font: 700 13px var(--m); letter-spacing: .08em; padding: 5px 10px; border-radius: 999px; }
-.cu2.send .v { background: var(--gold); color: var(--navy); }
-.cu2.hold .v { color: var(--hold); border: 1px solid var(--hold); }
-.cu2 .at { margin-top: 8px; font-size: 14.5px; color: var(--tx-3); line-height: 1.45; }
-.cu2 .gts { display: flex; gap: 6px; margin-top: 12px; }
-.cu2 .gts span { flex: 1; text-align: center; padding: 6px 0; border-radius: 8px; font: 500 12px var(--m); letter-spacing: .06em; background: rgba(247, 243, 233, .06); color: var(--tx-3); }
-.cu2 .gts span.p { background: rgba(126, 211, 166, .14); color: var(--ok); }
-.cu2 .gts span.f { background: rgba(229, 140, 122, .16); color: var(--hold); }
-.cu2 .wy { margin-top: 12px; font-size: 15.5px; line-height: 1.45; color: var(--tx); }
-@media (max-width: 960px) { .lab { grid-template-columns: 1fr; } .ctrls { position: static; } }
-@media (max-width: 600px) { .cus { grid-template-columns: 1fr; } .sumbar .gb { margin-left: 0; } }
 
-/* 03 · analysis */
-.an { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
-.an > * { min-width: 0; }
-.steps { border-top: 1px solid var(--ln-l2); }
-.steps li { padding: 16px 0; border-bottom: 1px solid var(--ln-l); display: grid; grid-template-columns: 34px 1fr; gap: 10px; }
-.steps li > i { font: 500 13px var(--m); color: var(--gold-ink); padding-top: 3px; }
-.steps b { display: block; font-size: 16.5px; }
-.steps p { margin-top: 4px; font-size: 15.5px; color: var(--ink-2); line-height: 1.5; }
-.chart { padding: clamp(18px, 3vw, 32px); border-radius: var(--r); background: #fff; border: 1px solid var(--ln-l); position: sticky; top: 96px; }
-.chart .top2 { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
-.chart .thv { font: 500 clamp(36px, 4vw, 52px)/1 var(--f); letter-spacing: -.04em; }
-.chart .thv small { font-size: 18px; color: var(--ink-3); letter-spacing: 0; margin-left: 6px; }
-.chart input[type=range] { width: 100%; margin-top: 18px; accent-color: var(--ink); height: 28px; }
-.chart svg { width: 100%; height: auto; margin-top: 10px; }
-.grp { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 18px; }
-.grp div { padding: 14px; border-radius: 12px; background: var(--ivory); }
-.grp b { display: block; font: 500 26px/1.1 var(--f); letter-spacing: -.02em; }
-.grp span { display: block; margin-top: 6px; font-size: 14.5px; line-height: 1.4; color: var(--ink-2); }
-.grp i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: 0; }
-.verdict { margin-top: 16px; padding: 14px 16px; border-left: 3px solid var(--ink); background: var(--ivory); font-size: 16px; line-height: 1.5; }
-@media (max-width: 960px) { .an { grid-template-columns: 1fr; } .chart { position: static; order: -1; } }
-@media (max-width: 520px) { .grp { grid-template-columns: 1fr; } }
+/* 02 · data */
+.dat { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: clamp(28px, 5vw, 80px); align-items: center; }
+.dat > * { min-width: 0; }
+.plot { padding: clamp(18px, 3vw, 28px); border-radius: var(--r); background: var(--navy-2); border: 1px solid var(--ln-d); }
+.plot svg { width: 100%; height: auto; }
+.plot .pt { fill: rgba(195, 203, 214, .45); transition: transform 1.4s var(--e), fill .6s; }
+.plot.in .pt.h { fill: var(--gold); }
+.plot .tr { fill: none; stroke: var(--gold); stroke-width: 2; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.plot.in .tr { transition: stroke-dashoffset 1.6s var(--e2) 1.2s; stroke-dashoffset: 0; }
+.plot .ax { stroke: var(--ln-d2); }
+.plot .foot2 { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
+.steps3 { margin-top: 28px; border-top: 1px solid var(--ln-d); }
+.steps3 li { display: grid; grid-template-columns: 40px 1fr; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--ln-d); }
+.steps3 li > i { font: 500 13px var(--m); color: var(--gold); padding-top: 3px; }
+.steps3 b { display: block; font-size: 18px; font-weight: 500; }
+.steps3 p { margin-top: 4px; color: var(--tx-2); font-size: 16px; }
+@media (max-width: 900px) { .dat { grid-template-columns: 1fr; } }
 
-/* 04 · responsibility map */
-.own { border-top: 1px solid var(--ln-d); }
-.own .r { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 5fr) minmax(0, 4fr); gap: clamp(14px, 3vw, 40px); padding: 22px 0; border-bottom: 1px solid var(--ln-d); align-items: baseline; }
-.own .r.h { padding: 14px 0; }
-.own .r.h span { font: 500 12.5px var(--m); letter-spacing: .08em; text-transform: uppercase; color: var(--tx-3); }
-.own .a { font-size: 19px; font-weight: 500; letter-spacing: -.01em; }
-.own .m { display: flex; gap: 12px; color: var(--tx); font-size: 16px; line-height: 1.5; }
-.own .m::before { content: ""; flex: 0 0 auto; width: 10px; height: 10px; border-radius: 50%; background: var(--gold); margin-top: 8px; }
-.own .o { display: flex; gap: 12px; color: var(--tx-3); font-size: 15.5px; line-height: 1.5; }
-.own .o::before { content: ""; flex: 0 0 auto; width: 10px; height: 10px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px var(--tx-3); margin-top: 8px; }
-@media (max-width: 820px) { .own .r { grid-template-columns: 1fr; gap: 8px; } .own .r.h { display: none; } }
-
-/* 05 · execution */
-.track { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; position: relative; }
-.track li { padding: 0 16px 0 0; position: relative; }
-.track li::before { content: ""; display: block; height: 4px; border-radius: 2px; background: var(--ln-l2); margin-bottom: 18px; }
-.track li.me::before { background: var(--gold-ink); }
-.track b { display: block; font-size: 20px; letter-spacing: -.015em; }
-.track p { margin-top: 6px; font-size: 15.5px; color: var(--ink-2); line-height: 1.45; }
-.track small { display: block; margin-top: 10px; font: 500 12.5px/1.4 var(--m); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
-.track li.me small { color: var(--gold-ink); }
-@media (max-width: 860px) { .track { grid-template-columns: 1fr; gap: 22px; } .track li { padding: 0 0 0 22px; } .track li::before { position: absolute; left: 0; top: 4px; bottom: 0; width: 4px; height: auto; margin: 0; } }
-.camps { margin-top: clamp(48px, 6vw, 72px); display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 4vw, 56px); }
-.camps > * { min-width: 0; }
-@media (max-width: 900px) { .camps { grid-template-columns: 1fr; } }
-.learn { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 3vw, 40px); margin-top: clamp(48px, 6vw, 72px); padding-top: 28px; border-top: 1px solid var(--ln-l2); }
-.learn b { display: block; font-size: 19px; letter-spacing: -.01em; }
-.learn p { margin-top: 8px; color: var(--ink-2); font-size: 16px; }
+/* 03 · role */
+.own2 { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 5vw, 72px); }
+.own2 > * { min-width: 0; }
+.own2 h3 { font-size: 22px; margin-bottom: 14px; }
+.own2 ul { border-top: 1px solid var(--ln-l2); }
+.own2 li { padding: 15px 0; border-bottom: 1px solid var(--ln-l); font-size: 17px; display: grid; grid-template-columns: 22px 1fr; gap: 10px; }
+.own2 li::before { content: ""; width: 9px; height: 9px; border-radius: 50%; margin-top: 9px; background: var(--gold-ink); }
+.own2 .oth li { color: var(--ink-2); }
+.own2 .oth li::before { background: transparent; box-shadow: inset 0 0 0 1.5px var(--ink-3); }
+@media (max-width: 860px) { .own2 { grid-template-columns: 1fr; } }
+.learn { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 3vw, 40px); }
+.learn > div { padding-top: 22px; border-top: 1px solid var(--ln-d2); }
+.learn b { display: block; font-size: 20px; font-weight: 500; letter-spacing: -.015em; }
+.learn p { margin-top: 8px; color: var(--tx-2); font-size: 16px; }
 @media (max-width: 760px) { .learn { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-
-<header class="nav">
-  <div class="wrap">
-    <a class="brand" href="../" aria-label="Khanım Azimli, home"><i aria-hidden="true">KA</i><span>Khanım Azimli</span></a>
-    <nav aria-label="Primary">
-      <ul>
-        <li><a href="../#work" aria-current="page">Work</a></li>
-        <li><a href="../about/">About</a></li>
-        <li><a class="cta" href="../#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+    
+    <header class="nav">
+      <div class="wrap">
+        <a class="brand" href="../" aria-label="Khanım Azimli, home"><i aria-hidden="true">KA</i><span>Khanım Azimli</span></a>
+        <nav aria-label="Primary">
+          <ul>
+            <li><a href="../#work" aria-current="page">Work</a></li>
+            <li><a href="../about/">About</a></li>
+            <li><a class="cta" href="../#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
 <main id="main">
-  <!-- HERO -->
   <section class="chero cjh" aria-labelledby="t">
     <div class="wrap">
       <div class="crumbs" data-rv><span class="lbl">Case 02 · Retail banking · Mobile app</span><span class="st done">Campaigns live</span></div>
       <div class="top">
         <h1 id="t" data-rv style="--d:.06s"><span>Who.</span><span>When.</span><span class="g">Whether.</span></h1>
         <div data-rv style="--d:.14s">
-          <p class="lede">Customer Journeys &amp; Hyper-Personalization: in the bank's hyper-personalization squad, I decide who a campaign is for, when it should reach them, and when the bank should stay silent.</p>
+          <p class="lede">Customer Journeys. My day-to-day work is deciding who a campaign is for, when it should reach them, and when the bank should not send anything at all.</p>
         </div>
       </div>
       <figure class="sys" id="sys" style="margin-top:clamp(32px,4vw,56px);margin-bottom:0" data-rv="fade">
         <div id="sysv"></div>
-        <figcaption class="sr">Animated illustration with 24 fictional customers. Each passes three questions in turn. Who: does the customer qualify? When: is this the right moment? Whether: should the bank contact them at all? Seven fail at Who, five at When and four at Whether, and are held back. Eight are sent the message.</figcaption>
-        <div class="sys-foot"><span class="small">Illustration with 24 fictional customers. Not bank data.</span><button class="btn ghost" type="button" id="sysR" style="min-height:40px;padding:6px 16px;font-size:14.5px">↻ Replay</button></div>
+        <figcaption class="sr">Abstract animation. Fictional customers pass three questions in turn: is this relevant to them, is this the right moment, and should the bank contact them at all. Some are held back at each question; the rest receive a message.</figcaption>
+        <div class="sys-foot"><span class="small">Abstract illustration with fictional customers.</span><button class="btn ghost" type="button" id="sysR" style="min-height:40px;padding:6px 16px;font-size:14.5px">↻ Replay</button></div>
       </figure>
     </div>
   </section>
@@ -191,156 +134,96 @@
   <section class="dk" style="padding-bottom:clamp(56px,7vw,96px)">
     <div class="wrap">
       <dl class="facts" style="margin-top:0" data-rv>
-        <div><dt>Problem</dt><dd>Many teams want the same customers' attention. Sending everything is noise, not personalization.</dd></div>
+        <div><dt>The problem</dt><dd>Many teams want the same customers' attention. Sending everything is noise, not personalization.</dd></div>
         <div><dt>My role</dt><dd>Lead Customer Experience Specialist. I own my campaigns on the business side.</dd></div>
-        <div><dt>Why it was complex</dt><dd>Five stages with different owners, Risk and Finance approval, three languages and bank-wide contact rules.</dd></div>
-        <div><dt>Delivered</dt><dd><b>Live campaigns</b> I own, with further campaigns in approval or development.</dd></div>
+        <div><dt>Worked with</dt><dd>Business squads, Data Science, Risk, Finance and the team that builds and launches campaigns.</dd></div>
+        <div><dt>Status</dt><dd><b>Live campaigns</b> I own, with more in approval or development.</dd></div>
       </dl>
     </div>
   </section>
 
-  <!-- 01 PROBLEM -->
   <section class="sec lt" aria-labelledby="s1">
     <div class="wrap">
       <div class="sh">
         <div><span class="lbl g" data-rv><span class="n">01</span> The business problem</span><h2 class="stmt" id="s1" data-rv style="--d:.06s"><span class="m">More messages</span> do not mean better personalization.</h2></div>
-        <p class="lede" data-rv style="--d:.12s">Every campaign can be approved on its own and still add up to noise for the customer. The decision that matters is per customer, not per campaign.</p>
+        <p class="lede" data-rv style="--d:.12s">Every campaign can be approved on its own and still add up to noise for the customer. The decision that matters is made for each customer, not for each campaign.</p>
       </div>
       <div class="bvd" id="bvd" aria-hidden="true">
-        <div class="pn"><span class="lbl">Broadcast</span><h3 style="margin-top:10px">Every approved campaign goes to everyone</h3><div class="grid" id="bv1"></div><p class="c">Each customer receives several messages, whether or not they fit.</p></div>
-        <div class="pn"><span class="lbl g">Decided</span><h3 style="margin-top:10px">Each customer gets the one that fits, or none</h3><div class="grid" id="bv2"></div><p class="c">Some receive one relevant message. Others are deliberately held back.</p></div>
+        <div class="pn"><span class="lbl">Broadcast</span><h3 style="margin-top:10px">Every campaign goes to everyone</h3><div class="grid" id="bv1"></div><p class="c">Each customer receives several messages, whether or not they fit.</p></div>
+        <div class="pn"><span class="lbl g">Decided</span><h3 style="margin-top:10px">Each customer gets what fits, or nothing</h3><div class="grid" id="bv2"></div><p class="c">Some receive one relevant message. Others are deliberately left alone.</p></div>
       </div>
-      <p class="note" style="margin-top:22px">Conceptual illustration: 40 fictional customers, each bar one message.</p>
+      <p class="note" style="margin-top:22px">Conceptual illustration with fictional customers.</p>
     </div>
   </section>
 
-  <!-- 02 LAB -->
-  <section class="sec dk" id="lab" aria-labelledby="s2">
-    <div class="wrap">
-      <div class="sh">
-        <div><span class="lbl g" data-rv><span class="n">02</span> Decision lab</span><h2 class="h2" id="s2" data-rv style="--d:.06s">Change the rules. See who hears from the bank, and why.</h2></div>
-        <p class="lede" data-rv style="--d:.12s">Eight fictional customers, one campaign. Adjust the three rules and read why each customer is sent the message or held back.</p>
-      </div>
-      <div class="lab">
-        <div class="ctrls">
-          <div class="ctrl"><div class="q"><b>WHO</b><span>Does the customer qualify?</span></div>
-            <label for="lw">Minimum monthly card spend</label><output id="lwo" for="lw">300 AZN</output>
-            <input type="range" id="lw" min="100" max="1000" step="50" value="300"></div>
-          <div class="ctrl"><div class="q"><b>WHEN</b><span>Is this the right moment?</span></div>
-            <span class="lab2" id="lnL">Send only if salary arrived</span>
-            <div class="seg" role="group" aria-labelledby="lnL"><button type="button" data-n="3" aria-pressed="false">in the last 3 days</button><button type="button" data-n="7" aria-pressed="true">in the last 7 days</button><button type="button" data-n="99" aria-pressed="false">any time</button></div></div>
-          <div class="ctrl"><div class="q"><b>WHETHER</b><span>Contact at all?</span></div>
-            <span class="lab2" id="lcL">Weekly contact limit per customer</span>
-            <div class="seg" role="group" aria-labelledby="lcL"><button type="button" data-c="1" aria-pressed="false">1 message</button><button type="button" data-c="2" aria-pressed="true">2 messages</button><button type="button" data-c="3" aria-pressed="false">3 messages</button></div></div>
-          <div class="ctrl fixed"><div class="q"><b>ALWAYS</b><span>Fixed</span></div><p>Customers on the bank's do-not-contact list are never messaged, whatever the other rules say.</p></div>
-        </div>
-        <div>
-          <div class="sumbar" aria-live="polite"><div class="s"><b id="ns">0</b><small>Send</small></div><div class="h"><b id="nh">0</b><small>Hold back</small></div><p class="gb" id="gb"></p></div>
-          <div class="cus" id="cus"></div>
-          <p class="note" style="margin-top:20px">Fictional customers and an illustrative campaign. Shows the logic, not the bank's real rules, thresholds or results.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 03 ANALYSIS -->
-  <section class="sec lt2" id="analysis" aria-labelledby="s3">
-    <div class="wrap">
-      <div class="sh">
-        <div><span class="lbl g" data-rv><span class="n">03</span> Analytical thinking</span><h2 class="h2" id="s3" data-rv style="--d:.06s">Setting a spend threshold, worked through.</h2></div>
-        <p class="lede" data-rv style="--d:.12s">A reward should change behaviour, not pay customers for what they already do. Move the threshold and watch the trade-off.</p>
-      </div>
-      <div class="an">
-        <ol class="steps">
-          <li><i>01</i><div><b>Business question</b><p>Which spend threshold makes a task-and-reward campaign add spending, at a reward cost Finance will approve?</p></div></li>
-          <li><i>02</i><div><b>Hypothesis</b><p>The right threshold sits a little above what most target customers spend today: close enough to reach, high enough to need a stretch.</p></div></li>
-          <li><i>03</i><div><b>Synthetic evidence</b><p>Monthly card spend for 10,000 invented customers. The real analysis uses each customer's recent spend.</p></div></li>
-          <li><i>04</i><div><b>Trade-offs</b><p>Customers who already qualify cost money without changing behaviour. Customers far below it are unlikely to try.</p></div></li>
-          <li><i>05</i><div><b>Decision rule</b><p>Choose the threshold where the within-reach group is large and most rewards go to customers who must stretch, within the cost Risk and Finance approve.</p></div></li>
-          <li><i>06</i><div><b>Validation</b><p>A control group receives no message, so the effect is the difference between groups: added spend per customer, reward cost per added AZN, and opt-outs as a guardrail.</p></div></li>
+  <section class="sec dk" id="data" aria-labelledby="s2">
+    <div class="wrap dat">
+      <div>
+        <span class="lbl g" data-rv><span class="n">02</span> How I use data</span>
+        <h2 class="h2" id="s2" data-rv style="--d:.06s;margin-top:18px">Some questions need more than a meeting or a campaign brief.</h2>
+        <p class="lede" data-rv style="--d:.12s;margin-top:20px">I look at customer data to check an assumption or explain a pattern before a decision is made. When I need to examine the information more closely, I use basic SQL to pull and review it myself.</p>
+        <ol class="steps3" data-rv>
+          <li><i>01</i><div><b>Ask</b><p>Turn a business question into something the data can answer.</p></div></li>
+          <li><i>02</i><div><b>Look</b><p>Pull and check the relevant information, with basic SQL where needed.</p></div></li>
+          <li><i>03</i><div><b>Decide</b><p>Bring what I found back to the team, with what it means for the campaign.</p></div></li>
         </ol>
-        <div class="chart">
-          <div class="top2"><div><span class="lbl">Monthly spend threshold</span><div class="thv num" style="margin-top:6px"><output id="tho" for="thR">500</output><small>AZN</small></div></div><span class="lbl">Synthetic · 10,000 invented customers</span></div>
-          <label class="sr" for="thR">Monthly spend threshold in AZN</label>
-          <input type="range" id="thR" min="150" max="900" step="25" value="500">
-          <svg id="thS" viewBox="0 0 720 260" role="img" aria-label="Histogram of synthetic monthly spend, coloured by group for the chosen threshold"></svg>
-          <div class="grp">
-            <div><b id="tA" class="num">0</b><span><i style="background:#B5651D"></i>Already qualify: rewarded for what they would spend anyway</span></div>
-            <div><b id="tB" class="num">0</b><span><i style="background:#0D1B2A"></i>Within reach: spend 60–100% of the threshold today</span></div>
-            <div><b id="tC" class="num">0</b><span><i style="background:#B9BEC6"></i>Out of reach: under 60%, unlikely to change</span></div>
-          </div>
-          <p class="verdict" id="thV" aria-live="polite"></p>
-          <p class="small" style="margin-top:12px">Illustrates the method. Not bank data and not a campaign result; the 60% cut-off and the verdict rules are illustrative.</p>
-        </div>
+      </div>
+      <div class="plot" id="plot">
+        <svg viewBox="0 0 480 320" id="plotS" aria-hidden="true"></svg>
+        <div class="foot2"><span class="small">Abstract illustration. No real data.</span><button class="btn ghost" type="button" id="plotR" style="min-height:40px;padding:6px 16px;font-size:14.5px">↻ Look again</button></div>
       </div>
     </div>
   </section>
 
-  <!-- 04 RESPONSIBILITY -->
+  <section class="sec lt" aria-labelledby="s3">
+    <div class="wrap">
+      <div class="sh">
+        <div><span class="lbl g" data-rv><span class="n">03</span> My responsibility</span><h2 class="h2" id="s3" data-rv style="--d:.06s">What I decide, and what other teams own.</h2></div>
+        <p class="lede" data-rv style="--d:.12s">For the campaigns I own, I am responsible for the business side, from the first insight to the results.</p>
+      </div>
+      <div class="own2">
+        <div data-rv><h3>My part</h3><ul>
+          <li>Customer insight: who a campaign is for, and why</li>
+          <li>Personalization and timing for my campaigns</li>
+          <li>The offer and message sequence, in three languages</li>
+          <li>Taking each campaign through its approvals</li>
+          <li>Hand-off, launch, and reviewing the results with the team</li></ul></div>
+        <div class="oth" data-rv style="--d:.08s"><h3>Owned by other teams</h3><ul>
+          <li>Scoring models, by Data Science</li>
+          <li>Building and configuring campaigns, by the engagement team</li>
+          <li>Cost and risk approval, by Risk and Finance</li></ul></div>
+      </div>
+    </div>
+  </section>
+
   <section class="sec dk" aria-labelledby="s4">
     <div class="wrap">
       <div class="sh">
-        <div><span class="lbl g" data-rv><span class="n">04</span> My responsibility</span><h2 class="h2" id="s4" data-rv style="--d:.06s">What I decide, and what other teams own.</h2></div>
-        <p class="lede" data-rv style="--d:.12s">For the campaigns I own, I set the business logic. I do not build the scoring models or configure the marketing platform.</p>
-      </div>
-      <div class="own" role="table" aria-label="Responsibilities">
-        <div class="r h" role="row"><span role="columnheader">Area</span><span role="columnheader">My part</span><span role="columnheader">With or by other teams</span></div>
-        <div class="r" role="row" data-rv><span class="a" role="rowheader">Segmentation</span><span class="m" role="cell">Choosing the segment for each of my campaigns from customer behaviour, research and unmet needs.</span><span class="o" role="cell">Scoring models, built by Data Science.</span></div>
-        <div class="r" role="row" data-rv><span class="a" role="rowheader">Customer eligibility</span><span class="m" role="cell">Eligibility rules: product held, spend threshold, segment, and no repeat reward for the same customer.</span><span class="o" role="cell">Bank-wide filters and do-not-contact lists, in the Data Science engine.</span></div>
-        <div class="r" role="row" data-rv><span class="a" role="rowheader">Trigger logic</span><span class="m" role="cell">The trigger moment: salary arrival, a spending pattern or a date.</span><span class="o" role="cell">Configured in the marketing platform by the engagement team.</span></div>
-        <div class="r" role="row" data-rv><span class="a" role="rowheader">Campaign decisioning</span><span class="m" role="cell">The reward, the threshold within the period and the message sequence.</span><span class="o" role="cell">Risk and Finance approve the cost.</span></div>
-        <div class="r" role="row" data-rv><span class="a" role="rowheader">Governance</span><span class="m" role="cell">Taking each campaign through its approval points, with every customer-facing text in Azerbaijani, English and Russian.</span><span class="o" role="cell">Launch sequencing across campaigns, by squad governance.</span></div>
-        <div class="r" role="row" data-rv><span class="a" role="rowheader">Cross-functional implementation</span><span class="m" role="cell">Handing the approved scenario to the build team and taking it to go-live.</span><span class="o" role="cell">Build and configuration by the engagement team.</span></div>
-        <div class="r" role="row" data-rv><span class="a" role="rowheader">Performance evaluation</span><span class="m" role="cell">Reviewing the results of my campaigns and what to change next.</span><span class="o" role="cell">Analysis with the squad's analysts; control groups held out by the measurement design.</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 05 EXECUTION -->
-  <section class="sec lt" aria-labelledby="s5">
-    <div class="wrap">
-      <div class="sh">
-        <div><span class="lbl g" data-rv><span class="n">05</span> Execution and learning</span><h2 class="h2" id="s5" data-rv style="--d:.06s">From idea to results, across five stages.</h2></div>
-        <p class="lede" data-rv style="--d:.12s">Gold marks the stages where I do the work for my campaigns.</p>
-      </div>
-      <ol class="track" data-rv>
-        <li class="me"><b>Idea</b><p>Research, behaviour, segment, unmet need.</p><small>My squad</small></li>
-        <li class="me"><b>Scenario</b><p>Business logic and texts; Risk and Finance approval.</p><small>Business squads</small></li>
-        <li><b>Build</b><p>Scenario configured in the marketing platform.</p><small>Engagement team</small></li>
-        <li class="me"><b>Launch</b><p>Go-live and sequencing against other campaigns.</p><small>Squad and engagement team</small></li>
-        <li class="me"><b>Results</b><p>Analysis and improvements.</p><small>Squad and analysts</small></li>
-      </ol>
-      <div class="camps">
-        <div data-rv><span class="lbl">Campaigns and status</span><h3 class="h3" style="margin-top:12px">Live campaigns I own, grouped by type.</h3><p class="small" style="margin-top:12px">Results are reported inside the bank and are not published here. Campaigns not yet launched are not described.</p></div>
-        <ul class="stat" data-rv style="--d:.08s">
-          <li><div><b>Task-and-reward, summer 2026</b><span class="d">Reach a spend threshold in the period, or take up a credit card, and earn event tickets. Several campaigns.</span></div><span class="st done">Live</span></li>
-          <li><div><b>Premium birthday reward</b><span class="d">Cashback on the customer's birthday</span></div><span class="st done">Live</span></li>
-          <li><div><b>In-app feedback survey</b><span class="d">Satisfaction survey inside the app</span></div><span class="st done">Live</span></li>
-          <li><div><b>Further campaigns</b><span class="d">Including a scenario triggered by an external context signal</span></div><span class="st wait">In approval or development</span></li>
-        </ul>
+        <div><span class="lbl g" data-rv><span class="n">04</span> Execution and learning</span><h2 class="h2" id="s4" data-rv style="--d:.06s">Live campaigns, and what they taught me.</h2></div>
+        <p class="lede" data-rv style="--d:.12s">My live campaigns range from task-and-reward offers to a premium birthday reward and an in-app feedback survey. Results are reported inside the bank and are not published here.</p>
       </div>
       <div class="learn">
-        <div data-rv><b>Size a rule before setting it</b><p>Who it would reward, who it would move and who it would miss.</p></div>
-        <div data-rv style="--d:.08s"><b>Restraint is part of the design</b><p>Holding messages back protects relevance, even when every campaign is approved.</p></div>
-        <div data-rv style="--d:.16s"><b>Write it so others can build it</b><p>A scenario is ready when the build team and the approvers can act on it without me in the room.</p></div>
+        <div data-rv><b>Relevance beats reach</b><p>A smaller audience that fits the offer does more than a large one that doesn't.</p></div>
+        <div data-rv style="--d:.08s"><b>Holding back is a decision</b><p>Not sending a message is often the right call, even when every campaign is approved.</p></div>
+        <div data-rv style="--d:.16s"><b>Write it so others can act</b><p>A campaign is ready when the people who build and approve it can work from it without me in the room.</p></div>
       </div>
     </div>
   </section>
 
-  <nav class="dk" aria-label="Case studies">
+  <nav class="dk" aria-label="Case studies" style="border-top:1px solid var(--ln-d)">
     <div class="wrap nextc">
       <a href="../abb-wrapped/"><span class="lbl">Previous · 01</span><b>← ABB Wrapped 2026</b></a>
-      <a href="../hyper-intelligence-os/"><span class="lbl">Next case · 03</span><b>Hyper Intelligence OS →</b></a>
+      <a href="../customer-os/"><span class="lbl">Next case · 03</span><b>Customer OS →</b></a>
     </div>
   </nav>
 </main>
 
 <footer class="foot">
-  <div class="wrap">
-    <span>© <span id="yr">2026</span> Khanım Azimli · Illustrations and the decision lab use fictional or synthetic data.</span>
-    <nav aria-label="Footer"><a href="../">Home</a><a href="../about/">About</a><a href="mailto:khanimazimli0@gmail.com">Email</a></nav>
-  </div>
-</footer>
+      <div class="wrap">
+        <span>© <span id="yr">2026</span> Khanım Azimli · Illustrations use fictional data.</span>
+        <nav aria-label="Footer"><a href="../">Home</a><a href="../abb-wrapped/">ABB Wrapped 2026</a><a href="../customer-journeys/">Customer Journeys</a><a href="../customer-os/">Customer OS</a><a href="../about/">About</a></nav>
+      </div>
+    </footer>
 
 <script src="../assets/studio.js"></script>
 <script>
@@ -349,7 +232,7 @@
   var host = document.getElementById('sysv'), fig = document.getElementById('sys'); if (!host) return;
   /* 24 fictional customers: the gate where each is held back (1 who, 2 when, 3 whether) or 0 = sent */
   var F = [0, 1, 2, 0, 1, 3, 0, 2, 1, 0, 3, 1, 0, 2, 1, 0, 3, 2, 1, 0, 3, 2, 1, 0];
-  var NAMES = ['Who', 'When', 'Whether'], REASON = ['Does not qualify', 'Not the right moment', 'Contacted recently or opted out'];
+  var NAMES = ['Who', 'When', 'Whether'], REASON = ['', '', ''];
   var G, vert, dots = [], raf = 0, t0 = 0, END, visible = true;
   function geo() {
     vert = host.clientWidth < 700;
@@ -363,8 +246,7 @@
       s += '<path class="ln" d="M' + G.start[0] + ' 170 H' + (G.send[0] - 30) + '"/>';
       G.gates.forEach(function (g, i) {
         s += '<path class="ln" d="M' + g[0] + ' 225 V310" stroke-dasharray="3 5"/>';
-        s += '<g class="gt" id="gt' + i + '" transform="translate(' + (g[0] - 70) + ' ' + (g[1] - 55) + ')"><rect class="b" width="140" height="110" rx="14"/><text x="70" y="50" text-anchor="middle">' + NAMES[i].toUpperCase() + '</text><text class="q" x="70" y="76" text-anchor="middle">' + ['qualifies?', 'right moment?', 'contact at all?'][i] + '</text></g>';
-        s += '<g class="tray"><text x="' + (g[0] - 62) + '" y="410">' + REASON[i] + '</text></g>';
+        s += '<g class="gt" id="gt' + i + '" transform="translate(' + (g[0] - 70) + ' ' + (g[1] - 55) + ')"><rect class="b" width="140" height="110" rx="14"/><text x="70" y="50" text-anchor="middle">' + NAMES[i].toUpperCase() + '</text><text class="q" x="70" y="76" text-anchor="middle">' + ['relevant?', 'right moment?', 'contact at all?'][i] + '</text></g>';
       });
       s += '<g class="end"><circle cx="' + G.send[0] + '" cy="170" r="14" fill="#D4AF37"/><text x="' + (G.send[0] + 26) + '" y="176" fill="#F7F3E9">SEND</text><text class="cnt" id="cS" x="' + (G.send[0] + 26) + '" y="200">0</text>';
       s += '<text x="' + (G.send[0] - 60) + '" y="410" fill="#E58C7A">HOLD BACK</text><text class="cnt" id="cH" x="' + (G.send[0] + 54) + '" y="410">0</text></g>';
@@ -372,7 +254,7 @@
       s += '<path class="ln" d="M130 ' + G.start[1] + ' V' + (G.send[1] - 30) + '"/>';
       G.gates.forEach(function (g, i) {
         s += '<path class="ln" d="M205 ' + g[1] + ' H255" stroke-dasharray="3 5"/>';
-        s += '<g class="gt" id="gt' + i + '" transform="translate(' + (g[0] - 75) + ' ' + (g[1] - 45) + ')"><rect class="b" width="150" height="90" rx="14"/><text x="75" y="40" text-anchor="middle">' + NAMES[i].toUpperCase() + '</text><text class="q" x="75" y="64" text-anchor="middle">' + ['qualifies?', 'right moment?', 'contact at all?'][i] + '</text></g>';
+        s += '<g class="gt" id="gt' + i + '" transform="translate(' + (g[0] - 75) + ' ' + (g[1] - 45) + ')"><rect class="b" width="150" height="90" rx="14"/><text x="75" y="40" text-anchor="middle">' + NAMES[i].toUpperCase() + '</text><text class="q" x="75" y="64" text-anchor="middle">' + ['relevant?', 'right moment?', 'contact at all?'][i] + '</text></g>';
       });
       s += '<text x="262" y="' + (G.gates[0][1] - 40) + '" fill="#E58C7A" style="font:700 14px Satoshi,Arial;letter-spacing:.06em">HOLD</text>';
       s += '<g class="end"><circle cx="130" cy="' + G.send[1] + '" r="14" fill="#D4AF37"/><text x="156" y="' + (G.send[1] + 6) + '" fill="#F7F3E9">SEND</text><text class="cnt" id="cS" x="226" y="' + (G.send[1] + 6) + '">0</text>';
@@ -442,77 +324,28 @@
   KA.onView(document.getElementById('bvd'), function () { document.getElementById('bvd').classList.add('in'); });
 })();
 
-/* ---------- 02: decision lab ---------- */
-(function () {
-  /* fictional customers: spend (AZN/month), days since salary, messages this week, on do-not-contact list */
-  var P = [
-    ['Leyla', 620, 1, 0, 0], ['Murad', 340, 2, 1, 0], ['Aysel', 910, 9, 0, 0], ['Kamran', 480, 0, 2, 0],
-    ['Nigar', 1200, 1, 0, 1], ['Rauf', 150, 2, 0, 0], ['Sabina', 760, 5, 1, 0], ['Tural', 430, 3, 3, 0]
-  ];
-  var W = 300, N = 7, CAP = 2;
-  var box = document.getElementById('cus'); if (!box) return;
-  function days(d) { return d === 0 ? 'today' : d === 1 ? 'yesterday' : d + ' days ago'; }
-  function draw() {
-    var s = 0, h = 0, fails = [0, 0, 0];
-    box.innerHTML = P.map(function (p) {
-      var who = p[1] >= W, when = p[2] <= N, wh = !p[4] && p[3] < CAP;
-      var ok = who && when && wh, why;
-      if (!who) { why = 'Held back at Who: spends ' + p[1] + ' AZN a month, below the ' + W + ' AZN minimum.'; fails[0]++; }
-      else if (!when) { why = 'Held back at When: salary arrived ' + days(p[2]) + '; the rule needs the last ' + N + ' days.'; fails[1]++; }
-      else if (p[4]) { why = 'Held back at Whether: on the bank\'s do-not-contact list.'; fails[2]++; }
-      else if (!wh) { why = 'Held back at Whether: already received ' + p[3] + ' message' + (p[3] === 1 ? '' : 's') + ' this week; the limit is ' + CAP + '.'; fails[2]++; }
-      else why = 'Send: qualifies, salary arrived ' + days(p[2]) + ', and ' + p[3] + ' of ' + CAP + ' messages used this week.';
-      ok ? s++ : h++;
-      var g = function (n, pass, reached) { return '<span class="' + (reached ? (pass ? 'p' : 'f') : '') + '">' + n + '</span>'; };
-      return '<div class="cu2 ' + (ok ? 'send' : 'hold') + '"><div class="hd"><b>' + p[0] + '</b><span class="v">' + (ok ? 'SEND' : 'HOLD BACK') + '</span></div>' +
-        '<p class="at">Spends ' + p[1] + ' AZN a month · salary ' + days(p[2]) + ' · ' + p[3] + ' message' + (p[3] === 1 ? '' : 's') + ' this week' + (p[4] ? ' · do-not-contact' : '') + '</p>' +
-        '<div class="gts">' + g('WHO', who, true) + g('WHEN', when, true) + g('WHETHER', wh, true) + '</div><p class="wy">' + why + '</p></div>';
-    }).join('');
-    document.getElementById('ns').textContent = s; document.getElementById('nh').textContent = h;
-    document.getElementById('gb').textContent = 'Held back at Who ' + fails[0] + ' · When ' + fails[1] + ' · Whether ' + fails[2];
-  }
-  var lw = document.getElementById('lw'), lwo = document.getElementById('lwo');
-  lw.addEventListener('input', function () { W = +lw.value; lwo.textContent = W + ' AZN'; draw(); });
-  function seg(sel, key, fn) { var bs = document.querySelectorAll(sel); bs.forEach(function (b) { b.addEventListener('click', function () { bs.forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); }); fn(+b.dataset[key]); draw(); }); }); }
-  seg('[data-n]', 'n', function (v) { N = v; });
-  seg('[data-c]', 'c', function (v) { CAP = v; });
-  draw();
-})();
 
-/* ---------- 03: spend threshold ---------- */
+/* ---------- 02: abstract pattern ---------- */
 (function () {
-  /* Synthetic monthly card spend: log-normal, median 260 AZN, 10,000 customers. Illustration only. */
-  var N = 10000, MU = Math.log(260), SG = 0.75, MAX = 1200, BIN = 25;
-  function erf(x) { var s = x < 0 ? -1 : 1; x = Math.abs(x); var t = 1 / (1 + 0.3275911 * x); var y = 1 - (((((1.061405429 * t - 1.453152027) * t) + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t * Math.exp(-x * x); return s * y; }
-  function cdf(x) { if (x <= 0) return 0; return 0.5 * (1 + erf((Math.log(x) - MU) / (SG * Math.SQRT2))); }
-  var bins = []; for (var b = 0; b < MAX; b += BIN) bins.push([b, (cdf(b + BIN) - cdf(b)) * N]);
-  var peak = Math.max.apply(null, bins.map(function (x) { return x[1]; }));
-  var svg = document.getElementById('thS'), R = document.getElementById('thR'); if (!svg) return;
-  var W = 720, H = 260, L = 6, B = 220, PW = W - 12;
-  function fmt(n) { return Math.round(n).toLocaleString('en-US'); }
-  function draw() {
-    var T = +R.value, lo = T * 0.6, bw = PW / bins.length;
-    var bars = bins.map(function (x) {
-      var mid = x[0] + BIN / 2, col = mid >= T ? '#B5651D' : mid >= lo ? '#0D1B2A' : '#B9BEC6';
-      var h = x[1] / peak * 180, xx = L + (x[0] / MAX) * PW;
-      return '<rect x="' + xx.toFixed(1) + '" y="' + (B - h).toFixed(1) + '" width="' + (bw - 2).toFixed(1) + '" height="' + h.toFixed(1) + '" fill="' + col + '" rx="2"/>';
-    }).join('');
-    var tx = L + (T / MAX) * PW, lx = L + (lo / MAX) * PW;
-    var br = '<path d="M' + lx.toFixed(1) + ' 14 V22 H' + tx.toFixed(1) + ' V14" fill="none" stroke="#0D1B2A" stroke-width="1.4"/><text x="' + ((lx + tx) / 2).toFixed(1) + '" y="10" font-size="13" font-weight="700" fill="#0D1B2A" text-anchor="middle" font-family="Satoshi, Arial">within reach</text>';
-    var ticks = [0, 200, 400, 600, 800, 1000].map(function (v) { var x = L + v / MAX * PW; return '<text x="' + x.toFixed(1) + '" y="246" font-size="13" fill="#5A6472" text-anchor="' + (v === 0 ? 'start' : 'middle') + '" font-family="JetBrains Mono, monospace">' + v + '</text>'; }).join('');
-    svg.innerHTML = bars + br + '<line x1="' + L + '" y1="' + B + '" x2="' + (L + PW) + '" y2="' + B + '" stroke="rgba(13,27,42,.3)"/>' +
-      '<line x1="' + tx.toFixed(1) + '" y1="30" x2="' + tx.toFixed(1) + '" y2="' + B + '" stroke="#0D1B2A" stroke-width="2" stroke-dasharray="5 4"/>' + ticks +
-      '<text x="' + (W - 6) + '" y="246" font-size="13" fill="#5A6472" text-anchor="end" font-family="Satoshi, Arial">AZN per month</text>';
-    var a = (1 - cdf(T)) * N, bb = (cdf(T) - cdf(lo)) * N, c = cdf(lo) * N;
-    document.getElementById('tho').textContent = T;
-    document.getElementById('tA').textContent = fmt(a); document.getElementById('tB').textContent = fmt(bb); document.getElementById('tC').textContent = fmt(c);
-    var share = a / (a + bb);
-    var v = share > 0.55 ? '<b>Too low.</b> Most rewards would go to customers who already spend this much.' :
-            bb < 1800 ? '<b>Too high.</b> Few customers are close enough to try.' :
-            '<b>Workable.</b> A large group is within reach, and most rewards would go to customers who must stretch to earn them.';
-    document.getElementById('thV').innerHTML = v + ' The final choice also depends on the reward cost Finance approves.';
+  var box = document.getElementById('plot'), svg = document.getElementById('plotS'); if (!svg) return;
+  function h(n) { var x = Math.sin(n * 12.9898 + 7.3) * 43758.5453; return x - Math.floor(x); }
+  var N = 90, P = [];
+  for (var i = 0; i < N; i++) {
+    var sx = 30 + h(i) * 420, sy = 30 + h(i + 50) * 250, band = i % 3 === 0;
+    var px = 40 + (i / N) * 400, py = 260 - (i / N) * 190 + (h(i + 90) - .5) * (band ? 26 : 120);
+    P.push([sx, sy, px, Math.max(24, Math.min(286, py)), band]);
   }
-  R.addEventListener('input', draw); draw();
+  var html = '<line class="ax" x1="24" y1="292" x2="460" y2="292"/><line class="ax" x1="24" y1="20" x2="24" y2="292"/>' +
+    P.map(function (p, i) { return '<circle class="pt' + (p[4] ? ' h' : '') + '" r="' + (p[4] ? 4.2 : 3.4) + '" cx="0" cy="0" style="transform:translate(' + p[0].toFixed(1) + 'px,' + p[1].toFixed(1) + 'px)"/>'; }).join('') +
+    '<path class="tr" pathLength="1" d="M40 262 C160 230 300 150 440 72"/>';
+  svg.innerHTML = html;
+  var pts = [].slice.call(svg.querySelectorAll('.pt'));
+  function settle(on) {
+    box.classList.toggle('in', on);
+    pts.forEach(function (c, i) { var p = P[i], x = on && p[4] ? p[2] : on ? p[0] * .5 + p[2] * .5 : p[0], y = on && p[4] ? p[3] : on ? p[1] * .5 + p[3] * .5 : p[1]; c.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)'; });
+  }
+  KA.onView(box, function () { settle(true); });
+  document.getElementById('plotR').addEventListener('click', function () { settle(false); setTimeout(function () { settle(true); }, KA.reduced ? 0 : 450); });
 })();
 </script>
 </body>

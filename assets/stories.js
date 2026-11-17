@@ -39,7 +39,7 @@
         '<path d="M122 22 l9 3 -9 3 2 -3z" fill="currentColor" transform="rotate(18 126 25)"/>' +
         '<text x="34" y="104" font-size="10" fill="currentColor" text-anchor="middle">Baku</text>' +
         '<text x="166" y="66" font-size="10" fill="currentColor" text-anchor="middle">' + esc(s.dest || s.v) + '</text>' +
-        (s.generic ? '<rect x="2" y="2" width="84" height="18" rx="9" fill="none" stroke="currentColor" opacity=".6"/><text x="44" y="14" font-size="9" fill="currentColor" text-anchor="middle">generic template</text>' : '') + '</svg>';
+        '</svg>';
     },
     first: function () {
       return '<svg viewBox="0 0 200 112" aria-hidden="true" font-family="Satoshi, Arial"><g fill="none" stroke="var(--sac)"><circle cx="100" cy="56" r="46" stroke-width="1" opacity=".35"/><circle cx="100" cy="56" r="36" stroke-width="2"/></g>' +
@@ -80,26 +80,14 @@
   function label(s) { return s.k + ': ' + s.h + (s.v ? ' ' + s.v : '') + '. ' + s.n + '.'; }
   window.KAStory = { inner: inner, style: style, label: label, themes: TH };
 
-  /* fictional story sequences by customer type; r = the rule that selected the story */
-  var intro = { t: 'navy', kind: 'intro', k: 'Intro', h: 'Your 2026, in stories', n: 'Built from your own payments', r: 'Same opening for all customers.' };
-  var close = { t: 'navy', kind: 'months', k: 'Closing', h: 'Thank you for this year', n: 'Active in 9 of 12 months · see you in 2027', r: 'Shared closing story.' };
-  window.KAStory.sets = [
-    [ intro,
-      { t: 'sand', kind: 'category', k: 'Top category', h: 'Your payments were led by', v: 'Cafés', n: '184 payments this year', rows: [['Cafés', 2140], ['Groceries', 1310], ['Transport', 640]], r: 'Category story: one variant per category, chosen by top spend.' },
-      { t: 'teal', kind: 'country', k: 'Top country abroad', h: 'Abroad, you spent most in', v: 'Georgia', n: '1,280 AZN across 3 trips', r: 'Country story: Georgia has its own designed story.' },
-      { t: 'ink', kind: 'first', k: 'A first', h: 'This year you opened your', v: 'First deposit', n: 'One of this year’s milestones', r: 'Product first: shown only to customers who had one this year.' },
-      close ],
-    [ intro,
-      { t: 'sand', kind: 'category', k: 'Top category', h: 'Your payments were led by', v: 'Groceries', n: '96 payments this year', rows: [['Groceries', 1310], ['Fuel', 720], ['Pharmacies', 380]], r: 'Category story: chosen by top spend.' },
-      { t: 'sky', kind: 'country', k: 'Top country abroad', h: 'Abroad, you spent most in', v: 'Iceland', generic: true, n: '410 AZN this year', r: 'Fallback: there is no designed story for Iceland, so the generic country template is filled with its name.' },
-      close ],
-    [ { t: 'green', prem: true, kind: 'intro', k: 'Intro · premium', h: 'Your 2026, in stories', n: 'A premium edition of your year', r: 'Premium version of the opening.' },
-      { t: 'green', prem: true, kind: 'category', k: 'Top category · premium', h: 'Your payments were led by', v: 'Travel', n: '42 payments this year', rows: [['Travel', 6900], ['Restaurants', 3150], ['Shopping', 2400]], r: 'Premium version of the category story.' },
-      { t: 'teal', prem: true, kind: 'country', k: 'Top country abroad', h: 'Abroad, you spent most in', v: 'Italy', n: '3,450 AZN across 2 trips', r: 'Country story: the same for every audience.' },
-      { t: 'green', prem: true, kind: 'months', k: 'Closing · premium', h: 'Thank you for this year', n: 'Active in 11 of 12 months', on: [1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1], r: 'Premium closing.' } ],
-    [ { t: 'plum', kind: 'away', k: 'Welcome back', h: 'We meet again', n: 'Here is what changed while you were away', r: 'Returning-customer path: replaces the year summary.' },
-      { t: 'plum', kind: 'news', k: 'While you were away', h: 'New partners joined', n: 'A short look at the year', r: 'Part of the separate returning-customer sequence.' },
-      { t: 'plum', kind: 'next', k: 'An invitation', h: 'Your next story starts here', n: 'One clear next step', r: 'Path-specific closing.' } ]
+  /* fictional story moments for illustration only */
+  window.KAStory.list = [
+    { t: 'navy', kind: 'intro', k: 'Opening', h: 'Your 2026, in stories', n: 'A look back at your year', c: 'The opening: a year of activity, told as a short story.' },
+    { t: 'sand', kind: 'category', k: 'Top category', h: 'Your payments were led by', v: 'Cafés', n: '184 payments this year', rows: [['Cafés', 2140], ['Groceries', 1310], ['Transport', 640]], c: 'Where the year went: everyday spending, made personal.' },
+    { t: 'teal', kind: 'country', k: 'Travel', h: 'Abroad, you spent most in', v: 'Georgia', n: 'Across 3 trips', c: 'Travel moments, drawn from the customer’s own year.' },
+    { t: 'ink', kind: 'first', k: 'A first', h: 'This year you opened your', v: 'First deposit', n: 'One of this year’s milestones', c: 'Milestones worth celebrating.' },
+    { t: 'navy', kind: 'months', k: 'Closing', h: 'Thank you for this year', n: 'See you in 2027', c: 'The closing: a warm end, and a reason to come back.' },
+    { t: 'plum', kind: 'away', k: 'Welcome back', h: 'We meet again', n: 'Here is what changed', c: '' },
+    { t: 'green', prem: true, kind: 'intro', k: 'Premium', h: 'Your 2026, in stories', n: 'A premium edition of your year', c: '' }
   ];
-  window.KAStory.year = '2026';
 })();
