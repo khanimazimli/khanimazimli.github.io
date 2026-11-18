@@ -13,11 +13,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Customer Journeys · Khanım Azimli</title>
-<meta name="description" content="Case study: customer analysis, business decisions and delivery in retail banking. Analysing customer information, using basic SQL where needed, shaping customer initiatives and coordinating their delivery.">
+<meta name="description" content="Case study: business analysis, customer experience and initiative delivery in retail banking. Analysing customer data with basic SQL where needed, shaping customer initiatives and owning their delivery and review.">
 <link rel="canonical" href="https://khanimazimli.github.io/customer-journeys/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Customer Journeys · case study">
-<meta property="og:description" content="Customer analysis, business decisions and delivery in a retail bank's mobile app.">
+<meta property="og:description" content="Business analysis, customer experience and initiative delivery in a retail bank's mobile app.">
 <meta property="og:url" content="https://khanimazimli.github.io/customer-journeys/">
 <meta name="theme-color" content="#0D1B2A">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%230D1B2A'/%3E%3Ccircle cx='16' cy='16' r='12' fill='none' stroke='%23D4AF37' stroke-width='1.6'/%3E%3Ctext x='16' y='20.5' font-family='Arial' font-size='11' font-weight='700' fill='%23D4AF37' text-anchor='middle'%3EKA%3C/text%3E%3C/svg%3E">
@@ -67,11 +67,15 @@
 .chips span { padding: 9px 14px; border-radius: 999px; border: 1px solid var(--ln-l2); font-size: 15px; color: var(--ink-2); }
 .chips span.me { background: var(--ink); color: var(--ivory); border-color: var(--ink); }
 @media (max-width: 860px) { .team { grid-template-columns: 1fr; } }
-.learn { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 3vw, 40px); margin-top: clamp(36px, 5vw, 56px); }
-.learn > div { padding-top: 22px; border-top: 1px solid var(--ln-d2); }
-.learn b { display: block; font-size: 20px; font-weight: 500; letter-spacing: -.015em; }
-.learn p { margin-top: 8px; color: var(--tx-2); font-size: 16px; }
-@media (max-width: 760px) { .learn { grid-template-columns: 1fr; } }
+.ctr .cta3 { display: block; padding: clamp(22px, 3vw, 32px); border-radius: var(--r); background: #fff; border: 1px solid var(--ln-l); color: inherit; text-decoration: none; transition: border-color .3s, transform .3s var(--e); }
+.ctr .cta3:hover { border-color: var(--gold-ink); transform: translateY(-2px); }
+.ctr .cta3:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 3px; }
+.dec { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0 clamp(14px, 2vw, 28px); }
+.dec > div { padding-top: 22px; border-top: 2px solid var(--ink); }
+.dec b { display: block; font-size: 18.5px; font-weight: 500; letter-spacing: -.01em; }
+.dec p { margin-top: 8px; color: var(--ink-2); font-size: 15.5px; }
+@media (max-width: 1080px) { .dec { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px clamp(14px, 2vw, 28px); } }
+@media (max-width: 680px) { .dec { grid-template-columns: 1fr; gap: 22px; } }
 </style>
 </head>
 <body>
@@ -96,8 +100,8 @@
       <div>
         <div class="crumbs" data-rv><span class="lbl">Case 02 · Retail banking · Mobile app</span><span class="st done">Initiatives live</span></div>
         <h1 id="t" data-rv style="--d:.06s">Customer Journeys</h1>
-        <p class="tagl" data-rv style="--d:.1s">Customer analysis, business decisions and delivery</p>
-        <p class="lede" data-rv style="--d:.16s">My day-to-day work at ABB: understanding what customers do and need, deciding what the bank should offer them and when, and seeing those initiatives through to results with the teams involved.</p>
+        <p class="tagl" data-rv style="--d:.1s">Business analysis, customer experience and initiative delivery</p>
+        <p class="lede" data-rv style="--d:.16s">My core work at ABB: analysing customer behaviour and business questions, shaping the customer initiatives I own, and taking them through delivery and review with business and technical teams.</p>
       </div>
       <div class="lpv" id="lpC" data-rv="fade"><svg aria-hidden="true"></svg></div>
     </div>
@@ -107,7 +111,7 @@
     <div class="wrap">
       <dl class="facts" style="margin-top:0" data-rv>
         <div><dt>Context</dt><dd>Customer experience and personalization in a retail bank's mobile app.</dd></div>
-        <div><dt>My role</dt><dd>Lead Customer Experience Specialist. I own the business side of my initiatives.</dd></div>
+        <div><dt>My role</dt><dd>Lead Customer Experience Specialist. <b>Business owner</b> of my initiatives, from the first question to the review of results.</dd></div>
         <div><dt>Worked with</dt><dd>Marketing, data science, risk, finance and engineering colleagues.</dd></div>
         <div><dt>Status</dt><dd><b>Live initiatives</b> that I own, with results reviewed inside the bank.</dd></div>
       </dl>
@@ -117,10 +121,10 @@
   <section class="sec lt" aria-labelledby="s1">
     <div class="wrap">
       <div class="sh" style="margin-bottom:0">
-        <div><span class="lbl g" data-rv><span class="n">01</span> Business context</span><h2 class="stmt" id="s1" data-rv style="--d:.06s"><span class="m">Reach is easy.</span> Relevance takes work.</h2></div>
+        <div><span class="lbl g" data-rv><span class="n">01</span> Business context</span><h2 class="stmt" id="s1" data-rv style="--d:.06s"><span class="m">Which customers need what,</span> and is it worth doing?</h2></div>
         <div data-rv style="--d:.12s">
-          <p class="lede">A bank's app can reach a large customer base, and many teams want that attention. The useful question is narrower: what does a particular group of customers actually need, and is it worth the bank's investment to offer it?</p>
-          <p class="body" style="margin-top:16px">Answering that well means understanding customers through their behaviour, being clear about the business goal, and checking afterwards whether the initiative did what it was meant to.</p>
+          <p class="lede">A bank's app reaches a large customer base, and many teams compete for that attention. Every initiative has to answer two questions: what a particular group of customers actually needs, and whether offering it is worth the bank's investment.</p>
+          <p class="body" style="margin-top:16px">Answering them well takes three things: evidence about customer behaviour, a clear business goal, and a review afterwards of whether the initiative did what it was meant to.</p>
         </div>
       </div>
     </div>
@@ -129,13 +133,13 @@
   <section class="sec lt2" aria-labelledby="s2">
     <div class="wrap">
       <div class="sh">
-        <div><span class="lbl g" data-rv><span class="n">02</span> My contribution</span><h2 class="h2" id="s2" data-rv style="--d:.06s">Three parts of the same job.</h2></div>
+        <div><span class="lbl g" data-rv><span class="n">02</span> My role</span><h2 class="h2" id="s2" data-rv style="--d:.06s">Analysis, decisions and delivery, in one role.</h2></div>
         <p class="lede" data-rv style="--d:.12s">For the initiatives I own, I am responsible for the business side from the first question to the review of results.</p>
       </div>
       <div class="ctr">
-        <article data-rv><span class="k">A</span><h3>Customer and data analysis</h3><p>I work with customer information, look at behavioural patterns and investigate business questions. When I need to, I use basic SQL to retrieve and examine the relevant data myself.</p></article>
-        <article data-rv style="--d:.08s"><span class="k">B</span><h3>Business decisions</h3><p>I connect what the analysis shows with customer experience and campaign initiatives: who they are for, what they should achieve, and whether they are worth doing.</p></article>
-        <article data-rv style="--d:.16s"><span class="k">C</span><h3>Project delivery</h3><p>I work with business and technical colleagues to get initiatives built and launched, and I review how they perform so the next one is better informed.</p></article>
+        <a class="cta3" href="#data" data-rv><span class="k">A</span><h3>Data and customer analysis</h3><p>Understanding behaviour and investigating business questions in customer data.</p></a>
+        <a class="cta3" href="#dec" data-rv style="--d:.08s"><span class="k">B</span><h3>Business decisions</h3><p>Turning customer needs and business requirements into initiatives worth doing.</p></a>
+        <a class="cta3" href="#own" data-rv style="--d:.16s"><span class="k">C</span><h3>Ownership and delivery</h3><p>Taking initiatives through to launch with business and technical teams, then reviewing the results.</p></a>
       </div>
     </div>
   </section>
@@ -143,13 +147,13 @@
   <section class="sec dk" id="data" aria-labelledby="s3">
     <div class="wrap dat">
       <div>
-        <span class="lbl g" data-rv><span class="n">03</span> Data and analysis</span>
-        <h2 class="h2" id="s3" data-rv style="--d:.06s;margin-top:18px">Some questions need more than a meeting or a brief.</h2>
-        <p class="lede" data-rv style="--d:.12s;margin-top:20px">Before a decision is made, I check the assumption behind it against customer data. When I need to look more closely, I use basic SQL to pull and review the information myself, then bring the finding back to the team.</p>
+        <span class="lbl g" data-rv><span class="n">A</span> Data and customer analysis</span>
+        <h2 class="h2" id="s3" data-rv style="--d:.06s;margin-top:18px">Checking the assumption before the decision.</h2>
+        <p class="lede" data-rv style="--d:.12s;margin-top:20px">I work with customer information to understand behaviour, investigate business questions and support decisions. For straightforward retrieval and checks, I use basic SQL myself, so I can examine the numbers and patterns behind a business question directly.</p>
         <ol class="steps3" data-rv>
-          <li><i>01</i><div><b>Ask</b><p>Turn a business question into something the data can answer.</p></div></li>
-          <li><i>02</i><div><b>Look</b><p>Retrieve and check the relevant information, with basic SQL where needed.</p></div></li>
-          <li><i>03</i><div><b>Decide</b><p>Explain what the data shows and what it means for the initiative.</p></div></li>
+          <li><i>01</i><div><b>Frame</b><p>Turn a business question into something the data can answer.</p></div></li>
+          <li><i>02</i><div><b>Examine</b><p>Retrieve and check the relevant information, with basic SQL where needed.</p></div></li>
+          <li><i>03</i><div><b>Interpret</b><p>Explain what the patterns show and what they mean for the initiative.</p></div></li>
         </ol>
       </div>
       <div class="plot" id="plot">
@@ -159,29 +163,32 @@
     </div>
   </section>
 
-  <section class="sec lt" aria-labelledby="s4">
-    <div class="wrap team">
-      <div>
-        <span class="lbl g" data-rv><span class="n">04</span> Working across teams</span>
-        <h2 class="h2" id="s4" data-rv style="--d:.06s;margin-top:18px">The business side, in a team of specialists.</h2>
+  <section class="sec lt" id="dec" aria-labelledby="s4">
+    <div class="wrap">
+      <div class="sh">
+        <div><span class="lbl g" data-rv><span class="n">B</span> Business decisions</span><h2 class="h2" id="s4" data-rv style="--d:.06s">Shaping initiatives the bank can justify.</h2></div>
+        <p class="lede" data-rv style="--d:.12s">Analysis matters only when it changes what the bank does. My part is connecting what customers need with what the business requires, and proposing initiatives that serve both.</p>
       </div>
-      <div data-rv style="--d:.1s">
-        <p class="lede">In a regulated bank, an initiative needs several specialists. My part is the business side: framing the need, agreeing what the initiative should achieve, and keeping it moving to launch. The models, the build and the risk and finance decisions belong to the colleagues who own them.</p>
-        <div class="chips" aria-label="Colleagues I work with"><span class="me">Business owner: me</span><span>Marketing</span><span>Data science</span><span>Risk</span><span>Finance</span><span>Engineering</span></div>
+      <div class="dec">
+        <div data-rv><b>Understanding requirements</b><p>What the business needs an initiative to achieve, and the constraints it has to respect.</p></div>
+        <div data-rv style="--d:.05s"><b>Assessing customer needs</b><p>Which customers the initiative is for, and what would actually be useful to them.</p></div>
+        <div data-rv style="--d:.1s"><b>Shaping the initiative</b><p>Defining the proposal: its audience, its goal and how success will be judged.</p></div>
+        <div data-rv style="--d:.15s"><b>Evaluating the evidence</b><p>Weighing the available information before committing the bank's effort.</p></div>
+        <div data-rv style="--d:.2s"><b>Supporting priorities</b><p>Helping decide what goes first, and what should wait or not happen at all.</p></div>
       </div>
     </div>
   </section>
 
-  <section class="sec dk" aria-labelledby="s5">
-    <div class="wrap">
-      <div class="sh" style="margin-bottom:0">
-        <div><span class="lbl g" data-rv><span class="n">05</span> Delivery and outcomes</span><h2 class="h2" id="s5" data-rv style="--d:.06s">Live, reviewed, and improved.</h2></div>
-        <p class="lede" data-rv style="--d:.12s">Initiatives I own are live in the app. I review their results with the team and carry what we learn into the next one. Performance figures are internal and are not published here.</p>
+  <section class="sec lt2" id="own" aria-labelledby="s5">
+    <div class="wrap team">
+      <div>
+        <span class="lbl g" data-rv><span class="n">C</span> Ownership and delivery</span>
+        <h2 class="h2" id="s5" data-rv style="--d:.06s;margin-top:18px">The business owner, in a team of specialists.</h2>
       </div>
-      <div class="learn">
-        <div data-rv><b>Start from the customer question</b><p>Decide what the customer needs before deciding which channel or format to use.</p></div>
-        <div data-rv style="--d:.08s"><b>Check before deciding</b><p>A quick look at the data often changes the question, and saves effort later.</p></div>
-        <div data-rv style="--d:.16s"><b>A good plan can be delivered</b><p>The best initiative is one the team can build, launch and measure.</p></div>
+      <div data-rv style="--d:.1s">
+        <p class="lede">I own the business side of my initiatives. That means managing the requirements within my scope, coordinating the business and technical teams who build and approve them, following execution, and assessing the results once they are live.</p>
+        <p class="body" style="margin-top:16px">The initiatives I own are live in the app, and I review their results with the team to inform the next one.</p>
+        <div class="chips" aria-label="Teams I work with"><span class="me">Business owner: me</span><span>Marketing</span><span>Data science</span><span>Risk</span><span>Finance</span><span>Engineering</span></div>
       </div>
     </div>
   </section>
@@ -204,7 +211,7 @@
 <script src="../assets/studio.js"></script>
 <script src="../assets/visuals.js"></script>
 <script>
-KAV.loop(document.querySelector('#lpC svg'));
+KAV.loop(document.querySelector('#lpC svg'), ['Analysis', 'Decision', 'Delivery', 'Review']);
 KA.onView(document.getElementById('lpC'), function () { document.getElementById('lpC').classList.add('in'); }, '0px');
 /* ---------- 02: abstract pattern ---------- */
 (function () {

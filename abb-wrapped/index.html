@@ -13,11 +13,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ABB Wrapped · Khanım Azimli</title>
-<meta name="description" content="Case study: ABB Wrapped, an annual personalized banking experience built around customers' individual banking activity. Khanım Azimli is Project Owner for the 2025 edition, which reached approximately 1.5 million customers, and the 2026 edition in development.">
+<meta name="description" content="Case study: ABB Wrapped, a large-scale personalized banking initiative built around individual customer activity. Khanım Azimli is Project Owner for the 2025 edition, which launched at scale, and for the 2026 edition in development, reporting directly to the Managing Director.">
 <link rel="canonical" href="https://khanimazimli.github.io/abb-wrapped/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ABB Wrapped · case study">
-<meta property="og:description" content="Project Owner of a personalized digital banking experience: 2025 edition reached approximately 1.5 million customers; 2026 edition in development.">
+<meta property="og:description" content="Project Owner of a large-scale personalized banking initiative: 2025 edition launched at scale; 2026 edition in development.">
 <meta property="og:url" content="https://khanimazimli.github.io/abb-wrapped/">
 <meta name="theme-color" content="#0D1B2A">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%230D1B2A'/%3E%3Ccircle cx='16' cy='16' r='12' fill='none' stroke='%23D4AF37' stroke-width='1.6'/%3E%3Ctext x='16' y='20.5' font-family='Arial' font-size='11' font-weight='700' fill='%23D4AF37' text-anchor='middle'%3EKA%3C/text%3E%3C/svg%3E">
@@ -34,7 +34,7 @@
 .wh h1 { font-size: clamp(50px, 6.4vw, 96px); letter-spacing: -.045em; line-height: .95; }
 .wh .sub { margin-top: 24px; }
 .wh .mine { margin-top: 26px; padding-left: 18px; border-left: 2px solid var(--gold); color: var(--tx); font-size: 17px; line-height: 1.55; max-width: 46ch; }
-.wh .role-line { font: 500 13px/1.3 var(--m); letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+.wh .role-line { font: 500 13px/1.3 var(--m); letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-top: 18px; }
 .wh .hl { margin-top: 18px; font-size: clamp(24px, 2.4vw, 34px); line-height: 1.2; letter-spacing: -.025em; font-weight: 500; max-width: 22ch; }
 .wh .hl span { color: var(--tx-3); }
 .wh .mine b { font-weight: 700; color: var(--gold); }
@@ -42,6 +42,7 @@
 .reach .edv { opacity: .55; }
 .reach .fig { position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%); text-align: center; padding: 22px 30px; border-radius: 20px; background: rgba(13, 27, 42, .82); border: 1px solid rgba(212, 175, 55, .45); backdrop-filter: blur(4px); }
 .reach .fig b { display: block; margin-top: 8px; font: 500 clamp(64px, 8vw, 120px)/1 var(--f); letter-spacing: -.05em; color: var(--gold); }
+.reach .fig b.wd { font-size: clamp(44px, 5.4vw, 80px); }
 .reach .fig .cap { display: block; margin-top: 10px; font-size: 15px; color: var(--tx-2); max-width: 22ch; margin-left: auto; margin-right: auto; }
 @media (max-width: 1080px) { .wh .wrap { grid-template-columns: 1fr; } }
 .tri { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 3vw, 40px); border-top: 1px solid var(--ln-l2); }
@@ -64,20 +65,15 @@
 .tl2 .mypart span { display: block; font: 500 12.5px var(--m); letter-spacing: .08em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
 .tl2 .mypart p { margin-top: 0; color: var(--tx); }
 @media (max-width: 760px) { .tl2 { grid-template-columns: 1fr; } .tl2::before, .tl2 .pr { display: none; } }
-.resp { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 5vw, 72px); }
-.resp > * { min-width: 0; }
-.resp ul { border-top: 1px solid var(--ln-l2); }
-.resp li { padding: 15px 0; border-bottom: 1px solid var(--ln-l); font-size: 17px; display: grid; grid-template-columns: 22px 1fr; gap: 10px; }
-.resp li::before { content: ""; width: 9px; height: 9px; border-radius: 50%; margin-top: 9px; background: var(--gold-ink); }
-.resp aside { padding: 22px; border-radius: var(--r); background: rgba(13, 27, 42, .04); border: 1px solid var(--ln-l); align-self: start; }
-.resp aside p { margin-top: 10px; color: var(--ink-2); font-size: 16px; }
-@media (max-width: 860px) { .resp { grid-template-columns: 1fr; } }
-.req { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(14px, 2.4vw, 32px); }
-.req div { padding-top: 20px; border-top: 1px solid var(--ln-d2); }
-.req b { display: block; font-size: 19px; font-weight: 500; letter-spacing: -.01em; }
-.req p { margin-top: 8px; color: var(--tx-2); font-size: 15.5px; }
-@media (max-width: 960px) { .req { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 560px) { .req { grid-template-columns: 1fr; } }
+.wh .po { display: inline-flex; align-items: center; gap: 12px; margin: 22px 0 18px; padding: 8px 16px 8px 8px; border-radius: 999px; border: 1px solid rgba(212, 175, 55, .55); background: rgba(212, 175, 55, .08); font-size: 15px; color: var(--tx-2); }
+.wh .po b { padding: 6px 12px; border-radius: 999px; background: var(--gold); color: var(--navy); font: 700 12.5px/1 var(--m); letter-spacing: .08em; text-transform: uppercase; }
+.own { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 clamp(16px, 2.6vw, 36px); }
+.own > div { padding: 22px 0 26px; border-top: 1px solid var(--ln-l2); }
+.own b { display: block; font-size: 19px; font-weight: 500; letter-spacing: -.01em; }
+.own b::before { content: ""; display: block; width: 28px; height: 3px; background: var(--gold-ink); margin-bottom: 14px; }
+.own p { margin-top: 8px; color: var(--ink-2); font-size: 15.5px; }
+@media (max-width: 960px) { .own { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .own { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -100,16 +96,17 @@
   <section class="chero wh" aria-labelledby="t">
     <div class="wrap">
       <div>
-        <div class="crumbs" data-rv><span class="lbl">Case 01 · Digital banking · Personalization</span><span class="st done">2025 launched</span><span class="st wait">2026 in development</span></div>
-        <p class="role-line" data-rv>Project Owner · Digital Banking · Personalization</p>
+        <div class="crumbs" data-rv><span class="lbl">Case 01 · Digital banking</span><span class="st done">2025 launched</span><span class="st wait">2026 in development</span></div>
+        <p class="po" data-rv><b>Project Owner</b><span>2025 and 2026 editions</span></p>
         <h1 id="t" data-rv style="--d:.06s">ABB Wrapped</h1>
-        <p class="hl" data-rv style="--d:.1s">1.5 million customers. <span>Stories shaped by their own year.</span></p>
-        <p class="lede sub" data-rv style="--d:.14s">ABB Wrapped is an annual personalized banking experience built around customers' individual banking activity.</p>
-        <p class="mine" data-rv style="--d:.18s">I served as <b>Project Owner for both the 2025 and 2026 editions</b>, leading the initiative across multiple teams and reporting project progress directly to the Managing Director.</p>
+        <p class="role-line" data-rv style="--d:.08s">Digital Banking · Personalization · Project Ownership</p>
+        <p class="hl" data-rv style="--d:.1s">A large-scale personalized banking initiative, <span>built around individual customer activity.</span></p>
+        <p class="lede sub" data-rv style="--d:.14s">The first edition launched in 2025, delivering personalized year-in-review experiences at scale.</p>
+        <p class="mine" data-rv style="--d:.18s">I served as <b>Project Owner</b> for the first edition and continue in the same role for the more advanced 2026 edition, managing cross-functional work and reporting directly to the Managing Director.</p>
       </div>
       <div class="reach" data-rv="fade" style="--d:.2s">
         <figure class="edv" id="edW" style="margin:0"><svg aria-hidden="true"></svg></figure>
-        <div class="fig"><span class="lbl g">2025 launch</span><b class="num">~1.5M</b><span class="cap">customers reached by the first edition, approximately</span></div>
+        <div class="fig"><span class="lbl g">2025 edition</span><b class="wd">Launched</b><span class="cap">personalized year-in-review experiences, delivered at scale</span></div>
       </div>
     </div>
   </section>
@@ -117,10 +114,10 @@
   <section class="dk" style="padding-bottom:clamp(56px,7vw,96px)">
     <div class="wrap">
       <dl class="facts" style="margin-top:0" data-rv>
-        <div><dt>What it is</dt><dd>An annual personalized banking experience in ABB's mobile app.</dd></div>
+        <div><dt>What it is</dt><dd>An annual personalized banking experience in ABB's mobile app, built from each customer's own banking activity.</dd></div>
         <div><dt>My role</dt><dd><b>Project Owner</b> for the 2025 and 2026 editions.</dd></div>
-        <div><dt>Reporting</dt><dd>Directly to the Managing Director on this project. Teams across marketing, design, product, data and engineering.</dd></div>
-        <div><dt>Status</dt><dd><b>2025 launched,</b> reaching approximately 1.5 million customers. The 2026 edition is in development.</dd></div>
+        <div><dt>Senior reporting</dt><dd>Directly to the <b>Managing Director</b> on this project.</dd></div>
+        <div><dt>Status</dt><dd><b>2025 launched</b> at scale. 2026 in development.</dd></div>
       </dl>
     </div>
   </section>
@@ -128,13 +125,13 @@
   <section class="sec lt" aria-labelledby="s1">
     <div class="wrap">
       <div class="sh">
-        <div><span class="lbl g" data-rv><span class="n">01</span> Personalized banking, at scale</span><h2 class="stmt" id="s1" data-rv style="--d:.06s"><span class="m">Personal</span> only works if it is right.</h2></div>
-        <p class="lede" data-rv style="--d:.12s">Each edition draws on customers' individual banking activity, so the year-in-review a customer receives reflects their own year with the bank. That makes it a data product as much as a creative one.</p>
+        <div><span class="lbl g" data-rv><span class="n">01</span> The initiative</span><h2 class="stmt" id="s1" data-rv style="--d:.06s"><span class="m">A data-informed product,</span> not a campaign.</h2></div>
+        <p class="lede" data-rv style="--d:.12s">Wrapped brings together customer-level banking data, the mobile app and personalization, delivered across several teams to a fixed release date. Its value depends on getting the data, the experience and the delivery right at the same time.</p>
       </div>
       <div class="tri">
-        <div data-rv><i></i><b>Relevant</b><p>The experience should reflect the customer's activity, not a generic message.</p></div>
-        <div data-rv style="--d:.08s"><i></i><b>Accurate</b><p>Details drawn from customer data need to be correct before they reach customers.</p></div>
-        <div data-rv style="--d:.16s"><i></i><b>Considered</b><p>Personal data needs care: deciding what is worth showing, and how, is part of the work.</p></div>
+        <div data-rv><i></i><b>Built on customer data</b><p>What a customer sees reflects their own activity with the bank, not a generic message.</p></div>
+        <div data-rv style="--d:.08s"><i></i><b>Accurate at scale</b><p>Personal details have to be right across a very large and varied customer base.</p></div>
+        <div data-rv style="--d:.16s"><i></i><b>Handled with care</b><p>Deciding what is worth showing a customer, and how, is part of the work.</p></div>
       </div>
     </div>
   </section>
@@ -142,13 +139,13 @@
   <section class="sec dk" aria-labelledby="s2">
     <div class="wrap">
       <div class="sh">
-        <div><span class="lbl g" data-rv><span class="n">02</span> From 2025 to 2026</span><h2 class="h2" id="s2" data-rv style="--d:.06s">One initiative, two editions.</h2></div>
-        <p class="lede" data-rv style="--d:.12s">The 2026 edition is a more advanced continuation, building on the experience of the 2025 launch.</p>
+        <div><span class="lbl g" data-rv><span class="n">02</span> Timeline</span><h2 class="h2" id="s2" data-rv style="--d:.06s">One initiative, two editions.</h2></div>
+        <p class="lede" data-rv style="--d:.12s">The 2026 edition is a more advanced continuation of the launched 2025 experience.</p>
       </div>
       <div class="tl2" id="tl2">
         <span class="pr" aria-hidden="true"></span>
-        <article data-rv><span class="yr">2025</span><br><span class="st done">Launched Dec 2025</span><h3>First edition</h3><p>Launched in the app, reaching approximately 1.5 million customers with year-in-review stories based on their own banking activity.</p><div class="mypart"><span>My role</span><p>Project Owner: led the initiative across teams and reported progress directly to the Managing Director.</p></div></article>
-        <article data-rv style="--d:.12s"><span class="yr">2026</span><br><span class="st wait">In development</span><h3>Next edition</h3><p>A more advanced continuation of the initiative, building on the 2025 experience. Not yet released.</p><div class="mypart"><span>My role</span><p>Project Owner: leading the initiative across teams and reporting progress directly to the Managing Director.</p></div></article>
+        <article data-rv><span class="yr">2025</span><br><span class="st done">Launched</span><h3>First edition</h3><p>Launched in ABB's mobile app in December 2025, giving customers a year-in-review based on their own banking activity.</p><div class="mypart"><span>My role</span><p>Project Owner. Managed the initiative across teams and reported progress directly to the Managing Director.</p></div></article>
+        <article data-rv style="--d:.12s"><span class="yr">2026</span><br><span class="st wait">In development</span><h3>Second edition</h3><p>A more advanced continuation, building on what the 2025 launch showed. Not yet released.</p><div class="mypart"><span>My role</span><p>Project Owner again, managing cross-functional work and reporting directly to the Managing Director.</p></div></article>
       </div>
     </div>
   </section>
@@ -156,35 +153,18 @@
   <section class="sec lt2" aria-labelledby="s3">
     <div class="wrap">
       <div class="sh">
-        <div><span class="lbl g" data-rv><span class="n">03</span> My role</span><h2 class="h2" id="s3" data-rv style="--d:.06s">Project ownership across two editions.</h2></div>
-        <p class="lede" data-rv style="--d:.12s">I own the initiative on the business side: what each edition should achieve, how the participating teams work together towards it, and keeping senior management informed.</p>
+        <div><span class="lbl g" data-rv><span class="n">03</span> My responsibilities</span><h2 class="h2" id="s3" data-rv style="--d:.06s">What project ownership covers.</h2></div>
+        <p class="lede" data-rv style="--d:.12s">I own the initiative from direction to results: what each edition should achieve, how the participating teams get there, and what senior management needs to know along the way.</p>
       </div>
-      <div class="resp">
-        <ul data-rv>
-          <li>Project Owner for the 2025 and 2026 editions</li>
-          <li>Managing the initiative across marketing, design, product, data and engineering teams</li>
-          <li>Reporting project progress directly to the Managing Director</li>
-          <li>Setting the direction for the experience: content and personalization</li>
-          <li>Preparing the 2026 edition, building on the 2025 launch</li>
-        </ul>
-        <aside data-rv style="--d:.08s"><span class="lbl">Other teams</span><p>Data infrastructure, engineering and technical implementation sit with the bank's data and engineering teams. My role is project ownership, not building the systems.</p></aside>
+      <div class="own">
+        <div data-rv><b>Project direction</b><p>Setting what each edition should achieve and which priorities come first.</p></div>
+        <div data-rv style="--d:.05s"><b>Personalization</b><p>Deciding what the experience shows each customer from their own banking activity, and how personal it should be.</p></div>
+        <div data-rv style="--d:.1s"><b>Cross-functional delivery</b><p>Managing the work across marketing, design, product, data and engineering teams through to release.</p></div>
+        <div data-rv style="--d:.15s"><b>Senior management reporting</b><p>Reporting project progress directly to the Managing Director.</p></div>
       </div>
     </div>
   </section>
 
-  <section class="sec dk" aria-labelledby="s4">
-    <div class="wrap">
-      <div class="sh">
-        <div><span class="lbl g" data-rv><span class="n">04</span> What the work involves</span><h2 class="h2" id="s4" data-rv style="--d:.06s">A digital product built for a broad and varied customer base.</h2></div>
-      </div>
-      <div class="req">
-        <div data-rv><b>Working from customer data</b><p>Turning banking activity into something a customer recognises as their own.</p></div>
-        <div data-rv style="--d:.06s"><b>Product decisions with several teams</b><p>Agreeing scope and priorities with colleagues who own different parts.</p></div>
-        <div data-rv style="--d:.12s"><b>Quality under a deadline</b><p>Balancing creative ambition with accuracy and a fixed release date.</p></div>
-        <div data-rv style="--d:.18s"><b>Learning between editions</b><p>Carrying what the first edition taught us into the second.</p></div>
-      </div>
-    </div>
-  </section>
 
   <nav class="dk" aria-label="Case studies" style="border-top:1px solid var(--ln-d)">
     <div class="wrap nextc">
